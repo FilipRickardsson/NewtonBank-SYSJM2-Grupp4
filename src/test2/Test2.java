@@ -13,6 +13,10 @@ public class Test2 {
         }
     }
     
+    public void printTheBestName() {
+        System.out.println("Christoffer");
+    }
+    
     public static void main(String[] args) {
         System.out.println("Johan är bäst av allt och alla!");
         System.out.println("Arsenal är riktigt bra!");
