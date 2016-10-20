@@ -7,8 +7,6 @@ public class Test2 {
         System.out.println("Arsenal är inte bra!");
 
         System.out.println("Test1");
-        System.out.println("lalalal");
-        System.out.println("grupp 4");
     }
 
     public void diego() {
