@@ -4,6 +4,7 @@ public class Test2 {
 
     public void print() {
         System.out.println("filip");
+        System.out.println("Hej");
     }
     
     public static void main(String[] args) {
