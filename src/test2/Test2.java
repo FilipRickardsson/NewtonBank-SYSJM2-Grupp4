@@ -3,7 +3,7 @@ package test2;
 public class Test2 {
 
     public void print() {
-        System.out.println("Print");
+        System.out.println("filip");
     }
     
     public static void main(String[] args) {
