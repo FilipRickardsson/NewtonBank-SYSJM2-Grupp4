@@ -9,9 +9,17 @@ public class Test2 {
         }
         if(false) {
 
-            
+           
         }
+        
+
+   
     }
+    
+     public void printBeks()
+        {
+            System.out.println("Bekir Halvadzic");
+        }
     
     public static void main(String[] args) {
         System.out.println("Johan är bäst av allt och alla!");
