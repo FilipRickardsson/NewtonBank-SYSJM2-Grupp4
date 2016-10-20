@@ -28,16 +28,17 @@ public class Test2 {
 
     public static void main(String[] args) {
         System.out.println("Johan är bäst av allt och alla!");
-        System.out.println("Arsenal är riktigt bra!");
+        System.out.println("Arsenal är inte bra!");
 
         System.out.println("Test1");
         System.out.println("lalalal");
         System.out.println("grupp 4");
     }
 
-    
-    public void diego(){
+    public void diego() {
         System.out.println("Diego! Diego! Diego! Diego!");
     }
-    
+    public void tobias(){
+        System.out.println("Tobias");
+    }
 }
