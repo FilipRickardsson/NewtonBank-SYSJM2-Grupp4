@@ -8,7 +8,7 @@ public class Test2 {
             
         }
         if(false) {
-
+            
             
         }
     }
@@ -20,6 +20,10 @@ public class Test2 {
         System.out.println("Test1");
         System.out.println("lalalal");
         System.out.println("grupp 4");
+    }
+    
+    public void diego(){
+        System.out.println("Diego! Diego! Diego! Diego!");
     }
     
 }
