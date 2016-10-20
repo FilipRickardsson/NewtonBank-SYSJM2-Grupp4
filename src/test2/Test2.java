@@ -6,15 +6,20 @@ public class Test2 {
         System.out.println("filip");
         if ("test".equals("test")) {
 
+           
         }
         if (false) {
 
             System.out.println("BATMAN");
         }
+        
+
+   
     }
 
-    public void printTheBestName() {
-        System.out.println("Christoffer");
+     public void printBeks()
+        {
+            System.out.println("Bekir Halvadzic");
     }
 
     public void filip() {
