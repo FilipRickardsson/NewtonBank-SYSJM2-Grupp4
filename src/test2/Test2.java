@@ -8,9 +8,13 @@ public class Test2 {
             
         }
         if(false) {
-            
-            
+
+            System.out.println("BATMAN");
         }
+    }
+    
+    public void filip() {
+        System.out.println("filip");
     }
     
     public static void main(String[] args) {
