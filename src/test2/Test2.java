@@ -7,6 +7,10 @@ public class Test2 {
         if("test".equals("test")) {
             
         }
+        if(false) {
+
+            
+        }
     }
     
     public static void main(String[] args) {
