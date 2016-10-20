@@ -9,7 +9,7 @@ public class Test2 {
         }
         if(false) {
 
-            
+            System.out.println("BATMAN");
         }
     }
     
