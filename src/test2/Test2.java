@@ -33,7 +33,8 @@ public class Test2 {
     public void diego() {
         System.out.println("Diego! Diego! Diego! Diego!");
     }
-    public void tobias(){
+
+    public void tobias() {
         System.out.println("Tobias");
     }
 }
