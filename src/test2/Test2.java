@@ -4,7 +4,7 @@ public class Test2 {
 
     public void print() {
         System.out.println("filip");
-        if(true) {
+        if("test".equals("test")) {
             
         }
     }
