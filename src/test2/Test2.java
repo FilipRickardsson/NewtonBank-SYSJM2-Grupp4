@@ -7,6 +7,7 @@ public class Test2 {
         System.out.println("Arsenal är riktigt dåliga!");
         
         System.out.println("Test1");
+        System.out.println("lalalal");
     }
     
 }
