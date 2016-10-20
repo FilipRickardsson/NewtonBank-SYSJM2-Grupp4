@@ -8,6 +8,7 @@ public class Test2 {
         
         System.out.println("Test1");
         System.out.println("lalalal");
+        System.out.println("grupp 4");
     }
     
 }
