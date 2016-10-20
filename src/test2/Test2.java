@@ -8,7 +8,6 @@ public class Test2 {
             
         }
         if(false) {
-
             
         }
     }
