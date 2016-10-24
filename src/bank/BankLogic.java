@@ -76,6 +76,14 @@ public class BankLogic {
         return customerInformation;
     }
 
+    /**
+     * Changes the name of a customer connected to a given social security
+     * number. Returns true if name is changed.
+     *
+     * @param name
+     * @param ssn
+     * @return
+     */
     public boolean changeCustomer(String name, long ssn) {
         for (int i = 0; i < customers.size(); i++) {
             if (customers.get(i).getSsn == ssn) {
@@ -86,6 +94,12 @@ public class BankLogic {
         return false;
     }
 
+    /**
+     * Removes a customer and returns a list with information about closed 
+     * accounts.
+     * @param ssn
+     * @return
+     */
     // TODO Add saldo + interest in info
     public List<String> removeCustomer(long ssn) {
         List<String> info = new ArrayList();
@@ -99,7 +113,12 @@ public class BankLogic {
         }
         return info;
     }
-
+    
+    /**
+     * Adds a savingsaccount to customer.
+     * @param ssn
+     * @return 
+     */
     public int addSavingsAccount(long ssn) {
         int accountNbr = -1;
         for (int i = 0; i < customers.size(); i++) {
@@ -133,6 +152,7 @@ public class BankLogic {
         }
     }
 
+
     /**
      * look in customer list for ssn and creates an credit account when search
      * fails returns -1
@@ -157,18 +177,20 @@ public class BankLogic {
      *
      * @return
      */
-    public arrayList<transactions> getTransactions(long ssn, int accountID) {
+    public List<String> getTransactions(long ssn, int accountID) {
+        ArrayList<String> transactionInformation = new ArrayList();
         for (int i = 0; i < customers.size(); i++) {
             // perhaps change to onyl search for ssn
-            if (ssn == customers.get(i).get(ssn) && accountID == customers.get(i).get(accountID)) {
-
-                for (int j = 0; j < transactions.size(); j++) {
-
-                    return transactions.get[i].toString();
+            if (ssn == customers.get(i).getSsn && accountID == customers.get(i).getAccountID) {
+                // check transaction name
+                for (int j = 0; j < customers.transactions.size(); j++) {
+                    transactionInformation.add(customers.get(i).getTransaction.
+                            get(j).toString());
                 }
+
             }
         }
-        return -1;
+        return transactionInformation;
     }
 
 }

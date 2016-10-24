@@ -19,13 +19,16 @@ public class SavingAccount {
     protected double interest;
     protected String accountType;
     protected boolean firstWithdrawal;
-    protected ArrayList<Transaction> transa;
+    protected final double withdrawalInterest;
+    protected ArrayList<Transaction> transactions;
+
 
     public SavingAccount(int accountNumber) {
         this.accountNumber = accountNumber;
         this.saldo = 0;
-        this.interest = 1.01;
-        transa=new ArrayList();
+        this.interest = 0.01;
+        this.withdrawalInterest = 0.02;
+        transactions = new ArrayList();
     }
 
     public void deposit(double amount) {
@@ -35,11 +38,12 @@ public class SavingAccount {
     }
 
     public void withdrawal(double amount) {
-        if (amount > 0 && saldo>=amount) {
+        if (amount > 0 && saldo >= amount) {
             if (firstWithdrawal == true) {
                 amount -= saldo;
+                firstWithdrawal = false;
             } else {
-                saldo = (1.02 * amount);
+                saldo = saldo * withdrawalInterest - saldo;
             }
         }
     }
