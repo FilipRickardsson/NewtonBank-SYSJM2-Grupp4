@@ -111,8 +111,30 @@ public class BankLogic {
         }
         return accountNbr;
     }
-      /**
-     * look in customer list for ssn and creates an credit account when search 
+
+    public String getAccount(long ssn, int accountId) {
+        return "Social security: " + ssn + " account number: " + accountId;
+    }
+
+    public boolean deposit(long ssn, int accountId, double amount) {
+        if (deposit) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    public boolean withdraw(long ssn, int accountId, double amount) {
+        if (withdrawal) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * look in customer list for ssn and creates an credit account when search
      * fails returns -1
      */
     public int addCreditAccount(long ssn) {
@@ -125,15 +147,14 @@ public class BankLogic {
                 accountNbrCounter++;
                 break;
             }
-            }
-        return accountNumber;
         }
-     
-    
+        return accountNumber;
+    }
 
     /**
-     * looks through customer list by ssn and account id and returns all 
+     * looks through customer list by ssn and account id and returns all
      * transactions on that account if it find nothing return -1
+     *
      * @return
      */
     public arrayList<transactions> getTransactions(long ssn, int accountID) {
