@@ -18,15 +18,14 @@ public class Transaction {
         this.updatedBalance = updatedBalance;
     }
 //<editor-fold defaultstate="collapsed" desc="comment">
+
     public String getTime() {
         return time;
     }
 
-
     public int getAccountID() {
         return accountID;
     }
-
 
     public String getDate() {
         return date;
