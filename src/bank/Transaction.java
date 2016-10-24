@@ -17,53 +17,31 @@ public class Transaction {
         this.amount = amount;
         this.updatedBalance = updatedBalance;
     }
-
+//<editor-fold defaultstate="collapsed" desc="comment">
     public String getTime() {
         return time;
     }
 
-    public void setTime(String time) {
-        this.time = time;
-    }
 
     public int getAccountID() {
         return accountID;
     }
 
-    public void setAccountID(int accountID) {
-        this.accountID = accountID;
-    }
 
     public String getDate() {
         return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
     }
 
     public String getTransactionType() {
         return transactionType;
     }
 
-    public void setTransactionType(String transactionType) {
-        this.transactionType = transactionType;
-    }
-
     public double getAmount() {
         return amount;
-    }
-
-    public void setAmount(double amount) {
-        this.amount = amount;
     }
 
     public double getUpdatedBalance() {
         return updatedBalance;
     }
-
-    public void setUpdatedBalance(double updatedBalance) {
-        this.updatedBalance = updatedBalance;
-    }
-
+    //</editor-fold>
 }
