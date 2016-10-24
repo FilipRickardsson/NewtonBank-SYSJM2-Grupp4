@@ -129,8 +129,6 @@ public class BankLogic {
         return accountNumber;
         }
      
-    
-
     /**
      * looks through customer list by ssn and account id and returns all 
      * transactions on that account if it find nothing return -1
