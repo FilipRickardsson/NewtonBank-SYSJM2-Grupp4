@@ -5,37 +5,36 @@
  */
 package bank;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Diddi
  */
 public class SavingAccount {
 
-    private int accountNumber;
-    private double amount;
-    private double saldo;
-    private double interest;
-    private String accountType;
-    private boolean firstWithdrawal;
+    protected int accountNumber;
+    protected double amount;
+    protected double saldo;
+    protected double interest;
+    protected String accountType;
+    protected boolean firstWithdrawal;
+    protected ArrayList<Transaction> transa;
 
-    public void SavingsAccount() {
-
-    }
-
-    public void SavingsAccount(int accountNumber, double amount, double saldo, double interest) {
+    public SavingAccount(int accountNumber) {
         this.accountNumber = accountNumber;
-        this.amount = amount;
-        this.saldo = saldo;
-        this.interest = interest;
+        this.saldo = 0;
+        this.interest = 1.01;
+        transa=new ArrayList();
     }
 
-    public void deposit(int amount) {
+    public void deposit(double amount) {
         if (amount > 0) {
             amount += saldo;
         }
     }
 
-    public void withdrawal(int amount) {
+    public void withdrawal(double amount) {
         if (amount > 0 && saldo>=amount) {
             if (firstWithdrawal == true) {
                 amount -= saldo;
@@ -46,14 +45,12 @@ public class SavingAccount {
     }
 
     public double calculateInterest() {
-        double result = saldo * 1.01;
-        return result;
+        return saldo *= interest;
     }
 
     @Override
     public String toString() {
-        String result = accountNumber + " " + saldo + " " + accountType + " " + interest;
-        return result;
+        return accountNumber + " " + saldo + " " + accountType + " " + interest;
     }
 
     //<editor-fold defaultstate="collapsed" desc="getters and setters">
