@@ -9,13 +9,13 @@ public class BankLogic {
     private int accountNbrCounter;
 
     public BankLogic() {
-        costumers = new ArrayList<Customer>;
-        accountNbr = 1001;
+        costumers = new ArrayList();
+        accountNbrCounter = 1001;
     }
 
-    public boolean changeCustomer(String name, long pNr) {
+    public boolean changeCustomer(String name, long ssn) {
         for (int i = 0; i < costumers.size(); i++) {
-            if (costumers.get(i).getPNr == pNr) {
+            if (costumers.get(i).getSsn == ssn) {
                 costumers.get(i).setName(name);
                 return true;
             }
@@ -23,29 +23,30 @@ public class BankLogic {
         return false;
     }
 
-    // TODO Add saldo + interest
-    public List<String> removeCustomer(long pNr) {
+    // TODO Add saldo + interest in info
+    public List<String> removeCustomer(long ssn) {
         List<String> info = new ArrayList();
         for (int i = 0; i < costumers.size(); i++) {
-            if (costumers.get(i).getPNr == pNr) {
-                for (int j = 0; j < costumers.; j++) {
-                    costumer(i).get
+            if (costumers.get(i).getSsn == ssn) {
+                ArrayList accounts = costumers.get(i).getAccounts();
+                for (int j = 0; j < accounts.size(); j++) {
+                    info.add(accounts.get(j).toString()); // Change/Add here
                 }
             }
         }
-        
+        return info;
     }
 
-    public int addSavingsAccount(long pNr) {
-        int currentAccountNbr = -1;
+    public int addSavingsAccount(long ssn) {
+        int accountNbr = -1;
         for (int i = 0; i < costumers.size(); i++) {
-            if (costumers.get(i).getPNr == pNr) {
-                costumers.get(i).getAccounts.add(new SavingsAccount(/*Insert inparameters here*/));
-                currentAccountNbr = accountNbrCounter;
+            if (costumers.get(i).getSsn == ssn) {
+                accountNbr = accountNbrCounter;
+                costumers.get(i).getAccounts.add(new SavingsAccount(accountNbr));
                 accountNbrCounter++;
             }
         }
-        return currentAccountNbr;
+        return accountNbr;
     }
 
 }
