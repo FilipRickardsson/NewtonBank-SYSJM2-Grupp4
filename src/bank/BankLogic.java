@@ -113,7 +113,7 @@ public class BankLogic {
     }
 
     public String getAccount(long ssn, int accountId) {
-        return "Social security: " + ssn + " account number: " + accountId;
+        return "Social security number: " + ssn + " account number: " + accountId;
     }
 
     public boolean deposit(long ssn, int accountId, double amount) {
