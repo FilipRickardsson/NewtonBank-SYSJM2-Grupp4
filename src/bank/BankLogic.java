@@ -112,11 +112,10 @@ public class BankLogic {
         return accountNbr;
     }
       /**
-     * letar igenom customer listan skapar ett credit account returnerar -1 om
-     * inget hittas
+     * look in customer list for ssn and creates an credit account when search 
+     * fails returns -1
      */
     public int addCreditAccount(long ssn) {
-        // kanske ska ändra kontonummer till tex 2001
         int accountNbr = -1;
 
         for (int i = 0; i < customers.size(); i++) {
@@ -133,14 +132,13 @@ public class BankLogic {
     
 
     /**
-     * letar igenom customer listan på ssn och account id och returnerar alla
-     * transactions på det kontot returnerar -1 om inget hittas
-     *
+     * looks through customer list by ssn and account id and returns all 
+     * transactions on that account if it find nothing return -1
      * @return
      */
     public arrayList<transactions> getTransactions(long ssn, int accountID) {
         for (int i = 0; i < customers.size(); i++) {
-            // möjligen ändring till att bara söka på ssn
+            // perhaps change to onyl search for ssn
             if (ssn == customers.get(i).get(ssn) && accountID == customers.get(i).get(accountID)) {
 
                 for (int j = 0; j < transactions.size(); j++) {
