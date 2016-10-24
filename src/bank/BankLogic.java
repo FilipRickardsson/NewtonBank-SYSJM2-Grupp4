@@ -111,8 +111,9 @@ public class BankLogic {
         }
         return accountNbr;
     }
-      /**
-     * look in customer list for ssn and creates an credit account when search 
+
+    /**
+     * look in customer list for ssn and creates an credit account when search
      * fails returns -1
      */
     public int addCreditAccount(long ssn) {
@@ -125,30 +126,31 @@ public class BankLogic {
                 accountNbrCounter++;
                 break;
             }
-            }
-        return accountNumber;
         }
-     
-    
+        return accountNumber;
+    }
 
     /**
-     * looks through customer list by ssn and account id and returns all 
+     * looks through customer list by ssn and account id and returns all
      * transactions on that account if it find nothing return -1
+     *
      * @return
      */
-    public arrayList<transactions> getTransactions(long ssn, int accountID) {
-        
+    public List<String> getTransactions(long ssn, int accountID) {
+        ArrayList<String> transactionInformation = new ArrayList();
         for (int i = 0; i < customers.size(); i++) {
             // perhaps change to onyl search for ssn
-            if (ssn == customers.get(i).get(ssn) && accountID == customers.get(i).get(accountID)) {
-
-                for (int j = 0; j < transactions.size(); j++) {
-
-                    return transactions.get[i].toString();
+            if (ssn == customers.get(i).getSsn && accountID == customers.get(i)
+                    .getAccountID) {
+                // check transaction name
+                for (int j = 0; j < customers.transactions.size(); j++) {
+                    transactionInformation.add(customers.get(i).getTransaction.
+                            get(j).toString());
                 }
+
             }
         }
-        return -1;
+        return transactionInformation;
     }
 
 }
