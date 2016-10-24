@@ -10,29 +10,31 @@ package bank;
  * @author Diddi
  */
 public class CreditAccount extends SavingAccount {
+
     private int creditBound;
     private double creditInterest;
 
-    public CreditAccount(int accountNumber){
+    public CreditAccount(int accountNumber) {
         super(accountNumber);
-        this.creditInterest=1.07;
-        this.interest=1.005;
-        this.creditBound=(-5000);
+        this.creditInterest = 0.07;
+        this.interest = 0.005;
+        this.creditBound = (-5000);
     }
-    public double calculateCredit(double saldo){
-        if(saldo<=0){
-            saldo*=creditInterest;
-        }
-        else if(saldo>=1){
-           saldo*=interest;
+
+    public double calculateCredit(double saldo) {
+        if (saldo <= 0) {
+            saldo = saldo * creditInterest - saldo;
+        } else if (saldo >= 1) {
+            saldo = saldo * interest + saldo;
         }
         return saldo;
-     }
+    }
+
     @Override
-    public void withdrawal(double amount){
-        if(saldo-amount>=creditBound && amount>0){
-            saldo-=amount;
+    public void withdrawal(double amount) {
+        if (saldo - amount >= creditBound && amount > 0) {
+            saldo -= amount;
         }
     }
-    
+
 }
