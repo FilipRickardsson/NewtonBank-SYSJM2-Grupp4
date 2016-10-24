@@ -10,21 +10,28 @@ public class BankLogic {
      * @return 
      */
     public List<String> getCustomers() {
-        //returnerar en lista med bankens kunders namn och personnumer
         List<String> customerPresentation = new ArrayList();
         
         //check variable names
         for(int i = 0; i < customers.size(); i++) {
             customerPresentation.add(customers.get(i).getName() + " " + 
-                    customers.get(i).getsSn);
+                    customers.get(i).getSsn);
         }
         
         return customerPresentation;
     }
     
-    public boolean addCustomer(String name, long pNr) {
-        //skapar en ny kund om det inte redan finns en med samma personummer, 
-        //returnerar då true annars false
+    public boolean addCustomer(String name, long ssn) {
+        //check variable names 
+        for(int i = 0; i < customers.size(); i++) {
+            if(ssn == customers.get(i).getSsn()) {
+                return false;
+            }
+        }
+        
+        //check constructor in Customer-klass
+        customers.add(new Customer(name, ssn));
+        return true;
     }
     
     public List<String> getCustomer(long pNr) {
