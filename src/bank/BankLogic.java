@@ -137,6 +137,7 @@ public class BankLogic {
      * @return
      */
     public arrayList<transactions> getTransactions(long ssn, int accountID) {
+        
         for (int i = 0; i < customers.size(); i++) {
             // perhaps change to onyl search for ssn
             if (ssn == customers.get(i).get(ssn) && accountID == customers.get(i).get(accountID)) {
