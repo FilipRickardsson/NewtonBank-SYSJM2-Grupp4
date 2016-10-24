@@ -152,6 +152,9 @@ public class BankLogic {
         }
     }
 
+    public String closeAccount(long ssn, int accountId, double amount) {
+        //TODO: Add logic
+    }
 
     /**
      * look in customer list for ssn and creates an credit account when search
