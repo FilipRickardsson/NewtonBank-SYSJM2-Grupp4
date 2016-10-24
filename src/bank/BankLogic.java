@@ -136,18 +136,21 @@ public class BankLogic {
      *
      * @return
      */
-    public List<Transaction> getTransactions(long ssn, int accountID) {
+    public List<String> getTransactions(long ssn, int accountID) {
+        ArrayList<String> transactionInformation = new ArrayList();
         for (int i = 0; i < customers.size(); i++) {
             // perhaps change to onyl search for ssn
-            if (ssn == customers.get(i).get(ssn) && accountID == customers.get(i).get(accountID)) {
-
-                for (int j = 0; j < transactions.size(); j++) {
-
-                    return transactions.get[i].toString();
+            if (ssn == customers.get(i).getSsn && accountID == customers.get(i)
+                    .getAccountID) {
+                // check transaction name
+                for (int j = 0; j < customers.transactions.size(); j++) {
+                    transactionInformation.add(customers.get(i).getTransaction.
+                            get(j).toString());
                 }
+
             }
         }
-        return -1;
+        return transactionInformation;
     }
 
 }
