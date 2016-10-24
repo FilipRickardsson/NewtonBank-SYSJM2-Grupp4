@@ -20,16 +20,16 @@ public class SavingAccount {
     protected String accountType;
     protected boolean firstWithdrawal;
     protected final double withdrawalInterest;
-    protected ArrayList<Transaction> transa;
+    protected ArrayList<Transaction> transactions;
 
     public SavingAccount(int accountNumber) {
         this.accountNumber = accountNumber;
         this.saldo = 0;
         this.interest = 0.01;
-        transa = new ArrayList();
         this.withdrawalInterest = 0.02;
+        transactions = new ArrayList();
     }
-
+    
     public void deposit(double amount) {
         if (amount > 0) {
             amount += saldo;
