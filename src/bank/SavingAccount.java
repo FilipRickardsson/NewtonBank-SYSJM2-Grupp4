@@ -25,6 +25,7 @@ public class SavingAccount {
         this.accountNumber = accountNumber;
         this.saldo = 0;
         this.interest = 1.01;
+        transa=new ArrayList();
     }
 
     public void deposit(double amount) {

@@ -17,7 +17,7 @@ public class Transaction {
         this.amount = amount;
         this.updatedBalance = updatedBalance;
     }
-
+    
     public String getTime() {
         return time;
     }
