@@ -122,7 +122,13 @@ public class BankLogic {
         }
         return accountNbr;
     }
-
+/**
+ * Returns a string with the accountID,balance,type of account and interest 
+ * using the accountID that belongs to the ssn we use
+ * @param ssn
+ * @param accountId
+ * @return 
+ */
     public String getAccount(long ssn, int accountId) {
         for (int i = 0; i < customers.size(); i++) {
             if (ssn == customers.get(i).getSsn()) {
@@ -135,6 +141,14 @@ public class BankLogic {
         return "Could not find account";
     }
 
+    /**
+     * makes a deposit from the accountnumber that belongs to the right social security number
+     * returns true if it went through otherwise i returnes false
+     * @param ssn
+     * @param accountId
+     * @param amount
+     * @return 
+     */
     public boolean deposit(long ssn, int accountId, double amount) {
         if (amount > 0) {
             searchForAccount(ssn, accountId).deposit(amount);
@@ -144,6 +158,14 @@ public class BankLogic {
         }
     }
 
+    /**
+     * makes a withdrawal from accountnumber that belongs to the right social security number
+     * returns true if it went through otherwise i returnes false
+     * @param ssn
+     * @param accountId
+     * @param amount
+     * @return 
+     */
     public boolean withdraw(long ssn, int accountId, double amount) {
         SavingAccount acc = searchForAccount(ssn, accountId); 
         
@@ -215,7 +237,12 @@ public class BankLogic {
         }
         return transactionInformation;
     }
-
+/**
+ * Searches through the list of customers with their ssn then returns the 
+ * customer with that ssn
+ * @param ssn
+ * @return 
+ */
     private Customer searchForCustomer(long ssn) {
         Customer customer = null;
         for (int i = 0; i < customers.size(); i++) {
@@ -226,7 +253,13 @@ public class BankLogic {
         }
         return customer;
     }
-
+       /**
+        * Searches through Customers first then through their account with the 
+        * accountID and gives us that account
+        * @param ssn
+        * @param accountNumber
+        * @return 
+        */
     private SavingAccount searchForAccount(long ssn, int accountNumber) {
         SavingAccount acc = null;
         Customer customer = searchForCustomer(ssn);

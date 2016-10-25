@@ -45,11 +45,21 @@ public class SavingAccount {
     
 
     //</editor-fold>
+    /**
+     * Adds given amount to accounts saldo and adds a new transaction to accounts
+     * transaction list.
+     * @param amount 
+     */
     public void deposit(double amount) {
         saldo += amount;
         transactions.add(new Transaction(accountNumber, false, amount, saldo));
     }
 
+    /**
+     * Removes given amount from accounts saldo and adds a new transaction to 
+     * accounts transaction list.
+     * @param amount 
+     */
     public void withdraw(double amount) {
         if (firstWithdrawal) {
             saldo -= amount;
@@ -60,6 +70,10 @@ public class SavingAccount {
         transactions.add(new Transaction(accountNumber, true, amount, saldo));
     }
 
+    /**
+     * Calculates interest of the account.
+     * @return 
+     */
     public double calcInterest() {
         return saldo * interest;
     }
