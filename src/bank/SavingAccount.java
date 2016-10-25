@@ -38,16 +38,19 @@ public class SavingAccount {
         return saldo;
     }
 
+    public ArrayList<Transaction> getTransactions() {
+        return transactions;
+    }
+    
+    
+
     //</editor-fold>
     public void deposit(double amount) {
         saldo += amount;
 
-//        if (amount > 0) {
-//            saldo += amount;
-//        }
     }
 
-    public void withdrawal(double amount) {
+    public void withdraw(double amount) {
         if (firstWithdrawal) {
             saldo -= amount;
             firstWithdrawal = false;
@@ -55,14 +58,6 @@ public class SavingAccount {
             saldo -= amount * withdrawalFee + amount;
         }
 
-//        if (amount > 0 && saldo >= amount) {
-//            if (firstWithdrawal == true) {
-//                amount -= saldo;
-//                firstWithdrawal = false;
-//            } else {
-//                saldo = saldo * withdrawalFee - saldo;
-//            }
-//        }
     }
 
     public double calcInterest() {
