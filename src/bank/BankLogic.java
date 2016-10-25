@@ -135,6 +135,14 @@ public class BankLogic {
         return "Could not find account";
     }
 
+    /**
+     * makes a deposit from the accountnumber that belongs to the right social security number
+     * returns true if it went through otherwise i returnes false
+     * @param ssn
+     * @param accountId
+     * @param amount
+     * @return 
+     */
     public boolean deposit(long ssn, int accountId, double amount) {
         if (amount > 0) {
             searchForAccount(ssn, accountId).deposit(amount);
@@ -144,6 +152,14 @@ public class BankLogic {
         }
     }
 
+    /**
+     * makes a withdrawal from accountnumber that belongs to the right social security number
+     * returns true if it went through otherwise i returnes false
+     * @param ssn
+     * @param accountId
+     * @param amount
+     * @return 
+     */
     public boolean withdraw(long ssn, int accountId, double amount) {
         SavingAccount acc = searchForAccount(ssn, accountId); 
         
