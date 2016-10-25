@@ -25,7 +25,7 @@ public class CreditAccount extends SavingAccount {
     }
 
     @Override
-    public void withdrawal(double amount) {
+    public void withdraw(double amount) {
         saldo -= amount;
         
     }
