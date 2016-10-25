@@ -38,6 +38,12 @@ public class SavingAccount {
         return saldo;
     }
 
+    public ArrayList<Transaction> getTransactions() {
+        return transactions;
+    }
+    
+    
+
     //</editor-fold>
     public void deposit(double amount) {
         saldo += amount;
