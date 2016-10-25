@@ -174,14 +174,14 @@ public class BankLogic {
         int accountNbr = -1;
 
         for (int i = 0; i < customers.size(); i++) {
-            if (ssn == customers.get(i).get(ssn)) {
-                customers.get(i).getAccounts.add(new CreditAccount(accountNbr));
+            if (ssn == customers.get(i).getSsn()) {
+                customers.get(i).getAccounts().add(new CreditAccount(accountNbr, "Credit Account"));
                 accountNbr = accountNbrCounter;
                 accountNbrCounter++;
                 break;
             }
         }
-        return accountNumber;
+        return accountNbr;
     }
 
     /**
