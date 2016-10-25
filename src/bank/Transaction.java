@@ -13,16 +13,16 @@ public class Transaction {
     private final double amount;
     private final double updatedBalance;
 
-    DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-    DateFormat df1 = new SimpleDateFormat("HH:mm:ss");
-    Date currentDate = new Date();
+    public Transaction(int accountID, boolean withdrawal,
+            double amount, double updatedBalance) {
 
-    // TODO change constructor to retrieve date and time from system clock
-    public Transaction(int accountID, String date, String time,
-            boolean withdrawal, double amount, double updatedBalance) {
+        DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+        DateFormat df1 = new SimpleDateFormat("HH:mm:ss");
+        Date currentDate = new Date();
+
         this.accountID = accountID;
-        this.date = df.format(currentDate); // Change this
-        this.time = df1.format(currentDate); // Change this
+        this.date = df.format(currentDate);
+        this.time = df1.format(currentDate);
         this.withdrawal = withdrawal;
         this.amount = amount;
         this.updatedBalance = updatedBalance;
@@ -54,11 +54,12 @@ public class Transaction {
     }
 
     //</editor-fold>
-    // TODO add toString method
-    
-
     @Override
     public String toString() {
-        return date + " " + time + " " + withdrawal + amount + " Balance: " + updatedBalance;
+        if (withdrawal) {
+            return date + " " + time + " " + " Out: " + amount + " Balance: " + updatedBalance;
+        } else {
+            return date + " " + time + " " + " In: " + amount + " Balance: " + updatedBalance;
+        }
     }
 }

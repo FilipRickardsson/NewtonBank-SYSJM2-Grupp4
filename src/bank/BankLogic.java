@@ -37,14 +37,13 @@ public class BankLogic {
      * @return
      */
     public boolean addCustomer(String name, long ssn) {
-        for (int i = 0; i < customers.size(); i++) {
-            if (ssn == customers.get(i).getSsn()) {
-                return false;
-            }
+        Customer customer = searchForCustomer(ssn);
+        if (customer != null) {
+            return false;
+        } else {
+            customers.add(new Customer(name, ssn));
+            return true;
         }
-
-        customers.add(new Customer(name, ssn));
-        return true;
     }
 
     /**
@@ -57,13 +56,12 @@ public class BankLogic {
     public List<String> getCustomer(long ssn) {
         ArrayList<String> customerInformation = new ArrayList();
 
-        for (int i = 0; i < customers.size(); i++) {
-            if (ssn == customers.get(i).getSsn()) {
-                customerInformation.add(customers.get(i).toString());
-                ArrayList accounts = customers.get(i).getAccounts();
-                for (int j = 0; j < accounts.size(); j++) {
-                    customerInformation.add(accounts.get(i).toString());
-                }
+        Customer customer = searchForCustomer(ssn);
+        if (customer != null) {
+            customerInformation.add(customer.toString());
+            ArrayList accounts = customer.getAccounts();
+            for (int j = 0; j < accounts.size(); j++) {
+                customerInformation.add(accounts.toString());
             }
         }
 
@@ -79,11 +77,11 @@ public class BankLogic {
      * @return
      */
     public boolean changeCustomer(String name, long ssn) {
-        for (int i = 0; i < customers.size(); i++) {
-            if (customers.get(i).getSsn() == ssn) {
-                customers.get(i).setName(name);
-                return true;
-            }
+        Customer customer = searchForCustomer(ssn);
+        if (customer != null) {
+            customer.setName(name);
+            return true;
+
         }
         return false;
     }
@@ -95,15 +93,14 @@ public class BankLogic {
      * @param ssn
      * @return
      */
-    // TODO Add saldo + interest in info
     public List<String> removeCustomer(long ssn) {
         List<String> info = new ArrayList();
-        for (int i = 0; i < customers.size(); i++) {
-            if (customers.get(i).getSsn() == ssn) {
-                ArrayList accounts = customers.get(i).getAccounts();
-                for (int j = 0; j < accounts.size(); j++) {
-                    info.add(accounts.get(j).toString()); // Change/Add here
-                }
+        Customer customer = searchForCustomer(ssn);
+        if (customer != null) {
+            info.add(customer.toString());
+            ArrayList accounts = customer.getAccounts();
+            for (int j = 0; j < accounts.size(); j++) {
+                info.add(accounts.get(j).toString());
             }
         }
         return info;
@@ -117,12 +114,11 @@ public class BankLogic {
      */
     public int addSavingsAccount(long ssn) {
         int accountNbr = -1;
-        for (int i = 0; i < customers.size(); i++) {
-            if (customers.get(i).getSsn() == ssn) {
-                accountNbr = accountNbrCounter;
-                customers.get(i).getAccounts().add(new SavingAccount(accountNbrCounter, "Saving Account"));
-                accountNbrCounter++;
-            }
+        Customer customer = searchForCustomer(ssn);
+        if (customer != null) {
+            accountNbr = accountNbrCounter;
+            customer.getAccounts().add(new SavingAccount(accountNbrCounter, "Saving Account"));
+            accountNbrCounter++;
         }
         return accountNbr;
     }
