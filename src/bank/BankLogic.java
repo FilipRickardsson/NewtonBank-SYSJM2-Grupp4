@@ -162,7 +162,13 @@ public class BankLogic {
             return false;
         }
     }
-
+    /**
+     * Closes an account connected to a ssn and accountId if accountId is 
+     * provided.
+     * @param ssn
+     * @param accountId
+     * @return info
+     */
     public String closeAccount(long ssn, int accountId) {
         SavingAccount acc = searchForAccount(ssn, accountId);
         String info = null;
