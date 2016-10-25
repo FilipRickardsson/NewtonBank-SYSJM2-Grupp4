@@ -167,8 +167,15 @@ public class BankLogic {
         }
     }
 
-    public String closeAccount(long ssn, int accountId, double amount) {
-        //TODO: Add logic
+    public String closeAccount(long ssn, int accountId) {
+        SavingAccount acc = searchForAccount(ssn, accountId);
+        String info = null;
+        if (acc != null) {
+            info = acc.toString();
+            Customer co = searchForCustomer(ssn);
+            co.getAccounts().remove(acc);
+        }
+        return info;
     }
 
     /**
@@ -179,14 +186,14 @@ public class BankLogic {
         int accountNbr = -1;
 
         for (int i = 0; i < customers.size(); i++) {
-            if (ssn == customers.get(i).get(ssn)) {
-                customers.get(i).getAccounts.add(new CreditAccount(accountNbr));
+            if (ssn == customers.get(i).getSsn()) {
+                customers.get(i).getAccounts().add(new CreditAccount(accountNbr, "Credit Account"));
                 accountNbr = accountNbrCounter;
                 accountNbrCounter++;
                 break;
             }
         }
-        return accountNumber;
+        return accountNbr;
     }
 
     /**
@@ -203,7 +210,7 @@ public class BankLogic {
                 // check transaction name
                 for (int j = 0; j < customers.transactions.size(); j++) {
                     transactionInformation.add(customers.get(i).getTransaction.
-                            get(j).toString());
+                                   get(j).toString());
                 }
 
             }
