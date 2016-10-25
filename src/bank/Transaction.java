@@ -2,23 +2,25 @@ package bank;
 
 public class Transaction {
 
-    private int accountID;
-    private String date;
-    private String time;
-    private String transactionType;
-    private double amount;
-    private double updatedBalance;
+    private final int accountID;
+    private final String date;
+    private final String time;
+    private final boolean withdrawal;
+    private final double amount;
+    private final double updatedBalance;
 
-    public Transaction(int accountID, String date, String time, String transactionType, double amount, double updatedBalance) {
+    // TODO change constructor to retrieve date and time from system clock
+    public Transaction(int accountID, String date, String time,
+            boolean withdrawal, double amount, double updatedBalance) {
         this.accountID = accountID;
-        this.date = date;
-        this.time = time;
-        this.transactionType = transactionType;
+        this.date = date; // Change this
+        this.time = time; // Change this
+        this.withdrawal = withdrawal;
         this.amount = amount;
         this.updatedBalance = updatedBalance;
     }
-//<editor-fold defaultstate="collapsed" desc="comment">
 
+    //<editor-fold defaultstate="collapsed" desc="Getters">
     public String getTime() {
         return time;
     }
@@ -31,8 +33,8 @@ public class Transaction {
         return date;
     }
 
-    public String getTransactionType() {
-        return transactionType;
+    public boolean getTransactionType() {
+        return withdrawal;
     }
 
     public double getAmount() {
@@ -42,5 +44,8 @@ public class Transaction {
     public double getUpdatedBalance() {
         return updatedBalance;
     }
+
     //</editor-fold>
+    
+    // TODO add toString method
 }

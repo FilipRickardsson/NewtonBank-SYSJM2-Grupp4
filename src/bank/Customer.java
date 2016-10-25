@@ -1,64 +1,38 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package bank;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author admin
- */
 public class Customer {
+
     private String name;
-    private long pNr;
-    private ArrayList<SavingAccount> list;
-            
+    private final long ssn;
+    private final ArrayList<SavingAccount> accounts;
 
-
-    
-    public Customer(String name, long pNr, ArrayList<SavingAccount> list)
-    {
+    public Customer(String name, long ssn) {
         this.name = name;
-        this.pNr = pNr;
-        list = new ArrayList();
+        this.ssn = ssn;
+        accounts = new ArrayList();
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public long getpNr()
-    {
-        return pNr;
+    public long getSsn() {
+        return ssn;
     }
 
-    public void setpNr(long pNr)
-    {
-        this.pNr = pNr;
+    public ArrayList<SavingAccount> getAccounts() {
+        return accounts;
     }
 
-    public ArrayList<SavingAccount> getList()
-    {
-        return list;
+    @Override
+    public String toString() {
+        return name+ "" +ssn;
     }
-
-    public void setList(ArrayList<SavingAccount> list)
-    {
-        this.list = list;
-    }
-
-
     
 }
-
-    
-

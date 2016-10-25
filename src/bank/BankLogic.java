@@ -5,7 +5,7 @@ import java.util.List;
 
 public class BankLogic {
 
-    List<Customer> customers;
+    private final List<Customer> customers;
     private int accountNbrCounter;
 
     public BankLogic() {
@@ -21,10 +21,8 @@ public class BankLogic {
     public List<String> getCustomers() {
         List<String> customerPresentation = new ArrayList();
 
-        //check variable names
         for (int i = 0; i < customers.size(); i++) {
-            customerPresentation.add(customers.get(i).getName() + " "
-                    + customers.get(i).getSsn);
+            customerPresentation.add(customers.get(i).toString());
         }
 
         return customerPresentation;
@@ -39,14 +37,12 @@ public class BankLogic {
      * @return
      */
     public boolean addCustomer(String name, long ssn) {
-        //check variable names 
         for (int i = 0; i < customers.size(); i++) {
             if (ssn == customers.get(i).getSsn()) {
                 return false;
             }
         }
 
-        //check constructor in Customer-klass
         customers.add(new Customer(name, ssn));
         return true;
     }
@@ -61,14 +57,12 @@ public class BankLogic {
     public List<String> getCustomer(long ssn) {
         ArrayList<String> customerInformation = new ArrayList();
 
-        //check variable names 
         for (int i = 0; i < customers.size(); i++) {
             if (ssn == customers.get(i).getSsn()) {
-                customerInformation.add(customers.get(i).getName() + " "
-                        + customers.get(i).getSsn);
-                for (int j = 0; j < customers.get(i).getAccounts().size(); j++) {
-                    customerInformation.add(customers.get(i).getAccounts()
-                            .get(j).toString);
+                customerInformation.add(customers.get(i).toString());
+                ArrayList accounts = customers.get(i).getAccounts();
+                for (int j = 0; j < accounts.size(); j++) {
+                    customerInformation.add(accounts.get(i).toString());
                 }
             }
         }
@@ -86,7 +80,7 @@ public class BankLogic {
      */
     public boolean changeCustomer(String name, long ssn) {
         for (int i = 0; i < customers.size(); i++) {
-            if (customers.get(i).getSsn == ssn) {
+            if (customers.get(i).getSsn() == ssn) {
                 customers.get(i).setName(name);
                 return true;
             }
@@ -95,8 +89,9 @@ public class BankLogic {
     }
 
     /**
-     * Removes a customer and returns a list with information about closed 
+     * Removes a customer and returns a list with information about closed
      * accounts.
+     *
      * @param ssn
      * @return
      */
@@ -104,7 +99,7 @@ public class BankLogic {
     public List<String> removeCustomer(long ssn) {
         List<String> info = new ArrayList();
         for (int i = 0; i < customers.size(); i++) {
-            if (customers.get(i).getSsn == ssn) {
+            if (customers.get(i).getSsn() == ssn) {
                 ArrayList accounts = customers.get(i).getAccounts();
                 for (int j = 0; j < accounts.size(); j++) {
                     info.add(accounts.get(j).toString()); // Change/Add here
@@ -113,18 +108,19 @@ public class BankLogic {
         }
         return info;
     }
-    
+
     /**
-     * Adds a savingsaccount to customer.
+     * Adds a SavingAccount to customer.
+     *
      * @param ssn
-     * @return 
+     * @return
      */
     public int addSavingsAccount(long ssn) {
         int accountNbr = -1;
         for (int i = 0; i < customers.size(); i++) {
-            if (customers.get(i).getSsn == ssn) {
+            if (customers.get(i).getSsn() == ssn) {
                 accountNbr = accountNbrCounter;
-                customers.get(i).getAccounts.add(new SavingsAccount(accountNbr));
+                customers.get(i).getAccounts().add(new SavingAccount(accountNbrCounter, "Saving Account"));
                 accountNbrCounter++;
             }
         }
@@ -132,7 +128,15 @@ public class BankLogic {
     }
 
     public String getAccount(long ssn, int accountId) {
-        return "Social security number: " + ssn + " account number: " + accountId;
+        for (int i = 0; i < customers.size(); i++) {
+            if (ssn == customers.get(i).getSsn()) {
+                ArrayList accounts = customers.get(i).getAccounts();
+                for (int j = 0; j < accounts.size(); j++) {
+                    return accounts.get(j).toString();
+                }
+            }
+        }
+        return "Could not find account";
     }
 
     public boolean deposit(long ssn, int accountId, double amount) {
