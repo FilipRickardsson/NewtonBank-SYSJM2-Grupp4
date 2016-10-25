@@ -140,7 +140,8 @@ public class BankLogic {
     }
 
     public boolean deposit(long ssn, int accountId, double amount) {
-        if (deposit) {
+        if (amount > 0) {
+            searchForAccount(ssn, accountId).deposit(amount);
             return true;
         } else {
             return false;
@@ -148,15 +149,33 @@ public class BankLogic {
     }
 
     public boolean withdraw(long ssn, int accountId, double amount) {
-        if (withdrawal) {
+        SavingAccount acc = searchForAccount(ssn, accountId); 
+        
+        if (acc instanceof SavingAccount && amount > 0) {
+            acc.withdraw(amount);
             return true;
+        } else if (acc instanceof CreditAccount && amount > 0) {
+            CreditAccount acc2 =  (CreditAccount)acc;
+            if (acc.saldo - amount >= acc2.getCreditLimit()) {
+                acc2.withdraw(amount);
+                return true;
+            } else {
+                return false;
+            }
         } else {
             return false;
         }
     }
 
-    public String closeAccount(long ssn, int accountId, double amount) {
-        //TODO: Add logic
+    public String closeAccount(long ssn, int accountId) {
+        SavingAccount acc = searchForAccount(ssn, accountId);
+        String info = null;
+        if (acc != null) {
+            info = acc.toString();
+            Customer co = searchForCustomer(ssn);
+            co.getAccounts().remove(acc);
+        }
+        return info;
     }
 
     /**
@@ -221,5 +240,5 @@ public class BankLogic {
         }
         return acc;
     }
-    
+
 }
