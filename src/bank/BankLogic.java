@@ -97,11 +97,17 @@ public class BankLogic {
         List<String> info = new ArrayList();
         Customer customer = searchForCustomer(ssn);
         if (customer != null) {
+            double sumInterest = 0;
+            double sumSaldo = 0;
             info.add(customer.toString());
-            ArrayList accounts = customer.getAccounts();
+            ArrayList<SavingAccount> accounts = customer.getAccounts();
             for (int j = 0; j < accounts.size(); j++) {
                 info.add(accounts.get(j).toString());
+                sumInterest += accounts.get(j).calcInterest();
+                sumSaldo += accounts.get(j).getSaldo() + sumInterest;
             }
+            info.add("Total Saldo: " +sumSaldo+ " Total interest: " +sumInterest);
+            customers.remove(customer);
         }
         return info;
     }
@@ -145,13 +151,13 @@ public class BankLogic {
     }
 
     public boolean withdraw(long ssn, int accountId, double amount) {
-        SavingAccount acc = searchForAccount(ssn, accountId); 
-        
+        SavingAccount acc = searchForAccount(ssn, accountId);
+
         if (acc instanceof SavingAccount && amount > 0) {
             acc.withdraw(amount);
             return true;
         } else if (acc instanceof CreditAccount && amount > 0) {
-            CreditAccount acc2 =  (CreditAccount)acc;
+            CreditAccount acc2 = (CreditAccount) acc;
             if (acc.saldo - amount >= acc2.getCreditLimit()) {
                 acc2.withdraw(amount);
                 return true;
@@ -182,12 +188,10 @@ public class BankLogic {
         int accountNbr = -1;
 
         searchForCustomer(ssn).add(new CreditAccount(accountNbr, "Credit Account"));
-                
-               
-                accountNbr = accountNbrCounter;
-                accountNbrCounter++;
-               
-            
+
+        accountNbr = accountNbrCounter;
+        accountNbrCounter++;
+
         return accountNbr;
     }
 
@@ -199,13 +203,13 @@ public class BankLogic {
      */
     public List<String> getTransactions(long ssn, int accountID) {
         ArrayList<String> transactionInformation = new ArrayList();
-       
+
         SavingAccount acc = searchForAccount(ssn, accountID);
-        
-                for (int j = 0; j < customers.size(); j++) {
-                    transactionInformation.add(acc.getTransactions().
-                            get(j).toString());
-  
+
+        for (int j = 0; j < customers.size(); j++) {
+            transactionInformation.add(acc.getTransactions().
+                    get(j).toString());
+
         }
         return transactionInformation;
     }

@@ -57,7 +57,7 @@ public class SavingAccount {
         } else {
             saldo -= amount * withdrawalFee + amount;
         }
-        transactions.add(new Transaction(accountNumber, true, amount, saldo));
+        transactions.add(new Transaction(accountNumber, false, amount, saldo));
     }
 
     public double calcInterest() {

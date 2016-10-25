@@ -16,29 +16,26 @@ public class CreditAccount extends SavingAccount {
         return creditLimit;
     }
 
-    public double getCreditInterest() {
-        return creditInterest;
-    }
-
-    public double calcDebt() {
-        return saldo * creditInterest;
-    }
-
+//    public double getCreditInterest() {
+//        return creditInterest;
+//    }
+//
+//    public double calcDebt() {
+//        return saldo * creditInterest;
+//    }
     @Override
     public void withdraw(double amount) {
         saldo -= amount;
         transactions.add(new Transaction(accountNumber, true, amount, saldo));
     }
 
-    //    @Override
-//    public double calcInterest() {
-//        return saldo * interest;
-//        
-//        if (saldo < 0) {
-//            saldo = saldo * creditInterest - saldo;
-//        } else if (saldo >= 1) {
-//            saldo = saldo * interest + saldo;
-//        }
-//        return saldo;
-//    }
+    @Override
+    public double calcInterest() {
+        if (saldo < 0) {
+            return saldo * creditInterest;
+        } else if (saldo >= 0) {
+            return saldo * interest;
+        }
+        return saldo;
+    }
 }
