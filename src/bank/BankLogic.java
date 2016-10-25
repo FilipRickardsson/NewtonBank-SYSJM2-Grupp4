@@ -215,7 +215,7 @@ public class BankLogic {
     public int addCreditAccount(long ssn) {
         int accountNbr = -1;
 
-        searchForCustomer(ssn).add(new CreditAccount(accountNbr, "Credit Account"));
+        searchForCustomer(ssn).getAccounts().add(new CreditAccount(accountNbr, "Credit Account"));
 
         accountNbr = accountNbrCounter;
         accountNbrCounter++;
