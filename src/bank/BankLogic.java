@@ -166,14 +166,13 @@ public class BankLogic {
     public int addCreditAccount(long ssn) {
         int accountNbr = -1;
 
-        for (int i = 0; i < customers.size(); i++) {
-            if (ssn == customers.get(i).getSsn()) {
-                customers.get(i).getAccounts().add(new CreditAccount(accountNbr, "Credit Account"));
+        searchForCustomer(ssn).add(new CreditAccount(accountNbr, "Credit Account"));
+                
+               
                 accountNbr = accountNbrCounter;
                 accountNbrCounter++;
-                break;
-            }
-        }
+               
+            
         return accountNbr;
     }
 
@@ -185,16 +184,13 @@ public class BankLogic {
      */
     public List<String> getTransactions(long ssn, int accountID) {
         ArrayList<String> transactionInformation = new ArrayList();
-        for (int i = 0; i < customers.size(); i++) {
-            // perhaps change to onyl search for ssn
-            if (ssn == customers.get(i).getSsn && accountID == customers.get(i).getAccountID) {
-                // check transaction name
-                for (int j = 0; j < customers.transactions.size(); j++) {
-                    transactionInformation.add(customers.get(i).getTransaction.
+       
+        SavingAccount acc = searchForAccount(ssn, accountID);
+        
+                for (int j = 0; j < customers.size(); j++) {
+                    transactionInformation.add(acc.getTransactions().
                             get(j).toString());
-                }
-
-            }
+  
         }
         return transactionInformation;
     }
