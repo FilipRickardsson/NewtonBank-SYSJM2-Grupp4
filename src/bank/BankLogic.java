@@ -174,7 +174,7 @@ public class BankLogic {
                 break;
             }
         }
-        return accountNumber;
+        return accountNbr;
     }
 
     /**
