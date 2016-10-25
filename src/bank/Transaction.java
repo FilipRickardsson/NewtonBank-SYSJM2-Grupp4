@@ -1,5 +1,9 @@
 package bank;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Transaction {
 
     private final int accountID;
@@ -9,12 +13,16 @@ public class Transaction {
     private final double amount;
     private final double updatedBalance;
 
+    DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+    DateFormat df1 = new SimpleDateFormat("HH:mm:ss");
+    Date currentDate = new Date();
+
     // TODO change constructor to retrieve date and time from system clock
     public Transaction(int accountID, String date, String time,
             boolean withdrawal, double amount, double updatedBalance) {
         this.accountID = accountID;
-        this.date = date; // Change this
-        this.time = time; // Change this
+        this.date = df.format(currentDate); // Change this
+        this.time = df1.format(currentDate); // Change this
         this.withdrawal = withdrawal;
         this.amount = amount;
         this.updatedBalance = updatedBalance;
@@ -46,6 +54,18 @@ public class Transaction {
     }
 
     //</editor-fold>
-    
     // TODO add toString method
+    
+//   Behövs denna ?    
+//   public String inOrOut(){
+//        if (withdrawal == true){
+//            return "Out: ";
+//        }
+//        else
+//            return "In: ";       
+//    }
+    @Override
+    public String toString() {
+        return date + " " + time + " " + withdrawal + amount + " Balance: " + updatedBalance;
+    }
 }

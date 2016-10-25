@@ -145,7 +145,6 @@ public class BankLogic {
         } else {
             return false;
         }
-
     }
 
     public boolean withdraw(long ssn, int accountId, double amount) {
@@ -205,4 +204,31 @@ public class BankLogic {
         return transactionInformation;
     }
 
+    private Customer searchForCustomer(long ssn) {
+        Customer customer = null;
+        for (int i = 0; i < customers.size(); i++) {
+            if (customers.get(i).getSsn() == ssn) {
+                customer = customers.get(i);
+                break;
+            }
+        }
+        return customer;
+    }
+
+    private SavingAccount searchForAccount(long ssn, int accountNumber) {
+        SavingAccount acc = null;
+        Customer customer = searchForCustomer(ssn);
+        if (customer != null) {
+            ArrayList<SavingAccount> accounts = customer.getAccounts();
+            for (int i = 0; i < accounts.size(); i++) {
+                if (accounts.get(i).getAccountNumber() == accountNumber) {
+                    acc = accounts.get(i);
+                    break;
+                }
+            }
+
+        }
+        return acc;
+    }
+    
 }
