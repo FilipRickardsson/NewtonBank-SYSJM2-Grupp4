@@ -156,8 +156,13 @@ public class BankLogic {
         }
     }
 
-    public String closeAccount(long ssn, int accountId, double amount) {
-        //TODO: Add logic
+    public String closeAccount(long ssn, int accountId) {
+        for (int i=0; customers.size();i++){
+            if(ssn==customers.get(i).getSsn()){
+               customers.get(i).getAccounts(); 
+               
+            }
+        }
     }
 
     /**
