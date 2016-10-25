@@ -157,7 +157,7 @@ public class BankLogic {
         } else if (acc instanceof CreditAccount && amount > 0) {
             CreditAccount acc2 =  (CreditAccount)acc;
             if (acc.saldo - amount >= acc2.getCreditLimit()) {
-                searchForAccount(ssn, accountId).withdraw(amount);
+                acc2.withdraw(amount);
                 return true;
             } else {
                 return false;
