@@ -23,7 +23,13 @@ public class CreditAccount extends SavingAccount {
     public double calcDebt() {
         return saldo * creditInterest;
     }
-
+    
+    /**
+     * Removes given amount from accounts saldo and adds a new transaction to 
+     * accounts transaction list.
+     * @param amount 
+     */
+    
     @Override
     public void withdraw(double amount) {
         saldo -= amount;
