@@ -27,9 +27,9 @@ public class CreditAccount extends SavingAccount {
     @Override
     public void withdraw(double amount) {
         saldo -= amount;
-        
+        transactions.add(new Transaction(accountNumber, true, amount, saldo));
     }
-    
+
     //    @Override
 //    public double calcInterest() {
 //        return saldo * interest;
@@ -41,5 +41,4 @@ public class CreditAccount extends SavingAccount {
 //        }
 //        return saldo;
 //    }
-
 }

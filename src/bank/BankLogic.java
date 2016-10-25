@@ -93,7 +93,6 @@ public class BankLogic {
      * @param ssn
      * @return
      */
-    // TODO Add saldo + interest in info
     public List<String> removeCustomer(long ssn) {
         List<String> info = new ArrayList();
         Customer customer = searchForCustomer(ssn);
@@ -101,7 +100,7 @@ public class BankLogic {
             info.add(customer.toString());
             ArrayList accounts = customer.getAccounts();
             for (int j = 0; j < accounts.size(); j++) {
-                info.add(accounts.get(j).toString()); // Change/Add here
+                info.add(accounts.get(j).toString());
             }
         }
         return info;
