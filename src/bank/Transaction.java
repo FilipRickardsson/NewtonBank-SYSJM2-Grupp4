@@ -56,14 +56,7 @@ public class Transaction {
     //</editor-fold>
     // TODO add toString method
     
-//   Behövs denna ?    
-//   public String inOrOut(){
-//        if (withdrawal == true){
-//            return "Out: ";
-//        }
-//        else
-//            return "In: ";       
-//    }
+
     @Override
     public String toString() {
         return date + " " + time + " " + withdrawal + amount + " Balance: " + updatedBalance;
