@@ -34,9 +34,5 @@ public class Customer {
     public String toString() {
         return name+ "" +ssn;
     }
-
-    void add(CreditAccount creditAccount) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
 }
