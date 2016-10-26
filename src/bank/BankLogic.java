@@ -299,8 +299,11 @@ public class BankLogic {
         return acc;
     }
 
+    /**
+     * Prints all customers to a text file
+     */
     public void customerToFile() {
-
+        //TODO: Change file destination to desktop
         try {
             FileWriter write = new FileWriter("Customer list.txt");
             BufferedWriter bf = new BufferedWriter(write);
