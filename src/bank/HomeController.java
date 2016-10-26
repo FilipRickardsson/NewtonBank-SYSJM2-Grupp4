@@ -8,6 +8,8 @@ import javafx.fxml.Initializable;
 
 public class HomeController implements Initializable {
     
+    private BankLogic bankLogic;
+    
     @FXML
     private void handleButtonAction(ActionEvent event) {
         System.out.println("Home Controller");
@@ -15,7 +17,7 @@ public class HomeController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        
     }    
     
 }
