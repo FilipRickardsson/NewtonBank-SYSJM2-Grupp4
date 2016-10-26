@@ -11,7 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 
-public class AccountController implements Initializable {
+public class AccountController implements Initializable{
     
 
     private BankLogic bankLogic;
@@ -59,7 +59,7 @@ public class AccountController implements Initializable {
     }
     
     @FXML
-    private void withdrawal(ActionEvent event){
+    private void makeWithdrawal(ActionEvent event){
         
     }
     
