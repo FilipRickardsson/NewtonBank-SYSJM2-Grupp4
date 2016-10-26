@@ -21,4 +21,8 @@
 .content {
     -fx-background-color: #DDDDDD;
     -fx-pref-height: 1500px;
+    -fx-pref-width: 300px;
+}
+.greyLabel{
+    -fx-text-fill:grey;
 }

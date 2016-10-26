@@ -275,7 +275,7 @@ public class BankLogic {
 
         for (int j = 0; j < customers.size(); j++) {
             transactionInformation.add(acc.getTransactions().
-                    get(j).toString());
+                           get(j).toString());
 
         }
         return transactionInformation;
