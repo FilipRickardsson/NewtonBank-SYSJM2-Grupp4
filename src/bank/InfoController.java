@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 
 public class InfoController implements Initializable {
     
+    private BankLogic bankLogic;
     @FXML
     private void handleButtonAction(ActionEvent event) {
         System.out.println("Info Controller");
@@ -15,6 +16,7 @@ public class InfoController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        BankLogic.getBankLogic();
 
     }    
     
