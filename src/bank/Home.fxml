@@ -15,7 +15,7 @@
    <left>
       <VBox prefHeight="200.0" prefWidth="100.0" styleClass="menu" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onAction="#handleButtonAction" styleClass="menuButton" stylesheets="@style.css" text="Home" />
+            <Button mnemonicParsing="false" styleClass="menuButton" stylesheets="@style.css" text="Home" />
             <Button mnemonicParsing="false" styleClass="menuButton" text="Customer" />
             <Button mnemonicParsing="false" styleClass="menuButton" text="Account" />
             <Button mnemonicParsing="false" styleClass="menuButton" text="Quit" />
@@ -33,7 +33,7 @@
                   <Button mnemonicParsing="false" onAction="#searchCustomer" text="Search" />
                   <Label text="Name" />
                   <Label text="SSN" />
-                  <ListView fx:id="customerList" prefHeight="200.0" prefWidth="200.0" />
+                  <ListView fx:id="customerListView" prefHeight="200.0" prefWidth="200.0" />
                   <Button mnemonicParsing="false" onAction="#printCustomersToFile" text="Print list" />
                   <Button mnemonicParsing="false" onAction="#removeCustomer" text="Remove" />
                   <Button mnemonicParsing="false" onAction="#selectCustomer" text="Select" />

@@ -57,7 +57,12 @@ public class HomeController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         bankLogic = BankLogic.getBankLogic();
+        
         customerList = FXCollections.observableArrayList(bankLogic.getCustomers());
+        
+        for(String s : customerList) {
+            System.out.println(s);
+        }
         
         customerListView.setItems(customerList);
     }    
