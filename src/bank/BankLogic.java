@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 public class BankLogic {
 
-    private static BankLogic logic;
+    private static BankLogic bankLogic;
 
     private final List<Customer> customers;
     private int accountNbrCounter;
@@ -19,6 +19,16 @@ public class BankLogic {
     private BankLogic() {
         customers = new ArrayList();
         accountNbrCounter = 1001;
+        
+        //To test
+        customers.add(new Customer("Dijana", 7912120101L));
+        customers.add(new Customer("Johan", 9702020101L));
+        customers.add(new Customer("Chrsitoffer", 9202254545L));
+        //To test
+        for(int i = 0; i < customers.size(); i++) {
+            addCreditAccount(customers.get(i).getSsn());
+            addSavingsAccount(customers.get(i).getSsn());
+        }
     }
 
     /**
@@ -27,10 +37,10 @@ public class BankLogic {
      * @return
      */
     public static BankLogic getBankLogic() {
-        if (logic == null) {
-            logic = new BankLogic();
+        if (bankLogic == null) {
+            bankLogic = new BankLogic();
         }
-        return logic;
+        return bankLogic;
     }
 
     /**
@@ -265,7 +275,7 @@ public class BankLogic {
 
         for (int j = 0; j < customers.size(); j++) {
             transactionInformation.add(acc.getTransactions().
-                    get(j).toString());
+                           get(j).toString());
 
         }
         return transactionInformation;
