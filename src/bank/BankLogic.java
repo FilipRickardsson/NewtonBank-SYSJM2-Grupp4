@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 public class BankLogic {
 
-    private static BankLogic logic;
+    private static BankLogic bankLogic;
 
     private final List<Customer> customers;
     private int accountNbrCounter;
@@ -27,10 +27,10 @@ public class BankLogic {
      * @return
      */
     public static BankLogic getBankLogic() {
-        if (logic == null) {
-            logic = new BankLogic();
+        if (bankLogic == null) {
+            bankLogic = new BankLogic();
         }
-        return logic;
+        return bankLogic;
     }
 
     /**
