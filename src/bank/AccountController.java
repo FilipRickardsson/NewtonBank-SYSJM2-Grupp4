@@ -6,6 +6,8 @@ import java.awt.TextField;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,9 +17,8 @@ public class AccountController implements Initializable {
     
 
     private BankLogic bankLogic;
-    ArrayList tList = new ArrayList();
     
-    
+    private ObservableList<String> listan;
     
     @FXML
     private TextField amount;
@@ -43,15 +44,15 @@ public class AccountController implements Initializable {
     private void makeTransaction(ActionEvent event){
         
         
-            
-            transaction.toString();
+//            
+//            transaction.toString();
         
     }
     
     @FXML
     private void makeDeposit(ActionEvent event){
         
-         bankLogic.deposit(customer.getSsn(), transaction.getAccountID(), transaction.getAmount() );
+//         bankLogic.deposit(customer.getSsn(), transaction.getAccountID(), transaction.getAmount() );
         
     }
     
@@ -66,8 +67,10 @@ public class AccountController implements Initializable {
     }
     
     public void init(long ssn, int accountID){
-         tList=(ArrayList)bankLogic.getTransactions(ssn, accountID);
-        
+         
+
+         
+        listan = FXCollections.observableArrayList(bankLogic.getTransactions(ssn, accountID));
                 
     }
             
@@ -76,7 +79,16 @@ public class AccountController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         bankLogic = BankLogic.getBankLogic();
+        
+        
+        
     }    
 
 
 }
+
+
+
+
+
+   
