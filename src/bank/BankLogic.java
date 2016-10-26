@@ -300,18 +300,19 @@ public class BankLogic {
     }
 
     public void customerToFile() {
-        
+
         try {
             FileWriter write = new FileWriter("Customer list.txt");
             BufferedWriter bf = new BufferedWriter(write);
             PrintWriter pw = new PrintWriter(bf);
-        for(int i = 0; i < customers.size(); i++) {
-            pw.println(customers.get(i).toString());
-        }
+            for (int i = 0; i < customers.size(); i++) {
+                pw.println(customers.get(i).toString());
+            }
+            pw.close();
         } catch (IOException ex) {
             Logger.getLogger(BankLogic.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 
 }
