@@ -11,7 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 
-public class CustomerController implements Initializable {
+public class CustomerController extends BaseController {
     @FXML
     Button change;
     @FXML
@@ -42,9 +42,28 @@ public class CustomerController implements Initializable {
         
         
     }
+    
+    public void sendInformation(String text) {
+        System.out.println(text);
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
     }    
+
+    @Override
+    protected void popupYes() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    protected void popupNo() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    protected void init() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

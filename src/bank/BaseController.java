@@ -51,5 +51,10 @@ public abstract class BaseController implements Initializable {
     }
 
     protected abstract void init();
+    
+    @FXML
+    protected void handleHome() {
+        showPopup();
+    } 
 
 }
