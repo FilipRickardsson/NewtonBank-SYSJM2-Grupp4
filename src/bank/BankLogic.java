@@ -1,7 +1,6 @@
 package bank;
 
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,12 +11,26 @@ import java.util.logging.Logger;
 
 public class BankLogic {
 
+    private static BankLogic logic;
+
     private final List<Customer> customers;
     private int accountNbrCounter;
 
-    public BankLogic() {
+    private BankLogic() {
         customers = new ArrayList();
         accountNbrCounter = 1001;
+    }
+
+    /**
+     * Singelton - returns a BankLogic object
+     *
+     * @return
+     */
+    public static BankLogic getBankLogic() {
+        if (logic == null) {
+            logic = new BankLogic();
+        }
+        return logic;
     }
 
     /**
@@ -304,7 +317,7 @@ public class BankLogic {
      * Prints all customers to a text file
      */
     public void customerToFile() {
-            String userHomeFolder = System.getProperty("usr.home");
+        String userHomeFolder = System.getProperty("user.home");
         try {
             FileWriter write = new FileWriter(userHomeFolder + "\\Desktop\\Customerlist.txt");
             BufferedWriter bf = new BufferedWriter(write);

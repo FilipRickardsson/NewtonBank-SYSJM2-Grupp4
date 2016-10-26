@@ -20,4 +20,5 @@
 
 .content {
     -fx-background-color: #DDDDDD;
+    -fx-pref-height: 1500px;
 }
