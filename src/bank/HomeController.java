@@ -100,6 +100,7 @@ public class HomeController extends BaseController {
 
         customerList = FXCollections.observableArrayList(bankLogic.getCustomers());
 
+        
         customerListView.setItems(customerList);
 
         try {

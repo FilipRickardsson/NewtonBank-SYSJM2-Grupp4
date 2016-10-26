@@ -1,11 +1,11 @@
 package bank;
 
 import java.awt.Button;
-import java.awt.Label;
 import java.awt.TextField;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,9 +15,8 @@ public class AccountController extends BaseController {
     
 
     private BankLogic bankLogic;
-    ArrayList tList = new ArrayList();
     
-    
+    private ObservableList<String> listan;
     
     @FXML
     private TextField amount;
@@ -43,20 +42,24 @@ public class AccountController extends BaseController {
     private void makeTransaction(ActionEvent event){
         
         
+
             
             //transaction.toString();
+
         
     }
     
     @FXML
     private void makeDeposit(ActionEvent event){
         
+
          //bankLogic.deposit(customer.getSsn(), transaction.getAccountID(), transaction.getAmount() );
+
         
     }
     
     @FXML
-    private void withdrawal(ActionEvent event){
+    private void makeWithdrawal(ActionEvent event){
         
     }
     
@@ -66,8 +69,10 @@ public class AccountController extends BaseController {
     }
     
     public void init(long ssn, int accountID){
-         tList=(ArrayList)bankLogic.getTransactions(ssn, accountID);
-        
+         
+
+         
+        listan = FXCollections.observableArrayList(bankLogic.getTransactions(ssn, accountID));
                 
     }
             
@@ -76,6 +81,9 @@ public class AccountController extends BaseController {
     public void initialize(URL url, ResourceBundle rb) {
 
         bankLogic = BankLogic.getBankLogic();
+        
+        
+        
     }    
 
     @Override
@@ -95,3 +103,9 @@ public class AccountController extends BaseController {
 
 
 }
+
+
+
+
+
+   
