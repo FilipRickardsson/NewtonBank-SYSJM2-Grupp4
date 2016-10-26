@@ -1,0 +1,23 @@
+
+.bg {
+    -fx-background-color: #ff69b4;
+}
+
+.menu {
+    -fx-alignment: top-center;
+    -fx-pref-width: 150px;
+    -fx-spacing: 20px;
+}
+
+.menuButton {
+    -fx-background-color: #ff69b4;
+    -fx-pref-width: 100px;
+}
+
+.menuButton:hover {
+    -fx-background-color: #CC69A4;
+}
+
+.content {
+    -fx-background-color: #DDDDDD;
+}

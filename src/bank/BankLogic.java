@@ -1,9 +1,13 @@
 package bank;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.*;
-import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class BankLogic implements Serializable {
 
@@ -293,6 +297,25 @@ public class BankLogic implements Serializable {
 
         }
         return acc;
+    }
+
+    /**
+     * Prints all customers to a text file
+     */
+    public void customerToFile() {
+        //TODO: Change file destination to desktop
+        try {
+            FileWriter write = new FileWriter("Customer list.txt");
+            BufferedWriter bf = new BufferedWriter(write);
+            PrintWriter pw = new PrintWriter(bf);
+            for (int i = 0; i < customers.size(); i++) {
+                pw.println(customers.get(i).toString());
+            }
+            pw.close();
+        } catch (IOException ex) {
+            Logger.getLogger(BankLogic.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
 }
