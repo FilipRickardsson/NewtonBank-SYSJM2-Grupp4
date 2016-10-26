@@ -5,23 +5,16 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 
-public class BankController implements Initializable {
-    
-    @FXML
-    private Label label;
+public class CustomerController implements Initializable {
     
     @FXML
     private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
+        System.out.println("Customer Controller");
     }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
-        // TODO
 
     }    
     
