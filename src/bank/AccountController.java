@@ -1,10 +1,8 @@
 package bank;
 
 import java.awt.Button;
-import java.awt.Label;
 import java.awt.TextField;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -52,7 +50,9 @@ public class AccountController implements Initializable {
     @FXML
     private void makeDeposit(ActionEvent event){
         
+
 //         bankLogic.deposit(customer.getSsn(), transaction.getAccountID(), transaction.getAmount() );
+
         
     }
     
