@@ -15,9 +15,6 @@ public class AccountController implements Initializable {
     
 
     private BankLogic bankLogic;
-    private Customer customer;
-    private SavingAccount savingAccount;
-    private Transaction transaction;
     ArrayList tList = new ArrayList();
     
     
