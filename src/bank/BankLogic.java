@@ -19,6 +19,16 @@ public class BankLogic {
     private BankLogic() {
         customers = new ArrayList();
         accountNbrCounter = 1001;
+        
+        //To test
+        customers.add(new Customer("Dijana", 7912120101L));
+        customers.add(new Customer("Johan", 9702020101L));
+        customers.add(new Customer("Chrsitoffer", 9202254545L));
+        //To test
+        for(int i = 0; i < customers.size(); i++) {
+            addCreditAccount(customers.get(i).getSsn());
+            addSavingsAccount(customers.get(i).getSsn());
+        }
     }
 
     /**

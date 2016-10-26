@@ -17,7 +17,7 @@ public class HomeController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        bankLogic = BankLogic.getBankLogic();
     }    
     
 }
