@@ -30,7 +30,11 @@ public class HomeController implements Initializable {
     
     @FXML
     private void searchCustomer(ActionEvent event) {
-        //Make customer highlighted in list below
+        for(int i = 0; i < customerList.size(); i++) {
+            if (customerList.get(i).contains(ssnSearchField.getCharacters())) {
+                customerListView.getSelectionModel().select(i);
+            }
+        }
         
     }
     
@@ -51,7 +55,7 @@ public class HomeController implements Initializable {
     
     @FXML
     private void createCustomer() {
-        //Creates customer
+        //Creates customer - Pop up
     }
     
     @Override
