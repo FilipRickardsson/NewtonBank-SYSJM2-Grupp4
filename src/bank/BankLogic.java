@@ -304,7 +304,7 @@ public class BankLogic {
      * Prints all customers to a text file
      */
     public void customerToFile() {
-            String userHomeFolder = System.getProperty("usr.home");
+            String userHomeFolder = System.getProperty("user.home");
         try {
             FileWriter write = new FileWriter(userHomeFolder + "\\Desktop\\Customerlist.txt");
             BufferedWriter bf = new BufferedWriter(write);
