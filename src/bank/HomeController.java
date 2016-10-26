@@ -1,14 +1,20 @@
 package bank;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class HomeController implements Initializable {
     
@@ -49,8 +55,13 @@ public class HomeController implements Initializable {
     }
     
     @FXML
-    private void selectCustomer() {
+    private void selectCustomer(ActionEvent event) throws IOException {
         //Selects a customer
+        
+        Parent root = FXMLLoader.load(getClass().getResource("Customer.fxml"));
+        Scene s = new Scene(root);
+        Stage stg = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stg.setScene(s);
     }
     
     @FXML
