@@ -42,8 +42,10 @@ public class AccountController implements Initializable {
     private void makeTransaction(ActionEvent event){
         
         
-//            
-//            transaction.toString();
+
+            
+            //transaction.toString();
+
         
     }
     
@@ -51,7 +53,7 @@ public class AccountController implements Initializable {
     private void makeDeposit(ActionEvent event){
         
 
-//         bankLogic.deposit(customer.getSsn(), transaction.getAccountID(), transaction.getAmount() );
+         //bankLogic.deposit(customer.getSsn(), transaction.getAccountID(), transaction.getAmount() );
 
         
     }

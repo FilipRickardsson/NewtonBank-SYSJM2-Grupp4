@@ -74,7 +74,6 @@ public class HomeController implements Initializable {
         bankLogic = BankLogic.getBankLogic();
         
         customerList = FXCollections.observableArrayList(bankLogic.getCustomers());
-        
 
         
         customerListView.setItems(customerList);
