@@ -23,13 +23,20 @@ public class CreditAccount extends SavingAccount {
 //    public double calcDebt() {
 //        return saldo * creditInterest;
 //    }
-    
+    /**
+     * Makes a withdrawal
+     * @param amount 
+     */
     @Override
     public void withdraw(double amount) {
         saldo -= amount;
         transactions.add(new Transaction(accountNumber, true, amount, saldo));
     }
-
+    
+    /**
+     * Calculates the interest
+     * @return 
+     */
     @Override
     public double calcInterest() {
         if (saldo < 0) {

@@ -1,7 +1,13 @@
 package bank;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class BankLogic {
 
@@ -106,7 +112,7 @@ public class BankLogic {
                 sumInterest += accounts.get(j).calcInterest();
                 sumSaldo += accounts.get(j).getSaldo() + sumInterest;
             }
-            info.add("Total Saldo: " +sumSaldo+ " Total interest: " +sumInterest);
+            info.add("Total Saldo: " + sumSaldo + " Total interest: " + sumInterest);
             customers.remove(customer);
         }
         return info;
@@ -128,13 +134,15 @@ public class BankLogic {
         }
         return accountNbr;
     }
-/**
- * Returns a string with the accountID,balance,type of account and interest 
- * using the accountID that belongs to the ssn we use
- * @param ssn
- * @param accountId
- * @return 
- */
+
+    /**
+     * Returns a string with the accountID,balance,type of account and interest
+     * using the accountID that belongs to the ssn we use
+     *
+     * @param ssn
+     * @param accountId
+     * @return
+     */
     public String getAccount(long ssn, int accountId) {
         for (int i = 0; i < customers.size(); i++) {
             if (ssn == customers.get(i).getSsn()) {
@@ -148,12 +156,14 @@ public class BankLogic {
     }
 
     /**
-     * makes a deposit from the accountnumber that belongs to the right social security number
-     * returns true if it went through otherwise i returnes false
+     * makes a deposit from the accountnumber that belongs to the right social
+     * security number returns true if it went through otherwise i returnes
+     * false
+     *
      * @param ssn
      * @param accountId
      * @param amount
-     * @return 
+     * @return
      */
     public boolean deposit(long ssn, int accountId, double amount) {
         if (amount > 0) {
@@ -165,12 +175,14 @@ public class BankLogic {
     }
 
     /**
-     * makes a withdrawal from accountnumber that belongs to the right social security number
-     * returns true if it went through otherwise i returnes false
+     * makes a withdrawal from accountnumber that belongs to the right social
+     * security number returns true if it went through otherwise i returnes
+     * false
+     *
      * @param ssn
      * @param accountId
      * @param amount
-     * @return 
+     * @return
      */
     public boolean withdraw(long ssn, int accountId, double amount) {
         SavingAccount acc = searchForAccount(ssn, accountId);
@@ -190,9 +202,11 @@ public class BankLogic {
             return false;
         }
     }
+
     /**
-     * Closes an account connected to a ssn and accountId if accountId is 
+     * Closes an account connected to a ssn and accountId if accountId is
      * provided.
+     *
      * @param ssn
      * @param accountId
      * @return info
@@ -214,12 +228,13 @@ public class BankLogic {
      */
     public int addCreditAccount(long ssn) {
         int accountNbr = -1;
+        Customer customer = searchForCustomer(ssn);
+        if (customer != null) {
+            searchForCustomer(ssn).getAccounts().add(new CreditAccount(accountNbr, "Credit Account"));
 
-        searchForCustomer(ssn).getAccounts().add(new CreditAccount(accountNbr, "Credit Account"));
-
-        accountNbr = accountNbrCounter;
-        accountNbrCounter++;
-
+            accountNbr = accountNbrCounter;
+            accountNbrCounter++;
+        }
         return accountNbr;
     }
 
@@ -241,12 +256,14 @@ public class BankLogic {
         }
         return transactionInformation;
     }
-/**
- * Searches through the list of customers with their ssn then returns the 
- * customer with that ssn
- * @param ssn
- * @return 
- */
+
+    /**
+     * Searches through the list of customers with their ssn then returns the
+     * customer with that ssn
+     *
+     * @param ssn
+     * @return
+     */
     private Customer searchForCustomer(long ssn) {
         Customer customer = null;
         for (int i = 0; i < customers.size(); i++) {
@@ -257,13 +274,15 @@ public class BankLogic {
         }
         return customer;
     }
-       /**
-        * Searches through Customers first then through their account with the 
-        * accountID and gives us that account
-        * @param ssn
-        * @param accountNumber
-        * @return 
-        */
+
+    /**
+     * Searches through Customers first then through their account with the
+     * accountID and gives us that account
+     *
+     * @param ssn
+     * @param accountNumber
+     * @return
+     */
     private SavingAccount searchForAccount(long ssn, int accountNumber) {
         SavingAccount acc = null;
         Customer customer = searchForCustomer(ssn);
@@ -278,6 +297,25 @@ public class BankLogic {
 
         }
         return acc;
+    }
+
+    /**
+     * Prints all customers to a text file
+     */
+    public void customerToFile() {
+        //TODO: Change file destination to desktop
+        try {
+            FileWriter write = new FileWriter("Customer list.txt");
+            BufferedWriter bf = new BufferedWriter(write);
+            PrintWriter pw = new PrintWriter(bf);
+            for (int i = 0; i < customers.size(); i++) {
+                pw.println(customers.get(i).toString());
+            }
+            pw.close();
+        } catch (IOException ex) {
+            Logger.getLogger(BankLogic.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
 }
