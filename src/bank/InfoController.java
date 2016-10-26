@@ -13,7 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 
-public class InfoController implements Initializable {
+public class InfoController extends BaseController {
     
     private BankLogic bankLogic;
     private long Ssn;
@@ -53,5 +53,20 @@ public class InfoController implements Initializable {
         accountList.setItems(accounts);
 
     }    
+
+    @Override
+    protected void popupYes() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    protected void popupNo() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    protected void init() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
