@@ -15,9 +15,6 @@ public class AccountController implements Initializable {
     
 
     private BankLogic bankLogic;
-    private Customer customer;
-    private SavingAccount savingAccount;
-    private Transaction transaction;
     ArrayList tList = new ArrayList();
     
     
@@ -47,14 +44,14 @@ public class AccountController implements Initializable {
         
         
             
-            transaction.toString();
+            //transaction.toString();
         
     }
     
     @FXML
     private void makeDeposit(ActionEvent event){
         
-         bankLogic.deposit(customer.getSsn(), transaction.getAccountID(), transaction.getAmount() );
+         //bankLogic.deposit(customer.getSsn(), transaction.getAccountID(), transaction.getAmount() );
         
     }
     
