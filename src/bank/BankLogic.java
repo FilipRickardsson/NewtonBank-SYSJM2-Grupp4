@@ -1,6 +1,7 @@
 package bank;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -303,9 +304,9 @@ public class BankLogic {
      * Prints all customers to a text file
      */
     public void customerToFile() {
-        //TODO: Change file destination to desktop
+            String userHomeFolder = System.getProperty("usr.home");
         try {
-            FileWriter write = new FileWriter("Customer list.txt");
+            FileWriter write = new FileWriter(userHomeFolder + "\\Desktop\\Customerlist.txt");
             BufferedWriter bf = new BufferedWriter(write);
             PrintWriter pw = new PrintWriter(bf);
             for (int i = 0; i < customers.size(); i++) {
