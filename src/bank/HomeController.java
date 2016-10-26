@@ -36,7 +36,7 @@ public class HomeController implements Initializable {
     
     @FXML
     private void printCustomersToFile() {
-        //Print customers to text file
+        bankLogic.customerToFile();
     }
     
     @FXML
@@ -59,10 +59,6 @@ public class HomeController implements Initializable {
         bankLogic = BankLogic.getBankLogic();
         
         customerList = FXCollections.observableArrayList(bankLogic.getCustomers());
-        
-        for(String s : customerList) {
-            System.out.println(s);
-        }
         
         customerListView.setItems(customerList);
     }    
