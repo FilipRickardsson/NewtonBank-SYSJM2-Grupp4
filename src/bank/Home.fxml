@@ -29,20 +29,20 @@
                <children>
                   <Label text="Select customer:" />
                   <Label text="ssn: " />
-                  <TextField />
-                  <Button mnemonicParsing="false" text="Search" />
+                  <TextField fx:id="ssnSearchField" />
+                  <Button mnemonicParsing="false" onAction="#searchCustomer" text="Search" />
                   <Label text="Name" />
                   <Label text="SSN" />
-                  <ListView prefHeight="200.0" prefWidth="200.0" />
-                  <Button mnemonicParsing="false" text="Print list" />
-                  <Button mnemonicParsing="false" text="Remove" />
-                  <Button mnemonicParsing="false" text="Select" />
+                  <ListView fx:id="customerList" prefHeight="200.0" prefWidth="200.0" />
+                  <Button mnemonicParsing="false" onAction="#printCustomersToFile" text="Print list" />
+                  <Button mnemonicParsing="false" onAction="#removeCustomer" text="Remove" />
+                  <Button mnemonicParsing="false" onAction="#selectCustomer" text="Select" />
                   <Label text="Create customer" />
                   <Label text="Name:" />
-                  <TextField />
+                  <TextField fx:id="nameInsert" />
                   <Label text="ssn:" />
-                  <TextField />
-                  <Button mnemonicParsing="false" text="Create" />
+                  <TextField fx:id="ssnInsert" />
+                  <Button mnemonicParsing="false" onAction="#createCustomer" text="Create" />
                </children></VBox>
          </content>
       </ScrollPane>
