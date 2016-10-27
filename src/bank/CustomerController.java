@@ -1,6 +1,5 @@
 package bank;
 
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -18,10 +17,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class CustomerController extends BaseController {
+
     @FXML
     Label Prn;
     @FXML
@@ -38,20 +39,37 @@ public class CustomerController extends BaseController {
     private ObservableList<String> accounts;
     private BankLogic banklogic;
     @FXML
+    RadioButton saving;
+    @FXML
+    RadioButton credit;
+    @FXML
+    Button create;
+    @FXML
+    Label message;
+
+    @FXML
     private void buttonChange(ActionEvent event) {
-        long newSsn= BaseController.selectedCustomerSSN;
+        long newSsn = BaseController.selectedCustomerSSN;
         banklogic.changeCustomer(changeName.getText(), newSsn);
-        updateInfo();   
+        updateInfo();
     }
 
     @FXML
-    private void buttonRemove(ActionEvent event) {
-       banklogic.closeAccount(selectedCustomerSSN, selectedCustomerAccountID);
+    private void buttonRemove(ActionEvent event) throws IOException {
+        setPopupMessage("Are you sure ?");
+        showPopup();
+    }
+
+    @FXML
+    private void buttonCreate(ActionEvent event) throws IOException {
+
+        banklogic.addSavingsAccount(selectedCustomerSSN);
+        updateInfo();
     }
 
     @FXML
     private void buttonSelect(ActionEvent event) throws IOException {
-        
+
         Parent root = FXMLLoader.load(getClass().getResource("Account.fxml"));
         Scene s = new Scene(root);
         Stage stg = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -64,23 +82,45 @@ public class CustomerController extends BaseController {
 
     @Override
     protected void popupYes() {
+//        banklogic.closeAccount(selectedCustomerSSN,selectedCustomerAccountID );
+//        updateInfo();
+
+        selectedCustomerAccountID = banklogic.getCustomerAccountIdViaIndex(listOfAccounts.getSelectionModel().getSelectedIndex());
+        System.out.println("Selected index: " + selectedCustomerAccountID);
+
+        Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getResource("Info.fxml"));
+            Scene s = new Scene(root);
+            main.setScene(s);
+        } catch (IOException ex) {
+            Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         System.out.println("Yes");
         popup.close();
     }
 
-    private void updateInfo(){
-        ArrayList<String> info=(ArrayList<String>) banklogic.getCustomer(selectedCustomerSSN);
+    @Override
+    protected void popupNo() {
+        System.out.println("No");
+        popup.close();
+    }
+
+    private void updateInfo() {
+        ArrayList<String> info = (ArrayList<String>) banklogic.getCustomer(selectedCustomerSSN);
         changeName.setText(info.get(0));
         Prn.setText(info.get(1));
         info.remove(0);
         info.remove(0);
         accounts = FXCollections.observableArrayList(info);
-        listOfAccounts.setItems(accounts); 
+        listOfAccounts.setItems(accounts);
     }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        banklogic=BankLogic.getBankLogic();
-        selectedCustomerSSN=7912120101L;
+        banklogic = BankLogic.getBankLogic();
+        selectedCustomerSSN = 7912120101L;
         updateInfo();
 
         try {
