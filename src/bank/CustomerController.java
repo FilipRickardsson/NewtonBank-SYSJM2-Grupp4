@@ -59,7 +59,6 @@ public class CustomerController extends BaseController {
         int newAccountId=BaseController.selectedCustomerAccountID;
         banklogic.closeAccount(selectedCustomerSSN, newAccountId);
         updateInfo();
-        setStage(main);
     }
     @FXML
     private void buttonCreate(ActionEvent event) throws IOException {
@@ -101,7 +100,7 @@ public class CustomerController extends BaseController {
         accounts = FXCollections.observableArrayList(info);
         listOfAccounts.setItems(accounts);
     }
-
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         banklogic = BankLogic.getBankLogic();
