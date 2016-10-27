@@ -3,6 +3,7 @@ package bank;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -82,7 +83,7 @@ public class AccountController extends BaseController {
         selectedCustomerSSN = 7912120101L;
         selectedCustomerAccountID= 1002;
         
-        listan = FXCollections.observableArrayList(bankLogic.getTransactions(selectedCustomerSSN, selectedCustomerAccountID));
+        listan = FXCollections.observableArrayList((ArrayList)bankLogic.getTransactions(selectedCustomerSSN, selectedCustomerAccountID));
         transactions.setItems(listan);
         
     }
