@@ -13,7 +13,7 @@ import javafx.stage.WindowEvent;
 
 public abstract class BaseController implements Initializable {
 
-    protected Stage main;
+    protected static Stage main;
     protected Stage popup;
     protected PopupController popupCtrl;
     
@@ -21,7 +21,7 @@ public abstract class BaseController implements Initializable {
     public static int selectedCustomerAccountID;
 
     protected void setStage(Stage stage) {
-        this.main = stage;
+        BaseController.main = stage;
     }
     
     protected void loadPopup() throws IOException {
