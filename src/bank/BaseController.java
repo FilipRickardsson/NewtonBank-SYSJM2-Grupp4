@@ -3,6 +3,7 @@ package bank;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -62,7 +63,22 @@ public abstract class BaseController implements Initializable {
 
     @FXML
     protected void handleHome() {
-        showPopup();
+        loadScene("Home.fxml");
+    }
+
+    @FXML
+    protected void handleCustomer() {
+        loadScene("Customer.fxml");
+    }
+
+    @FXML
+    protected void handleAccount() {
+        loadScene("Account.fxml");
+    }
+
+    @FXML
+    protected void handleQuit() {
+        Platform.exit();
     }
 
     protected void loadScene(String sceneToLoad) {
