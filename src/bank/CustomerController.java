@@ -1,6 +1,5 @@
 package bank;
 
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -22,6 +21,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class CustomerController extends BaseController {
+
     @FXML
     Label Prn;
     @FXML
@@ -37,18 +37,22 @@ public class CustomerController extends BaseController {
     @FXML
     private ObservableList<String> accounts;
     private BankLogic banklogic;
+
     @FXML
     private void buttonChange(ActionEvent event) {
-        long newSsn= BaseController.selectedCustomerSSN;
+        long newSsn = BaseController.selectedCustomerSSN;
         banklogic.changeCustomer(changeName.getText(), newSsn);
-        updateInfo();   
+        updateInfo();        
     }
-
+    
     @FXML
-    private void buttonRemove(ActionEvent event) {
-       banklogic.closeAccount(selectedCustomerSSN, selectedCustomerAccountID);
+    private void buttonRemove(ActionEvent event) throws IOException {
+        loadPopup();
+        setPopupMessage("Are you sure ?");
+        showPopup();
+        banklogic.closeAccount(selectedCustomerSSN, selectedCustomerAccountID);
     }
-
+    
     @FXML
     private void buttonSelect(ActionEvent event) throws IOException {
         
@@ -57,42 +61,44 @@ public class CustomerController extends BaseController {
         Stage stg = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stg.setScene(s);
     }
-
+    
     public void sendInformation(String text) {
         System.out.println(text);
     }
-
+    
     @Override
     protected void popupYes() {
         System.out.println("Yes");
         popup.close();
     }
-
+    
     @Override
     protected void popupNo() {
         System.out.println("No");
         popup.close();
     }
-    private void updateInfo(){
-        ArrayList<String> info=(ArrayList<String>) banklogic.getCustomer(selectedCustomerSSN);
+
+    private void updateInfo() {
+        ArrayList<String> info = (ArrayList<String>) banklogic.getCustomer(selectedCustomerSSN);
         changeName.setText(info.get(0));
         Prn.setText(info.get(1));
         info.remove(0);
         info.remove(0);
         accounts = FXCollections.observableArrayList(info);
-        listOfAccounts.setItems(accounts); 
+        listOfAccounts.setItems(accounts);        
     }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        banklogic=BankLogic.getBankLogic();
-        selectedCustomerSSN=7912120101L;
+        banklogic = BankLogic.getBankLogic();
+        selectedCustomerSSN = 7912120101L;
         updateInfo();
-
+        
         try {
             loadPopup();
         } catch (IOException ex) {
             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
 }
