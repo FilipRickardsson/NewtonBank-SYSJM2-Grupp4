@@ -14,47 +14,46 @@ import javafx.stage.WindowEvent;
 public abstract class BaseController implements Initializable {
 
     protected Stage popup;
+    protected PopupController popupCtrl;
 
     @FXML
     Label lblMessage;
 
-    public void loadPopup() throws IOException {
+    protected void loadPopup() throws IOException {
         popup = new Stage();
-        FXMLLoader myLoader = new FXMLLoader(getClass().getResource("Popup.fxml"));
-        myLoader.setController(this);
-        Parent popupRoot = (Parent) myLoader.load();
-        popup.setScene(new Scene(popupRoot));
-        popup.setTitle("Message");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Popup.fxml"));
+        Parent root = (Parent) loader.load();
+        popupCtrl = (PopupController) loader.getController();
+        popupCtrl.setController(this);
         popup.setResizable(false);
         popup.initModality(Modality.APPLICATION_MODAL);
+        popup.setScene(new Scene(root));
+        popup.setTitle("Newton Bank");
         popup.setOnCloseRequest((WindowEvent we) -> {
-            
+            we.consume();
         });
+
     }
 
     protected void showPopup() {
         if (popup != null) {
             popup.show();
         } else {
-            System.out.println("Error");
+            System.out.println("Error loading popup");
         }
     }
 
-    @FXML
     protected abstract void popupYes();
 
-    @FXML
     protected abstract void popupNo();
 
     protected void setPopupMessage(String msg) {
-        lblMessage.setText(msg);
+        popupCtrl.setMessage(msg);
     }
 
-    protected abstract void init();
-    
     @FXML
     protected void handleHome() {
         showPopup();
-    } 
+    }
 
 }

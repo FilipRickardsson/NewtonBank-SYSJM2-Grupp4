@@ -10,7 +10,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -62,12 +61,13 @@ public class HomeController extends BaseController {
         //Selects a customer
         FXMLLoader myLoader = new FXMLLoader(getClass().getResource("Customer.fxml"));
         Parent root = (Parent) myLoader.load();
-        CustomerController controller = (CustomerController)myLoader.getController();
+        CustomerController controller = (CustomerController) myLoader.getController();
         controller.sendInformation("Hej");
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.setTitle("Newton Bank");
         stage.show();
+        
 //        Parent root = FXMLLoader.load(getClass().getResource("Customer.fxml"));
 //        Scene s = new Scene(root);
 //        Stage stg = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -80,27 +80,23 @@ public class HomeController extends BaseController {
     }
 
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-
-    }
-
-    @Override
     protected void popupYes() {
-        //bankLogic.removeCustomer();
+        System.out.println("Yes");
+        popup.close();
     }
 
     @Override
     protected void popupNo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("No");
+        popup.close();
     }
 
     @Override
-    protected void init() {
+    public void initialize(URL url, ResourceBundle rb) {
         bankLogic = BankLogic.getBankLogic();
 
         customerList = FXCollections.observableArrayList(bankLogic.getCustomers());
 
-        
         customerListView.setItems(customerList);
 
         try {
@@ -108,6 +104,7 @@ public class HomeController extends BaseController {
         } catch (IOException ex) {
             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
 }
