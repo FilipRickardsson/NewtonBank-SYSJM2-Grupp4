@@ -341,5 +341,9 @@ public class BankLogic {
         }
 
     }
+    
+    public long getCustomerSsnViaIndex(int CustomerIndex) {
+        return customers.get(CustomerIndex).getSsn();
+    }
 
 }
