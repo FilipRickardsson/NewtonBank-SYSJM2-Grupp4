@@ -68,11 +68,6 @@ public class CustomerController extends BaseController {
         popup.close();
     }
 
-    @Override
-    protected void popupNo() {
-        System.out.println("No");
-        popup.close();
-    }
     private void updateInfo(){
         ArrayList<String> info=(ArrayList<String>) banklogic.getCustomer(selectedCustomerSSN);
         changeName.setText(info.get(0));

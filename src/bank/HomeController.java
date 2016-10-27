@@ -81,8 +81,8 @@ public class HomeController extends BaseController {
             System.out.println("Yes");
             selectedCustomerSSN = bankLogic.getCustomerSsnViaIndex(customerListView
                     .getSelectionModel().getSelectedIndex());
-//        bankLogic.removeCustomer(selectedCustomerSSN);
-//        updateInfo();
+
+            selectedCustomerAccountID = 0;
             popup.close();
 
             Parent root = FXMLLoader.load(getClass().getResource("Info.fxml"));
@@ -92,12 +92,6 @@ public class HomeController extends BaseController {
             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-    }
-
-    @Override
-    protected void popupNo() {
-        System.out.println("No");
-        popup.close();
     }
 
     private void updateInfo() {
