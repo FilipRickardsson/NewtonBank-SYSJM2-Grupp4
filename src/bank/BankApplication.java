@@ -11,7 +11,12 @@ public class BankApplication extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Home.fxml"));
+        Parent root = (Parent) loader.load();
+        BaseController controller = (BaseController) loader.getController();
+        controller.setStage(stage);
+        
+//        Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
 
         Scene scene = new Scene(root);
 
@@ -20,7 +25,7 @@ public class BankApplication extends Application {
     }
 
     public static void main(String[] args) {
-        launch(args);   
+        launch(args);
     }
 
 }
