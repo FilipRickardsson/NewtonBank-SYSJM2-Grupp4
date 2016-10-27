@@ -58,20 +58,11 @@ public class HomeController extends BaseController {
 
     @FXML
     private void selectCustomer(ActionEvent event) throws IOException {
-        //Selects a customer
-        FXMLLoader myLoader = new FXMLLoader(getClass().getResource("Customer.fxml"));
-        Parent root = (Parent) myLoader.load();
-        CustomerController controller = (CustomerController) myLoader.getController();
-        controller.sendInformation("Hej");
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Newton Bank");
-        stage.show();
-        
-//        Parent root = FXMLLoader.load(getClass().getResource("Customer.fxml"));
-//        Scene s = new Scene(root);
-//        Stage stg = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//        stg.setScene(s);
+        //Selects a customer        
+        Parent root = FXMLLoader.load(getClass().getResource("Customer.fxml"));
+        Scene s = new Scene(root);
+        Stage stg = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stg.setScene(s);
     }
 
     @FXML
