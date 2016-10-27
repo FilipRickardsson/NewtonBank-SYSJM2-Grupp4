@@ -51,7 +51,13 @@ public class CustomerController extends BaseController {
     @FXML
     private void buttonChange(ActionEvent event) {
         long newSsn = BaseController.selectedCustomerSSN;
-        banklogic.changeCustomer(changeName.getText(), newSsn);
+        
+        if(banklogic.changeCustomer(changeName.getText(), newSsn)){
+            message.setText("Change success");
+        }
+        else{
+            message.setText("Invalid symbols");
+        }
     }
 
     @FXML
