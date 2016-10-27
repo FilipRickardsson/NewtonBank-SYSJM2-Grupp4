@@ -39,6 +39,7 @@ public class AccountController extends BaseController {
     @FXML
     private void makeTransaction(ActionEvent event) {
         //transaction.toString();
+        
     }
 
     @FXML
@@ -58,6 +59,7 @@ public class AccountController extends BaseController {
 
     public void init(long ssn, int accountID) {
         listan = FXCollections.observableArrayList(bankLogic.getTransactions(ssn, accountID));
+        transactions.setItems(listan);
     }
 
     @Override
