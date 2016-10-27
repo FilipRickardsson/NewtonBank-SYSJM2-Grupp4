@@ -53,12 +53,12 @@ public class CustomerController extends BaseController {
         updateInfo();
     }
     @FXML
-    private void buttonRemove(ActionEvent event) throws IOException {
+    private void buttonRemove(ActionEvent event){
         setPopupMessage("Are you sure ?");
         showPopup(); 
     }
     @FXML
-    private void buttonCreate(ActionEvent event) throws IOException {
+    private void buttonCreate(ActionEvent event){
         
         banklogic.addSavingsAccount(selectedCustomerSSN);
         updateInfo();
