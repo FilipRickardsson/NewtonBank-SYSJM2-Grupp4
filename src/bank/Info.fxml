@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
@@ -28,14 +27,7 @@
             <VBox prefHeight="200.0" prefWidth="100.0" styleClass="content">
                <children>
                   <Label text="Deleted" />
-                  <Label text="name" />
-                  <TextField fx:id="name" />
-                  <Label text="ssn" />
-                  <TextField fx:id="ssn" />
-                  <Label text="Account" />
-                  <ListView fx:id="accountList" prefHeight="200.0" prefWidth="200.0" />
-                  <Label text="Balance" />
-                  <TextField fx:id="balance" />
+                  <ListView fx:id="accountList" prefHeight="276.0" prefWidth="300.0" />
                </children></VBox>
          </content>
       </ScrollPane>

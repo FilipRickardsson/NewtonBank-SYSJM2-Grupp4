@@ -20,21 +20,10 @@ import javafx.stage.Stage;
 public class InfoController extends BaseController {
 
     private BankLogic bankLogic;
-    private String testLong = "9202254545";
-    private String testName = "paul";
-    private String testBalance = "10000";
-    @FXML
-    private TextField name;
-    @FXML
-    private TextField ssn;
-    @FXML
-    private Label account;
-    @FXML
-    private TextField balance;
     @FXML
     private ListView accountList;
 
-    private ObservableList<String> accounts;
+    private ObservableList<String> customerInformation;
     
     
 
@@ -47,13 +36,7 @@ public class InfoController extends BaseController {
     //Hur får vi ut vilka accounts som tagits bort?
     //fixa popupYes ladda home.fxml
 
-    @FXML
-    private String balanceSet() {
-        String saldo = "Fix";
-       // ta hand info och få ut saldo
-       
-       return saldo;
-    }
+   
 
     @Override
     protected void popupYes() {
@@ -84,12 +67,18 @@ public class InfoController extends BaseController {
     public void initialize(URL url, ResourceBundle rb) {
         bankLogic = BankLogic.getBankLogic();
         //TODO fix
-        accounts = FXCollections.observableArrayList(bankLogic.getAccount(9202254545L, 1006));       
-        accountList.setItems(accounts);
-        ssn.setText(testLong);
-        name.setText(testName);
-        balance.setText(testBalance);
-       
+        
+        if (selectedCustomerAccountID == 0){
+            
+            customerInformation = FXCollections.observableArrayList(bankLogic.removeCustomer(selectedCustomerSSN));
+            accountList.setItems(customerInformation);
+        }
+        else{
+            bankLogic.closeAccount(selectedCustomerSSN, selectedCustomerAccountID);
+            
+        customerInformation = FXCollections.observableArrayList(bankLogic.closeAccount(selectedCustomerSSN, selectedCustomerAccountID));       
+        accountList.setItems(customerInformation);
+        }
 
         try {
             loadPopup();
