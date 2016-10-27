@@ -69,12 +69,6 @@ public class AccountController extends BaseController {
         popup.close();
     }
 
-    @Override
-    protected void popupNo() {
-        System.out.println("No");
-        popup.close();
-    }
-
     public void updateInfo(){
         
         selectedCustomerSSN = 7912120101L;

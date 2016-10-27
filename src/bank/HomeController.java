@@ -94,12 +94,6 @@ public class HomeController extends BaseController {
 
     }
 
-    @Override
-    protected void popupNo() {
-        System.out.println("No");
-        popup.close();
-    }
-
     private void updateInfo() {
         customerList = FXCollections.observableArrayList(bankLogic.getCustomers());
 
