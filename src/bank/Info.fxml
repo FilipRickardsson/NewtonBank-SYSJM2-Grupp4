@@ -15,7 +15,7 @@
    <left>
       <VBox prefHeight="200.0" prefWidth="100.0" styleClass="menu" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onAction="#handleButtonAction" styleClass="menuButton" stylesheets="@style.css" text="Home" />
+            <Button mnemonicParsing="false" styleClass="menuButton" stylesheets="@style.css" text="Home" />
             <Button mnemonicParsing="false" styleClass="menuButton" text="Customer" />
             <Button mnemonicParsing="false" styleClass="menuButton" text="Account" />
             <Button mnemonicParsing="false" styleClass="menuButton" text="Quit" />
@@ -29,13 +29,13 @@
                <children>
                   <Label text="Deleted" />
                   <Label text="name" />
-                  <TextField fx:id="name" />
+                  <TextField />
                   <Label text="ssn" />
-                  <TextField fx:id="ssn" />
+                  <TextField />
                   <Label text="Account" />
-                  <ListView fx:id="account" prefHeight="200.0" prefWidth="200.0" />
+                  <ListView fx:id="accountList" prefHeight="200.0" prefWidth="200.0" />
                   <Label text="Balance" />
-                  <TextField fx:id="balance" />
+                  <TextField />
                </children></VBox>
          </content>
       </ScrollPane>
