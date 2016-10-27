@@ -38,8 +38,10 @@
                   <Button mnemonicParsing="false" onAction="#removeCustomer" text="Remove" />
                   <Button mnemonicParsing="false" onAction="#selectCustomer" text="Select" />
                   <Label text="Create customer" />
-                  <Label text="Name:" />
-                  <TextField fx:id="nameInsert" />
+                  <Label text="First name:" />
+                  <TextField fx:id="firstNameInsert" />
+                  <Label text="Last name:" />
+                  <TextField fx:id="lastNameInsert" />
                   <Label text="ssn:" />
                   <TextField fx:id="ssnInsert" />
                   <Button mnemonicParsing="false" onAction="#createCustomer" text="Create" />
