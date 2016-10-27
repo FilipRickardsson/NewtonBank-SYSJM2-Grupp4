@@ -30,9 +30,9 @@
                <children>
                   <Label text="Name" />
                   <TextField fx:id="changeName" />
-                  <Button mnemonicParsing="false" text="Change" />
+                  <Button fx:id="change" mnemonicParsing="false" onAction="#buttonChange" text="Change" />
                   <Label text="SSN:" />
-                  <Label styleClass="greyLabel" text="Personnummer" />
+                  <Label fx:id="Prn" styleClass="greyLabel" text="Personnummer" />
                   <Label text="KONTON" />
                   <ListView fx:id="listOfAccounts" prefHeight="200.0" prefWidth="200.0" />
                   <Button mnemonicParsing="false" text="Remove" />
