@@ -71,8 +71,6 @@ public class AccountController extends BaseController {
 
     public void updateInfo(){
         
-        selectedCustomerSSN = 7912120101L;
-        selectedCustomerAccountID= 1002;
         
         listan = FXCollections.observableArrayList((ArrayList)bankLogic.getTransactions(selectedCustomerSSN, selectedCustomerAccountID));
         transactions.setItems(listan);
