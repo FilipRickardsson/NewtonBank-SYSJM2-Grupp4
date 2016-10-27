@@ -30,7 +30,10 @@ public class HomeController extends BaseController {
     private ListView customerListView;
 
     @FXML
-    private TextField nameInsert;
+    private TextField firstNameInsert;
+
+    @FXML
+    private TextField lastNameInsert;
 
     @FXML
     private TextField ssnInsert;
@@ -61,15 +64,17 @@ public class HomeController extends BaseController {
         selectedCustomerSSN = bankLogic.getCustomerSsnViaIndex(customerListView
                 .getSelectionModel().getSelectedIndex());
 
-        Parent root = FXMLLoader.load(getClass().getResource("Customer.fxml"));
-        Scene s = new Scene(root);
-        Stage stg = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stg.setScene(s);
+        loadScene("Customer.fxml");
     }
 
     @FXML
     private void createCustomer() {
-        bankLogic.addCustomer(nameInsert.getText(), Long.parseLong(ssnInsert
+        //Fix with first/last name
+
+        String fullName = firstNameInsert.getText() + " "
+                + lastNameInsert.getText();
+
+        bankLogic.addCustomer(fullName, Long.parseLong(ssnInsert
                 .getText()));
 
         updateInfo();
@@ -77,21 +82,14 @@ public class HomeController extends BaseController {
 
     @Override
     protected void popupYes() {
-        try {
-            System.out.println("Yes");
-            selectedCustomerSSN = bankLogic.getCustomerSsnViaIndex(customerListView
-                    .getSelectionModel().getSelectedIndex());
+        System.out.println("Yes");
+        selectedCustomerSSN = bankLogic.getCustomerSsnViaIndex(customerListView
+                .getSelectionModel().getSelectedIndex());
 
-            selectedCustomerAccountID = 0;
-            popup.close();
+        selectedCustomerAccountID = 0;
+        popup.close();
 
-            Parent root = FXMLLoader.load(getClass().getResource("Info.fxml"));
-            Scene s = new Scene(root);
-            main.setScene(s);
-        } catch (IOException ex) {
-            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        loadScene("Info.fxml");
     }
 
     private void updateInfo() {

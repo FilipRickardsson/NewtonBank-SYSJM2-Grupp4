@@ -19,6 +19,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
 public class CustomerController extends BaseController {
@@ -46,7 +47,7 @@ public class CustomerController extends BaseController {
     Button create;
     @FXML
     Label message;
-
+    final ToggleGroup group=new ToggleGroup();
     @FXML
     private void buttonChange(ActionEvent event) {
         long newSsn = BaseController.selectedCustomerSSN;
@@ -55,15 +56,19 @@ public class CustomerController extends BaseController {
     }
 
     @FXML
-    private void buttonRemove(ActionEvent event) throws IOException {
+    private void buttonRemove(ActionEvent event){
         setPopupMessage("Are you sure ?");
         showPopup();
     }
 
     @FXML
-    private void buttonCreate(ActionEvent event) throws IOException {
-
-        banklogic.addSavingsAccount(selectedCustomerSSN);
+    private void buttonCreate(ActionEvent event){
+        if(saving.isSelected()){
+            banklogic.addSavingsAccount(selectedCustomerSSN);
+        }
+        else{
+            banklogic.addCreditAccount(selectedCustomerSSN);
+        }
         updateInfo();
     }
 
@@ -119,6 +124,9 @@ public class CustomerController extends BaseController {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        saving.setSelected(true);
+        saving.setToggleGroup(group);
+        credit.setToggleGroup(group);
         banklogic = BankLogic.getBankLogic();
         selectedCustomerSSN = 7912120101L;
         updateInfo();

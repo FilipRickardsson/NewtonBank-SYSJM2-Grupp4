@@ -16,9 +16,9 @@
       <VBox prefHeight="200.0" prefWidth="100.0" styleClass="menu" BorderPane.alignment="CENTER">
          <children>
             <Button mnemonicParsing="false" onAction="#handleHome" styleClass="menuButton" stylesheets="@style.css" text="Home" />
-            <Button mnemonicParsing="false" styleClass="menuButton" text="Customer" />
-            <Button mnemonicParsing="false" styleClass="menuButton" text="Account" />
-            <Button mnemonicParsing="false" styleClass="menuButton" text="Quit" />
+            <Button mnemonicParsing="false" onAction="#handleCustomer" styleClass="menuButton" text="Customer" />
+            <Button mnemonicParsing="false" onAction="#handleAccount" styleClass="menuButton" text="Account" />
+            <Button mnemonicParsing="false" onAction="#handleQuit" styleClass="menuButton" text="Quit" />
          </children>
       </VBox>
    </left>
@@ -28,7 +28,7 @@
             <VBox prefHeight="200.0" prefWidth="100.0" styleClass="content">
                <children>
                   <Label text="Select customer:" />
-                  <Label text="ssn: " />
+                  <Label text="SSN: " />
                   <TextField fx:id="ssnSearchField" />
                   <Button mnemonicParsing="false" onAction="#searchCustomer" text="Search" />
                   <Label text="Name" />
@@ -40,7 +40,7 @@
                   <Label text="Create customer" />
                   <Label text="Name:" />
                   <TextField fx:id="nameInsert" />
-                  <Label text="ssn:" />
+                  <Label text="SSN:" />
                   <TextField fx:id="ssnInsert" />
                   <Button mnemonicParsing="false" onAction="#createCustomer" text="Create" />
                </children></VBox>
