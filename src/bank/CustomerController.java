@@ -52,7 +52,6 @@ public class CustomerController extends BaseController {
     private void buttonChange(ActionEvent event) {
         long newSsn = BaseController.selectedCustomerSSN;
         banklogic.changeCustomer(changeName.getText(), newSsn);
-        updateInfo();
     }
 
     @FXML
@@ -77,11 +76,6 @@ public class CustomerController extends BaseController {
         selectedCustomerAccountID = banklogic.getCustomerAccountIdViaIndex(listOfAccounts.getSelectionModel().getSelectedIndex());
         loadScene("Account.fxml");
     }
-
-    public void sendInformation(String text) {
-        System.out.println(text);
-    }
-
     @Override
     protected void popupYes() {
         selectedCustomerAccountID = banklogic.getCustomerAccountIdViaIndex(listOfAccounts.getSelectionModel().getSelectedIndex());
