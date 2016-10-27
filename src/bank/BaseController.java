@@ -50,7 +50,9 @@ public abstract class BaseController implements Initializable {
 
     protected abstract void popupYes();
 
-    protected abstract void popupNo();
+    protected void popupNo() {
+        popup.close();
+    }
 
     protected void setPopupMessage(String msg) {
         popupCtrl.setMessage(msg);

@@ -45,6 +45,8 @@ public class CustomerController extends BaseController {
     @FXML
     Button create;
     @FXML
+    Label message;
+    @FXML
     private void buttonChange(ActionEvent event) {
         long newSsn = BaseController.selectedCustomerSSN;
         banklogic.changeCustomer(changeName.getText(), newSsn);
@@ -52,13 +54,8 @@ public class CustomerController extends BaseController {
     }
     @FXML
     private void buttonRemove(ActionEvent event) throws IOException {
-        loadPopup();
         setPopupMessage("Are you sure ?");
-        showPopup();
-        popupYes();
-        int newAccountId=BaseController.selectedCustomerAccountID;
-        banklogic.closeAccount(selectedCustomerSSN, newAccountId);
-        updateInfo();
+        showPopup(); 
     }
     @FXML
     private void buttonCreate(ActionEvent event) throws IOException {
@@ -81,6 +78,17 @@ public class CustomerController extends BaseController {
 
     @Override
     protected void popupYes() {
+        banklogic.closeAccount(selectedCustomerSSN,selectedCustomerAccountID );
+        updateInfo();
+         Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getResource("Info.fxml"));
+            Scene s = new Scene(root);
+            main.setScene(s);
+        } catch (IOException ex) {
+            Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+           
         System.out.println("Yes");
         popup.close();
     }
@@ -99,7 +107,6 @@ public class CustomerController extends BaseController {
         info.remove(0);
         accounts = FXCollections.observableArrayList(info);
         listOfAccounts.setItems(accounts);
-        System.out.println("yftmvtf");
     }
     
     @Override

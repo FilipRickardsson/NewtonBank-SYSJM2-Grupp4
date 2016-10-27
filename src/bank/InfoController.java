@@ -70,12 +70,6 @@ public class InfoController extends BaseController {
 
     }
 
-    @Override
-    protected void popupNo() {
-        System.out.println("No");
-        popup.close();
-
-    }
  @FXML
     protected void handleHome() {
         showPopup();
