@@ -99,6 +99,7 @@ public class CustomerController extends BaseController {
         info.remove(0);
         accounts = FXCollections.observableArrayList(info);
         listOfAccounts.setItems(accounts);
+        System.out.println("yftmvtf");
     }
     
     @Override
