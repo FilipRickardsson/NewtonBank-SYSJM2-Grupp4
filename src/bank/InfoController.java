@@ -57,10 +57,16 @@ public class InfoController extends BaseController {
 
     @Override
     protected void popupYes() {
-        
-        // ladda home scen
-        
-        popup.close();
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
+            Scene s = new Scene(root);
+            main.setScene(s);
+            // ladda home scen
+            
+            popup.close();
+        } catch (IOException ex) {
+            Logger.getLogger(InfoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
