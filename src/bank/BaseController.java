@@ -1,6 +1,7 @@
 package bank;
 
 import java.io.IOException;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -42,7 +43,7 @@ public abstract class BaseController implements Initializable {
         }
     }
 
-    protected abstract void popupYes();
+    protected abstract void popupYes(ActionEvent event);
 
     protected abstract void popupNo();
 
