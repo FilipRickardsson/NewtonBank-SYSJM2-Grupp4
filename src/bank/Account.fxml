@@ -35,6 +35,7 @@
                   <TextField fx:id="amount" />
                   <Button fx:id="deposit" mnemonicParsing="false" onAction="#makeDeposit" text="Deposit" />
                   <Button fx:id="withdrawal" mnemonicParsing="false" onAction="#makeWithdrawal" text="Withdrawal" />
+                  <Label fx:id="error" />
                </children></VBox>
          </content>
       </ScrollPane>
