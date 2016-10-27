@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -15,9 +14,9 @@ public abstract class BaseController implements Initializable {
 
     protected Stage popup;
     protected PopupController popupCtrl;
-
-    @FXML
-    Label lblMessage;
+    
+    public static long selectedCustomerSSN;
+    public static int selectedCustomerAccountID;
 
     protected void loadPopup() throws IOException {
         popup = new Stage();
