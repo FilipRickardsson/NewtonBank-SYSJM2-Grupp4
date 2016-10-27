@@ -34,10 +34,7 @@ public class AccountController extends BaseController {
     @FXML
     private Button withdrawal;
 
-    @FXML
-    private void handleAmount(ActionEvent event) {
-
-    }
+  
 
  
 
