@@ -30,7 +30,10 @@ public class HomeController extends BaseController {
     private ListView customerListView;
 
     @FXML
-    private TextField nameInsert;
+    private TextField firstNameInsert;
+    
+    @FXML
+    private TextField lastNameInsert;
 
     @FXML
     private TextField ssnInsert;
@@ -69,7 +72,12 @@ public class HomeController extends BaseController {
 
     @FXML
     private void createCustomer() {
-        bankLogic.addCustomer(nameInsert.getText(), Long.parseLong(ssnInsert
+        //Fix with first/last name
+        
+        String fullName = firstNameInsert.getText() + " " 
+                + lastNameInsert.getText();
+        
+        bankLogic.addCustomer(fullName, Long.parseLong(ssnInsert
                 .getText()));
 
         updateInfo();
