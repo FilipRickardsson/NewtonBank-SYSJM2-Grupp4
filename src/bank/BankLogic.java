@@ -26,8 +26,8 @@ public class BankLogic {
         customers.add(new Customer("Chrsitoffer", 9202254545L));
         //To test
         for(int i = 0; i < customers.size(); i++) {
-            addCreditAccount(customers.get(i).getSsn());
             addSavingsAccount(customers.get(i).getSsn());
+            addCreditAccount(customers.get(i).getSsn());
         }
     }
 
@@ -92,7 +92,11 @@ public class BankLogic {
             customerInformation.add(Long.toString(customer.getSsn()));
             ArrayList accounts = customer.getAccounts();
             for (int j = 0; j < accounts.size(); j++) {
-                customerInformation.add(accounts.toString());
+                customerInformation.add(accounts.get(j).toString());
+            }
+            
+            for (int i = 0; i < customerInformation.size(); i++) {
+                System.out.println(customerInformation.get(i));
             }
         }
 
@@ -154,7 +158,7 @@ public class BankLogic {
         Customer customer = searchForCustomer(ssn);
         if (customer != null) {
             accountNbr = accountNbrCounter;
-            customer.getAccounts().add(new SavingAccount(accountNbrCounter, "Saving Account"));
+            customer.getAccounts().add(new SavingAccount(accountNbr, "Saving Account"));
             accountNbrCounter++;
         }
         return accountNbr;
@@ -255,9 +259,8 @@ public class BankLogic {
         int accountNbr = -1;
         Customer customer = searchForCustomer(ssn);
         if (customer != null) {
-            searchForCustomer(ssn).getAccounts().add(new CreditAccount(accountNbr, "Credit Account"));
-
             accountNbr = accountNbrCounter;
+            searchForCustomer(ssn).getAccounts().add(new CreditAccount(accountNbr, "Credit Account"));
             accountNbrCounter++;
         }
         return accountNbr;

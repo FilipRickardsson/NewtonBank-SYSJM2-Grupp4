@@ -30,11 +30,11 @@
                   <Label text="Account Number" />
                   <Label text="Saldo" />
                   <Label text="Type" />
-                  <ListView prefHeight="200.0" prefWidth="200.0" />
+                  <ListView fx:id="transactions" prefHeight="200.0" prefWidth="200.0" />
                   <Label text="Amount" />
-                  <TextField fx:id="Amount" />
-                  <Button mnemonicParsing="false" text="Deposit" />
-                  <Button mnemonicParsing="false" text="Withdrawal" />
+                  <TextField fx:id="amount" onAction="#handleAmount" />
+                  <Button fx:id="deposit" mnemonicParsing="false" onAction="#makeDeposit" text="Deposit" />
+                  <Button fx:id="withdrawal" mnemonicParsing="false" onAction="#makeWithdrawal" text="Withdrawal" />
                </children></VBox>
          </content>
       </ScrollPane>

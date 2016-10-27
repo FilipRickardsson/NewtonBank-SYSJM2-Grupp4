@@ -16,12 +16,14 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class CustomerController extends BaseController {
-
+    @FXML
+    Label Prn;
     @FXML
     Button change;
     @FXML
@@ -44,7 +46,7 @@ public class CustomerController extends BaseController {
 
     @FXML
     private void buttonRemove(ActionEvent event) {
-       
+       banklogic.closeAccount(selectedCustomerSSN, selectedCustomerAccountID);
     }
 
     @FXML
@@ -74,6 +76,9 @@ public class CustomerController extends BaseController {
     private void updateInfo(){
         ArrayList<String> info=(ArrayList<String>) banklogic.getCustomer(selectedCustomerSSN);
         changeName.setText(info.get(0));
+        Prn.setText(info.get(1));
+        info.remove(0);
+        info.remove(0);
         accounts = FXCollections.observableArrayList(info);
         listOfAccounts.setItems(accounts); 
     }
