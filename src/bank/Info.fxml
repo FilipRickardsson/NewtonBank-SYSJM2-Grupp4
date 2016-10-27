@@ -29,13 +29,13 @@
                <children>
                   <Label text="Deleted" />
                   <Label text="name" />
-                  <TextField />
+                  <TextField fx:id="name" />
                   <Label text="ssn" />
-                  <TextField />
+                  <TextField fx:id="ssn" />
                   <Label text="Account" />
                   <ListView fx:id="accountList" prefHeight="200.0" prefWidth="200.0" />
                   <Label text="Balance" />
-                  <TextField />
+                  <TextField fx:id="balance" />
                </children></VBox>
          </content>
       </ScrollPane>
