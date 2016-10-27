@@ -52,6 +52,7 @@ public class HomeController extends BaseController {
 
     @FXML
     private void removeCustomer() {
+        setPopupMessage("Are you sure?");
         showPopup();
     }
 
