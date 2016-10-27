@@ -27,7 +27,7 @@
             <VBox prefHeight="200.0" prefWidth="100.0" styleClass="content">
                <children>
                   <Label text="Deleted" />
-                  <ListView fx:id="accountList" prefHeight="276.0" prefWidth="300.0" />
+                  <ListView fx:id="accountList" onMouseClicked="#dontPressMe" onMouseEntered="#dontPressMe" prefHeight="276.0" prefWidth="300.0" />
                </children></VBox>
          </content>
       </ScrollPane>
