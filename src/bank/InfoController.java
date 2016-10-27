@@ -29,7 +29,7 @@ public class InfoController extends BaseController {
     private ObservableList<String> accounts;
 
     @FXML
-    private void nameSsnSet() {
+    private void nameSet() {
         // sett name and ssn textfields based on wich customer/account is closing
     }
 
@@ -52,12 +52,15 @@ public class InfoController extends BaseController {
         popup.close();
 
     }
-
+ @FXML
+    protected void handleHome() {
+        showPopup();
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        BankLogic.getBankLogic();
+        bankLogic = BankLogic.getBankLogic();
         //TODO fix
-        accounts =FXCollections.observableArrayList();
+        accounts = FXCollections.observableArrayList(bankLogic.getCustomers());
         
         accountList.setItems(accounts);
 
