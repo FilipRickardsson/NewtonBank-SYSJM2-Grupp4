@@ -2,19 +2,18 @@ package bank;
 
 import java.awt.Label;
 import java.awt.TextField;
+import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 
-public class InfoController implements Initializable {
-    
+public class InfoController extends BaseController {
+
     private BankLogic bankLogic;
     @FXML
     private TextField name;
@@ -26,23 +25,34 @@ public class InfoController implements Initializable {
     private TextField balance;
     @FXML
     private ListView accountList;
-            
-    @FXML
-            private void nameSsnSet(){
-                // sett name and ssn textfields based on wich customer/account is closing
-        }
-            @FXML
-            private void balanceSet(){
-                //Set the balance textfield to total balance + interest for 
-//                closed accounts
 
-        
-}
-                
-    
-    ObservableList<String> accounts;
-    
-    
+    private ObservableList<String> accounts;
+
+    @FXML
+    private void nameSsnSet() {
+        // sett name and ssn textfields based on wich customer/account is closing
+    }
+
+    @FXML
+    private void balanceSet() {
+        // Set the balance textfield to total balance + interest for 
+        // closed accounts
+    }
+
+    @Override
+    protected void popupYes() {
+        System.out.println("Yes");
+        popup.close();
+
+    }
+
+    @Override
+    protected void popupNo() {
+        System.out.println("No");
+        popup.close();
+
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         BankLogic.getBankLogic();
@@ -51,6 +61,12 @@ public class InfoController implements Initializable {
         
         accountList.setItems(accounts);
 
-    }    
-    
+        try {
+            loadPopup();
+        } catch (IOException ex) {
+            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
 }
