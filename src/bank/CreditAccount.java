@@ -46,4 +46,8 @@ public class CreditAccount extends SavingAccount {
         }
         return saldo;
     }
+        @Override
+    public String toString() {
+        return accountNumber + " " + saldo + " " + accountType + " " + interest;
+    }
 }

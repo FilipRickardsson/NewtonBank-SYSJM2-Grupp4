@@ -46,7 +46,7 @@ public class CustomerController extends BaseController {
 
     @FXML
     private void buttonRemove(ActionEvent event) {
-       
+       banklogic.closeAccount(selectedCustomerSSN, selectedCustomerAccountID);
     }
 
     @FXML
