@@ -26,7 +26,7 @@ public class CustomerController extends BaseController {
     private ObservableList<String> accounts;
     @FXML
     private void buttonChange(ActionEvent event) {
-        
+    
     }
     @FXML
     private void buttonRemove(ActionEvent event) {
@@ -38,9 +38,7 @@ public class CustomerController extends BaseController {
     }
     public void init(String name, long ssn){
         accounts=FXCollections.observableArrayList();
-        listOfAccounts.setItems(accounts);
-        
-        
+        listOfAccounts.setItems(accounts);    
     }
     
     public void sendInformation(String text) {
