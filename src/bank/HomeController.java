@@ -75,7 +75,7 @@ public class HomeController extends BaseController {
         updateInfo();
     }
 
-    @Override
+    //@Override
     protected void popupYes(ActionEvent event) {
         try {
             System.out.println("Yes");
