@@ -114,9 +114,10 @@ public class BankLogic {
     public boolean changeCustomer(String name, long ssn) {
         Customer customer = searchForCustomer(ssn);
         if (customer != null) {
-            customer.setName(name);
-            return true;
-
+            if(name.matches("^[ A-z]+$")) {
+                customer.setName(name);
+                return true;
+            }
         }
         return false;
     }
@@ -245,7 +246,7 @@ public class BankLogic {
         String info = null;
         if (acc != null) {
             //info = acc.toString();
-            info = "SSN: " + ssn + " Saldo: " + acc.getSaldo() + " Interest: " + acc.calcInterest();
+            info = "SSN: " + ssn + "Type: " +acc.getAccountType()+ " Saldo: " + acc.getSaldo() + " Interest: " + acc.calcInterest();
             Customer co = searchForCustomer(ssn);
             co.getAccounts().remove(acc);
         }

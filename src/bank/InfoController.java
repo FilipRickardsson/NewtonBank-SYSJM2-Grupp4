@@ -3,18 +3,22 @@ package bank;
 import java.awt.Label;
 import javafx.scene.control.TextField;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class InfoController extends BaseController {
@@ -25,18 +29,15 @@ public class InfoController extends BaseController {
 
     private ObservableList<String> customerInformation;
     
-    
+  
 
-    @FXML
-    private void nameSet() {
-        // sett name and ssn textfields based on wich customer/account is closing
-    }
-    // Få info från tidigare scen
-    //Fix balance set
-    //Hur får vi ut vilka accounts som tagits bort?
-    //fixa popupYes ladda home.fxml
 
-   
+   public void dontPressMe(MouseEvent event){
+       accountList.addEventFilter(MouseEvent.MOUSE_PRESSED, (MouseEvent event1) -> {
+           System.out.println(">> Mouse Clicked");
+           event1.consume();
+       });
+               }
 
     @Override
     protected void popupYes() {
@@ -61,6 +62,7 @@ public class InfoController extends BaseController {
     public void initialize(URL url, ResourceBundle rb) {
         bankLogic = BankLogic.getBankLogic();
         //TODO fix
+        
         
         if (selectedCustomerAccountID == 0){
             

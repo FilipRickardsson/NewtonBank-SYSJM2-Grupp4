@@ -19,6 +19,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
 public class CustomerController extends BaseController {
@@ -46,57 +47,46 @@ public class CustomerController extends BaseController {
     Button create;
     @FXML
     Label message;
-
+    final ToggleGroup group=new ToggleGroup();
     @FXML
     private void buttonChange(ActionEvent event) {
         long newSsn = BaseController.selectedCustomerSSN;
-        banklogic.changeCustomer(changeName.getText(), newSsn);
-        updateInfo();
+        
+        if(banklogic.changeCustomer(changeName.getText(), newSsn)){
+            message.setText("Change success");
+        }
+        else{
+            message.setText("Invalid symbols");
+        }
     }
 
     @FXML
-    private void buttonRemove(ActionEvent event) throws IOException {
+    private void buttonRemove(ActionEvent event){
         setPopupMessage("Are you sure ?");
         showPopup();
     }
 
     @FXML
-    private void buttonCreate(ActionEvent event) throws IOException {
-
-        banklogic.addSavingsAccount(selectedCustomerSSN);
+    private void buttonCreate(ActionEvent event){
+        if(saving.isSelected()){
+            banklogic.addSavingsAccount(selectedCustomerSSN);
+        }
+        else{
+            banklogic.addCreditAccount(selectedCustomerSSN);
+        }
         updateInfo();
     }
 
     @FXML
     private void buttonSelect(ActionEvent event) throws IOException {
-
-        Parent root = FXMLLoader.load(getClass().getResource("Account.fxml"));
-        Scene s = new Scene(root);
-        Stage stg = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stg.setScene(s);
+        selectedCustomerAccountID = banklogic.getCustomerAccountIdViaIndex(listOfAccounts.getSelectionModel().getSelectedIndex());
+        loadScene("Account.fxml");
     }
-
-    public void sendInformation(String text) {
-        System.out.println(text);
-    }
-
     @Override
     protected void popupYes() {
-//        banklogic.closeAccount(selectedCustomerSSN,selectedCustomerAccountID );
-//        updateInfo();
-
         selectedCustomerAccountID = banklogic.getCustomerAccountIdViaIndex(listOfAccounts.getSelectionModel().getSelectedIndex());
         System.out.println("Selected index: " + selectedCustomerAccountID);
-
-        Parent root;
-        try {
-            root = FXMLLoader.load(getClass().getResource("Info.fxml"));
-            Scene s = new Scene(root);
-            main.setScene(s);
-        } catch (IOException ex) {
-            Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        loadScene("Info.fxml");
         System.out.println("Yes");
         popup.close();
     }
@@ -119,8 +109,10 @@ public class CustomerController extends BaseController {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        saving.setSelected(true);
+        saving.setToggleGroup(group);
+        credit.setToggleGroup(group);
         banklogic = BankLogic.getBankLogic();
-        selectedCustomerSSN = 7912120101L;
         updateInfo();
 
         try {
