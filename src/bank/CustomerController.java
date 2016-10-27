@@ -17,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -37,41 +38,53 @@ public class CustomerController extends BaseController {
     @FXML
     private ObservableList<String> accounts;
     private BankLogic banklogic;
-
+    @FXML
+    RadioButton saving;
+    @FXML
+    RadioButton credit;
+    @FXML
+    Button create;
     @FXML
     private void buttonChange(ActionEvent event) {
         long newSsn = BaseController.selectedCustomerSSN;
         banklogic.changeCustomer(changeName.getText(), newSsn);
-        updateInfo();        
+        updateInfo();
     }
-    
     @FXML
     private void buttonRemove(ActionEvent event) throws IOException {
         loadPopup();
         setPopupMessage("Are you sure ?");
         showPopup();
+        popupYes();
         banklogic.closeAccount(selectedCustomerSSN, selectedCustomerAccountID);
+        updateInfo();
+        
     }
-    
+    @FXML
+    private void buttonCreate(ActionEvent event) throws IOException {
+        saving.getOnAction();
+        banklogic.addSavingsAccount(selectedCustomerSSN);
+        updateInfo();
+    }
     @FXML
     private void buttonSelect(ActionEvent event) throws IOException {
-        
+
         Parent root = FXMLLoader.load(getClass().getResource("Account.fxml"));
         Scene s = new Scene(root);
         Stage stg = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stg.setScene(s);
     }
-    
+
     public void sendInformation(String text) {
         System.out.println(text);
     }
-    
+
     @Override
     protected void popupYes() {
         System.out.println("Yes");
         popup.close();
     }
-    
+
     @Override
     protected void popupNo() {
         System.out.println("No");
@@ -85,7 +98,7 @@ public class CustomerController extends BaseController {
         info.remove(0);
         info.remove(0);
         accounts = FXCollections.observableArrayList(info);
-        listOfAccounts.setItems(accounts);        
+        listOfAccounts.setItems(accounts);
     }
 
     @Override
@@ -93,12 +106,12 @@ public class CustomerController extends BaseController {
         banklogic = BankLogic.getBankLogic();
         selectedCustomerSSN = 7912120101L;
         updateInfo();
-        
+
         try {
             loadPopup();
         } catch (IOException ex) {
             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
 }
