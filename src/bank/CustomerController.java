@@ -47,7 +47,7 @@ public class CustomerController extends BaseController {
     Button create;
     @FXML
     Label message;
-
+    final ToggleGroup group=new ToggleGroup();
     @FXML
     private void buttonChange(ActionEvent event) {
         long newSsn = BaseController.selectedCustomerSSN;
@@ -124,6 +124,7 @@ public class CustomerController extends BaseController {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        saving.setSelected(true);
         saving.setToggleGroup(group);
         credit.setToggleGroup(group);
         banklogic = BankLogic.getBankLogic();
