@@ -19,7 +19,7 @@ public class PopupController implements Initializable {
     }
 
     @FXML
-    private void popupYes(ActionEvent event) {
+    private void popupYes() {
         controller.popupYes();
     }
 
