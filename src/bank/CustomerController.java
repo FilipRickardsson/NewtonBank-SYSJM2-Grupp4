@@ -11,7 +11,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ListView;
+import javafx.stage.Stage;
 
 public class CustomerController extends BaseController {
 
@@ -30,17 +35,21 @@ public class CustomerController extends BaseController {
 
     @FXML
     private void buttonChange(ActionEvent event) {
-
+        
     }
 
     @FXML
     private void buttonRemove(ActionEvent event) {
-
+       
     }
 
     @FXML
-    private void buttonSelect(ActionEvent event) {
-
+    private void buttonSelect(ActionEvent event) throws IOException {
+        
+        Parent root = FXMLLoader.load(getClass().getResource("Account.fxml"));
+        Scene s = new Scene(root);
+        Stage stg = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stg.setScene(s);
     }
 
     public void sendInformation(String text) {
