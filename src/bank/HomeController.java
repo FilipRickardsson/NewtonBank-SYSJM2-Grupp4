@@ -52,13 +52,14 @@ public class HomeController extends BaseController {
 
     @FXML
     private void removeCustomer() {
-        //Removes a customer - Pop up?
         showPopup();
     }
 
     @FXML
     private void selectCustomer(ActionEvent event) throws IOException {
-        //Selects a customer        
+        selectedCustomerSSN = bankLogic.getCustomerSsnViaIndex(customerListView
+                .getSelectionModel().getSelectedIndex());
+        
         Parent root = FXMLLoader.load(getClass().getResource("Customer.fxml"));
         Scene s = new Scene(root);
         Stage stg = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -67,12 +68,19 @@ public class HomeController extends BaseController {
 
     @FXML
     private void createCustomer() {
-        //Creates customer - Pop up
+        bankLogic.addCustomer(nameInsert.getText(), Long.parseLong(ssnInsert
+                .getText()));
+        
+        updateInfo();
     }
 
     @Override
     protected void popupYes() {
         System.out.println("Yes");
+        selectedCustomerSSN = bankLogic.getCustomerSsnViaIndex(customerListView
+                .getSelectionModel().getSelectedIndex());
+        bankLogic.removeCustomer(selectedCustomerSSN);
+        updateInfo();
         popup.close();
     }
 
@@ -81,14 +89,19 @@ public class HomeController extends BaseController {
         System.out.println("No");
         popup.close();
     }
+    
+    private void updateInfo() {
+        customerList = FXCollections.observableArrayList(bankLogic.getCustomers());
+
+        customerListView.setItems(customerList);
+        
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         bankLogic = BankLogic.getBankLogic();
-
-        customerList = FXCollections.observableArrayList(bankLogic.getCustomers());
-
-        customerListView.setItems(customerList);
+        
+        updateInfo();
 
         try {
             loadPopup();
