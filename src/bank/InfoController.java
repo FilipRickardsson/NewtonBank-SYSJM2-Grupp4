@@ -25,17 +25,6 @@ public class InfoController extends BaseController {
 
     private ObservableList<String> customerInformation;
     
-    
-
-    @FXML
-    private void nameSet() {
-        // sett name and ssn textfields based on wich customer/account is closing
-    }
-    // Få info från tidigare scen
-    //Fix balance set
-    //Hur får vi ut vilka accounts som tagits bort?
-    //fixa popupYes ladda home.fxml
-
    
 
     @Override
@@ -68,7 +57,7 @@ public class InfoController extends BaseController {
             accountList.setItems(customerInformation);
         }
         else{
-            bankLogic.closeAccount(selectedCustomerSSN, selectedCustomerAccountID);
+           
             
         customerInformation = FXCollections.observableArrayList(bankLogic.closeAccount(selectedCustomerSSN, selectedCustomerAccountID));       
         accountList.setItems(customerInformation);
