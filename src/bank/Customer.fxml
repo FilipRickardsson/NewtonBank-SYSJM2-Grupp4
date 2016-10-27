@@ -30,6 +30,7 @@
                <children>
                   <Label text="Name" />
                   <TextField fx:id="changeName" />
+                  <Label text="Label" />
                   <Button fx:id="change" mnemonicParsing="false" onAction="#buttonChange" text="Change" />
                   <Label text="SSN:" />
                   <Label fx:id="Prn" styleClass="greyLabel" text="Personnummer" />
@@ -38,9 +39,9 @@
                   <Button fx:id="remove" mnemonicParsing="false" onAction="#buttonRemove" text="Remove" />
                   <Button fx:id="select" mnemonicParsing="false" onAction="#buttonSelect" text="Select" />
                   <Label text="Create Account" />
-                  <RadioButton mnemonicParsing="false" text="SavingAccount" />
-                  <RadioButton mnemonicParsing="false" text="CreditAccount" />
-                  <Button mnemonicParsing="false" text="Create" />
+                  <RadioButton fx:id="saving" mnemonicParsing="false" text="SavingAccount" />
+                  <RadioButton fx:id="credit" mnemonicParsing="false" text="CreditAccount" />
+                  <Button fx:id="create" mnemonicParsing="false" onAction="#buttonCreate" text="Create" />
                </children></VBox>
          </content>
       </ScrollPane>
