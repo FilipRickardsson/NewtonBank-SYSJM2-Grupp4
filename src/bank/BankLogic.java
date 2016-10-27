@@ -88,7 +88,8 @@ public class BankLogic {
 
         Customer customer = searchForCustomer(ssn);
         if (customer != null) {
-            customerInformation.add(customer.toString());
+            customerInformation.add(customer.getName());
+            customerInformation.add(Long.toString(customer.getSsn()));
             ArrayList accounts = customer.getAccounts();
             for (int j = 0; j < accounts.size(); j++) {
                 customerInformation.add(accounts.toString());
@@ -340,6 +341,10 @@ public class BankLogic {
             Logger.getLogger(BankLogic.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+    
+    public long getCustomerSsnViaIndex(int CustomerIndex) {
+        return customers.get(CustomerIndex).getSsn();
     }
 
 }
