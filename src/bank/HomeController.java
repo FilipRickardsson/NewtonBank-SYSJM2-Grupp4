@@ -83,7 +83,7 @@ public class HomeController extends BaseController {
                     .getSelectionModel().getSelectedIndex());
 //        bankLogic.removeCustomer(selectedCustomerSSN);
 //        updateInfo();
-//        popup.close();
+            popup.close();
 
             Parent root = FXMLLoader.load(getClass().getResource("Info.fxml"));
             Scene s = new Scene(root);
