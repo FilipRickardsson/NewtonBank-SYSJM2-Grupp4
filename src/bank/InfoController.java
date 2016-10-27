@@ -16,17 +16,14 @@ import javafx.scene.control.ListView;
 public class InfoController implements Initializable {
     
     private BankLogic bankLogic;
-    private long Ssn;
     @FXML
     private TextField name;
     @FXML
-    private Label ssn;
-    @FXML
-    private Label Deleted;
+    private TextField ssn;
     @FXML
     private Label account;
     @FXML
-    private Label balance;
+    private TextField balance;
     @FXML
     private ListView accountList;
             
@@ -38,6 +35,7 @@ public class InfoController implements Initializable {
             private void balanceSet(){
                 //Set the balance textfield to total balance + interest for 
 //                closed accounts
+
         
 }
                 
@@ -48,7 +46,8 @@ public class InfoController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         BankLogic.getBankLogic();
-        accounts =FXCollections.observableArrayList(bankLogic.getAccount(9702020101L, 1001));
+        //TODO fix
+        accounts =FXCollections.observableArrayList();
         
         accountList.setItems(accounts);
 
