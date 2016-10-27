@@ -114,7 +114,7 @@ public class BankLogic {
     public boolean changeCustomer(String name, long ssn) {
         Customer customer = searchForCustomer(ssn);
         if (customer != null) {
-            if(name.matches("[a-zA-Z]+")) {
+            if(name.matches("^[ A-z]+$")) {
                 customer.setName(name);
                 return true;
             }
