@@ -74,11 +74,8 @@ public class CustomerController extends BaseController {
 
     @FXML
     private void buttonSelect(ActionEvent event) throws IOException {
-
-        Parent root = FXMLLoader.load(getClass().getResource("Account.fxml"));
-        Scene s = new Scene(root);
-        Stage stg = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stg.setScene(s);
+        selectedCustomerAccountID = banklogic.getCustomerAccountIdViaIndex(listOfAccounts.getSelectionModel().getSelectedIndex());
+        loadScene("Account.fxml");
     }
 
     public void sendInformation(String text) {
@@ -87,21 +84,9 @@ public class CustomerController extends BaseController {
 
     @Override
     protected void popupYes() {
-//        banklogic.closeAccount(selectedCustomerSSN,selectedCustomerAccountID );
-//        updateInfo();
-
         selectedCustomerAccountID = banklogic.getCustomerAccountIdViaIndex(listOfAccounts.getSelectionModel().getSelectedIndex());
         System.out.println("Selected index: " + selectedCustomerAccountID);
-
-        Parent root;
-        try {
-            root = FXMLLoader.load(getClass().getResource("Info.fxml"));
-            Scene s = new Scene(root);
-            main.setScene(s);
-        } catch (IOException ex) {
-            Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        loadScene("Info.fxml");
         System.out.println("Yes");
         popup.close();
     }
@@ -128,7 +113,6 @@ public class CustomerController extends BaseController {
         saving.setToggleGroup(group);
         credit.setToggleGroup(group);
         banklogic = BankLogic.getBankLogic();
-        selectedCustomerSSN = 7912120101L;
         updateInfo();
 
         try {
