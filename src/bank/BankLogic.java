@@ -277,11 +277,12 @@ public class BankLogic {
 
         SavingAccount acc = searchForAccount(ssn, accountID);
 
-        for (int j = 0; j < customers.size(); j++) {
+        
+        for (int j = 0; j < acc.getTransactions().size(); j++) {
             transactionInformation.add(acc.getTransactions().
                            get(j).toString());
-
         }
+        
         return transactionInformation;
     }
 
