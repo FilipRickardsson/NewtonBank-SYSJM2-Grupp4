@@ -13,12 +13,17 @@ import javafx.stage.WindowEvent;
 
 public abstract class BaseController implements Initializable {
 
+    protected Stage main;
     protected Stage popup;
     protected PopupController popupCtrl;
     
     public static long selectedCustomerSSN;
     public static int selectedCustomerAccountID;
 
+    protected void setStage(Stage stage) {
+        this.main = stage;
+    }
+    
     protected void loadPopup() throws IOException {
         popup = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Popup.fxml"));
@@ -43,7 +48,7 @@ public abstract class BaseController implements Initializable {
         }
     }
 
-    protected abstract void popupYes(ActionEvent event);
+    protected abstract void popupYes();
 
     protected abstract void popupNo();
 

@@ -76,7 +76,7 @@ public class HomeController extends BaseController {
     }
 
     @Override
-    protected void popupYes(ActionEvent event) {
+    protected void popupYes() {
         try {
             System.out.println("Yes");
             selectedCustomerSSN = bankLogic.getCustomerSsnViaIndex(customerListView
@@ -87,8 +87,7 @@ public class HomeController extends BaseController {
 
             Parent root = FXMLLoader.load(getClass().getResource("Info.fxml"));
             Scene s = new Scene(root);
-            Stage stg = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stg.setScene(s);
+            main.setScene(s);
         } catch (IOException ex) {
             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
         }
