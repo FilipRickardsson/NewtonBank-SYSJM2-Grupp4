@@ -15,24 +15,21 @@ import javafx.scene.control.ListView;
 public class InfoController extends BaseController {
 
     private BankLogic bankLogic;
-    private long Ssn;
     @FXML
     private TextField name;
     @FXML
-    private Label ssn;
-    @FXML
-    private Label Deleted;
+    private TextField ssn;
     @FXML
     private Label account;
     @FXML
-    private Label balance;
+    private TextField balance;
     @FXML
     private ListView accountList;
 
     private ObservableList<String> accounts;
 
     @FXML
-    private void nameSsnSet() {
+    private void nameSet() {
         // sett name and ssn textfields based on wich customer/account is closing
     }
 
@@ -55,12 +52,16 @@ public class InfoController extends BaseController {
         popup.close();
 
     }
-
+ @FXML
+    protected void handleHome() {
+        showPopup();
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        BankLogic.getBankLogic();
-        accounts = FXCollections.observableArrayList(bankLogic.getAccount(9702020101L, 1001));
-
+        bankLogic = BankLogic.getBankLogic();
+        //TODO fix
+        accounts = FXCollections.observableArrayList(bankLogic.getCustomers());
+        
         accountList.setItems(accounts);
 
         try {
