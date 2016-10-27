@@ -32,7 +32,7 @@
                   <Label text="Type" />
                   <ListView fx:id="transactions" prefHeight="200.0" prefWidth="200.0" />
                   <Label text="Amount" />
-                  <TextField fx:id="amount" onAction="#handleAmount" />
+                  <TextField fx:id="amount" />
                   <Button fx:id="deposit" mnemonicParsing="false" onAction="#makeDeposit" text="Deposit" />
                   <Button fx:id="withdrawal" mnemonicParsing="false" onAction="#makeWithdrawal" text="Withdrawal" />
                </children></VBox>
