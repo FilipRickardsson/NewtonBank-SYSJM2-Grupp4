@@ -1,9 +1,9 @@
 package bank;
 
-import java.awt.Button;
-import java.awt.TextField;
+
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,7 +15,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class CustomerController extends BaseController {
@@ -32,10 +34,12 @@ public class CustomerController extends BaseController {
     ListView listOfAccounts;
     @FXML
     private ObservableList<String> accounts;
-
+    private BankLogic banklogic;
     @FXML
     private void buttonChange(ActionEvent event) {
-        
+        long newSsn= BaseController.selectedCustomerSSN;
+        banklogic.changeCustomer(changeName.getText(), newSsn);
+        updateInfo();   
     }
 
     @FXML
@@ -67,11 +71,17 @@ public class CustomerController extends BaseController {
         System.out.println("No");
         popup.close();
     }
-
+    private void updateInfo(){
+        ArrayList<String> info=(ArrayList<String>) banklogic.getCustomer(selectedCustomerSSN);
+        changeName.setText(info.get(0));
+        accounts = FXCollections.observableArrayList(info);
+        listOfAccounts.setItems(accounts); 
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        accounts = FXCollections.observableArrayList();
-        listOfAccounts.setItems(accounts);
+        banklogic=BankLogic.getBankLogic();
+        selectedCustomerSSN=7912120101L;
+        updateInfo();
 
         try {
             loadPopup();
