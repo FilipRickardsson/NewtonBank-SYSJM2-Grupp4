@@ -94,6 +94,10 @@ public class BankLogic {
             for (int j = 0; j < accounts.size(); j++) {
                 customerInformation.add(accounts.toString());
             }
+            
+            for (int i = 0; i < customerInformation.size(); i++) {
+                System.out.println(customerInformation.get(i));
+            }
         }
 
         return customerInformation;
