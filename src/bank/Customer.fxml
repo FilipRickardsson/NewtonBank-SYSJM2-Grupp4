@@ -34,13 +34,13 @@
                   <Button fx:id="change" mnemonicParsing="false" onAction="#buttonChange" text="Change" />
                   <Label text="SSN:" />
                   <Label fx:id="Prn" styleClass="greyLabel" text="Personnummer" />
-                  <Label text="KONTON" />
+                  <Label text="Accounts" />
                   <ListView fx:id="listOfAccounts" prefHeight="200.0" prefWidth="200.0" />
                   <Button fx:id="remove" mnemonicParsing="false" onAction="#buttonRemove" text="Remove" />
                   <Button fx:id="select" mnemonicParsing="false" onAction="#buttonSelect" text="Select" />
                   <Label text="Create Account" />
-                  <RadioButton fx:id="saving" mnemonicParsing="false" text="SavingAccount" />
-                  <RadioButton fx:id="credit" mnemonicParsing="false" text="CreditAccount" />
+                  <RadioButton fx:id="saving" mnemonicParsing="false" text="Saving Account" />
+                  <RadioButton fx:id="credit" mnemonicParsing="false" text="Credit Account" />
                   <Button fx:id="create" mnemonicParsing="false" onAction="#buttonCreate" text="Create" />
                </children></VBox>
          </content>
