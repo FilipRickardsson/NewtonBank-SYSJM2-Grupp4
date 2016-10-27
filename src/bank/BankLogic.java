@@ -245,7 +245,7 @@ public class BankLogic {
         String info = null;
         if (acc != null) {
             //info = acc.toString();
-            info = "SSN: " + ssn + " Saldo: " + acc.getSaldo() + " Interest: " + acc.calcInterest();
+            info = "SSN: " + ssn + "Type: " +acc.getAccountType()+ " Saldo: " + acc.getSaldo() + " Interest: " + acc.calcInterest();
             Customer co = searchForCustomer(ssn);
             co.getAccounts().remove(acc);
         }
