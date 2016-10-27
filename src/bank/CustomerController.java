@@ -56,13 +56,14 @@ public class CustomerController extends BaseController {
         setPopupMessage("Are you sure ?");
         showPopup();
         popupYes();
-        banklogic.closeAccount(selectedCustomerSSN, selectedCustomerAccountID);
+        int newAccountId=BaseController.selectedCustomerAccountID;
+        banklogic.closeAccount(selectedCustomerSSN, newAccountId);
         updateInfo();
-        
+        setStage(main);
     }
     @FXML
     private void buttonCreate(ActionEvent event) throws IOException {
-        saving.getOnAction();
+        
         banklogic.addSavingsAccount(selectedCustomerSSN);
         updateInfo();
     }
