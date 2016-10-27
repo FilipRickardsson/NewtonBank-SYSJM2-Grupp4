@@ -60,7 +60,7 @@ public class HomeController extends BaseController {
     private void selectCustomer(ActionEvent event) throws IOException {
         selectedCustomerSSN = bankLogic.getCustomerSsnViaIndex(customerListView
                 .getSelectionModel().getSelectedIndex());
-        
+
         Parent root = FXMLLoader.load(getClass().getResource("Customer.fxml"));
         Scene s = new Scene(root);
         Stage stg = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -71,18 +71,28 @@ public class HomeController extends BaseController {
     private void createCustomer() {
         bankLogic.addCustomer(nameInsert.getText(), Long.parseLong(ssnInsert
                 .getText()));
-        
+
         updateInfo();
     }
 
     @Override
-    protected void popupYes() {
-        System.out.println("Yes");
-        selectedCustomerSSN = bankLogic.getCustomerSsnViaIndex(customerListView
-                .getSelectionModel().getSelectedIndex());
-        bankLogic.removeCustomer(selectedCustomerSSN);
-        updateInfo();
-        popup.close();
+    protected void popupYes(ActionEvent event) {
+        try {
+            System.out.println("Yes");
+            selectedCustomerSSN = bankLogic.getCustomerSsnViaIndex(customerListView
+                    .getSelectionModel().getSelectedIndex());
+//        bankLogic.removeCustomer(selectedCustomerSSN);
+//        updateInfo();
+//        popup.close();
+
+            Parent root = FXMLLoader.load(getClass().getResource("Info.fxml"));
+            Scene s = new Scene(root);
+            Stage stg = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stg.setScene(s);
+        } catch (IOException ex) {
+            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     @Override
@@ -90,18 +100,18 @@ public class HomeController extends BaseController {
         System.out.println("No");
         popup.close();
     }
-    
+
     private void updateInfo() {
         customerList = FXCollections.observableArrayList(bankLogic.getCustomers());
 
         customerListView.setItems(customerList);
-        
+
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         bankLogic = BankLogic.getBankLogic();
-        
+
         updateInfo();
 
         try {
