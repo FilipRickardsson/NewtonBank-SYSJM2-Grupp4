@@ -19,13 +19,13 @@ public class BankLogic {
     private BankLogic() {
         customers = new ArrayList();
         accountNbrCounter = 1001;
-        
+
         //To test
         customers.add(new Customer("Dijana", 7912120101L));
         customers.add(new Customer("Johan", 9702020101L));
         customers.add(new Customer("Chrsitoffer", 9202254545L));
         //To test
-        for(int i = 0; i < customers.size(); i++) {
+        for (int i = 0; i < customers.size(); i++) {
             addSavingsAccount(customers.get(i).getSsn());
             addCreditAccount(customers.get(i).getSsn());
         }
@@ -94,7 +94,7 @@ public class BankLogic {
             for (int j = 0; j < accounts.size(); j++) {
                 customerInformation.add(accounts.get(j).toString());
             }
-            
+
             for (int i = 0; i < customerInformation.size(); i++) {
                 System.out.println(customerInformation.get(i));
             }
@@ -244,7 +244,8 @@ public class BankLogic {
         SavingAccount acc = searchForAccount(ssn, accountId);
         String info = null;
         if (acc != null) {
-            info = acc.toString();
+            //info = acc.toString();
+            info = "SSN: " + ssn + " Saldo: " + acc.getSaldo() + " Interest: " + acc.calcInterest();
             Customer co = searchForCustomer(ssn);
             co.getAccounts().remove(acc);
         }
@@ -277,12 +278,11 @@ public class BankLogic {
 
         SavingAccount acc = searchForAccount(ssn, accountID);
 
-        
         for (int j = 0; j < acc.getTransactions().size(); j++) {
             transactionInformation.add(acc.getTransactions().
-                           get(j).toString());
+                    get(j).toString());
         }
-        
+
         return transactionInformation;
     }
 
@@ -346,9 +346,14 @@ public class BankLogic {
         }
 
     }
-    
+
     public long getCustomerSsnViaIndex(int CustomerIndex) {
         return customers.get(CustomerIndex).getSsn();
+    }
+
+    public int getCustomerAccountIdViaIndex(int AccountIdIndex) {
+        Customer customer = searchForCustomer(BaseController.selectedCustomerSSN);
+        return customer.getAccounts().get(AccountIdIndex).getAccountNumber();
     }
 
 }

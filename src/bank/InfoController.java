@@ -68,8 +68,6 @@ public class InfoController extends BaseController {
             accountList.setItems(customerInformation);
         }
         else{
-            bankLogic.closeAccount(selectedCustomerSSN, selectedCustomerAccountID);
-            
         customerInformation = FXCollections.observableArrayList(bankLogic.closeAccount(selectedCustomerSSN, selectedCustomerAccountID));       
         accountList.setItems(customerInformation);
         }

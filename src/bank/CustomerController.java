@@ -47,18 +47,20 @@ public class CustomerController extends BaseController {
     Button create;
     @FXML
     Label message;
-    final ToggleGroup group = new ToggleGroup();
+
     @FXML
     private void buttonChange(ActionEvent event) {
         long newSsn = BaseController.selectedCustomerSSN;
         banklogic.changeCustomer(changeName.getText(), newSsn);
         updateInfo();
     }
+
     @FXML
     private void buttonRemove(ActionEvent event){
         setPopupMessage("Are you sure ?");
-        showPopup(); 
+        showPopup();
     }
+
     @FXML
     private void buttonCreate(ActionEvent event){
         if(saving.isSelected()){
@@ -69,6 +71,7 @@ public class CustomerController extends BaseController {
         }
         updateInfo();
     }
+
     @FXML
     private void buttonSelect(ActionEvent event) throws IOException {
 
@@ -84,9 +87,13 @@ public class CustomerController extends BaseController {
 
     @Override
     protected void popupYes() {
-        banklogic.closeAccount(selectedCustomerSSN,selectedCustomerAccountID );
-        updateInfo();
-         Parent root;
+//        banklogic.closeAccount(selectedCustomerSSN,selectedCustomerAccountID );
+//        updateInfo();
+
+        selectedCustomerAccountID = banklogic.getCustomerAccountIdViaIndex(listOfAccounts.getSelectionModel().getSelectedIndex());
+        System.out.println("Selected index: " + selectedCustomerAccountID);
+
+        Parent root;
         try {
             root = FXMLLoader.load(getClass().getResource("Info.fxml"));
             Scene s = new Scene(root);
@@ -94,7 +101,7 @@ public class CustomerController extends BaseController {
         } catch (IOException ex) {
             Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
         }
-           
+
         System.out.println("Yes");
         popup.close();
     }
@@ -114,7 +121,7 @@ public class CustomerController extends BaseController {
         accounts = FXCollections.observableArrayList(info);
         listOfAccounts.setItems(accounts);
     }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         saving.setToggleGroup(group);
