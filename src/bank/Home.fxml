@@ -31,6 +31,7 @@
                   <Label text="SSN: " />
                   <TextField fx:id="ssnSearchField" />
                   <Button mnemonicParsing="false" onAction="#searchCustomer" text="Search" />
+                  <Label fx:id="wrongSearch" />
                   <Label text="Name" />
                   <Label text="SSN" />
                   <ListView fx:id="customerListView" prefHeight="200.0" prefWidth="200.0" />
@@ -38,9 +39,11 @@
                   <Button mnemonicParsing="false" onAction="#removeCustomer" text="Remove" />
                   <Button mnemonicParsing="false" onAction="#selectCustomer" text="Select" />
                   <Label text="Create customer" />
-                  <Label text="Name:" />
-                  <TextField fx:id="nameInsert" />
-                  <Label text="SSN:" />
+                  <Label text="First name:" />
+                  <TextField fx:id="firstNameInsert" />
+                  <Label text="Last name:" />
+                  <TextField fx:id="lastNameInsert" />
+                  <Label text="ssn:" />
                   <TextField fx:id="ssnInsert" />
                   <Button mnemonicParsing="false" onAction="#createCustomer" text="Create" />
                </children></VBox>

@@ -9,13 +9,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 public class HomeController extends BaseController {
 
@@ -25,6 +21,9 @@ public class HomeController extends BaseController {
 
     @FXML
     private TextField ssnSearchField;
+
+    @FXML
+    private Label wrongSearch;
 
     @FXML
     private ListView customerListView;
@@ -39,11 +38,30 @@ public class HomeController extends BaseController {
     private TextField ssnInsert;
 
     @FXML
-    private void searchCustomer(ActionEvent event) {
-        for (int i = 0; i < customerList.size(); i++) {
-            if (customerList.get(i).contains(ssnSearchField.getCharacters())) {
-                customerListView.getSelectionModel().select(i);
+    private void searchCustomer() {
+        wrongSearch.setText("");
+        String searchStr = null;
+        boolean match = false;
+
+        try {
+            if (!ssnSearchField.getText().isEmpty()) {
+                long testInput = Long.parseLong(ssnSearchField.getText());
+                for (int i = 0; i < customerList.size(); i++) {
+                    searchStr = customerList.get(i).substring(customerList.get(i).length() - 10);
+                    if (searchStr.equals(ssnSearchField.getText())) {
+                        customerListView.getSelectionModel().select(i);
+                        match = true;
+                    }
+                    
+                }
+                if (!match) {
+                    wrongSearch.setText("No match");
+                }
+            } else {
+                wrongSearch.setText("Nothing in search field");
             }
+        } catch (NumberFormatException e) {
+            wrongSearch.setText("Only numbers allowed");
         }
 
     }
