@@ -114,7 +114,7 @@ public class BankLogic {
     public boolean changeCustomer(String name, long ssn) {
         Customer customer = searchForCustomer(ssn);
         if (customer != null) {
-            if(name.matches("^[ A-z]+$")) {
+            if (name.matches("^[ A-z]+$")) {
                 customer.setName(name);
                 return true;
             }
@@ -220,7 +220,7 @@ public class BankLogic {
         if (acc instanceof SavingAccount && amount > 0 && amount < acc.getSaldo()) {
             acc.withdraw(amount);
             return true;
-            
+
         } else if (acc instanceof CreditAccount && amount > 0) {
             CreditAccount acc2 = (CreditAccount) acc;
             if (acc.saldo - amount >= acc2.getCreditLimit()) {
@@ -247,7 +247,7 @@ public class BankLogic {
         String info = null;
         if (acc != null) {
             //info = acc.toString();
-            info = "SSN: " + ssn + "Type: " +acc.getAccountType()+ " Saldo: " + acc.getSaldo() + " Interest: " + acc.calcInterest();
+            info = "SSN: " + ssn + "Type: " + acc.getAccountType() + " Saldo: " + acc.getSaldo() + " Interest: " + acc.calcInterest();
             Customer co = searchForCustomer(ssn);
             co.getAccounts().remove(acc);
         }

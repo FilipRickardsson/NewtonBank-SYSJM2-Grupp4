@@ -32,7 +32,7 @@ public class Customer {
 
     @Override
     public String toString() {
-        return name+ "" +ssn;
+        return "Name: " + name + ", SSN: " + ssn;
     }
-    
+
 }

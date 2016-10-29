@@ -9,13 +9,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
 public class HomeController extends BaseController {
-
-    private BankLogic bankLogic;
 
     private ObservableList<String> customerList;
 
@@ -37,6 +36,12 @@ public class HomeController extends BaseController {
     @FXML
     private TextField ssnInsert;
 
+    @FXML
+    private Button btnCustomer;
+    
+    @FXML
+    private Button btnAccount;
+    
     @FXML
     private void searchCustomer() {
         wrongSearch.setText("");
@@ -100,7 +105,6 @@ public class HomeController extends BaseController {
 
     @Override
     protected void popupYes() {
-        System.out.println("Yes");
         selectedCustomerSSN = bankLogic.getCustomerSsnViaIndex(customerListView
                 .getSelectionModel().getSelectedIndex());
 
@@ -119,8 +123,9 @@ public class HomeController extends BaseController {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        bankLogic = BankLogic.getBankLogic();
-
+        btnAccount.setVisible(false);
+        btnCustomer.setVisible(false);
+        
         updateInfo();
 
         try {

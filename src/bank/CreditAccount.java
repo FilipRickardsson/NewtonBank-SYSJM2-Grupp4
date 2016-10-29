@@ -16,26 +16,21 @@ public class CreditAccount extends SavingAccount {
         return creditLimit;
     }
 
-//    public double getCreditInterest() {
-//        return creditInterest;
-//    }
-//
-//    public double calcDebt() {
-//        return saldo * creditInterest;
-//    }
     /**
      * Makes a withdrawal
-     * @param amount 
+     *
+     * @param amount
      */
     @Override
     public void withdraw(double amount) {
         saldo -= amount;
         transactions.add(new Transaction(accountNumber, true, amount, saldo));
     }
-    
+
     /**
      * Calculates the interest
-     * @return 
+     *
+     * @return
      */
     @Override
     public double calcInterest() {
@@ -46,8 +41,9 @@ public class CreditAccount extends SavingAccount {
         }
         return saldo;
     }
-        @Override
+
+    @Override
     public String toString() {
-        return accountNumber + " " + saldo + " " + accountType + " " + interest;
+        return "AccountID: " + accountNumber + ", Saldo: " + saldo + ", Type: " + accountType + ", Interest: " + interest;
     }
 }

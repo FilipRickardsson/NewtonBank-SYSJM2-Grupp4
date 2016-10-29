@@ -31,7 +31,7 @@ public class PopupController implements Initializable {
     public void setMessage(String msg) {
         lblMessage.setText(msg);
     }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 

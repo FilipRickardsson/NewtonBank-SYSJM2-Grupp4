@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -19,10 +18,15 @@ public abstract class BaseController implements Initializable {
     protected static Stage main;
     protected Stage popup;
     protected PopupController popupCtrl;
+    protected BankLogic bankLogic;
 
     public static long selectedCustomerSSN;
     public static int selectedCustomerAccountID;
 
+    public BaseController() {
+        bankLogic = BankLogic.getBankLogic();
+    }
+    
     protected void setStage(Stage stage) {
         BaseController.main = stage;
     }
@@ -53,7 +57,7 @@ public abstract class BaseController implements Initializable {
 
     protected abstract void popupYes();
 
-    protected void popupNo() {
+    protected final void popupNo() {
         popup.close();
     }
 

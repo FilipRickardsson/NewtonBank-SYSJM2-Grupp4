@@ -21,7 +21,7 @@ public class SavingAccount {
         transactions = new ArrayList();
     }
 
-    //<editor-fold defaultstate="collapsed" desc="getters and setters">
+    //<editor-fold defaultstate="collapsed" desc="Getters">
     public int getAccountNumber() {
         return accountNumber;
     }
@@ -41,14 +41,13 @@ public class SavingAccount {
     public ArrayList<Transaction> getTransactions() {
         return transactions;
     }
-    
-    
 
     //</editor-fold>
     /**
-     * Adds given amount to accounts saldo and adds a new transaction to accounts
-     * transaction list.
-     * @param amount 
+     * Adds given amount to accounts saldo and adds a new transaction to
+     * accounts transaction list.
+     *
+     * @param amount
      */
     public void deposit(double amount) {
         saldo += amount;
@@ -56,9 +55,10 @@ public class SavingAccount {
     }
 
     /**
-     * Removes given amount from accounts saldo and adds a new transaction to 
+     * Removes given amount from accounts saldo and adds a new transaction to
      * accounts transaction list.
-     * @param amount 
+     *
+     * @param amount
      */
     public void withdraw(double amount) {
         if (firstWithdrawal) {
@@ -72,7 +72,8 @@ public class SavingAccount {
 
     /**
      * Calculates interest of the account.
-     * @return 
+     *
+     * @return
      */
     public double calcInterest() {
         return saldo * interest;
@@ -81,7 +82,7 @@ public class SavingAccount {
     // TODO change this later
     @Override
     public String toString() {
-        return accountNumber + " " + saldo + " " + accountType + " " + interest;
+        return "AccountID: " + accountNumber + ", Saldo: " + saldo + ", Type: " + accountType + ", Interest: " + interest;
     }
 
 }
