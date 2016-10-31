@@ -74,7 +74,7 @@ public class HomeController extends BaseController {
             } else {
                 wrongSearch.setText("Nothing in search field");
             }
-        } catch (NullPointerException e) {
+        } catch (NumberFormatException e) {
             wrongSearch.setText("Only numbers allowed");
         }
 
