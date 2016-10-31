@@ -17,6 +17,8 @@ import javafx.scene.input.MouseEvent;
 
 public class InfoController extends BaseController {
 
+    private int typeOfOperation;
+    
     @FXML
     private ListView accountList;
 
@@ -38,28 +40,27 @@ public class InfoController extends BaseController {
     @FXML
     @Override
     protected void handleHome() {
-        setPopupMessage("Are you sure?");
+        typeOfOperation = 0;
+        setPopupMessage("Are you sure you want to leave?");
         showPopup();
     }
+
     @FXML
     @Override
     protected void handleCustomer() {
-        setPopupMessage("Are you sure?");
+        typeOfOperation = 1;
+        setPopupMessage("Are you sure you want to leave?");
         showPopup();
     }
+
     @Override
     protected void popupYes() {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
-            Scene s = new Scene(root);
-            main.setScene(s);
-            // ladda home scen
-
-            popup.close();
-        } catch (IOException ex) {
-            Logger.getLogger(InfoController.class.getName()).log(Level.SEVERE, null, ex);
+        if(typeOfOperation == 0) {
+            loadScene("Home.fxml");
+        } else {
+            loadScene("Customer.fxml");
         }
-
+        popup.close();
     }
 
     @Override
