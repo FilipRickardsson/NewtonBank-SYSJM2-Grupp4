@@ -19,7 +19,7 @@ public class AccountController extends BaseController {
 
     @FXML
     private Label accountInformation;
-    
+
     @FXML
     private TextField amount;
 
@@ -32,7 +32,8 @@ public class AccountController extends BaseController {
     @FXML
     private void makeDeposit() {
         if (validateInput()) {
-            boolean success = bankLogic.deposit(selectedCustomerSSN, selectedCustomerAccountID, Double.parseDouble(amount.getText()));
+            double value = Math.round(Double.parseDouble(amount.getText()) * 100.0) / 100.0;
+            boolean success = bankLogic.deposit(selectedCustomerSSN, selectedCustomerAccountID, value);
             updateInfo();
             if (success) {
                 error.setText("Transaction complete");
@@ -48,7 +49,8 @@ public class AccountController extends BaseController {
     @FXML
     private void makeWithdrawal() {
         if (validateInput()) {
-            boolean success = bankLogic.withdraw(selectedCustomerSSN, selectedCustomerAccountID, Double.parseDouble(amount.getText()));
+            double value = Math.round(Double.parseDouble(amount.getText()) * 100.0) / 100.0;
+            boolean success = bankLogic.withdraw(selectedCustomerSSN, selectedCustomerAccountID, value);
             updateInfo();
             if (success) {
                 error.setText("Transaction complete");
@@ -76,15 +78,14 @@ public class AccountController extends BaseController {
     }
 
     public void updateInfo() {
+        accountInformation.setText(bankLogic.getAccount(selectedCustomerSSN,
+                selectedCustomerAccountID));
         listan = FXCollections.observableArrayList((ArrayList) bankLogic.getTransactions(selectedCustomerSSN, selectedCustomerAccountID));
         transactions.setItems(listan);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        accountInformation.setText(bankLogic.getAccount(selectedCustomerSSN, 
-                selectedCustomerAccountID));
-        
         updateInfo();
 
         try {
