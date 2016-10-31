@@ -35,10 +35,10 @@ public class AccountController extends BaseController {
             double value = Math.round(Double.parseDouble(amount.getText()) * 100.0) / 100.0;
             boolean success = bankLogic.deposit(selectedCustomerSSN, selectedCustomerAccountID, value);
             updateInfo();
-            if (success) {
+            if (success  && value < 1000000000) {
                 error.setText("Transaction complete");
             } else {
-                error.setText("Not enough money");
+                error.setText("Invalid amount");
             }
         } else {
             error.setText("Invalid input");
@@ -66,7 +66,7 @@ public class AccountController extends BaseController {
     private boolean validateInput() {
         try {
             double input = Double.parseDouble(amount.getText());
-            return input > 0 && input < 1000000000;
+            return input > 0;
         } catch (NumberFormatException ex) {
             return false;
         }
