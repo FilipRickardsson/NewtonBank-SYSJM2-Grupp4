@@ -1,5 +1,6 @@
 package bank;
 
+import com.sun.xml.internal.ws.util.StringUtils;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -97,10 +98,13 @@ public class HomeController extends BaseController {
     @FXML
     private void createCustomer() {
         //Fix with first/last name
-
-        String fullName = firstNameInsert.getText() + " "
-                + lastNameInsert.getText();
-
+        String firstName = firstNameInsert.getText().replaceAll("\\s","");
+        
+        String lastName = lastNameInsert.getText().replaceAll("\\s","");
+        
+        String fullName = firstName + " "
+                + lastName;
+        
         bankLogic.addCustomer(fullName, Long.parseLong(ssnInsert
                 .getText()));
 
