@@ -41,6 +41,7 @@
                   <Label fx:id="lblSsn" styleClass="greyLabel" text="Personnummer" />
                   <Label text="Accounts" />
                   <ListView fx:id="listOfAccounts" prefHeight="200.0" prefWidth="200.0" />
+                  <Label fx:id="message2" />
                   <Button mnemonicParsing="false" onAction="#buttonRemove" text="Remove" />
                   <Button mnemonicParsing="false" onAction="#buttonSelect" text="Select" />
                   <Label text="Create Account" />

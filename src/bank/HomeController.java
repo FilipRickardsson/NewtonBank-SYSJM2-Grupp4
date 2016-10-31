@@ -15,42 +15,44 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
 public class HomeController extends BaseController {
-    
+
     private ObservableList<String> customerList;
-    
+
     @FXML
     private TextField ssnSearchField;
-    
+
     @FXML
     private Label wrongSearch;
-    
+    @FXML
+    private Label noSelection;
+
     @FXML
     private Label wrongCreateCustomer;
-    
+
     @FXML
     private ListView customerListView;
-    
+
     @FXML
     private TextField firstNameInsert;
-    
+
     @FXML
     private TextField lastNameInsert;
-    
+
     @FXML
     private TextField ssnInsert;
-    
+
     @FXML
     private Button btnCustomer;
-    
+
     @FXML
     private Button btnAccount;
-    
+
     @FXML
     private void searchCustomer() {
         wrongSearch.setText("");
         String searchStr;
         boolean match = false;
-        
+
         try {
             if (!ssnSearchField.getText().isEmpty()) {
                 long testInput = Long.parseLong(ssnSearchField.getText());
@@ -61,7 +63,7 @@ public class HomeController extends BaseController {
                             customerListView.getSelectionModel().select(i);
                             match = true;
                         }
-                        
+
                     }
                     if (!match) {
                         wrongSearch.setText("No match");
@@ -75,44 +77,51 @@ public class HomeController extends BaseController {
         } catch (NumberFormatException e) {
             wrongSearch.setText("Only numbers allowed");
         }
-        
+
     }
-    
+
     @FXML
     private void printCustomersToFile() {
         bankLogic.customerToFile();
     }
-    
+
     @FXML
     private void removeCustomer() {
-        setPopupMessage("Are you sure?");
-        showPopup();
+        if (customerListView.getSelectionModel().getSelectedItem() != null) {
+            setPopupMessage("Are you sure?");
+            showPopup();
+        } else {
+            noSelection.setText("Nothing selected");
+        }
     }
-    
+
     @FXML
     private void selectCustomer(ActionEvent event) throws IOException {
-        selectedCustomerSSN = bankLogic.getCustomerSsnViaIndex(customerListView
-                .getSelectionModel().getSelectedIndex());
-        
-        loadScene("Customer.fxml");
+        if (customerListView.getSelectionModel().getSelectedItem() != null) {
+            selectedCustomerSSN = bankLogic.getCustomerSsnViaIndex(customerListView
+                           .getSelectionModel().getSelectedIndex());
+            loadScene("Customer.fxml");
+        } else {
+            noSelection.setText("Nothing selected");
+        }
     }
-    
+
     @FXML
     private void createCustomer() {
         if (!firstNameInsert.getText().isEmpty() || !lastNameInsert.getText()
-                .isEmpty() || !ssnSearchField.getText().isEmpty()) {
-            
+                       .isEmpty() || !ssnSearchField.getText().isEmpty()) {
+
             String firstName = firstNameInsert.getText().replaceAll("\\s", "");
-            
+
             String lastName = lastNameInsert.getText().replaceAll("\\s", "");
-            
+
             try {
                 if (bankLogic.isAlpha(firstName) && bankLogic.isAlpha(lastName)) {
                     String fullName = firstName + " "
-                            + lastName;
+                                   + lastName;
                     if (ssnInsert.getText().length() == 10) {
                         bankLogic.addCustomer(fullName, Long.parseLong(ssnInsert
-                                .getText()));
+                                       .getText()));
                         updateInfo();
                         firstNameInsert.clear();
                         lastNameInsert.clear();
@@ -131,38 +140,38 @@ public class HomeController extends BaseController {
             wrongCreateCustomer.setText("Missing information");
         }
     }
-    
+
     @Override
     protected void popupYes() {
         selectedCustomerSSN = bankLogic.getCustomerSsnViaIndex(customerListView
-                .getSelectionModel().getSelectedIndex());
-        
+                       .getSelectionModel().getSelectedIndex());
+
         selectedCustomerAccountID = 0;
         popup.close();
-        
+
         loadScene("Info.fxml");
     }
-    
+
     private void updateInfo() {
         customerList = FXCollections.observableArrayList(bankLogic.getCustomers());
-        
+
         customerListView.setItems(customerList);
-        
+
     }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         btnAccount.setVisible(false);
         btnCustomer.setVisible(false);
-        
+
         updateInfo();
-        
+
         try {
             loadPopup();
         } catch (IOException ex) {
             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
-    
+
 }

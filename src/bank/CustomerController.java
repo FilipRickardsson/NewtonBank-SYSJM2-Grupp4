@@ -42,7 +42,8 @@ public class CustomerController extends BaseController {
 
     @FXML
     private Label message;
-
+    @FXML
+    private Label message2;
     @FXML
     private Button btnAccount;
 
@@ -67,9 +68,14 @@ public class CustomerController extends BaseController {
 
     @FXML
     private void buttonRemove(ActionEvent event) {
-        typeOfOperation = 0;
+        if(listOfAccounts.getSelectionModel().getSelectedItem()!=null){
+            typeOfOperation = 0;
         setPopupMessage("Are you sure you want to\nremove the account?");
         showPopup();
+        }else{
+            message2.setText("Nothing selected");
+        }
+        
     }
 
     @FXML
@@ -85,8 +91,14 @@ public class CustomerController extends BaseController {
 
     @FXML
     private void buttonSelect(ActionEvent event) throws IOException {
-        selectedCustomerAccountID = bankLogic.getCustomerAccountIdViaIndex(listOfAccounts.getSelectionModel().getSelectedIndex());
-        loadScene("Account.fxml");
+        
+        if(listOfAccounts.getSelectionModel().getSelectedItem()!=null){
+           selectedCustomerAccountID = bankLogic.getCustomerAccountIdViaIndex(listOfAccounts.getSelectionModel().getSelectedIndex());
+        loadScene("Account.fxml"); 
+        }else
+        {
+           message2.setText("Nothing selected");
+        }
     }
 
     @Override
