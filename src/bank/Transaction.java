@@ -58,7 +58,7 @@ public class Transaction {
     public String toString() {
         if (withdrawal) {
             return date + " " + time + " " + " Out: " + String.format("%.2f", amount) 
-                    + " Balance: " + String.format("%.12f", updatedBalance);
+                    + " Balance: " + String.format("%.2f", updatedBalance);
         } else {
             return date + " " + time + " " + " In: " + String.format("%.2f", amount) 
                     + " Balance: " + String.format("%.2f", updatedBalance);
