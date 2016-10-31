@@ -144,9 +144,12 @@ public class BankLogic {
                 sumSaldo += accounts.get(j).getSaldo();
             }
             if (sumSaldo + sumInterest < 0) {
-                info.add("Total debt: " + (sumSaldo + sumInterest) + " whereof interest is: " + sumInterest);
+
+                info.add("Total debt: " + String.format("%.2f", sumSaldo + sumInterest)
+                        + " whereof interest is: " + sumInterest);
             } else {
-                info.add("Total money back: " + (sumSaldo + sumInterest) + " whereof interest is: " + sumInterest);
+                info.add("Total money back: " + String.format("%.2f", sumSaldo + sumInterest) 
+                        + " whereof interest is: " + sumInterest);
             }
 
             customers.remove(customer);
@@ -228,12 +231,10 @@ public class BankLogic {
                 return false;
             }
         } else if (acc instanceof SavingAccount && amount > 0) {
-            if (acc.isFirstWithdrawal() && amount <= acc.getSaldo()) {
+            if ((amount + (amount * acc.getWithdrawalFee())) <= acc.getSaldo()) {
                 acc.withdraw(amount);
                 return true;
-            } else if (amount < acc.getSaldo()) {
-                acc.withdraw(amount);
-                return true;
+
             } else {
                 return false;
             }
