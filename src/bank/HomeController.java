@@ -38,29 +38,33 @@ public class HomeController extends BaseController {
 
     @FXML
     private Button btnCustomer;
-    
+
     @FXML
     private Button btnAccount;
-    
+
     @FXML
     private void searchCustomer() {
         wrongSearch.setText("");
-        String searchStr = null;
+        String searchStr;
         boolean match = false;
 
         try {
             if (!ssnSearchField.getText().isEmpty()) {
                 long testInput = Long.parseLong(ssnSearchField.getText());
-                for (int i = 0; i < customerList.size(); i++) {
-                    searchStr = customerList.get(i).substring(customerList.get(i).length() - 10);
-                    if (searchStr.equals(ssnSearchField.getText())) {
-                        customerListView.getSelectionModel().select(i);
-                        match = true;
+                if (ssnSearchField.getText().length() == 10) {
+                    for (int i = 0; i < customerList.size(); i++) {
+                        searchStr = customerList.get(i).substring(customerList.get(i).length() - 10);
+                        if (searchStr.equals(ssnSearchField.getText())) {
+                            customerListView.getSelectionModel().select(i);
+                            match = true;
+                        }
+
                     }
-                    
-                }
-                if (!match) {
-                    wrongSearch.setText("No match");
+                    if (!match) {
+                        wrongSearch.setText("No match");
+                    }
+                } else {
+                    wrongSearch.setText("Wrong input length");
                 }
             } else {
                 wrongSearch.setText("Nothing in search field");
@@ -125,7 +129,7 @@ public class HomeController extends BaseController {
     public void initialize(URL url, ResourceBundle rb) {
         btnAccount.setVisible(false);
         btnCustomer.setVisible(false);
-        
+
         updateInfo();
 
         try {
