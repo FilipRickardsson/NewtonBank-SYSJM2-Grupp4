@@ -55,7 +55,7 @@ public class AccountController extends BaseController {
             if (success) {
                 error.setText("Transaction complete");
             } else {
-                error.setText("Not enough money");
+                error.setText("Invalid amount");
             }
         } else {
             error.setText("Invalid input");
@@ -66,7 +66,7 @@ public class AccountController extends BaseController {
     private boolean validateInput() {
         try {
             double input = Double.parseDouble(amount.getText());
-            return input > 0;
+            return input > 0 && input < 1000000000;
         } catch (NumberFormatException ex) {
             return false;
         }
