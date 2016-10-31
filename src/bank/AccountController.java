@@ -64,11 +64,7 @@ public class AccountController extends BaseController {
     private boolean validateInput() {
         try {
             double input = Double.parseDouble(amount.getText());
-            if (input > 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return input > 0;
         } catch (NumberFormatException ex) {
             return false;
         }

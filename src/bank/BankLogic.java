@@ -175,13 +175,9 @@ public class BankLogic {
      * @return
      */
     public String getAccount(long ssn, int accountId) {
-        for (int i = 0; i < customers.size(); i++) {
-            if (ssn == customers.get(i).getSsn()) {
-                ArrayList accounts = customers.get(i).getAccounts();
-                for (int j = 0; j < accounts.size(); j++) {
-                    return accounts.get(j).toString();
-                }
-            }
+        SavingAccount acc = searchForAccount(ssn, accountId);
+        if (acc != null) {
+            return acc.toString();
         }
         return "Could not find account";
     }
@@ -349,8 +345,10 @@ public class BankLogic {
                 pw.println(customers.get(i).toString());
             }
             pw.close();
+
         } catch (IOException ex) {
-            Logger.getLogger(BankLogic.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BankLogic.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -366,8 +364,9 @@ public class BankLogic {
 
     /**
      * Makes sure a string only contains letters
+     *
      * @param str
-     * @return 
+     * @return
      */
     public boolean isAlpha(String str) {
         char[] chars = str.toCharArray();
