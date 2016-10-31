@@ -85,8 +85,7 @@ public class SavingAccount {
      * @return
      */
     public double calcInterest() {
-        saldo = saldo * interest;
-        return saldo;
+        return Math.round((saldo * interest) * 100.0) / 100.0;
     }
 
     // TODO change this later

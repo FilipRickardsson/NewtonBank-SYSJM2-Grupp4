@@ -143,7 +143,12 @@ public class BankLogic {
                 sumInterest += accounts.get(j).calcInterest();
                 sumSaldo += accounts.get(j).getSaldo();
             }
-            info.add("Total Saldo: " + (sumSaldo + sumInterest) + " Total interest: " + sumInterest);
+            if (sumSaldo + sumInterest < 0) {
+                info.add("Total debt: " + (sumSaldo + sumInterest) + " whereof interest is: " + sumInterest);
+            } else {
+                info.add("Total money back: " + (sumSaldo + sumInterest) + " whereof interest is: " + sumInterest);
+            }
+
             customers.remove(customer);
         }
         return info;

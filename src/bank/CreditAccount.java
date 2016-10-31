@@ -39,7 +39,7 @@ public class CreditAccount extends SavingAccount {
         } else if (saldo >= 0) {
             return saldo * interest;
         }
-        return saldo;
+        return Math.round(saldo * 100.0) / 100.0;
     }
 
     @Override
