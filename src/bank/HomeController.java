@@ -112,9 +112,9 @@ public class HomeController extends BaseController {
                        .isEmpty() || !ssnSearchField.getText().isEmpty()) {
 
             String firstName = firstNameInsert.getText().replaceAll("\\s", "");
-
-            String lastName = lastNameInsert.getText().replaceAll("\\s", "");
-
+            
+            String lastName = lastNameInsert.getText().replaceAll("\\s", "");   
+            
             try {
                 if (bankLogic.isAlpha(firstName) && bankLogic.isAlpha(lastName)) {
                     String fullName = firstName + " "
