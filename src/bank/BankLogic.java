@@ -21,9 +21,9 @@ public class BankLogic {
         accountNbrCounter = 1001;
 
         //To test
-        customers.add(new Customer("Dijana", 7912120101L));
-        customers.add(new Customer("Johan", 9702020101L));
-        customers.add(new Customer("Chrsitoffer", 9202254545L));
+        customers.add(new Customer("Dijana Popovic", 7912120101L));
+        customers.add(new Customer("Johan Jonsson", 9702020101L));
+        customers.add(new Customer("Chrsitoffer Flystam", 9202254545L));
         //To test
         for (int i = 0; i < customers.size(); i++) {
             addSavingsAccount(customers.get(i).getSsn());

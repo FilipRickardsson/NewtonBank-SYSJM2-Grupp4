@@ -25,7 +25,10 @@ public class CustomerController extends BaseController {
     private Label lblSsn;
 
     @FXML
-    private TextField changeName;
+    private TextField changeFirstName;
+
+    @FXML
+    private TextField changeLastName;
 
     @FXML
     private ListView listOfAccounts;
@@ -38,7 +41,7 @@ public class CustomerController extends BaseController {
 
     @FXML
     private Label message;
-    
+
     @FXML
     private Button btnAccount;
 
@@ -47,11 +50,17 @@ public class CustomerController extends BaseController {
     @FXML
     private void buttonChange(ActionEvent event) {
         long newSsn = BaseController.selectedCustomerSSN;
+        if (changeFirstName.getText().length() > 1 && changeLastName.getText().length() > 1) {
 
-        if (bankLogic.changeCustomer(changeName.getText(), newSsn)) {
-            message.setText("Change success");
-        } else {
-            message.setText("Invalid symbols");
+            if (bankLogic.changeCustomer(changeFirstName.getText() + " "
+                           + changeLastName.getText(), newSsn)) {
+                message.setText("Change success");
+                System.out.println("Change saved to: " + changeFirstName.getText() + changeLastName.getText());
+            } else {
+                message.setText("Invalid symbols");
+            }
+        }else {
+           message.setText("Input too short!");
         }
     }
 
@@ -86,12 +95,18 @@ public class CustomerController extends BaseController {
 
     private void updateInfo() {
         ArrayList<String> info = (ArrayList<String>) bankLogic.getCustomer(selectedCustomerSSN);
-        changeName.setText(info.get(0));
+
+        String[] parts = info.get(0).split(" ");
+        String part1 = parts[0];
+        String part2 = parts[1];
+        changeFirstName.setText(parts[0]);
+        changeLastName.setText(parts[1]);
         lblSsn.setText(info.get(1));
         info.remove(0);
         info.remove(0);
         accounts = FXCollections.observableArrayList(info);
         listOfAccounts.setItems(accounts);
+
     }
 
     @Override
@@ -100,7 +115,7 @@ public class CustomerController extends BaseController {
         saving.setSelected(true);
         saving.setToggleGroup(group);
         credit.setToggleGroup(group);
-        
+
         updateInfo();
 
         try {
