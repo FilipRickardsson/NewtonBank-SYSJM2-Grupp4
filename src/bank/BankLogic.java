@@ -140,9 +140,9 @@ public class BankLogic {
             for (int j = 0; j < accounts.size(); j++) {
                 info.add(accounts.get(j).toString());
                 sumInterest += accounts.get(j).calcInterest();
-                sumSaldo += accounts.get(j).getSaldo() + sumInterest;
+                sumSaldo += accounts.get(j).getSaldo();
             }
-            info.add("Total Saldo: " + sumSaldo + " Total interest: " + sumInterest);
+            info.add("Total Saldo: " + (sumSaldo + sumInterest) + " Total interest: " + sumInterest);
             customers.remove(customer);
         }
         return info;

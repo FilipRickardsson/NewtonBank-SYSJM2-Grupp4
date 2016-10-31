@@ -14,6 +14,7 @@ public class BankApplication extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Home.fxml"));
         Parent root = (Parent) loader.load();
         BaseController controller = (BaseController) loader.getController();
+        stage.setTitle("Newton Bank");
         controller.setStage(stage);
         
 //        Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));

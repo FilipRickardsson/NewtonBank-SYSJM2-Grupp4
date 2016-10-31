@@ -20,6 +20,7 @@ import javafx.scene.control.ToggleGroup;
 public class CustomerController extends BaseController {
 
     private ObservableList<String> accounts;
+    private int typeOfOperation = 0;
 
     @FXML
     private Label lblSsn;
@@ -66,18 +67,20 @@ public class CustomerController extends BaseController {
 
     @FXML
     private void buttonRemove(ActionEvent event) {
-        setPopupMessage("Are you sure ?");
+        typeOfOperation = 0;
+        setPopupMessage("Are you sure you want to\nremove the account?");
         showPopup();
     }
 
     @FXML
     private void buttonCreate(ActionEvent event) {
+        typeOfOperation = 1;
         if (saving.isSelected()) {
-            bankLogic.addSavingsAccount(selectedCustomerSSN);
+            setPopupMessage("Create Savingaccount?");
         } else {
-            bankLogic.addCreditAccount(selectedCustomerSSN);
+            setPopupMessage("Create Creditaccount?");
         }
-        updateInfo();
+        showPopup();
     }
 
     @FXML
@@ -88,8 +91,17 @@ public class CustomerController extends BaseController {
 
     @Override
     protected void popupYes() {
-        selectedCustomerAccountID = bankLogic.getCustomerAccountIdViaIndex(listOfAccounts.getSelectionModel().getSelectedIndex());
-        loadScene("Info.fxml");
+        if (typeOfOperation == 0) {
+            selectedCustomerAccountID = bankLogic.getCustomerAccountIdViaIndex(listOfAccounts.getSelectionModel().getSelectedIndex());
+            loadScene("Info.fxml");
+        } else {
+            if (saving.isSelected()) {
+                bankLogic.addSavingsAccount(selectedCustomerSSN);
+            } else {
+                bankLogic.addCreditAccount(selectedCustomerSSN);
+            }
+            updateInfo();
+        }
         popup.close();
     }
 

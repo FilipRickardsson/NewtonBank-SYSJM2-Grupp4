@@ -17,6 +17,7 @@ public class SavingAccount {
         this.saldo = 0;
         this.interest = 0.01;
         this.accountType = accountType;
+        this.firstWithdrawal = true;
         this.withdrawalFee = 0.02;
         transactions = new ArrayList();
     }
@@ -67,7 +68,7 @@ public class SavingAccount {
         } else {
             saldo -= amount * withdrawalFee + amount;
         }
-        transactions.add(new Transaction(accountNumber, false, amount, saldo));
+        transactions.add(new Transaction(accountNumber, true, amount, saldo));
     }
 
     /**
