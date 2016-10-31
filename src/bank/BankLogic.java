@@ -234,7 +234,10 @@ public class BankLogic {
                 acc.withdraw(amount);
                 return true;
 
-            } else {
+            } else if(acc.isFirstWithdrawal() && amount <= acc.getSaldo()) {
+                acc.withdraw(amount);
+                return true;
+            }else {
                 return false;
             }
         } else {
