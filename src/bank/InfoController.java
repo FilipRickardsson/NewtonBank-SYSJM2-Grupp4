@@ -41,7 +41,12 @@ public class InfoController extends BaseController {
         setPopupMessage("Are you sure?");
         showPopup();
     }
-
+    @FXML
+    @Override
+    protected void handleCustomer() {
+        setPopupMessage("Are you sure?");
+        showPopup();
+    }
     @Override
     protected void popupYes() {
         try {
@@ -59,7 +64,6 @@ public class InfoController extends BaseController {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        btnCustomer.setVisible(false);
         btnAccount.setVisible(false);
 
         //TODO fix
