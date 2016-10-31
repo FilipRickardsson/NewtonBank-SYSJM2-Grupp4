@@ -99,27 +99,36 @@ public class HomeController extends BaseController {
     
     @FXML
     private void createCustomer() {
-        //Fix with first/last name
-        String firstName = firstNameInsert.getText().replaceAll("\\s", "");
-        
-        String lastName = lastNameInsert.getText().replaceAll("\\s", "");
-        
-        try {
-            if (true) {
-                String fullName = firstName + " "
-                        + lastName;
-                if (ssnInsert.getText().length() == 10) {
-                    bankLogic.addCustomer(fullName, Long.parseLong(ssnInsert
-                            .getText()));
-                    updateInfo();
+        if (!firstNameInsert.getText().isEmpty() || !lastNameInsert.getText()
+                .isEmpty() || !ssnSearchField.getText().isEmpty()) {
+            
+            String firstName = firstNameInsert.getText().replaceAll("\\s", "");
+            
+            String lastName = lastNameInsert.getText().replaceAll("\\s", "");
+            
+            try {
+                if (bankLogic.isAlpha(firstName) && bankLogic.isAlpha(lastName)) {
+                    String fullName = firstName + " "
+                            + lastName;
+                    if (ssnInsert.getText().length() == 10) {
+                        bankLogic.addCustomer(fullName, Long.parseLong(ssnInsert
+                                .getText()));
+                        updateInfo();
+                        firstNameInsert.clear();
+                        lastNameInsert.clear();
+                        ssnInsert.clear();
+                        wrongCreateCustomer.setText("Customer added!");
+                    } else {
+                        wrongCreateCustomer.setText("Wrong input length on ssn");
+                    }
                 } else {
-                    wrongCreateCustomer.setText("Wrong input length on ssn");
+                    wrongCreateCustomer.setText("A name can't contain numbers");
                 }
-            } else {
-                wrongCreateCustomer.setText("A name can't contain numbers");
+            } catch (NumberFormatException e) {
+                wrongCreateCustomer.setText("Only numbers allowed in ssn");
             }
-        } catch (NumberFormatException e) {
-            wrongCreateCustomer.setText("Only numbers allowed");
+        } else {
+            wrongCreateCustomer.setText("Missing information");
         }
     }
     

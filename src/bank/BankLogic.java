@@ -356,7 +356,22 @@ public class BankLogic {
         Customer customer = searchForCustomer(BaseController.selectedCustomerSSN);
         return customer.getAccounts().get(AccountIdIndex).getAccountNumber();
     }
-    
 
+    /**
+     * Makes sure a string only contains letters
+     * @param str
+     * @return 
+     */
+    public boolean isAlpha(String str) {
+        char[] chars = str.toCharArray();
+
+        for (char c : chars) {
+            if (!Character.isLetter(c)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 
 }
