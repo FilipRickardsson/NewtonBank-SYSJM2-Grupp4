@@ -217,10 +217,16 @@ public class BankLogic {
     public boolean withdraw(long ssn, int accountId, double amount) {
         SavingAccount acc = searchForAccount(ssn, accountId);
 
-        if (acc instanceof SavingAccount && amount > 0 && amount < acc.getSaldo()) {
-            acc.withdraw(amount);
-            return true;
-
+        if (acc instanceof SavingAccount && amount > 0) {
+            if (acc.isFirstWithdrawal() && amount <= acc.getSaldo()) {
+                acc.withdraw(amount);
+                return true;
+            } else if (amount < acc.getSaldo()) {
+                acc.withdraw(amount);
+                return true;
+            } else {
+                return false;
+            }
         } else if (acc instanceof CreditAccount && amount > 0) {
             CreditAccount acc2 = (CreditAccount) acc;
             if (acc.saldo - amount >= acc2.getCreditLimit()) {

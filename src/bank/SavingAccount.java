@@ -39,6 +39,14 @@ public class SavingAccount {
         return saldo;
     }
 
+    public boolean isFirstWithdrawal() {
+        return firstWithdrawal;
+    }
+
+    public double getWithdrawalFee() {
+        return withdrawalFee;
+    }
+
     public ArrayList<Transaction> getTransactions() {
         return transactions;
     }
@@ -68,7 +76,7 @@ public class SavingAccount {
         } else {
             saldo -= amount * withdrawalFee + amount;
         }
-        transactions.add(new Transaction(accountNumber, false, amount, saldo));
+        transactions.add(new Transaction(accountNumber, true, amount, saldo));
     }
 
     /**
