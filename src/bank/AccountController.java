@@ -28,11 +28,6 @@ public class AccountController extends BaseController {
 
     @FXML
     private void makeDeposit() {
-        try{
-            if (!amount.getText().isEmpty()){
-                error.setText("Amount is empty");
-            }
-        }
         bankLogic.deposit(selectedCustomerSSN, selectedCustomerAccountID, Double.parseDouble(amount.getText()));
         updateInfo();
     }
