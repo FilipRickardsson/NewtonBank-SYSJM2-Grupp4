@@ -74,7 +74,7 @@ public class HomeController extends BaseController {
             } else {
                 wrongSearch.setText("Nothing in search field");
             }
-        } catch (NumberFormatException e) {
+        } catch (NullPointerException e) {
             wrongSearch.setText("Only numbers allowed");
         }
 
@@ -99,7 +99,7 @@ public class HomeController extends BaseController {
     private void selectCustomer(ActionEvent event) throws IOException {
         if (customerListView.getSelectionModel().getSelectedItem() != null) {
             selectedCustomerSSN = bankLogic.getCustomerSsnViaIndex(customerListView
-                           .getSelectionModel().getSelectedIndex());
+                    .getSelectionModel().getSelectedIndex());
             loadScene("Customer.fxml");
         } else {
             noSelection.setText("Nothing selected");
@@ -145,7 +145,7 @@ public class HomeController extends BaseController {
     @Override
     protected void popupYes() {
         selectedCustomerSSN = bankLogic.getCustomerSsnViaIndex(customerListView
-                       .getSelectionModel().getSelectedIndex());
+                .getSelectionModel().getSelectedIndex());
 
         selectedCustomerAccountID = 0;
         popup.close();

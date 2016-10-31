@@ -35,20 +35,21 @@ public class CreditAccount extends SavingAccount {
     @Override
     public double calcInterest() {
         if (saldo < 0) {
-            return saldo * creditInterest;
-        } else if (saldo >= 0) {
-            return saldo * interest;
+            return Math.round(saldo * creditInterest * 100.0) / 100.0;
+        } else {
+            return Math.round(saldo * interest * 100.0) / 100.0;
         }
-        return Math.round(saldo * 100.0) / 100.0;
     }
 
     @Override
     public String toString() {
         if (saldo < 0){
-        return "AccountID: " + accountNumber + ", Saldo: " + saldo + ", Type: " + accountType + ", Interest: " + creditInterest;
+        return "AccountID: " + accountNumber + ", Saldo: " + String.format("%.2f", saldo) 
+                + ", Type: " + accountType + ", Interest: " + creditInterest;
         }
         else{
-            return "AccountID: " + accountNumber + ", Saldo: " + saldo + ", Type: " + accountType + ", Interest: " + interest;
+            return "AccountID: " + accountNumber + ", Saldo: " + String.format("%.2f", saldo) 
+                    + ", Type: " + accountType + ", Interest: " + interest;
         }
     }
 }
