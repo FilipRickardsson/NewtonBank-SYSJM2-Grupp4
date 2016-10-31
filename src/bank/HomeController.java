@@ -104,7 +104,7 @@ public class HomeController extends BaseController {
             
             String firstName = firstNameInsert.getText().replaceAll("\\s", "");
             
-            String lastName = lastNameInsert.getText().replaceAll("\\s", "");
+            String lastName = lastNameInsert.getText().replaceAll("\\s", "");   
             
             try {
                 if (bankLogic.isAlpha(firstName) && bankLogic.isAlpha(lastName)) {
