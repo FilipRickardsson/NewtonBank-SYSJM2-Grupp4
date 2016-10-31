@@ -8,9 +8,6 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
@@ -18,7 +15,7 @@ import javafx.scene.input.MouseEvent;
 public class InfoController extends BaseController {
 
     private int typeOfOperation;
-    
+
     @FXML
     private ListView accountList;
 
@@ -55,7 +52,7 @@ public class InfoController extends BaseController {
 
     @Override
     protected void popupYes() {
-        if(typeOfOperation == 0) {
+        if (typeOfOperation == 0) {
             loadScene("Home.fxml");
         } else {
             loadScene("Customer.fxml");
@@ -66,10 +63,10 @@ public class InfoController extends BaseController {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         btnAccount.setVisible(false);
-
+        
         //TODO fix
         if (selectedCustomerAccountID == 0) {
-
+            btnCustomer.setVisible(false);
             customerInformation = FXCollections.observableArrayList(bankLogic.removeCustomer(selectedCustomerSSN));
             accountList.setItems(customerInformation);
         } else {
