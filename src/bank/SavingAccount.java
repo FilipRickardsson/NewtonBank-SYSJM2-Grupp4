@@ -77,7 +77,8 @@ public class SavingAccount {
      * @return
      */
     public double calcInterest() {
-        return saldo * interest;
+        saldo = saldo * interest;
+        return saldo;
     }
 
     // TODO change this later
