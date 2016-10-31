@@ -108,13 +108,9 @@ public class HomeController extends BaseController {
 
     @FXML
     private void createCustomer() {
-        if (!firstNameInsert.getText().isEmpty() && !lastNameInsert.getText()
-                       .isEmpty() || !ssnSearchField.getText().isEmpty()) {
-
+        if (!firstNameInsert.getText().isEmpty() && !lastNameInsert.getText().isEmpty() && !ssnInsert.getText().isEmpty()) {
             String firstName = firstNameInsert.getText().replaceAll("\\s", "");
-            
             String lastName = lastNameInsert.getText().replaceAll("\\s", "");   
-            
             try {
                 if (bankLogic.isAlpha(firstName) && bankLogic.isAlpha(lastName)) {
                     String fullName = firstName + " "
