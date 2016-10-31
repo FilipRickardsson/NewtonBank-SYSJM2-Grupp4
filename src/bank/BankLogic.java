@@ -144,6 +144,7 @@ public class BankLogic {
                 sumSaldo += accounts.get(j).getSaldo();
             }
             if (sumSaldo + sumInterest < 0) {
+
                 info.add("Total debt: " + String.format("%.2f", sumSaldo + sumInterest)
                         + " whereof interest is: " + sumInterest);
             } else {
