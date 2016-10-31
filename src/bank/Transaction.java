@@ -57,9 +57,11 @@ public class Transaction {
     @Override
     public String toString() {
         if (withdrawal) {
-            return date + " " + time + " " + " Out: " + amount + " Balance: " + updatedBalance;
+            return date + " " + time + " " + " Out: " + String.format("%.2f", amount) 
+                    + " Balance: " + String.format("%.12f", updatedBalance);
         } else {
-            return date + " " + time + " " + " In: " + amount + " Balance: " + updatedBalance;
+            return date + " " + time + " " + " In: " + String.format("%.2f", amount) 
+                    + " Balance: " + String.format("%.2f", updatedBalance);
         }
     }
 }
