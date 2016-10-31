@@ -114,15 +114,20 @@ public class HomeController extends BaseController {
             try {
                 if (bankLogic.isAlpha(firstName) && bankLogic.isAlpha(lastName)) {
                     String fullName = firstName + " "
-                            + lastName;
+                                   + lastName;
+
                     if (ssnInsert.getText().length() == 10) {
-                        bankLogic.addCustomer(fullName, Long.parseLong(ssnInsert
-                                .getText()));
-                        updateInfo();
-                        firstNameInsert.clear();
-                        lastNameInsert.clear();
-                        ssnInsert.clear();
-                        wrongCreateCustomer.setText("Customer added!");
+                        if (bankLogic.addCustomer(fullName, Long.parseLong(ssnInsert
+                                       .getText()))) {
+
+                            updateInfo();
+                            firstNameInsert.clear();
+                            lastNameInsert.clear();
+                            ssnInsert.clear();
+                            wrongCreateCustomer.setText("Customer added!");
+                        }else{
+                            wrongCreateCustomer.setText("Customer already exist");
+                       }
                     } else {
                         wrongCreateCustomer.setText("Wrong input length on ssn");
                     }
