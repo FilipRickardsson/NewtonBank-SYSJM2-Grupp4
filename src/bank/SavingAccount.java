@@ -91,7 +91,7 @@ public class SavingAccount {
     // TODO change this later
     @Override
     public String toString() {
-        return "AccountID: " + accountNumber + ", Saldo: " + saldo + ", Type: " + accountType + ", Interest: " + interest;
+        return "AccountID: " + accountNumber + ", Saldo: " + String.format("%.2f", saldo) + ", Type: " + accountType + ", Interest: " + interest;
     }
 
 }
