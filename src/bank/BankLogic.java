@@ -21,9 +21,9 @@ public class BankLogic {
         accountNbrCounter = 1001;
 
         //To test
-        customers.add(new Customer("Dijana", 7912120101L));
-        customers.add(new Customer("Johan", 9702020101L));
-        customers.add(new Customer("Chrsitoffer", 9202254545L));
+        customers.add(new Customer("Dijana Popovic", 7912120101L));
+        customers.add(new Customer("Johan Jonsson", 9702020101L));
+        customers.add(new Customer("Chrsitoffer Flystam", 9202254545L));
         //To test
         for (int i = 0; i < customers.size(); i++) {
             addSavingsAccount(customers.get(i).getSsn());
@@ -140,9 +140,9 @@ public class BankLogic {
             for (int j = 0; j < accounts.size(); j++) {
                 info.add(accounts.get(j).toString());
                 sumInterest += accounts.get(j).calcInterest();
-                sumSaldo += accounts.get(j).getSaldo() + sumInterest;
+                sumSaldo += accounts.get(j).getSaldo();
             }
-            info.add("Total Saldo: " + sumSaldo + " Total interest: " + sumInterest);
+            info.add("Total Saldo: " + (sumSaldo + sumInterest) + " Total interest: " + sumInterest);
             customers.remove(customer);
         }
         return info;
@@ -217,10 +217,16 @@ public class BankLogic {
     public boolean withdraw(long ssn, int accountId, double amount) {
         SavingAccount acc = searchForAccount(ssn, accountId);
 
-        if (acc instanceof SavingAccount && amount > 0 && amount < acc.getSaldo()) {
-            acc.withdraw(amount);
-            return true;
-
+        if (acc instanceof SavingAccount && amount > 0) {
+            if (acc.isFirstWithdrawal() && amount <= acc.getSaldo()) {
+                acc.withdraw(amount);
+                return true;
+            } else if (amount < acc.getSaldo()) {
+                acc.withdraw(amount);
+                return true;
+            } else {
+                return false;
+            }
         } else if (acc instanceof CreditAccount && amount > 0) {
             CreditAccount acc2 = (CreditAccount) acc;
             if (acc.saldo - amount >= acc2.getCreditLimit()) {
