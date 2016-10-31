@@ -114,7 +114,8 @@ public class BankLogic {
     public boolean changeCustomer(String name, long ssn) {
         Customer customer = searchForCustomer(ssn);
         if (customer != null) {
-            if (name.matches("^[ A-z]+$")) {
+            String nameWithoutSpace = name.replaceAll("\\s", "");
+            if (isAlpha(nameWithoutSpace)) {
                 customer.setName(name);
                 return true;
             }
@@ -217,10 +218,16 @@ public class BankLogic {
     public boolean withdraw(long ssn, int accountId, double amount) {
         SavingAccount acc = searchForAccount(ssn, accountId);
 
-        if (acc instanceof SavingAccount && amount > 0 && amount < acc.getSaldo()) {
-            acc.withdraw(amount);
-            return true;
-
+        if (acc instanceof SavingAccount && amount > 0) {
+            if (acc.isFirstWithdrawal() && amount <= acc.getSaldo()) {
+                acc.withdraw(amount);
+                return true;
+            } else if (amount < acc.getSaldo()) {
+                acc.withdraw(amount);
+                return true;
+            } else {
+                return false;
+            }
         } else if (acc instanceof CreditAccount && amount > 0) {
             CreditAccount acc2 = (CreditAccount) acc;
             if (acc.saldo - amount >= acc2.getCreditLimit()) {
@@ -355,6 +362,23 @@ public class BankLogic {
     public int getCustomerAccountIdViaIndex(int AccountIdIndex) {
         Customer customer = searchForCustomer(BaseController.selectedCustomerSSN);
         return customer.getAccounts().get(AccountIdIndex).getAccountNumber();
+    }
+
+    /**
+     * Makes sure a string only contains letters
+     * @param str
+     * @return 
+     */
+    public boolean isAlpha(String str) {
+        char[] chars = str.toCharArray();
+
+        for (char c : chars) {
+            if (!Character.isLetter(c)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
 }

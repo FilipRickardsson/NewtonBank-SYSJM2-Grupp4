@@ -46,6 +46,7 @@
                   <Label text="ssn:" />
                   <TextField fx:id="ssnInsert" />
                   <Button mnemonicParsing="false" onAction="#createCustomer" text="Create" />
+                  <Label fx:id="wrongCreateCustomer" />
                </children></VBox>
          </content>
       </ScrollPane>

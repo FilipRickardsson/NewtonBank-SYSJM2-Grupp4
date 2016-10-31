@@ -28,16 +28,46 @@ public class AccountController extends BaseController {
 
     @FXML
     private void makeDeposit() {
-        bankLogic.deposit(selectedCustomerSSN, selectedCustomerAccountID, Double.parseDouble(amount.getText()));
-        updateInfo();
+        if (validateInput()) {
+            boolean success = bankLogic.deposit(selectedCustomerSSN, selectedCustomerAccountID, Double.parseDouble(amount.getText()));
+            updateInfo();
+            if (success) {
+                error.setText("Transaction complete");
+            } else {
+                error.setText("Not enough money");
+            }
+        } else {
+            error.setText("Invalid input");
+        }
+        amount.clear();
     }
 
     @FXML
     private void makeWithdrawal() {
-        boolean success = bankLogic.withdraw(selectedCustomerSSN, selectedCustomerAccountID, Double.parseDouble(amount.getText()));
-        updateInfo();
-        if (!success) {
-            error.setText("Not enough money");
+        if (validateInput()) {
+            boolean success = bankLogic.withdraw(selectedCustomerSSN, selectedCustomerAccountID, Double.parseDouble(amount.getText()));
+            updateInfo();
+            if (success) {
+                error.setText("Transaction complete");
+            } else {
+                error.setText("Not enough money");
+            }
+        } else {
+            error.setText("Invalid input");
+        }
+        amount.clear();
+    }
+
+    private boolean validateInput() {
+        try {
+            double input = Double.parseDouble(amount.getText());
+            if (input > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (NumberFormatException ex) {
+            return false;
         }
     }
 
