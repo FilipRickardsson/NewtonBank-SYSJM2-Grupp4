@@ -34,7 +34,7 @@
                   <Label text="Amount" />
                   <TextField fx:id="amount" />
                   <Button mnemonicParsing="false" onAction="#makeDeposit" text="Deposit" />
-                  <Button mnemonicParsing="false" onAction="#makeWithdrawal" text="Withdrawal" />
+                  <Button mnemonicParsing="false" onAction="#makeWithdrawal" text="Withdraw" />
                   <Label fx:id="error" />
                </children></VBox>
          </content>
