@@ -18,6 +18,9 @@ public class AccountController extends BaseController {
     private ObservableList<String> listan;
 
     @FXML
+    private Label accountInformation;
+    
+    @FXML
     private TextField amount;
 
     @FXML
@@ -79,6 +82,9 @@ public class AccountController extends BaseController {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        accountInformation.setText(bankLogic.getAccount(selectedCustomerSSN, 
+                selectedCustomerAccountID));
+        
         updateInfo();
 
         try {
