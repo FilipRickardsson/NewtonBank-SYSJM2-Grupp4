@@ -82,9 +82,9 @@ public class CustomerController extends BaseController {
     private void buttonCreate(ActionEvent event) {
         typeOfOperation = 1;
         if (saving.isSelected()) {
-            setPopupMessage("Create Savingaccount?");
+            setPopupMessage("Create saving account?");
         } else {
-            setPopupMessage("Create Creditaccount?");
+            setPopupMessage("Create credit account?");
         }
         showPopup();
     }
