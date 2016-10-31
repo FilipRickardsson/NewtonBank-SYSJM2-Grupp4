@@ -74,7 +74,7 @@ public class HomeController extends BaseController {
             } else {
                 wrongSearch.setText("Nothing in search field");
             }
-        } catch (NumberFormatException e) {
+        } catch (NullPointerException e) {
             wrongSearch.setText("Only numbers allowed");
         }
 
@@ -99,7 +99,7 @@ public class HomeController extends BaseController {
     private void selectCustomer(ActionEvent event) throws IOException {
         if (customerListView.getSelectionModel().getSelectedItem() != null) {
             selectedCustomerSSN = bankLogic.getCustomerSsnViaIndex(customerListView
-                           .getSelectionModel().getSelectedIndex());
+                    .getSelectionModel().getSelectedIndex());
             loadScene("Customer.fxml");
         } else {
             noSelection.setText("Nothing selected");
@@ -110,14 +110,14 @@ public class HomeController extends BaseController {
     private void createCustomer() {
         if (!firstNameInsert.getText().isEmpty() && !lastNameInsert.getText().isEmpty() && !ssnInsert.getText().isEmpty()) {
             String firstName = firstNameInsert.getText().replaceAll("\\s", "");
-            String lastName = lastNameInsert.getText().replaceAll("\\s", "");   
+            String lastName = lastNameInsert.getText().replaceAll("\\s", "");
             try {
                 if (bankLogic.isAlpha(firstName) && bankLogic.isAlpha(lastName)) {
                     String fullName = firstName + " "
-                                   + lastName;
+                            + lastName;
                     if (ssnInsert.getText().length() == 10) {
                         bankLogic.addCustomer(fullName, Long.parseLong(ssnInsert
-                                       .getText()));
+                                .getText()));
                         updateInfo();
                         firstNameInsert.clear();
                         lastNameInsert.clear();
@@ -140,7 +140,7 @@ public class HomeController extends BaseController {
     @Override
     protected void popupYes() {
         selectedCustomerSSN = bankLogic.getCustomerSsnViaIndex(customerListView
-                       .getSelectionModel().getSelectedIndex());
+                .getSelectionModel().getSelectedIndex());
 
         selectedCustomerAccountID = 0;
         popup.close();
