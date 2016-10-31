@@ -108,7 +108,7 @@ public class HomeController extends BaseController {
 
     @FXML
     private void createCustomer() {
-        if (!firstNameInsert.getText().isEmpty() || !lastNameInsert.getText()
+        if (!firstNameInsert.getText().isEmpty() && !lastNameInsert.getText()
                        .isEmpty() || !ssnSearchField.getText().isEmpty()) {
 
             String firstName = firstNameInsert.getText().replaceAll("\\s", "");
