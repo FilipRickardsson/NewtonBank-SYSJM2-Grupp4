@@ -45,10 +45,12 @@ public class CreditAccount extends SavingAccount {
     @Override
     public String toString() {
         if (saldo < 0){
-        return "AccountID: " + accountNumber + ", Saldo: " + saldo + ", Type: " + accountType + ", Interest: " + creditInterest;
+        return "AccountID: " + accountNumber + ", Saldo: " + String.format("%.2f", saldo) 
+                + ", Type: " + accountType + ", Interest: " + creditInterest;
         }
         else{
-            return "AccountID: " + accountNumber + ", Saldo: " + saldo + ", Type: " + accountType + ", Interest: " + interest;
+            return "AccountID: " + accountNumber + ", Saldo: " + String.format("%.2f", saldo) 
+                    + ", Type: " + accountType + ", Interest: " + interest;
         }
     }
 }
