@@ -10,12 +10,12 @@
 }
 
 .menuButton {
-    -fx-background-color: #ff69b4;
+    -fx-background-color: #EE7202;
     -fx-pref-width: 100px;
 }
 
 .menuButton:hover {
-    -fx-background-color: #CC69A4;
+    -fx-background-color: #CC4D00;
 }
 
 .content {
@@ -26,4 +26,8 @@
 
 .greyLabel{
     -fx-text-fill:grey;
+}
+.border-pane:top{
+    -fx-background-color:#EE7202
+      
 }
