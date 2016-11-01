@@ -349,7 +349,7 @@ public class BankLogic {
     public void customerToFile() {
         String userHomeFolder = System.getProperty("user.home");
         try {
-            FileWriter write = new FileWriter(userHomeFolder + "\\Desktop\\Customerlist.txt");
+            FileWriter write = new FileWriter("Customerlist.txt");
             BufferedWriter bf = new BufferedWriter(write);
             PrintWriter pw = new PrintWriter(bf);
             for (int i = 0; i < customers.size(); i++) {
