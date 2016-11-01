@@ -130,7 +130,7 @@ public class CustomerController extends BaseController {
         listOfAccounts.setItems(accounts);
 
     }
-
+    //Tooglegrup is for the RadioButtons
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         btnAccount.setVisible(false);
