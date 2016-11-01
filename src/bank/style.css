@@ -5,13 +5,16 @@
 
 .menu {
     -fx-alignment: top-center;
-    -fx-pref-width: 150px;
-    -fx-spacing: 20px;
+    -fx-pref-width: 200px;
+    -fx-spacing: 35px;
+    -fx-background-color:white;
 }
 
 .menuButton {
     -fx-background-color: #EE7202;
-    -fx-pref-width: 100px;
+    -fx-pref-width: 130px;
+    -fx-font-size:14pt;
+    -fx-font-weight:bold;
 }
 
 .menuButton:hover {
@@ -27,7 +30,12 @@
 .greyLabel{
     -fx-text-fill:grey;
 }
-.border-pane:top{
-    -fx-background-color:#EE7202
-      
+
+.borderPane{
+    -fx-background-color: #EE7202;
+}
+.lblLogo{
+    -fx-font-size:25pt;
+    -fx-text-fill: white;
+    -fx-font-weight:bold;
 }
