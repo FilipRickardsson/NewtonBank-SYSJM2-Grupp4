@@ -34,16 +34,24 @@
                   <Label text="First name:" />
                   <TextField fx:id="changeFirstName" />
                   <Label text="Last name:" />
-                  <TextField fx:id="changeLastName" />
-                  <Label fx:id="message" />
-                  <Button mnemonicParsing="false" onAction="#buttonChange" text="Change" />
-                  <Label text="SSN:" />
-                  <Label fx:id="lblSsn" styleClass="greyLabel" text="Personnummer" />
+                  <TextField fx:id="changeLastName" prefHeight="31.0" prefWidth="221.0" />
+                  <HBox prefHeight="40.0" prefWidth="400.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#buttonChange" text="Change" />
+                        <Label fx:id="message" prefHeight="21.0" prefWidth="175.0" />
+                        <Label text="SSN:" />
+                        <Label fx:id="lblSsn" styleClass="greyLabel" text="Personnummer" />
+                     </children>
+                  </HBox>
                   <Label text="Accounts" />
-                  <ListView fx:id="listOfAccounts" prefHeight="200.0" prefWidth="200.0" />
-                  <Label fx:id="message2" />
-                  <Button mnemonicParsing="false" onAction="#buttonRemove" text="Remove" />
-                  <Button mnemonicParsing="false" onAction="#buttonSelect" text="Select" />
+                  <ListView fx:id="listOfAccounts" prefHeight="100.0" prefWidth="353.0" />
+                  <HBox prefHeight="41.0" prefWidth="400.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#buttonRemove" text="Remove" />
+                        <Button mnemonicParsing="false" onAction="#buttonSelect" text="Select" />
+                        <Label fx:id="message2" prefHeight="21.0" prefWidth="253.0" />
+                     </children>
+                  </HBox>
                   <Label text="Create Account" />
                   <RadioButton fx:id="saving" mnemonicParsing="false" text="Saving Account" />
                   <RadioButton fx:id="credit" mnemonicParsing="false" text="Credit Account" />
