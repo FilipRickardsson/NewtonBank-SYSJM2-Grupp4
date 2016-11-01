@@ -25,7 +25,7 @@
    <center>
       <ScrollPane BorderPane.alignment="CENTER">
          <content>
-            <VBox prefHeight="200.0" prefWidth="100.0" styleClass="content">
+            <VBox prefHeight="200.0" prefWidth="939.0" styleClass="content">
                <children>
                   <Label text="Select customer:" />
                   <Label text="SSN: " />
