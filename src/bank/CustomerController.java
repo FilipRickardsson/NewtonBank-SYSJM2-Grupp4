@@ -54,28 +54,29 @@ public class CustomerController extends BaseController {
         long newSsn = BaseController.selectedCustomerSSN;
         if (changeFirstName.getText().length() > 1 && changeLastName.getText().length() > 1) {
 
-            if (bankLogic.changeCustomer(changeFirstName.getText() + " "
-                           + changeLastName.getText(), newSsn)) {
+            if (bankLogic.validateName(changeFirstName.getText(),
+                    changeLastName.getText())) {
+                bankLogic.changeCustomer(changeFirstName.getText() + " "
+                        + changeLastName.getText(), newSsn);
                 message.setText("Change success");
-                System.out.println("Change saved to: " + changeFirstName.getText() + changeLastName.getText());
             } else {
                 message.setText("Invalid symbols");
             }
-        }else {
-           message.setText("Input too short!");
+        } else {
+            message.setText("Input too short!");
         }
     }
 
     @FXML
     private void buttonRemove(ActionEvent event) {
-        if(listOfAccounts.getSelectionModel().getSelectedItem()!=null){
+        if (listOfAccounts.getSelectionModel().getSelectedItem() != null) {
             typeOfOperation = 0;
-        setPopupMessage("Are you sure you want to\nremove the account?");
-        showPopup();
-        }else{
+            setPopupMessage("Are you sure you want to\nremove the account?");
+            showPopup();
+        } else {
             message2.setText("Nothing selected");
         }
-        
+
     }
 
     @FXML
@@ -91,13 +92,12 @@ public class CustomerController extends BaseController {
 
     @FXML
     private void buttonSelect(ActionEvent event) throws IOException {
-        
-        if(listOfAccounts.getSelectionModel().getSelectedItem()!=null){
-           selectedCustomerAccountID = bankLogic.getCustomerAccountIdViaIndex(listOfAccounts.getSelectionModel().getSelectedIndex());
-        loadScene("Account.fxml"); 
-        }else
-        {
-           message2.setText("Nothing selected");
+
+        if (listOfAccounts.getSelectionModel().getSelectedItem() != null) {
+            selectedCustomerAccountID = bankLogic.getCustomerAccountIdViaIndex(listOfAccounts.getSelectionModel().getSelectedIndex());
+            loadScene("Account.fxml");
+        } else {
+            message2.setText("Nothing selected");
         }
     }
 
@@ -130,6 +130,7 @@ public class CustomerController extends BaseController {
         listOfAccounts.setItems(accounts);
 
     }
+
     //Tooglegrup is for the RadioButtons
     @Override
     public void initialize(URL url, ResourceBundle rb) {

@@ -114,13 +114,10 @@ public class BankLogic {
     public boolean changeCustomer(String name, long ssn) {
         Customer customer = searchForCustomer(ssn);
         if (customer != null) {
-//            System.out.println(name.matches("^[ A-z-]+$"));
-//            String nameWithoutSpace = name.replaceAll("\\s", "");
-//            if (isAlpha(nameWithoutSpace)) {
-//                customer.setName(name);
-//                return true;
-//            }
+            customer.setName(name);
+            return true;
         }
+
         return false;
     }
 
@@ -363,11 +360,12 @@ public class BankLogic {
         }
 
     }
-    
+
     /**
      * Returns customer ssn og given index
+     *
      * @param CustomerIndex
-     * @return 
+     * @return
      */
     public long getCustomerSsnViaIndex(int CustomerIndex) {
         return customers.get(CustomerIndex).getSsn();
@@ -408,14 +406,14 @@ public class BankLogic {
             if (!firstName.contains("--") || !firstName.substring(0, 1).contains("-") || !firstName.substring(firstName.length() - 1).contains("-")) {
                 firstNameValid = true;
             }
-        } 
-            
+        }
+
         if (lastName.matches("^[A-zåäö ]+$")) {
             if (!lastName.contains("  ") || !lastName.substring(0, 1).contains(" ") || !lastName.substring(lastName.length() - 1).contains(" ")) {
                 lastNameValid = true;
             }
         }
-        
+
         return firstNameValid && lastNameValid;
     }
 
