@@ -24,6 +24,9 @@ public class BankLogic {
         customers.add(new Customer("Dijana Popovic", 7912120101L));
         customers.add(new Customer("Johan Jonsson", 9702020101L));
         customers.add(new Customer("Christoffer Flystam", 9202254545L));
+        customers.add(new Customer("Tobias Hjertelundh", 8706045625L));
+        customers.add(new Customer("Bekir Halvadzic", 9909195421L));
+        customers.add(new Customer("Filip Rickardsson", 8802023251L));
         //To test
         for (int i = 0; i < customers.size(); i++) {
             addSavingsAccount(customers.get(i).getSsn());
