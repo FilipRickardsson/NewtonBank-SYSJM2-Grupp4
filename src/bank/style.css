@@ -22,6 +22,19 @@
     -fx-background-color: #CC4D00;
 }
 
+.menuButtonActive {
+    -fx-background-color: #CC4D00;
+    -fx-pref-width: 130px;
+    -fx-font-size:14pt;
+    -fx-font-weight:bold;
+    -fx-text-fill:white;
+
+}
+
+.menuButtonActive {
+    -fx-background-color: #CC4D00;
+}
+
 .content {
     -fx-background-color: #DDDDDD;
     -fx-pref-height: 825px;
