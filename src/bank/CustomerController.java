@@ -120,7 +120,7 @@ public class CustomerController extends BaseController {
     private void updateInfo() {
         ArrayList<String> info = (ArrayList<String>) bankLogic.getCustomer(selectedCustomerSSN);
 
-        String[] parts = info.get(0).split(" ");
+        String[] parts = info.get(0).split(" ", 2);
         changeFirstName.setText(parts[0]);
         changeLastName.setText(parts[1]);
         lblSsn.setText(info.get(1));
