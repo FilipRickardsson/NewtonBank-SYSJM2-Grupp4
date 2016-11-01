@@ -1,6 +1,7 @@
 package bank;
 
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -357,11 +358,14 @@ public class BankLogic {
             }
             pw.close();
 
-        } catch (IOException ex) {
+        }catch (IOException ex) {
             Logger.getLogger(BankLogic.class
                     .getName()).log(Level.SEVERE, null, ex);
         }
 
+        
+    
+        
     }
 
     public long getCustomerSsnViaIndex(int CustomerIndex) {
