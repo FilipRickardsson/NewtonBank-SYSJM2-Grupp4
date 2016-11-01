@@ -32,7 +32,7 @@ public class AccountController extends BaseController {
     @FXML
     private void makeDeposit() {
         if (validateInput()) {
-            double value = Math.round(Double.parseDouble(amount.getText()) * 100.0) / 100.0;
+            double value = Math.round(Double.parseDouble(amount.getText().replaceAll(",", ".")) * 100.0) / 100.0;
             boolean success = bankLogic.deposit(selectedCustomerSSN, selectedCustomerAccountID, value);
             updateInfo();
             if (success) {
@@ -49,7 +49,7 @@ public class AccountController extends BaseController {
     @FXML
     private void makeWithdrawal() {
         if (validateInput()) {
-            double value = Math.round(Double.parseDouble(amount.getText()) * 100.0) / 100.0;
+            double value = Math.round(Double.parseDouble(amount.getText().replaceAll(",", ".")) * 100.0) / 100.0;
             boolean success = bankLogic.withdraw(selectedCustomerSSN, selectedCustomerAccountID, value);
             updateInfo();
             if (success) {
@@ -66,7 +66,7 @@ public class AccountController extends BaseController {
     //test
     private boolean validateInput() {
         try {
-            double input = Double.parseDouble(amount.getText());
+            double input = Double.parseDouble(amount.getText().replaceAll(",", "."));
             if (input > 1000000000 || input < 0) {
                 throw new NumberFormatException();
             }
