@@ -15,6 +15,7 @@
     -fx-pref-width: 130px;
     -fx-font-size:14pt;
     -fx-font-weight:bold;
+    -fx-text-fill:white;
 }
 
 .menuButton:hover {
