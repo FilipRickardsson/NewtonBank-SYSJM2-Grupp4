@@ -6,6 +6,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="825.0" prefWidth="1100.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bank.HomeController">
@@ -27,7 +28,6 @@
          <content>
             <VBox prefHeight="200.0" prefWidth="939.0" styleClass="content">
                <children>
-                  <Label text="Select customer:" />
                   <Label text="SSN: " />
                   <TextField fx:id="ssnSearchField" />
                   <Button mnemonicParsing="false" onAction="#searchCustomer" text="Search" />
@@ -35,10 +35,14 @@
                   <Label text="Name" />
                   <Label text="SSN" />
                   <ListView fx:id="customerListView" prefHeight="200.0" prefWidth="200.0" />
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#printCustomersToFile" text="Print list" />
+                        <Button mnemonicParsing="false" onAction="#removeCustomer" text="Remove" />
+                        <Button mnemonicParsing="false" onAction="#selectCustomer" text="Select" />
+                     </children>
+                  </HBox>
                   <Label fx:id="noSelection" />
-                  <Button mnemonicParsing="false" onAction="#printCustomersToFile" text="Print list" />
-                  <Button mnemonicParsing="false" onAction="#removeCustomer" text="Remove" />
-                  <Button mnemonicParsing="false" onAction="#selectCustomer" text="Select" />
                   <Label text="Create customer" />
                   <Label text="First name:" />
                   <TextField fx:id="firstNameInsert" />
