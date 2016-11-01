@@ -20,8 +20,8 @@ public class BankApplication extends Application {
         stage.setHeight(825);
         controller.setStage(stage);
         
-        Image applicationIcon = new Image(getClass().getResourceAsStream("nb.png"));
-        stage.getIcons().add(applicationIcon);
+        Image icon = new Image(getClass().getResourceAsStream("nb.png"));
+        stage.getIcons().add(icon);
 
         Scene scene = new Scene(root);
 
