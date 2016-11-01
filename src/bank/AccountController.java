@@ -63,6 +63,7 @@ public class AccountController extends BaseController {
         amount.clear();
     }
 
+    //test
     private boolean validateInput() {
         try {
             double input = Double.parseDouble(amount.getText());
