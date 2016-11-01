@@ -109,12 +109,11 @@ public class HomeController extends BaseController {
     @FXML
     private void createCustomer() {
         if (!firstNameInsert.getText().isEmpty() && !lastNameInsert.getText().isEmpty() && !ssnInsert.getText().isEmpty()) {
-            String firstName = firstNameInsert.getText().replaceAll("\\s", "");
-            String lastName = lastNameInsert.getText().replaceAll("\\s", "");
+            
             try {
-                if (bankLogic.isAlpha(firstName) && bankLogic.isAlpha(lastName)) {
-                    String fullName = firstName + " "
-                                   + lastName;
+                if (bankLogic.validateName(firstNameInsert.getText(), lastNameInsert.getText())) {
+                    String fullName = firstNameInsert.getText() + " "
+                                   + lastNameInsert.getText();
 
                     if (ssnInsert.getText().length() == 10) {
                         if (bankLogic.addCustomer(fullName, Long.parseLong(ssnInsert
@@ -132,7 +131,7 @@ public class HomeController extends BaseController {
                         wrongCreateCustomer.setText("Wrong input length on ssn");
                     }
                 } else {
-                    wrongCreateCustomer.setText("A name can't contain numbers");
+                    wrongCreateCustomer.setText("Invalid symbols i names");
                 }
             } catch (NumberFormatException e) {
                 wrongCreateCustomer.setText("Only numbers allowed in ssn");

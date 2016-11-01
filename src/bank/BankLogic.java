@@ -1,7 +1,6 @@
 package bank;
 
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -115,11 +114,12 @@ public class BankLogic {
     public boolean changeCustomer(String name, long ssn) {
         Customer customer = searchForCustomer(ssn);
         if (customer != null) {
-            String nameWithoutSpace = name.replaceAll("\\s", "");
-            if (isAlpha(nameWithoutSpace)) {
-                customer.setName(name);
-                return true;
-            }
+//            System.out.println(name.matches("^[ A-z-]+$"));
+//            String nameWithoutSpace = name.replaceAll("\\s", "");
+//            if (isAlpha(nameWithoutSpace)) {
+//                customer.setName(name);
+//                return true;
+//            }
         }
         return false;
     }
@@ -348,7 +348,6 @@ public class BankLogic {
      * Prints all customers to a text file
      */
     public void customerToFile() {
-        String userHomeFolder = System.getProperty("user.home");
         try {
             FileWriter write = new FileWriter("Customerlist.txt");
             BufferedWriter bf = new BufferedWriter(write);
@@ -401,6 +400,23 @@ public class BankLogic {
         }
 
         return true;
+    }
+
+    public boolean validateName(String firstName, String lastName) {
+        boolean firstNameValid = false, lastNameValid = false;
+        if (firstName.matches("^[A-zåäö-]+$")) {
+            if (!firstName.contains("--") || !firstName.substring(0, 1).contains("-") || !firstName.substring(firstName.length() - 1).contains("-")) {
+                firstNameValid = true;
+            }
+        } 
+            
+        if (lastName.matches("^[A-zåäö ]+$")) {
+            if (!lastName.contains("  ") || !lastName.substring(0, 1).contains(" ") || !lastName.substring(lastName.length() - 1).contains(" ")) {
+                lastNameValid = true;
+            }
+        }
+        
+        return firstNameValid && lastNameValid;
     }
 
 }
