@@ -149,7 +149,7 @@ public class BankLogic {
                 info.add("Total debt: " + String.format("%.2f", sumSaldo + sumInterest)
                         + " whereof interest is: " + String.format("%.2f", sumInterest));
             } else {
-                info.add("Total money back: " + String.format("%.2f", sumSaldo + sumInterest) 
+                info.add("Total money back: " + String.format("%.2f", sumSaldo + sumInterest)
                         + " whereof interest is: " + String.format("%.2f", sumInterest));
             }
 
@@ -236,10 +236,10 @@ public class BankLogic {
                 acc.withdraw(amount);
                 return true;
 
-            } else if(acc.isFirstWithdrawal() && amount <= acc.getSaldo()) {
+            } else if (acc.isFirstWithdrawal() && amount <= acc.getSaldo()) {
                 acc.withdraw(amount);
                 return true;
-            }else {
+            } else {
                 return false;
             }
         } else {
@@ -259,9 +259,9 @@ public class BankLogic {
         SavingAccount acc = searchForAccount(ssn, accountId);
         String info = null;
         if (acc != null) {
-            info = "SSN: " + ssn + ", Type: " + acc.getAccountType() + 
-                    ", Saldo: " + String.format("%.2f", acc.getSaldo()) + 
-                    ", Interest: " + String.format("%.2f", acc.calcInterest());
+            info = "SSN: " + ssn + ", Type: " + acc.getAccountType()
+                    + ", Saldo: " + String.format("%.2f", acc.getSaldo())
+                    + ", Interest: " + String.format("%.2f", acc.calcInterest());
             Customer co = searchForCustomer(ssn);
             co.getAccounts().remove(acc);
         }
@@ -358,20 +358,28 @@ public class BankLogic {
             }
             pw.close();
 
-        }catch (IOException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(BankLogic.class
                     .getName()).log(Level.SEVERE, null, ex);
         }
 
-        
-    
-        
     }
-
+    
+    /**
+     * Returns customer ssn og given index
+     * @param CustomerIndex
+     * @return 
+     */
     public long getCustomerSsnViaIndex(int CustomerIndex) {
         return customers.get(CustomerIndex).getSsn();
     }
 
+    /**
+     * Returns the accountId of given index
+     *
+     * @param AccountIdIndex
+     * @return
+     */
     public int getCustomerAccountIdViaIndex(int AccountIdIndex) {
         Customer customer = searchForCustomer(BaseController.selectedCustomerSSN);
         return customer.getAccounts().get(AccountIdIndex).getAccountNumber();
