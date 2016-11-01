@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class BankApplication extends Application {
@@ -19,7 +20,8 @@ public class BankApplication extends Application {
         stage.setHeight(825);
         controller.setStage(stage);
         
-//        Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
+        Image applicationIcon = new Image(getClass().getResourceAsStream("nb.png"));
+        stage.getIcons().add(applicationIcon);
 
         Scene scene = new Scene(root);
 
