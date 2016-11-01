@@ -363,11 +363,22 @@ public class BankLogic {
         }
 
     }
-
+    
+    /**
+     * Returns customer ssn og given index
+     * @param CustomerIndex
+     * @return 
+     */
     public long getCustomerSsnViaIndex(int CustomerIndex) {
         return customers.get(CustomerIndex).getSsn();
     }
 
+    /**
+     * Returns the accountId of given index
+     *
+     * @param AccountIdIndex
+     * @return
+     */
     public int getCustomerAccountIdViaIndex(int AccountIdIndex) {
         Customer customer = searchForCustomer(BaseController.selectedCustomerSSN);
         return customer.getAccounts().get(AccountIdIndex).getAccountNumber();

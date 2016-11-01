@@ -10,20 +10,24 @@
 }
 
 .menuButton {
-    -fx-background-color: #ff69b4;
+    -fx-background-color: #EE7202;
     -fx-pref-width: 100px;
 }
 
 .menuButton:hover {
-    -fx-background-color: #CC69A4;
+    -fx-background-color: #CC4D00;
 }
 
 .content {
     -fx-background-color: #DDDDDD;
-    -fx-pref-height: 1500px;
-    -fx-pref-width: 400px;
+    -fx-pref-height: 825px;
+    -fx-pref-width: 1100px;
 }
 
 .greyLabel{
     -fx-text-fill:grey;
+}
+.border-pane:top{
+    -fx-background-color:#EE7202
+      
 }
