@@ -147,10 +147,10 @@ public class BankLogic {
             if (sumSaldo + sumInterest < 0) {
 
                 info.add("Total debt: " + String.format("%.2f", sumSaldo + sumInterest)
-                        + " whereof interest is: " + sumInterest);
+                        + " whereof interest is: " + String.format("%.2f", sumInterest));
             } else {
                 info.add("Total money back: " + String.format("%.2f", sumSaldo + sumInterest) 
-                        + " whereof interest is: " + sumInterest);
+                        + " whereof interest is: " + String.format("%.2f", sumInterest));
             }
 
             customers.remove(customer);
@@ -259,7 +259,9 @@ public class BankLogic {
         SavingAccount acc = searchForAccount(ssn, accountId);
         String info = null;
         if (acc != null) {
-            info = "SSN: " + ssn + ", Type: " + acc.getAccountType() + ", Saldo: " + acc.getSaldo() + ", Interest: " + acc.calcInterest();
+            info = "SSN: " + ssn + ", Type: " + acc.getAccountType() + 
+                    ", Saldo: " + String.format("%.2f", acc.getSaldo()) + 
+                    ", Interest: " + String.format("%.2f", acc.calcInterest());
             Customer co = searchForCustomer(ssn);
             co.getAccounts().remove(acc);
         }
