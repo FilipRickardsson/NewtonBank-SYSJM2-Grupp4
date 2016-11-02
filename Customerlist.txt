@@ -1,3 +1,6 @@
 Name: Dijana Popovic, SSN: 7912120101
 Name: Johan Jonsson, SSN: 9702020101
-Name: to to, SSN: 9202254545
+Name: Christoffer Flystam, SSN: 9202254545
+Name: Tobias Hjertelundh, SSN: 8706045625
+Name: Bekir Halvadzic, SSN: 9909195421
+Name: Filip Rickardsson, SSN: 8802023251
