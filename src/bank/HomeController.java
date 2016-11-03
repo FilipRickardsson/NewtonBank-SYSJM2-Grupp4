@@ -46,7 +46,9 @@ public class HomeController extends BaseController {
 
     @FXML
     private Button btnAccount;
-
+/**
+ * Searching for customer with SSN. 
+ */
     @FXML
     private void searchCustomer() {
         wrongSearch.setText("");

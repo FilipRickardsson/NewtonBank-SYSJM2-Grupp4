@@ -402,7 +402,13 @@ public class BankLogic {
 
         return true;
     }
-
+/**
+ * if firstName & lastName contains the symbols we allow it will return true. both firstName and lastName must be true
+    for the symbols can be allowed
+ * @param firstName
+ * @param lastName
+ * @return Allowed symbols
+ */
     public boolean validateName(String firstName, String lastName) {
         boolean firstNameValid = false, lastNameValid = false;
         if (firstName.matches("^[A-zåäö-]+$")) {
