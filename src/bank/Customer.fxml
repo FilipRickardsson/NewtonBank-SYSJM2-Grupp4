@@ -6,14 +6,14 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="825.0" prefWidth="1100.0" styleClass="borderPane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bank.CustomerController">
-   <top>
-      <Label styleClass="lblLogo" text="Newton Bank" BorderPane.alignment="CENTER" />
-   </top>
    <left>
       <VBox prefHeight="200.0" prefWidth="100.0" styleClass="menu" BorderPane.alignment="CENTER">
          <children>
@@ -36,7 +36,7 @@
                   <TextField fx:id="changeLastName" prefHeight="31.0" prefWidth="221.0" />
                   <HBox prefHeight="40.0" prefWidth="400.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#buttonChange" text="Change" />
+                        <Button mnemonicParsing="false" onAction="#buttonChange" styleClass="actionButton" text="Change" />
                         <Label fx:id="message" prefHeight="21.0" prefWidth="175.0" />
                         <Label text="SSN:" />
                         <Label fx:id="lblSsn" styleClass="greyLabel" text="Personnummer" />
@@ -44,19 +44,31 @@
                   </HBox>
                   <Label text="Accounts" />
                   <ListView fx:id="listOfAccounts" prefHeight="100.0" prefWidth="353.0" />
-                  <HBox prefHeight="41.0" prefWidth="400.0">
+                  <HBox prefHeight="41.0" prefWidth="400.0" styleClass="hBox">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#buttonRemove" text="Remove" />
-                        <Button mnemonicParsing="false" onAction="#buttonSelect" text="Select" />
+                        <Button mnemonicParsing="false" onAction="#buttonRemove" styleClass="actionButton" text="Remove" />
+                        <Button mnemonicParsing="false" onAction="#buttonSelect" styleClass="actionButton" text="Select" />
                         <Label fx:id="message2" prefHeight="21.0" prefWidth="253.0" />
                      </children>
                   </HBox>
-                  <Label text="Create Account" />
+                  <Label styleClass="bigHeader" text="Create Account" />
                   <RadioButton fx:id="saving" mnemonicParsing="false" text="Saving Account" />
                   <RadioButton fx:id="credit" mnemonicParsing="false" text="Credit Account" />
-                  <Button mnemonicParsing="false" onAction="#buttonCreate" text="Create" />
+                  <Button mnemonicParsing="false" onAction="#buttonCreate" styleClass="actionButton" text="Create" />
                </children></VBox>
          </content>
       </ScrollPane>
    </center>
+   <top>
+      <AnchorPane>
+         <children>
+            <Label layoutX="419.0" styleClass="lblLogo" text="Newton Bank" />
+            <ImageView fitHeight="89.0" fitWidth="101.0" layoutX="59.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@nb2.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </top>
 </BorderPane>

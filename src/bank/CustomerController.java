@@ -133,7 +133,12 @@ public class CustomerController extends BaseController {
         }
         popup.close();
     }
-
+/**
+ * Spilts name in two Strings to make FirstName and LastName.
+ * Put in ArrayList to be shown in TextFields.
+ * To shown right information on right place, index 1&2 are removed that
+ * contains FirstName and LastName.
+ */
     private void updateInfo() {
         ArrayList<String> info = (ArrayList<String>) bankLogic.getCustomer(selectedCustomerSSN);
 

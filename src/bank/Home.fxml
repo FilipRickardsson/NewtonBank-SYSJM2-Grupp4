@@ -5,13 +5,25 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="825.0" prefWidth="1100.0" styleClass="borderPane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bank.HomeController">
    <top>
-      <Label styleClass="lblLogo" text="Newton Bank" BorderPane.alignment="CENTER" />
+      <AnchorPane BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="419.0" styleClass="lblLogo" text="Newton Bank" />
+            <ImageView fitHeight="89.0" fitWidth="101.0" layoutX="59.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@nb2.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
    </top>
    <left>
       <VBox prefHeight="200.0" prefWidth="100.0" styleClass="menu" BorderPane.alignment="CENTER">
@@ -33,13 +45,13 @@
                   <TextField fx:id="ssnSearchField" />
                   <Button mnemonicParsing="false" onAction="#searchCustomer" styleClass="actionButton" text="Search" />
                   <Label fx:id="wrongSearch" />
-                  <Label text="List of current customers" />
+                  <Label styleClass="smallHeader" text="List of current customers" />
                   <ListView fx:id="customerListView" prefHeight="200.0" prefWidth="200.0" />
-                  <HBox prefHeight="100.0" prefWidth="200.0">
+                  <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hBox">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#printCustomersToFile" text="Print list" />
-                        <Button mnemonicParsing="false" onAction="#removeCustomer" text="Remove" />
-                        <Button mnemonicParsing="false" onAction="#selectCustomer" text="Select" />
+                        <Button mnemonicParsing="false" onAction="#printCustomersToFile" styleClass="actionButton" text="Print list" />
+                        <Button mnemonicParsing="false" onAction="#removeCustomer" styleClass="actionButton" text="Remove" />
+                        <Button mnemonicParsing="false" onAction="#selectCustomer" styleClass="actionButton" text="Select" />
                      </children>
                   </HBox>
                   <Label fx:id="listViewInformation" />
@@ -50,7 +62,7 @@
                   <TextField fx:id="lastNameInsert" />
                   <Label text="SSN:" />
                   <TextField fx:id="ssnInsert" />
-                  <Button mnemonicParsing="false" onAction="#createCustomer" text="Create" />
+                  <Button mnemonicParsing="false" onAction="#createCustomer" styleClass="actionButton" text="Create" />
                   <Label fx:id="wrongCreateCustomer" />
                </children></VBox>
          </content>

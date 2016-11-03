@@ -28,7 +28,8 @@
 }
 
 .menuButtonActive {
-    -fx-background-color: #CC4D00;
+    
+    -fx-background-color: #515151;
     -fx-pref-width: 130px;
     -fx-font-size:14pt;
     -fx-font-weight:bold;
@@ -36,15 +37,20 @@
 
 }
 
-.menuButtonActive {
-    -fx-background-color: #515151;
-}
+
 
 .actionButton {
-    
-    -fx-border-insets: 5px;
-    -fx-background-insets: 5px;
-    
+
+    -fx-background-color: #515151;
+    -fx-pref-width: 100px;
+    -fx-font-size:12pt;
+    -fx-font-weight:bold;
+    -fx-text-fill:white;
+
+}
+
+.actionButton:hover {
+    -fx-background-color: #848482;
 }
 
 .content {
@@ -52,6 +58,7 @@
     -fx-pref-height: 825px;
     -fx-pref-width: 880px;
     -fx-padding: 33px;
+    -fx-spacing: 10px;
 }
 
 .greyLabel{
@@ -76,4 +83,8 @@
 
 .smallHeader{
     -fx-font-size: 15pt;
+}
+
+.hBox{
+    -fx-spacing: 10px;
 }
