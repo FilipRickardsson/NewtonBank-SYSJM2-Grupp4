@@ -192,6 +192,7 @@ public class HomeController extends BaseController {
         btnAccount.setVisible(false);
         btnCustomer.setVisible(false);
         ssnSearchField.setPromptText("YYMMDDXXXX");
+        ssnInsert.setPromptText("YYMMDDXXXX");
 
         updateInfo();
 

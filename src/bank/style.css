@@ -1,6 +1,7 @@
 .root {
     -fx-focus-color: #515151;
     -fx-accent: #515151;
+    
 }
 
 .bg {
@@ -55,7 +56,7 @@
 
 .content {
     -fx-background-color: #FFFFFF;
-    -fx-pref-height: 825px;
+    -fx-pref-height: 1100px;
     -fx-pref-width: 880px;
     -fx-padding: 33px;
     -fx-spacing: 10px;
@@ -87,4 +88,18 @@
 
 .hBox{
     -fx-spacing: 10px;
+}
+
+.interactiveListView{
+    -fx-pref-height: 320px;
+}
+
+.ssnTextField{
+    -fx-min-width: 145px;
+    -fx-max-width: 145px;
+}
+
+.textField{
+    -fx-min-width: 250px;
+    -fx-max-width: 250px;
 }

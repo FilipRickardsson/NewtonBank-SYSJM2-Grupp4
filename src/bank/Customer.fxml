@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -25,32 +26,40 @@
       </VBox>
    </left>
    <center>
-      <ScrollPane prefHeight="825.0" prefWidth="1100.0" BorderPane.alignment="CENTER">
+      <ScrollPane prefHeight="850.0" prefWidth="1100.0" BorderPane.alignment="CENTER">
          <content>
-            <VBox prefHeight="200.0" prefWidth="100.0" styleClass="content">
+            <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="100.0" styleClass="content">
                <children>
                   <Label fx:id="currentCustomer" styleClass="bigHeader" />
-                  <Label text="First name:" />
-                  <TextField fx:id="changeFirstName" />
-                  <Label text="Last name:" />
-                  <TextField fx:id="changeLastName" prefHeight="31.0" prefWidth="221.0" />
-                  <HBox prefHeight="40.0" prefWidth="400.0">
+                  <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#buttonChange" styleClass="actionButton" text="Change" />
-                        <Label fx:id="message" prefHeight="21.0" prefWidth="175.0" />
                         <Label text="SSN:" />
                         <Label fx:id="lblSsn" styleClass="greyLabel" text="Personnummer" />
                      </children>
+                     <styleClass>
+                        <String fx:value="hBox" />
+                        <String fx:value="smallHeader" />
+                     </styleClass>
                   </HBox>
-                  <Label text="Accounts" />
-                  <ListView fx:id="listOfAccounts" prefHeight="100.0" prefWidth="353.0" />
+                  <Label text="First name:" />
+                  <TextField fx:id="changeFirstName" styleClass="textField" />
+                  <Label text="Last name:" />
+                  <TextField fx:id="changeLastName" prefHeight="31.0" prefWidth="221.0" styleClass="textField" />
+                  <HBox prefHeight="40.0" prefWidth="400.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#buttonChange" styleClass="actionButton" text="Change" />
+                     </children>
+                  </HBox>
+                  <Label fx:id="message" prefHeight="21.0" prefWidth="175.0" />
+                  <Label styleClass="smallHeader" text="Accounts" />
+                  <ListView fx:id="listOfAccounts" minHeight="-Infinity" prefHeight="100.0" prefWidth="353.0" styleClass="interactiveListView" />
                   <HBox prefHeight="41.0" prefWidth="400.0" styleClass="hBox">
                      <children>
                         <Button mnemonicParsing="false" onAction="#buttonRemove" styleClass="actionButton" text="Remove" />
                         <Button mnemonicParsing="false" onAction="#buttonSelect" styleClass="actionButton" text="Select" />
-                        <Label fx:id="message2" prefHeight="21.0" prefWidth="253.0" />
                      </children>
                   </HBox>
+                  <Label fx:id="message2" prefHeight="21.0" prefWidth="253.0" />
                   <Label styleClass="bigHeader" text="Create Account" />
                   <RadioButton fx:id="saving" mnemonicParsing="false" text="Saving Account" />
                   <RadioButton fx:id="credit" mnemonicParsing="false" text="Credit Account" />

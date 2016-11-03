@@ -29,9 +29,9 @@
             <VBox prefHeight="1497.0" prefWidth="119.0" styleClass="content">
                <children>
                   <Label fx:id="accountInformation" styleClass="bigHeader" />
-                  <ListView fx:id="transactions" prefHeight="200.0" prefWidth="200.0" />
+                  <ListView fx:id="transactions" minHeight="-Infinity" prefHeight="200.0" prefWidth="200.0" styleClass="interactiveListView" />
                   <Label styleClass="smallHeader" text="Amount" />
-                  <TextField fx:id="amount" />
+                  <TextField fx:id="amount" styleClass="textField" />
                   <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hBox">
                      <children>
                         <Button mnemonicParsing="false" onAction="#makeDeposit" styleClass="actionButton" text="Deposit" />
