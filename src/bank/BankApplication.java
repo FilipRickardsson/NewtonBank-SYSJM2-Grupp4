@@ -18,6 +18,7 @@ public class BankApplication extends Application {
         stage.setTitle("Newton Bank");
         stage.setWidth(1100);
         stage.setHeight(825);
+        stage.setResizable(false);
         controller.setStage(stage);
         
         Image icon = new Image(getClass().getResourceAsStream("nb.png"));

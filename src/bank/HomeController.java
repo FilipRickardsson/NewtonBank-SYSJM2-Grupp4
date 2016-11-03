@@ -23,9 +23,10 @@ public class HomeController extends BaseController {
 
     @FXML
     private Label wrongSearch;
+    
     @FXML
-    private Label noSelection;
-
+    private Label listViewInformation;
+    
     @FXML
     private Label wrongCreateCustomer;
 
@@ -83,6 +84,7 @@ public class HomeController extends BaseController {
     @FXML
     private void printCustomersToFile() {
         bankLogic.customerToFile();
+        listViewInformation.setText("Customer list printed to text file");
     }
 
     @FXML
@@ -91,7 +93,7 @@ public class HomeController extends BaseController {
             setPopupMessage("Are you sure?");
             showPopup();
         } else {
-            noSelection.setText("Nothing selected");
+            listViewInformation.setText("Nothing selected");
         }
     }
 
@@ -102,7 +104,7 @@ public class HomeController extends BaseController {
                     .getSelectionModel().getSelectedIndex());
             loadScene("Customer.fxml");
         } else {
-            noSelection.setText("Nothing selected");
+            listViewInformation.setText("Nothing selected");
         }
     }
 
