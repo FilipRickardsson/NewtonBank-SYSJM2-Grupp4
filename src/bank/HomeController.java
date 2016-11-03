@@ -26,7 +26,7 @@ public class HomeController extends BaseController {
 
     @FXML
     private Label listViewInformation;
-    
+
     @FXML
     private Label wrongCreateCustomer;
 
@@ -47,10 +47,11 @@ public class HomeController extends BaseController {
 
     @FXML
     private Button btnAccount;
-/**
- * Searching for customer by SSN. limited input. 
- * Error handling if symbols or lenght not right
- */
+
+    /**
+     * Searching for customer by SSN. limited input. Error handling if symbols
+     * or length not right
+     */
     @FXML
     private void searchCustomer() {
         wrongSearch.setText("");
@@ -83,18 +84,24 @@ public class HomeController extends BaseController {
         }
 
     }
-/**
- * File with customerslist saves in C:\Users\"MyCoputer"\Documents\GitProject\Projekt2Bank
- * 
- */
+
+    /**
+     * File with customerslist saves in
+     * C:\Users\"MyCoputer"\Documents\GitProject\Projekt2Bank
+     *
+     */
     @FXML
     private void printCustomersToFile() {
-        bankLogic.customerToFile();
-        listViewInformation.setText("Customer list printed to text file");
+        if (bankLogic.customerToFile()) {
+            listViewInformation.setText("Customer list printed to text file");
+        } else {
+            listViewInformation.setText("Could not write to file. Check file permissions");
+        }
     }
-/**
- * removes customer from list. PopUp appers for confirmation.
- */
+
+    /**
+     * removes customer from list. PopUp appers for confirmation.
+     */
     @FXML
     private void removeCustomer() {
         if (customerListView.getSelectionModel().getSelectedItem() != null) {
@@ -104,11 +111,13 @@ public class HomeController extends BaseController {
             listViewInformation.setText("Nothing selected");
         }
     }
-/**
- * Selected customer, go to next scene
- * @param event
- * @throws IOException 
- */
+
+    /**
+     * Selected customer, go to next scene
+     *
+     * @param event
+     * @throws IOException
+     */
     @FXML
     private void selectCustomer(ActionEvent event) throws IOException {
         if (customerListView.getSelectionModel().getSelectedItem() != null) {
@@ -119,10 +128,12 @@ public class HomeController extends BaseController {
             listViewInformation.setText("Nothing selected");
         }
     }
-/**
- * Create customr with firstname and lastname that combine to one String name.
- * Error handling: if existing SSn, if SSN lenght too long, Symbols is allowed, no input.
- */
+
+    /**
+     * Create customr with firstname and lastname that combine to one String
+     * name. Error handling: if existing SSn, if SSN lenght too long, Symbols is
+     * allowed, no input.
+     */
     @FXML
     private void createCustomer() {
         if (!firstNameInsert.getText().isEmpty() && !lastNameInsert.getText().isEmpty() && !ssnInsert.getText().isEmpty()) {
