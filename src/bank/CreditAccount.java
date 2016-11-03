@@ -19,7 +19,7 @@ public class CreditAccount extends Account {
     public double getCreditInterest() {
         return creditInterest;
     }
-    
+
     /**
      * Makes a withdrawal
      *
@@ -47,14 +47,12 @@ public class CreditAccount extends Account {
 
     @Override
     public String toString() {
-
-        if (saldo < 0){
-        return "AccountID: " + accountNumber + ", Saldo: " + String.format("%.2f", saldo) 
-                + ", Type: " + accountType + ", Interest: " + creditInterest;
-        }
-        else{
-            return "AccountID: " + accountNumber + ", Saldo: " + String.format("%.2f", saldo) 
-                    + ", Type: " + accountType + ", Interest: " + interest;
+        if (saldo < 0) {
+            return "AccountID: " + accountNumber + ", Type: " + accountType
+                    + ", Interest: " + interest + "\nSaldo: " + String.format("%.2f", saldo);
+        } else {
+            return "AccountID: " + accountNumber + ", Type: " + accountType
+                    + ", Interest: " + interest + "\nSaldo: " + String.format("%.2f", saldo);
         }
     }
 }

@@ -52,7 +52,8 @@ public class SavingAccount extends Account {
    
     @Override
     public String toString() {
-        return "AccountID: " + accountNumber + ", Saldo: " + String.format("%.2f", saldo) + ", Type: " + accountType + ", Interest: " + interest;
+        return "AccountID: " + accountNumber + ", Type: " + accountType
+                + ", Interest: " + interest + "\nSaldo: " + String.format("%.2f", saldo);
     }
 
 }
