@@ -54,7 +54,7 @@ public class HomeController extends BaseController {
      */
     @FXML
     private void searchCustomer() {
-        wrongSearch.setText("");
+        showMessage("", wrongSearch, false);
         String searchStr;
         boolean match = false;
 
@@ -68,19 +68,18 @@ public class HomeController extends BaseController {
                             customerListView.getSelectionModel().select(i);
                             match = true;
                         }
-
                     }
                     if (!match) {
-                        wrongSearch.setText("No match");
+                        showMessage("No match", wrongSearch, true);
                     }
                 } else {
-                    wrongSearch.setText("Wrong input length");
+                    showMessage("Wrong input length", wrongSearch, true);
                 }
             } else {
-                wrongSearch.setText("Nothing in search field");
+                showMessage("Nothing in search field", wrongSearch, true);
             }
         } catch (NumberFormatException e) {
-            wrongSearch.setText("Only numbers allowed");
+            showMessage("Only numbers allowed", wrongSearch, true);
         }
 
     }
@@ -93,9 +92,9 @@ public class HomeController extends BaseController {
     @FXML
     private void printCustomersToFile() {
         if (bankLogic.customerToFile()) {
-            listViewInformation.setText("Customer list printed to text file");
+            showMessage("Customer list printed to text file", listViewInformation, false);
         } else {
-            listViewInformation.setText("Could not write to file. Check file permissions");
+            showMessage("Could not write to file. Check file permissions", listViewInformation, true);
         }
     }
 
@@ -108,7 +107,7 @@ public class HomeController extends BaseController {
             setPopupMessage("Are you sure you want to remove\ncustomer?");
             showPopup();
         } else {
-            listViewInformation.setText("Nothing selected");
+            showMessage("Nothing selected", listViewInformation, true);
         }
     }
 
@@ -125,7 +124,7 @@ public class HomeController extends BaseController {
                     .getSelectionModel().getSelectedIndex());
             loadScene("Customer.fxml");
         } else {
-            listViewInformation.setText("Nothing selected");
+            showMessage("Nothing selected", listViewInformation, true);
         }
     }
 
@@ -151,21 +150,21 @@ public class HomeController extends BaseController {
                             firstNameInsert.clear();
                             lastNameInsert.clear();
                             ssnInsert.clear();
-                            wrongCreateCustomer.setText("Customer added!");
+                            showMessage("Customer added!", wrongCreateCustomer, false);
                         } else {
-                            wrongCreateCustomer.setText("Customer already exist");
+                            showMessage("Customer already exist", wrongCreateCustomer, true);
                         }
                     } else {
-                        wrongCreateCustomer.setText("Wrong input length on ssn");
+                        showMessage("Wrong input length on ssn", wrongCreateCustomer, true);
                     }
                 } else {
-                    wrongCreateCustomer.setText("Invalid symbols i names");
+                    showMessage("Invalid symbols i names", wrongCreateCustomer, true);
                 }
             } catch (NumberFormatException e) {
-                wrongCreateCustomer.setText("Only numbers allowed in ssn");
+                showMessage("Only numbers allowed in ssn", wrongCreateCustomer, true);
             }
         } else {
-            wrongCreateCustomer.setText("Missing information");
+            showMessage("Missing information", wrongCreateCustomer, true);
         }
     }
 

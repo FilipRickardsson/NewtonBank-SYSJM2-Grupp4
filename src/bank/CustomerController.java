@@ -24,7 +24,7 @@ public class CustomerController extends BaseController {
 
     @FXML
     private Label currentCustomer;
-    
+
     @FXML
     private Label lblSsn;
 
@@ -51,10 +51,12 @@ public class CustomerController extends BaseController {
     private Button btnAccount;
 
     private final ToggleGroup group = new ToggleGroup();
-/**
- * changeButton checks if input is valid. Error message if not.
- * @param event 
- */
+
+    /**
+     * changeButton checks if input is valid. Error message if not.
+     *
+     * @param event
+     */
     @FXML
     private void buttonChange(ActionEvent event) {
         long newSsn = BaseController.selectedCustomerSSN;
@@ -64,19 +66,21 @@ public class CustomerController extends BaseController {
                     changeLastName.getText())) {
                 bankLogic.changeCustomer(changeFirstName.getText() + " "
                         + changeLastName.getText(), newSsn);
-                message.setText("Change success");
+                showMessage("Change success", message, false);
                 updateInfo();
             } else {
-                message.setText("Invalid symbols");
+                showMessage("Invalid symbols", message, true);
             }
         } else {
-            message.setText("Input too short!");
+            showMessage("Input too short!", message, true);
         }
     }
-/**
- * removeButton calls PopUp for confirmaton
- * @param event 
- */
+
+    /**
+     * removeButton calls PopUp for confirmaton
+     *
+     * @param event
+     */
     @FXML
     private void buttonRemove(ActionEvent event) {
         if (listOfAccounts.getSelectionModel().getSelectedItem() != null) {
@@ -84,14 +88,16 @@ public class CustomerController extends BaseController {
             setPopupMessage("Are you sure you want to\nremove the account?");
             showPopup();
         } else {
-            message2.setText("Nothing selected");
+            showMessage("Nothing selected", message2, true);
         }
 
     }
-/**
- * Using RadioButtons to select and create account
- * @param event 
- */
+
+    /**
+     * Using RadioButtons to select and create account
+     *
+     * @param event
+     */
     @FXML
     private void buttonCreate(ActionEvent event) {
         typeOfOperation = 1;
@@ -102,11 +108,13 @@ public class CustomerController extends BaseController {
         }
         showPopup();
     }
-/**
- * Selected object to new scene
- * @param event
- * @throws IOException 
- */
+
+    /**
+     * Selected object to new scene
+     *
+     * @param event
+     * @throws IOException
+     */
     @FXML
     private void buttonSelect(ActionEvent event) throws IOException {
 
@@ -114,7 +122,7 @@ public class CustomerController extends BaseController {
             selectedCustomerAccountID = bankLogic.getCustomerAccountIdViaIndex(listOfAccounts.getSelectionModel().getSelectedIndex());
             loadScene("Account.fxml");
         } else {
-            message2.setText("Nothing selected");
+            showMessage("Nothing selected", message2, true);
         }
     }
 
@@ -133,12 +141,12 @@ public class CustomerController extends BaseController {
         }
         popup.close();
     }
-/**
- * Spilts name in two Strings to make FirstName and LastName.
- * Put in ArrayList to be shown in TextFields.
- * To shown right information on right place, index 1&2 are removed that
- * contains FirstName and LastName.
- */
+
+    /**
+     * Spilts name in two Strings to make FirstName and LastName. Put in
+     * ArrayList to be shown in TextFields. To shown right information on right
+     * place, index 1&2 are removed that contains FirstName and LastName.
+     */
     private void updateInfo() {
         ArrayList<String> info = (ArrayList<String>) bankLogic.getCustomer(selectedCustomerSSN);
 
@@ -154,11 +162,13 @@ public class CustomerController extends BaseController {
 
     }
 
-/**
- * ToogleButton for the RadioButtons. How they are selected. One at the time.
- * @param url
- * @param rb 
- */
+    /**
+     * ToogleButton for the RadioButtons. How they are selected. One at the
+     * time.
+     *
+     * @param url
+     * @param rb
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         btnAccount.setVisible(false);
