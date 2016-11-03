@@ -6,7 +6,7 @@ public class Customer {
 
     private String name;
     private final long ssn;
-    private final ArrayList<SavingAccount> accounts;
+    private final ArrayList<Account> accounts;
 
     public Customer(String name, long ssn) {
         this.name = name;
@@ -26,7 +26,7 @@ public class Customer {
         return ssn;
     }
 
-    public ArrayList<SavingAccount> getAccounts() {
+    public ArrayList<Account> getAccounts() {
         return accounts;
     }
 

@@ -1,44 +1,18 @@
 package bank;
 
-import java.util.ArrayList;
+public class SavingAccount extends Account {
 
-public class SavingAccount {
-
-    protected final int accountNumber;
-    protected double saldo;
-    protected double interest;
-    protected final String accountType;
     protected boolean firstWithdrawal;
     protected final double withdrawalFee;
-    protected ArrayList<Transaction> transactions;
 
-    public SavingAccount(int accountNumber, String accountType) {
-        this.accountNumber = accountNumber;
-        this.saldo = 0;
-        this.interest = 0.01;
-        this.accountType = accountType;
-        this.firstWithdrawal = true;
-        this.withdrawalFee = 0.02;
-        transactions = new ArrayList();
+    public SavingAccount(int accountNumber) {
+        super(accountNumber, "Saving Account");
+        interest = 0.01;
+        firstWithdrawal = true;
+        withdrawalFee = 0.02;
     }
 
     //<editor-fold defaultstate="collapsed" desc="Getters">
-    public int getAccountNumber() {
-        return accountNumber;
-    }
-
-    public String getAccountType() {
-        return accountType;
-    }
-
-    public double getInterest() {
-        return interest;
-    }
-
-    public double getSaldo() {
-        return saldo;
-    }
-
     public boolean isFirstWithdrawal() {
         return firstWithdrawal;
     }
@@ -47,28 +21,14 @@ public class SavingAccount {
         return withdrawalFee;
     }
 
-    public ArrayList<Transaction> getTransactions() {
-        return transactions;
-    }
-
     //</editor-fold>
-    /**
-     * Adds given amount to accounts saldo and adds a new transaction to
-     * accounts transaction list.
-     *
-     * @param amount
-     */
-    public void deposit(double amount) {
-        saldo += amount;
-        transactions.add(new Transaction(accountNumber, false, amount, saldo));
-    }
-
     /**
      * Removes given amount from accounts saldo and adds a new transaction to
      * accounts transaction list.
      *
      * @param amount
      */
+    @Override
     public void withdraw(double amount) {
         if (firstWithdrawal) {
             saldo -= amount;
@@ -84,6 +44,7 @@ public class SavingAccount {
      *
      * @return
      */
+    @Override
     public double calcInterest() {
         return Math.round((saldo * interest) * 100.0) / 100.0;
     }
