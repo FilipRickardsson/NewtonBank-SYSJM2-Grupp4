@@ -41,7 +41,8 @@
 }
 
 .content {
-    -fx-background-color: #DDDDDD;
+/*    -fx-background-color: #DDDDDD;*/
+    -fx-background-color: #FFFFFF;
     -fx-pref-height: 825px;
     -fx-pref-width: 880px;
     -fx-padding: 33px;
@@ -60,4 +61,13 @@
     -fx-text-fill: white;
     -fx-font-weight:bold;
     -fx-padding: 25px;
+}
+
+.bigHeader{
+    -fx-font-size: 20pt;
+    -fx-font-weight:bold;
+}
+
+.smallHeader{
+    -fx-font-size: 15pt;
 }
