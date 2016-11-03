@@ -19,9 +19,9 @@ public class BankLogic {
     private BankLogic() {
         customers = new ArrayList();
         accountNbrCounter = 1001;
-/**
- * Created customer with accounts to test program.
- */
+        /**
+         * Created customer with accounts to test program.
+         */
         customers.add(new Customer("Dijana Popovic", 7912120101L));
         customers.add(new Customer("Johan Jonsson", 9702020101L));
         customers.add(new Customer("Christoffer Flystam", 9202254545L));
@@ -348,8 +348,10 @@ public class BankLogic {
 
     /**
      * Prints all customers to a text file.
+     *
+     * @return
      */
-    public void customerToFile() {
+    public boolean customerToFile() {
         try {
             FileWriter write = new FileWriter("Customerlist.txt");
             BufferedWriter bf = new BufferedWriter(write);
@@ -358,16 +360,15 @@ public class BankLogic {
                 pw.println(customers.get(i).toString());
             }
             pw.close();
+            return true;
 
         } catch (IOException ex) {
-            Logger.getLogger(BankLogic.class
-                    .getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
-
     }
 
     /**
-     * Returns customer ssn og given index
+     * Returns customer ssn of given index
      *
      * @param CustomerIndex
      * @return
@@ -404,13 +405,16 @@ public class BankLogic {
 
         return true;
     }
-/**
- * if firstName & lastName contains the symbols we allow it will return true. both firstName and lastName must be true
-    for the symbols can be allowed
- * @param firstName
- * @param lastName
- * @return Allowed symbols
- */
+
+    /**
+     * if firstName & lastName contains the symbols we allow it will return
+     * true. both firstName and lastName must be true for the symbols can be
+     * allowed
+     *
+     * @param firstName
+     * @param lastName
+     * @return Allowed symbols
+     */
     public boolean validateName(String firstName, String lastName) {
         boolean firstNameValid = false, lastNameValid = false;
         if (firstName.matches("^[A-zåäöÅÄÖ-]+$")) {

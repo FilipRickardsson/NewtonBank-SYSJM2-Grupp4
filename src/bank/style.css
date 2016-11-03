@@ -28,7 +28,8 @@
 }
 
 .menuButtonActive {
-    -fx-background-color: #CC4D00;
+    
+    -fx-background-color: #515151;
     -fx-pref-width: 130px;
     -fx-font-size:14pt;
     -fx-font-weight:bold;
@@ -36,12 +37,23 @@
 
 }
 
-.menuButtonActive {
+
+
+.actionButton {
+
     -fx-background-color: #515151;
+    -fx-pref-width: 100px;
+    -fx-font-size:12pt;
+    -fx-font-weight:bold;
+    -fx-text-fill:white;
+
+}
+
+.actionButton:hover {
+    -fx-background-color: #848482;
 }
 
 .content {
-/*    -fx-background-color: #DDDDDD;*/
     -fx-background-color: #FFFFFF;
     -fx-pref-height: 825px;
     -fx-pref-width: 880px;
@@ -71,4 +83,8 @@
 
 .smallHeader{
     -fx-font-size: 15pt;
+}
+
+.hBox{
+    -fx-spacing: 10px;
 }

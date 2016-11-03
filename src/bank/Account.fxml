@@ -28,14 +28,14 @@
          <content>
             <VBox prefHeight="1497.0" prefWidth="119.0" styleClass="content">
                <children>
-                  <Label fx:id="accountInformation" />
+                  <Label fx:id="accountInformation" styleClass="bigHeader" />
                   <ListView fx:id="transactions" prefHeight="200.0" prefWidth="200.0" />
-                  <Label text="Amount" />
+                  <Label styleClass="smallHeader" text="Amount" />
                   <TextField fx:id="amount" />
-                  <HBox prefHeight="100.0" prefWidth="200.0">
+                  <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hBox">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#makeDeposit" text="Deposit" />
-                        <Button mnemonicParsing="false" onAction="#makeWithdrawal" text="Withdraw" />
+                        <Button mnemonicParsing="false" onAction="#makeDeposit" styleClass="actionButton" text="Deposit" />
+                        <Button mnemonicParsing="false" onAction="#makeWithdrawal" styleClass="actionButton" text="Withdraw" />
                      </children>
                   </HBox>
                   <Label fx:id="error" />
