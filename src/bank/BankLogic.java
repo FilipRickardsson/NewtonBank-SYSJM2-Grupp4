@@ -139,7 +139,7 @@ public class BankLogic {
             double sumInterest = 0;
             double sumSaldo = 0;
             info.add(customer.toString());
-            ArrayList<SavingAccount> accounts = customer.getAccounts();
+            ArrayList<Account> accounts = customer.getAccounts();
             for (int j = 0; j < accounts.size(); j++) {
                 info.add(accounts.get(j).toString());
                 sumInterest += accounts.get(j).calcInterest();
@@ -170,7 +170,7 @@ public class BankLogic {
         Customer customer = searchForCustomer(ssn);
         if (customer != null) {
             accountNbr = accountNbrCounter;
-            customer.getAccounts().add(new SavingAccount(accountNbr, "Saving Account"));
+            customer.getAccounts().add(new SavingAccount(accountNbr));
             accountNbrCounter++;
         }
         return accountNbr;
@@ -185,7 +185,7 @@ public class BankLogic {
      * @return
      */
     public String getAccount(long ssn, int accountId) {
-        SavingAccount acc = searchForAccount(ssn, accountId);
+        Account acc = searchForAccount(ssn, accountId);
         if (acc != null) {
             return acc.toString();
         }
@@ -222,7 +222,7 @@ public class BankLogic {
      * @return
      */
     public boolean withdraw(long ssn, int accountId, double amount) {
-        SavingAccount acc = searchForAccount(ssn, accountId);
+        Account acc = searchForAccount(ssn, accountId);
 
         if (acc instanceof CreditAccount && amount > 0) {
             CreditAccount acc2 = (CreditAccount) acc;
@@ -233,12 +233,13 @@ public class BankLogic {
                 return false;
             }
         } else if (acc instanceof SavingAccount && amount > 0) {
-            if ((amount + (amount * acc.getWithdrawalFee())) <= acc.getSaldo()) {
+            SavingAccount acc2 = (SavingAccount) acc;
+            if ((amount + (amount * acc2.getWithdrawalFee())) <= acc2.getSaldo()) {
                 acc.withdraw(amount);
                 return true;
 
-            } else if (acc.isFirstWithdrawal() && amount <= acc.getSaldo()) {
-                acc.withdraw(amount);
+            } else if (acc2.isFirstWithdrawal() && amount <= acc2.getSaldo()) {
+                acc2.withdraw(amount);
                 return true;
             } else {
                 return false;
@@ -257,7 +258,7 @@ public class BankLogic {
      * @return info
      */
     public String closeAccount(long ssn, int accountId) {
-        SavingAccount acc = searchForAccount(ssn, accountId);
+        Account acc = searchForAccount(ssn, accountId);
         String info = null;
         if (acc != null) {
             info = "SSN: " + ssn + ", Type: " + acc.getAccountType()
@@ -278,7 +279,7 @@ public class BankLogic {
         Customer customer = searchForCustomer(ssn);
         if (customer != null) {
             accountNbr = accountNbrCounter;
-            searchForCustomer(ssn).getAccounts().add(new CreditAccount(accountNbr, "Credit Account"));
+            searchForCustomer(ssn).getAccounts().add(new CreditAccount(accountNbr));
             accountNbrCounter++;
         }
         return accountNbr;
@@ -293,7 +294,7 @@ public class BankLogic {
     public List<String> getTransactions(long ssn, int accountID) {
         ArrayList<String> transactionInformation = new ArrayList();
 
-        SavingAccount acc = searchForAccount(ssn, accountID);
+        Account acc = searchForAccount(ssn, accountID);
 
         for (int j = 0; j < acc.getTransactions().size(); j++) {
             transactionInformation.add(acc.getTransactions().
@@ -329,11 +330,11 @@ public class BankLogic {
      * @param accountNumber
      * @return
      */
-    private SavingAccount searchForAccount(long ssn, int accountNumber) {
-        SavingAccount acc = null;
+    private Account searchForAccount(long ssn, int accountNumber) {
+        Account acc = null;
         Customer customer = searchForCustomer(ssn);
         if (customer != null) {
-            ArrayList<SavingAccount> accounts = customer.getAccounts();
+            ArrayList<Account> accounts = customer.getAccounts();
             for (int i = 0; i < accounts.size(); i++) {
                 if (accounts.get(i).getAccountNumber() == accountNumber) {
                     acc = accounts.get(i);
