@@ -23,9 +23,10 @@ public class HomeController extends BaseController {
 
     @FXML
     private Label wrongSearch;
-    @FXML
-    private Label noSelection;
 
+    @FXML
+    private Label listViewInformation;
+    
     @FXML
     private Label wrongCreateCustomer;
 
@@ -85,6 +86,7 @@ public class HomeController extends BaseController {
     @FXML
     private void printCustomersToFile() {
         bankLogic.customerToFile();
+        listViewInformation.setText("Customer list printed to text file");
     }
 
     @FXML
@@ -93,7 +95,7 @@ public class HomeController extends BaseController {
             setPopupMessage("Are you sure?");
             showPopup();
         } else {
-            noSelection.setText("Nothing selected");
+            listViewInformation.setText("Nothing selected");
         }
     }
 
@@ -104,31 +106,31 @@ public class HomeController extends BaseController {
                     .getSelectionModel().getSelectedIndex());
             loadScene("Customer.fxml");
         } else {
-            noSelection.setText("Nothing selected");
+            listViewInformation.setText("Nothing selected");
         }
     }
 
     @FXML
     private void createCustomer() {
         if (!firstNameInsert.getText().isEmpty() && !lastNameInsert.getText().isEmpty() && !ssnInsert.getText().isEmpty()) {
-            
+
             try {
                 if (bankLogic.validateName(firstNameInsert.getText(), lastNameInsert.getText())) {
                     String fullName = firstNameInsert.getText() + " "
-                                   + lastNameInsert.getText();
+                            + lastNameInsert.getText();
 
                     if (ssnInsert.getText().length() == 10) {
                         if (bankLogic.addCustomer(fullName, Long.parseLong(ssnInsert
-                                       .getText()))) {
+                                .getText()))) {
 
                             updateInfo();
                             firstNameInsert.clear();
                             lastNameInsert.clear();
                             ssnInsert.clear();
                             wrongCreateCustomer.setText("Customer added!");
-                        }else{
+                        } else {
                             wrongCreateCustomer.setText("Customer already exist");
-                       }
+                        }
                     } else {
                         wrongCreateCustomer.setText("Wrong input length on ssn");
                     }
@@ -165,6 +167,7 @@ public class HomeController extends BaseController {
     public void initialize(URL url, ResourceBundle rb) {
         btnAccount.setVisible(false);
         btnCustomer.setVisible(false);
+        ssnSearchField.setPromptText("YYMMDDXXXX");
 
         updateInfo();
 

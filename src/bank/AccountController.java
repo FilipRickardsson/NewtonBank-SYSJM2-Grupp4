@@ -15,7 +15,7 @@ import javafx.scene.control.TextField;
 
 public class AccountController extends BaseController {
 
-    private ObservableList<String> listan;
+    private ObservableList<String> accountList;
 
     @FXML
     private Label accountInformation;
@@ -92,8 +92,8 @@ public class AccountController extends BaseController {
     public void updateInfo() {
         accountInformation.setText(bankLogic.getAccount(selectedCustomerSSN,
                 selectedCustomerAccountID));
-        listan = FXCollections.observableArrayList((ArrayList) bankLogic.getTransactions(selectedCustomerSSN, selectedCustomerAccountID));
-        transactions.setItems(listan);
+        accountList = FXCollections.observableArrayList((ArrayList) bankLogic.getTransactions(selectedCustomerSSN, selectedCustomerAccountID));
+        transactions.setItems(accountList);
     }
 
     @Override
