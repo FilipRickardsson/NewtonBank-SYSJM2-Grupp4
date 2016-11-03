@@ -46,6 +46,7 @@
     -fx-pref-height: 825px;
     -fx-pref-width: 880px;
     -fx-padding: 33px;
+    -fx-spacing: 10px;
 }
 
 .greyLabel{

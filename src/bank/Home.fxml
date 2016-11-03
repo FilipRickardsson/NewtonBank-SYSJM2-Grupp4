@@ -5,13 +5,25 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="825.0" prefWidth="1100.0" styleClass="borderPane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bank.HomeController">
    <top>
-      <Label styleClass="lblLogo" text="Newton Bank" BorderPane.alignment="CENTER" />
+      <AnchorPane BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="419.0" styleClass="lblLogo" text="Newton Bank" />
+            <ImageView fitHeight="89.0" fitWidth="101.0" layoutX="59.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@nb2.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
    </top>
    <left>
       <VBox prefHeight="200.0" prefWidth="100.0" styleClass="menu" BorderPane.alignment="CENTER">
