@@ -32,7 +32,7 @@
             <VBox prefHeight="200.0" prefWidth="100.0" styleClass="content">
                <children>
                   <Label styleClass="bigHeader" text="Deleted data" />
-                  <ListView fx:id="accountList" onMouseClicked="#dontPressMe" onMouseEntered="#dontPressMe" prefHeight="276.0" prefWidth="300.0" />
+                  <ListView fx:id="accountList" minHeight="-Infinity" onMouseClicked="#dontPressMe" onMouseEntered="#dontPressMe" prefHeight="276.0" prefWidth="300.0" styleClass="interactiveListView" />
                </children></VBox>
          </content>
       </ScrollPane>
