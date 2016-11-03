@@ -19,15 +19,16 @@ public class BankLogic {
     private BankLogic() {
         customers = new ArrayList();
         accountNbrCounter = 1001;
-
-        //To test
+/**
+ * Created customer with accounts to test program.
+ */
         customers.add(new Customer("Dijana Popovic", 7912120101L));
         customers.add(new Customer("Johan Jonsson", 9702020101L));
         customers.add(new Customer("Christoffer Flystam", 9202254545L));
         customers.add(new Customer("Tobias Hjertelundh", 8706045625L));
         customers.add(new Customer("Bekir Halvadzic", 9909195421L));
         customers.add(new Customer("Filip Rickardsson", 8802023251L));
-        //To test
+
         for (int i = 0; i < customers.size(); i++) {
             addSavingsAccount(customers.get(i).getSsn());
             addCreditAccount(customers.get(i).getSsn());
@@ -270,8 +271,8 @@ public class BankLogic {
     }
 
     /**
-     * look in customer list for ssn and creates an credit account when search
-     * fails returns -1
+     * look in customer list for ssn and creates an credit account when search.
+     * fails returns -1.
      */
     public int addCreditAccount(long ssn) {
         int accountNbr = -1;
@@ -346,7 +347,7 @@ public class BankLogic {
     }
 
     /**
-     * Prints all customers to a text file
+     * Prints all customers to a text file.
      */
     public void customerToFile() {
         try {

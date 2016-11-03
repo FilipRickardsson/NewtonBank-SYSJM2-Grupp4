@@ -49,7 +49,7 @@ public class SavingAccount extends Account {
         return Math.round((saldo * interest) * 100.0) / 100.0;
     }
 
-    // TODO change this later
+   
     @Override
     public String toString() {
         return "AccountID: " + accountNumber + ", Type: " + accountType
