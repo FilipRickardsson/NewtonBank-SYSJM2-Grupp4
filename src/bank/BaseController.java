@@ -9,14 +9,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 public abstract class BaseController implements Initializable {
-/**
- * This is the superClass that haves equal information to different scenes. Buttons. Titels. PopUps.
- */
+
+    /**
+     * This is the superClass that haves equal information to different scenes.
+     * Buttons. Titels. PopUps.
+     */
     protected static Stage main;
     protected Stage popup;
     protected PopupController popupCtrl;
@@ -28,14 +32,16 @@ public abstract class BaseController implements Initializable {
     public BaseController() {
         bankLogic = BankLogic.getBankLogic();
     }
-    
+
     protected void setStage(Stage stage) {
         BaseController.main = stage;
     }
-/**
- * Create PopUps
- * @throws IOException 
- */
+
+    /**
+     * Create PopUps
+     *
+     * @throws IOException
+     */
     protected void loadPopup() throws IOException {
         popup = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Popup.fxml"));
@@ -97,6 +103,16 @@ public abstract class BaseController implements Initializable {
             main.setScene(s);
         } catch (IOException ex) {
             Logger.getLogger(BaseController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    protected void showMessage(String msg, Label lbl, boolean isError) {
+        if (isError) {
+            lbl.setText(msg);
+            lbl.setTextFill(Color.RED);
+        } else {
+            lbl.setText(msg);
+            lbl.setTextFill(Color.BLACK);
         }
     }
 
