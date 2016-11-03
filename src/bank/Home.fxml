@@ -28,12 +28,12 @@
          <content>
             <VBox prefHeight="200.0" prefWidth="939.0" styleClass="content">
                <children>
-                  <Label text="SSN: " />
+                  <Label styleClass="bigHeader" text="Customers of Newton Bank" />
+                  <Label styleClass="smallHeader" text="Customer search" />
                   <TextField fx:id="ssnSearchField" />
                   <Button mnemonicParsing="false" onAction="#searchCustomer" text="Search" />
                   <Label fx:id="wrongSearch" />
-                  <Label text="Name" />
-                  <Label text="SSN" />
+                  <Label text="List of current customers" />
                   <ListView fx:id="customerListView" prefHeight="200.0" prefWidth="200.0" />
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
@@ -43,7 +43,7 @@
                      </children>
                   </HBox>
                   <Label fx:id="listViewInformation" />
-                  <Label text="Create customer" />
+                  <Label styleClass="bigHeader" text="Add new customer" />
                   <Label text="First name:" />
                   <TextField fx:id="firstNameInsert" />
                   <Label text="Last name:" />
