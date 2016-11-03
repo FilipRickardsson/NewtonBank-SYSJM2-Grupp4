@@ -32,7 +32,7 @@
                   <ListView fx:id="transactions" minHeight="-Infinity" prefHeight="200.0" prefWidth="200.0" styleClass="interactiveListView" />
                   <Label styleClass="smallHeader" text="Amount" />
                   <TextField fx:id="amount" styleClass="textField" />
-                  <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hBox">
+                  <HBox prefHeight="40.0" prefWidth="814.0" styleClass="hBox">
                      <children>
                         <Button mnemonicParsing="false" onAction="#makeDeposit" styleClass="actionButton" text="Deposit" />
                         <Button mnemonicParsing="false" onAction="#makeWithdrawal" styleClass="actionButton" text="Withdraw" />
