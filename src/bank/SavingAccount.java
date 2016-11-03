@@ -2,8 +2,8 @@ package bank;
 
 public class SavingAccount extends Account {
 
-    protected boolean firstWithdrawal;
-    protected final double withdrawalFee;
+    private boolean firstWithdrawal;
+    private final double withdrawalFee;
 
     public SavingAccount(int accountNumber) {
         super(accountNumber, "Saving Account");
