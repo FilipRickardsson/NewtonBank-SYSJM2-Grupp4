@@ -42,12 +42,12 @@
                <children>
                   <Label styleClass="bigHeader" text="Customers of Newton Bank" />
                   <Label styleClass="smallHeader" text="Customer search" />
-                  <TextField fx:id="ssnSearchField" />
+                  <TextField fx:id="ssnSearchField" minWidth="-Infinity" styleClass="ssnTextField" />
                   <Button mnemonicParsing="false" onAction="#searchCustomer" styleClass="actionButton" text="Search" />
                   <Label fx:id="wrongSearch" />
                   <Label styleClass="smallHeader" text="List of current customers" />
-                  <ListView fx:id="customerListView" prefHeight="200.0" prefWidth="200.0" />
-                  <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hBox">
+                  <ListView fx:id="customerListView" minHeight="-Infinity" prefHeight="200.0" prefWidth="200.0" styleClass="interactiveListView" />
+                  <HBox prefHeight="41.0" prefWidth="814.0" styleClass="hBox">
                      <children>
                         <Button mnemonicParsing="false" onAction="#printCustomersToFile" styleClass="actionButton" text="Print list" />
                         <Button mnemonicParsing="false" onAction="#removeCustomer" styleClass="actionButton" text="Remove" />
@@ -57,11 +57,11 @@
                   <Label fx:id="listViewInformation" />
                   <Label styleClass="bigHeader" text="Add new customer" />
                   <Label text="First name:" />
-                  <TextField fx:id="firstNameInsert" />
+                  <TextField fx:id="firstNameInsert" styleClass="textField" />
                   <Label text="Last name:" />
-                  <TextField fx:id="lastNameInsert" />
+                  <TextField fx:id="lastNameInsert" styleClass="textField" />
                   <Label text="SSN:" />
-                  <TextField fx:id="ssnInsert" />
+                  <TextField fx:id="ssnInsert" styleClass="ssnTextField" />
                   <Button mnemonicParsing="false" onAction="#createCustomer" styleClass="actionButton" text="Create" />
                   <Label fx:id="wrongCreateCustomer" />
                </children></VBox>
