@@ -48,7 +48,8 @@ public class HomeController extends BaseController {
     @FXML
     private Button btnAccount;
 /**
- * Searching for customer by SSN. limited input. 10symbols max and find exact customer 
+ * Searching for customer by SSN. limited input. 
+ * Error handling if symbols or lenght not right
  */
     @FXML
     private void searchCustomer() {
@@ -82,13 +83,18 @@ public class HomeController extends BaseController {
         }
 
     }
-
+/**
+ * File with customerslist saves in C:\Users\"MyCoputer"\Documents\GitProject\Projekt2Bank
+ * 
+ */
     @FXML
     private void printCustomersToFile() {
         bankLogic.customerToFile();
         listViewInformation.setText("Customer list printed to text file");
     }
-
+/**
+ * removes customer from list. PopUp appers for confirmation.
+ */
     @FXML
     private void removeCustomer() {
         if (customerListView.getSelectionModel().getSelectedItem() != null) {
@@ -98,7 +104,11 @@ public class HomeController extends BaseController {
             listViewInformation.setText("Nothing selected");
         }
     }
-
+/**
+ * Selected customer, go to next scene
+ * @param event
+ * @throws IOException 
+ */
     @FXML
     private void selectCustomer(ActionEvent event) throws IOException {
         if (customerListView.getSelectionModel().getSelectedItem() != null) {
@@ -109,7 +119,10 @@ public class HomeController extends BaseController {
             listViewInformation.setText("Nothing selected");
         }
     }
-
+/**
+ * Create customr with firstname and lastname that combine to one String name.
+ * Error handling: if existing SSn, if SSN lenght too long, Symbols is allowed, no input.
+ */
     @FXML
     private void createCustomer() {
         if (!firstNameInsert.getText().isEmpty() && !lastNameInsert.getText().isEmpty() && !ssnInsert.getText().isEmpty()) {

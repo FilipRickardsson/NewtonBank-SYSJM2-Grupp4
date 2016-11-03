@@ -88,7 +88,7 @@ public class SavingAccount {
         return Math.round((saldo * interest) * 100.0) / 100.0;
     }
 
-    // TODO change this later
+   
     @Override
     public String toString() {
         return "AccountID: " + accountNumber + ", Saldo: " + String.format("%.2f", saldo) + ", Type: " + accountType + ", Interest: " + interest;

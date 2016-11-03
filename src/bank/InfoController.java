@@ -26,7 +26,10 @@ public class InfoController extends BaseController {
     private Button btnAccount;
 
     private ObservableList<String> customerInformation;
-
+/**
+ * Prevents selection in ListView.
+ * @param event 
+ */
     public void dontPressMe(MouseEvent event) {
         accountList.addEventFilter(MouseEvent.MOUSE_PRESSED, (MouseEvent event1) -> {
             System.out.println(">> Mouse Clicked");
@@ -64,7 +67,9 @@ public class InfoController extends BaseController {
     public void initialize(URL url, ResourceBundle rb) {
         btnAccount.setVisible(false);
         
-        //TODO fix
+/**
+ * Visibility of menuButtons when in different scene.
+ */
         if (selectedCustomerAccountID == 0) {
             btnCustomer.setVisible(false);
             customerInformation = FXCollections.observableArrayList(bankLogic.removeCustomer(selectedCustomerSSN));
