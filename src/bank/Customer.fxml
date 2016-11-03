@@ -29,6 +29,7 @@
          <content>
             <VBox prefHeight="200.0" prefWidth="100.0" styleClass="content">
                <children>
+                  <Label fx:id="currentCustomer" styleClass="bigHeader" />
                   <Label text="First name:" />
                   <TextField fx:id="changeFirstName" />
                   <Label text="Last name:" />

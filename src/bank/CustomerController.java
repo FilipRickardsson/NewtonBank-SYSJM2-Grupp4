@@ -23,6 +23,9 @@ public class CustomerController extends BaseController {
     private int typeOfOperation = 0;
 
     @FXML
+    private Label currentCustomer;
+    
+    @FXML
     private Label lblSsn;
 
     @FXML
@@ -62,6 +65,7 @@ public class CustomerController extends BaseController {
                 bankLogic.changeCustomer(changeFirstName.getText() + " "
                         + changeLastName.getText(), newSsn);
                 message.setText("Change success");
+                updateInfo();
             } else {
                 message.setText("Invalid symbols");
             }
@@ -133,6 +137,7 @@ public class CustomerController extends BaseController {
     private void updateInfo() {
         ArrayList<String> info = (ArrayList<String>) bankLogic.getCustomer(selectedCustomerSSN);
 
+        currentCustomer.setText(info.get(0));
         String[] parts = info.get(0).split(" ", 2);
         changeFirstName.setText(parts[0]);
         changeLastName.setText(parts[1]);

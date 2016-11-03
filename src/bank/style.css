@@ -40,8 +40,14 @@
     -fx-background-color: #515151;
 }
 
+.actionButton {
+    
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
+    
+}
+
 .content {
-/*    -fx-background-color: #DDDDDD;*/
     -fx-background-color: #FFFFFF;
     -fx-pref-height: 825px;
     -fx-pref-width: 880px;

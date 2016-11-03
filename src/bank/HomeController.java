@@ -92,7 +92,7 @@ public class HomeController extends BaseController {
     @FXML
     private void removeCustomer() {
         if (customerListView.getSelectionModel().getSelectedItem() != null) {
-            setPopupMessage("Are you sure?");
+            setPopupMessage("Are you sure you want to remove\ncustomer?");
             showPopup();
         } else {
             listViewInformation.setText("Nothing selected");

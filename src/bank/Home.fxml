@@ -31,7 +31,7 @@
                   <Label styleClass="bigHeader" text="Customers of Newton Bank" />
                   <Label styleClass="smallHeader" text="Customer search" />
                   <TextField fx:id="ssnSearchField" />
-                  <Button mnemonicParsing="false" onAction="#searchCustomer" text="Search" />
+                  <Button mnemonicParsing="false" onAction="#searchCustomer" styleClass="actionButton" text="Search" />
                   <Label fx:id="wrongSearch" />
                   <Label text="List of current customers" />
                   <ListView fx:id="customerListView" prefHeight="200.0" prefWidth="200.0" />

@@ -366,7 +366,7 @@ public class BankLogic {
     }
 
     /**
-     * Returns customer ssn og given index
+     * Returns customer ssn of given index
      *
      * @param CustomerIndex
      * @return
