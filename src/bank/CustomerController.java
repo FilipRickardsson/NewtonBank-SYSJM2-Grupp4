@@ -48,7 +48,10 @@ public class CustomerController extends BaseController {
     private Button btnAccount;
 
     private final ToggleGroup group = new ToggleGroup();
-
+/**
+ * changeButton checks if input is valid. Error message if not.
+ * @param event 
+ */
     @FXML
     private void buttonChange(ActionEvent event) {
         long newSsn = BaseController.selectedCustomerSSN;
@@ -66,7 +69,10 @@ public class CustomerController extends BaseController {
             message.setText("Input too short!");
         }
     }
-
+/**
+ * removeButton calls PopUp for confirmaton
+ * @param event 
+ */
     @FXML
     private void buttonRemove(ActionEvent event) {
         if (listOfAccounts.getSelectionModel().getSelectedItem() != null) {
@@ -78,7 +84,10 @@ public class CustomerController extends BaseController {
         }
 
     }
-
+/**
+ * Using RadioButtons to select and create account
+ * @param event 
+ */
     @FXML
     private void buttonCreate(ActionEvent event) {
         typeOfOperation = 1;
@@ -89,7 +98,11 @@ public class CustomerController extends BaseController {
         }
         showPopup();
     }
-
+/**
+ * Selected object to new scene
+ * @param event
+ * @throws IOException 
+ */
     @FXML
     private void buttonSelect(ActionEvent event) throws IOException {
 
@@ -131,7 +144,11 @@ public class CustomerController extends BaseController {
 
     }
 
-    //Tooglegrup is for the RadioButtons
+/**
+ * ToogleButton for the RadioButtons. How they are selected. One at the time.
+ * @param url
+ * @param rb 
+ */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         btnAccount.setVisible(false);

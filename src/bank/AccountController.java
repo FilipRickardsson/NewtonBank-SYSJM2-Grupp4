@@ -15,7 +15,7 @@ import javafx.scene.control.TextField;
 
 public class AccountController extends BaseController {
 
-    private ObservableList<String> listan;
+    private ObservableList<String> accountList;
 
     @FXML
     private Label accountInformation;
@@ -32,6 +32,9 @@ public class AccountController extends BaseController {
     @FXML
     private void makeDeposit() {
         if (validateInput()) {
+/**
+ * Math.Round used to have two decimals in saldo
+ */
             double value = Math.round(Double.parseDouble(amount.getText().replaceAll(",", ".")) * 100.0) / 100.0;
             boolean success = bankLogic.deposit(selectedCustomerSSN, selectedCustomerAccountID, value);
             updateInfo();
@@ -63,7 +66,10 @@ public class AccountController extends BaseController {
         amount.clear();
     }
 
-    //test
+/**
+ * deposit limit
+ * @return true if number to big
+ */
     private boolean validateInput() {
         try {
             double input = Double.parseDouble(amount.getText().replaceAll(",", "."));
@@ -80,12 +86,14 @@ public class AccountController extends BaseController {
     protected void popupYes() {
         popup.close();
     }
-
+/**
+ * Updates all new information that been changed
+ */
     public void updateInfo() {
         accountInformation.setText(bankLogic.getAccount(selectedCustomerSSN,
                 selectedCustomerAccountID));
-        listan = FXCollections.observableArrayList((ArrayList) bankLogic.getTransactions(selectedCustomerSSN, selectedCustomerAccountID));
-        transactions.setItems(listan);
+        accountList = FXCollections.observableArrayList((ArrayList) bankLogic.getTransactions(selectedCustomerSSN, selectedCustomerAccountID));
+        transactions.setItems(accountList);
     }
 
     @Override

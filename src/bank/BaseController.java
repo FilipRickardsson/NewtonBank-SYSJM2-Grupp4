@@ -14,7 +14,9 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 public abstract class BaseController implements Initializable {
-
+/**
+ * This is the superClass that haves equal information to different scenes. Buttons. Titels. PopUps.
+ */
     protected static Stage main;
     protected Stage popup;
     protected PopupController popupCtrl;
@@ -30,7 +32,10 @@ public abstract class BaseController implements Initializable {
     protected void setStage(Stage stage) {
         BaseController.main = stage;
     }
-
+/**
+ * Create PopUps
+ * @throws IOException 
+ */
     protected void loadPopup() throws IOException {
         popup = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Popup.fxml"));

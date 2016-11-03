@@ -25,8 +25,8 @@ public class HomeController extends BaseController {
     private Label wrongSearch;
 
     @FXML
-    private Label noSelection;
-
+    private Label listViewInformation;
+    
     @FXML
     private Label wrongCreateCustomer;
 
@@ -47,7 +47,9 @@ public class HomeController extends BaseController {
 
     @FXML
     private Button btnAccount;
-
+/**
+ * Searching for customer by SSN. limited input. 10symbols max and find exact customer 
+ */
     @FXML
     private void searchCustomer() {
         wrongSearch.setText("");
@@ -84,6 +86,7 @@ public class HomeController extends BaseController {
     @FXML
     private void printCustomersToFile() {
         bankLogic.customerToFile();
+        listViewInformation.setText("Customer list printed to text file");
     }
 
     @FXML
@@ -92,7 +95,7 @@ public class HomeController extends BaseController {
             setPopupMessage("Are you sure?");
             showPopup();
         } else {
-            noSelection.setText("Nothing selected");
+            listViewInformation.setText("Nothing selected");
         }
     }
 
@@ -103,7 +106,7 @@ public class HomeController extends BaseController {
                     .getSelectionModel().getSelectedIndex());
             loadScene("Customer.fxml");
         } else {
-            noSelection.setText("Nothing selected");
+            listViewInformation.setText("Nothing selected");
         }
     }
 
