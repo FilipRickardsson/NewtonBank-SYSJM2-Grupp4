@@ -859,7 +859,7 @@
 									},
 									"name": "updateInfo",
 									"documentation": "Updates all new information that been changed",
-									"visibility": "public",
+									"visibility": "private",
 									"isStatic": false,
 									"isLeaf": false,
 									"parameters": [
@@ -7134,7 +7134,7 @@
 													"height": 13,
 													"autoResize": false,
 													"underline": false,
-													"text": "+updateInfo(): void",
+													"text": "-updateInfo(): void",
 													"horizontalAlignment": 0,
 													"verticalAlignment": 5
 												},

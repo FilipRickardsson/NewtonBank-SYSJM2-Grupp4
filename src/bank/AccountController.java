@@ -103,7 +103,7 @@ public class AccountController extends BaseController {
     /**
      * Updates the information in the scene
      */
-    public void updateInfo() {
+    private void updateInfo() {
         accountInformation.setText(bankLogic.getAccount(selectedCustomerSSN,
                 selectedCustomerAccountID));
         accountList = FXCollections.observableArrayList((ArrayList) bankLogic.getTransactions(selectedCustomerSSN, selectedCustomerAccountID));
