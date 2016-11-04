@@ -20,9 +20,10 @@ public class BankApplication extends Application {
         Parent root = (Parent) loader.load();
         BaseController controller = (BaseController) loader.getController();
         stage.setTitle("Newton Bank");
+        stage.setMinWidth(1100);
+        stage.setMinHeight(825);
         stage.setWidth(1100);
         stage.setHeight(825);
-        stage.setResizable(false);
         controller.setStage(stage);
         
         // Sets appliation logo
