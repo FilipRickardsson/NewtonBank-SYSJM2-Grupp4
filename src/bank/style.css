@@ -28,8 +28,7 @@
     -fx-background-color: #CC4D00;
 }
 
-.menuButtonActive {
-    
+.menuButtonActive {    
     -fx-background-color: #515151;
     -fx-pref-width: 130px;
     -fx-font-size:14pt;
@@ -38,16 +37,12 @@
 
 }
 
-
-
 .actionButton {
-
     -fx-background-color: #515151;
     -fx-pref-width: 100px;
     -fx-font-size:12pt;
     -fx-font-weight:bold;
     -fx-text-fill:white;
-
 }
 
 .actionButton:hover {

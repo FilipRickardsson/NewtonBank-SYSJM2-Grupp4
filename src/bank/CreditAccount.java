@@ -1,10 +1,20 @@
 package bank;
 
+/**
+ * A creditaccount in the bank
+ *
+ * @author Grupp 4
+ */
 public class CreditAccount extends Account {
 
     private final int creditLimit;
     private final double creditInterest;
 
+    /**
+     * Constructor
+     *
+     * @param accountNumber The unique account id
+     */
     public CreditAccount(int accountNumber) {
         super(accountNumber, "Credit Account");
         this.creditInterest = 0.07;
@@ -21,20 +31,20 @@ public class CreditAccount extends Account {
     }
 
     /**
-     * Makes a withdrawal
+     * Makes a withdrawal and adds a transaction
      *
-     * @param amount
+     * @param amount the amount to withdraw
      */
     @Override
     public void withdraw(double amount) {
         saldo -= amount;
-        transactions.add(new Transaction(accountNumber, true, amount, saldo));
+        transactions.add(new Transaction(accountID, true, amount, saldo));
     }
 
     /**
      * Calculates the interest
      *
-     * @return
+     * @return The interest
      */
     @Override
     public double calcInterest() {
@@ -48,10 +58,10 @@ public class CreditAccount extends Account {
     @Override
     public String toString() {
         if (saldo < 0) {
-            return "AccountID: " + accountNumber + ", Type: " + accountType
+            return "AccountID: " + accountID + ", Type: " + accountType
                     + ", Interest: " + interest + "\nSaldo: " + String.format("%.2f", saldo);
         } else {
-            return "AccountID: " + accountNumber + ", Type: " + accountType
+            return "AccountID: " + accountID + ", Type: " + accountType
                     + ", Interest: " + interest + "\nSaldo: " + String.format("%.2f", saldo);
         }
     }

@@ -17,6 +17,11 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 
+/**
+ * Handles the logic for the Customer scene
+ *
+ * @author Grupp 4
+ */
 public class CustomerController extends BaseController {
 
     private ObservableList<String> accounts;
@@ -45,15 +50,17 @@ public class CustomerController extends BaseController {
 
     @FXML
     private Label message;
+    
     @FXML
     private Label message2;
+    
     @FXML
     private Button btnAccount;
 
     private final ToggleGroup group = new ToggleGroup();
 
     /**
-     * changeButton checks if input is valid. Error message if not.
+     * changeButton checks if input is valid. Shows error message if not. F
      *
      * @param event
      */
@@ -77,7 +84,7 @@ public class CustomerController extends BaseController {
     }
 
     /**
-     * removeButton calls PopUp for confirmaton
+     * removeButton shows a popup for confirmaton
      *
      * @param event
      */
@@ -94,7 +101,8 @@ public class CustomerController extends BaseController {
     }
 
     /**
-     * Using RadioButtons to select and create account
+     * Shows a popup for confirmation on which account to create based on which
+     * radiobutton is selected
      *
      * @param event
      */
@@ -110,14 +118,13 @@ public class CustomerController extends BaseController {
     }
 
     /**
-     * Selected object to new scene
+     * Loads the Account scene if a account is selected
      *
      * @param event
-     * @throws IOException
+     * @throws IOException If the scene could not be loaded
      */
     @FXML
     private void buttonSelect(ActionEvent event) throws IOException {
-
         if (listOfAccounts.getSelectionModel().getSelectedItem() != null) {
             selectedCustomerAccountID = bankLogic.getCustomerAccountIdViaIndex(listOfAccounts.getSelectionModel().getSelectedIndex());
             loadScene("Account.fxml");
@@ -143,13 +150,10 @@ public class CustomerController extends BaseController {
     }
 
     /**
-     * Spilts name in two Strings to make FirstName and LastName. Put in
-     * ArrayList to be shown in TextFields. To shown right information on right
-     * place, index 1&2 are removed that contains FirstName and LastName.
+     * Updates the information in the scene.
      */
     private void updateInfo() {
         ArrayList<String> info = (ArrayList<String>) bankLogic.getCustomer(selectedCustomerSSN);
-
         currentCustomer.setText(info.get(0));
         String[] parts = info.get(0).split(" ", 2);
         changeFirstName.setText(parts[0]);
@@ -159,12 +163,11 @@ public class CustomerController extends BaseController {
         info.remove(0);
         accounts = FXCollections.observableArrayList(info);
         listOfAccounts.setItems(accounts);
-
     }
 
     /**
-     * ToogleButton for the RadioButtons. How they are selected. One at the
-     * time.
+     * Initializes the scene, buttons are set invisible and radiobuttons are
+     * grouped
      *
      * @param url
      * @param rb

@@ -14,6 +14,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
+/**
+ * Handles the logic for the Home scene
+ *
+ * @author Grupp 4
+ */
 public class HomeController extends BaseController {
 
     private ObservableList<String> customerList;
@@ -49,8 +54,8 @@ public class HomeController extends BaseController {
     private Button btnAccount;
 
     /**
-     * Searching for customer by SSN. limited input. Error handling if symbols
-     * or length not right
+     * Searches for customer by SSN. limited input. Error handling if symbols or
+     * length not right
      */
     @FXML
     private void searchCustomer() {
@@ -85,9 +90,8 @@ public class HomeController extends BaseController {
     }
 
     /**
-     * File with customerslist saves in
-     * C:\Users\"MyCoputer"\Documents\GitProject\Projekt2Bank
-     *
+     * Writes a textfile with a list of customer which is saved in the root
+     * folder of the application
      */
     @FXML
     private void printCustomersToFile() {
@@ -99,7 +103,7 @@ public class HomeController extends BaseController {
     }
 
     /**
-     * removes customer from list. PopUp appers for confirmation.
+     * Shows a confirmation popup when the remove customer button is pressed
      */
     @FXML
     private void removeCustomer() {
@@ -112,10 +116,10 @@ public class HomeController extends BaseController {
     }
 
     /**
-     * Selected customer, go to next scene
+     * If a customer is selected, the application goes to next scene
      *
      * @param event
-     * @throws IOException
+     * @throws IOException If the scene could not be loaded
      */
     @FXML
     private void selectCustomer(ActionEvent event) throws IOException {
@@ -129,9 +133,10 @@ public class HomeController extends BaseController {
     }
 
     /**
-     * Create customr with firstname and lastname that combine to one String
-     * name. Error handling: if existing SSn, if SSN lenght too long, Symbols is
-     * allowed, no input.
+     * Checks that the different textfields has correct input and sends the 
+     * information for validation in BankLogic which then creates a
+     * new customer. The error handling checks if the names and SSN is correct 
+     * length and shows error messages based on result
      */
     @FXML
     private void createCustomer() {
@@ -172,20 +177,25 @@ public class HomeController extends BaseController {
     protected void popupYes() {
         selectedCustomerSSN = bankLogic.getCustomerSsnViaIndex(customerListView
                 .getSelectionModel().getSelectedIndex());
-
         selectedCustomerAccountID = 0;
         popup.close();
-
         loadScene("Info.fxml");
     }
 
+    /**
+     * Updates the information displayed in the scene
+     */
     private void updateInfo() {
         customerList = FXCollections.observableArrayList(bankLogic.getCustomers());
-
         customerListView.setItems(customerList);
-
     }
 
+    /**
+     * Initializes the scene
+     *
+     * @param url
+     * @param rb
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         btnAccount.setVisible(false);

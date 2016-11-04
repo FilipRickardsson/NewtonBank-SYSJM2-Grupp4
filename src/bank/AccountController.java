@@ -13,6 +13,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
+/**
+ * Handles the logic for the Account scene
+ *
+ * @author Grupp 4
+ */
 public class AccountController extends BaseController {
 
     private ObservableList<String> accountList;
@@ -29,12 +34,14 @@ public class AccountController extends BaseController {
     @FXML
     private Label error;
 
+    /**
+     * Tries to make a desposit based on user-input and shows messages based on
+     * the result
+     */
     @FXML
     private void makeDeposit() {
         if (validateInput()) {
-            /**
-             * Math.Round used to have two decimals in saldo
-             */
+            // Math.Round used to round the deposit to two decimals
             double value = Math.round(Double.parseDouble(amount.getText().replaceAll(",", ".")) * 100.0) / 100.0;
             boolean success = bankLogic.deposit(selectedCustomerSSN, selectedCustomerAccountID, value);
             updateInfo();
@@ -49,9 +56,14 @@ public class AccountController extends BaseController {
         amount.clear();
     }
 
+    /**
+     * Tries to make a withdrawal based on user input and shows messages based on
+     * the result
+     */
     @FXML
     private void makeWithdrawal() {
         if (validateInput()) {
+            // Math.Round used to round the deposit to two decimals
             double value = Math.round(Double.parseDouble(amount.getText().replaceAll(",", ".")) * 100.0) / 100.0;
             boolean success = bankLogic.withdraw(selectedCustomerSSN, selectedCustomerAccountID, value);
             updateInfo();
@@ -67,9 +79,9 @@ public class AccountController extends BaseController {
     }
 
     /**
-     * deposit limit
+     * Validates the user input
      *
-     * @return true if number to big
+     * @return true if the amount is within range
      */
     private boolean validateInput() {
         try {
@@ -89,7 +101,7 @@ public class AccountController extends BaseController {
     }
 
     /**
-     * Updates all new information that been changed
+     * Updates the information in the scene
      */
     public void updateInfo() {
         accountInformation.setText(bankLogic.getAccount(selectedCustomerSSN,
@@ -98,6 +110,11 @@ public class AccountController extends BaseController {
         transactions.setItems(accountList);
     }
 
+    /**
+     * Initializes the scene
+     * @param url
+     * @param rb 
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         updateInfo();

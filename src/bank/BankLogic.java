@@ -6,9 +6,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
+/**
+ * Handles the logic of the bank. Designed with the designpattern Singelton
+ *
+ * @author Grupp 4
+ */
 public class BankLogic {
 
     private static BankLogic bankLogic;
@@ -20,7 +23,7 @@ public class BankLogic {
         customers = new ArrayList();
         accountNbrCounter = 1001;
         /**
-         * Created customer with accounts to test program.
+         * Default hardcoded customers with accounts to test the program.
          */
         customers.add(new Customer("Dijana Popovic", 7912120101L));
         customers.add(new Customer("Johan Jonsson", 9702020101L));
@@ -38,7 +41,7 @@ public class BankLogic {
     /**
      * Singelton - returns a BankLogic object
      *
-     * @return
+     * @return The BankLogic object
      */
     public static BankLogic getBankLogic() {
         if (bankLogic == null) {
@@ -50,11 +53,10 @@ public class BankLogic {
     /**
      * Returns a list of all customers name and social security number.
      *
-     * @return
+     * @return The customer list
      */
     public List<String> getCustomers() {
         List<String> customerPresentation = new ArrayList();
-
         for (int i = 0; i < customers.size(); i++) {
             customerPresentation.add(customers.get(i).toString());
         }
@@ -66,9 +68,9 @@ public class BankLogic {
      * Creates a new customer and adds it to the Customer-list. Returns true if
      * created and false if not.
      *
-     * @param name
-     * @param ssn
-     * @return
+     * @param name Name of the new customer
+     * @param ssn SSN of the new customer
+     * @return True if successfully created customer
      */
     public boolean addCustomer(String name, long ssn) {
         Customer customer = searchForCustomer(ssn);
@@ -84,8 +86,8 @@ public class BankLogic {
      * Returns a list containing information about the customer matching the
      * given social security number.
      *
-     * @param ssn
-     * @return
+     * @param ssn SSN of the customer
+     * @return A list of information about the customer
      */
     public List<String> getCustomer(long ssn) {
         ArrayList<String> customerInformation = new ArrayList();
@@ -98,7 +100,6 @@ public class BankLogic {
             for (int j = 0; j < accounts.size(); j++) {
                 customerInformation.add(accounts.get(j).toString());
             }
-
             for (int i = 0; i < customerInformation.size(); i++) {
                 System.out.println(customerInformation.get(i));
             }
@@ -109,11 +110,11 @@ public class BankLogic {
 
     /**
      * Changes the name of a customer connected to a given social security
-     * number. Returns true if name is changed.
+     * number. Returns true if the name is changed.
      *
-     * @param name
-     * @param ssn
-     * @return
+     * @param name The new name of the customer
+     * @param ssn The ssn of the customer
+     * @return True if successfully changed the name
      */
     public boolean changeCustomer(String name, long ssn) {
         Customer customer = searchForCustomer(ssn);
@@ -126,8 +127,8 @@ public class BankLogic {
     }
 
     /**
-     * Removes a customer and returns a list with information about closed
-     * accounts.
+     * Removes a customer and returns a list with information about the customer
+     * and the closed accounts.
      *
      * @param ssn
      * @return
@@ -153,7 +154,6 @@ public class BankLogic {
                 info.add("Total money back: " + String.format("%.2f", sumSaldo + sumInterest)
                         + " whereof interest is: " + String.format("%.2f", sumInterest));
             }
-
             customers.remove(customer);
         }
         return info;
@@ -162,8 +162,9 @@ public class BankLogic {
     /**
      * Adds a SavingAccount to customer.
      *
-     * @param ssn
-     * @return
+     * @param ssn The ssn of the customer
+     * @return The accountID of the new account. -1 If the customer was not
+     * found
      */
     public int addSavingsAccount(long ssn) {
         int accountNbr = -1;
@@ -177,12 +178,13 @@ public class BankLogic {
     }
 
     /**
-     * Returns a string with the accountID,balance,type of account and interest
-     * using the accountID that belongs to the ssn we use
+     * Returns a string with the accountID, balance, type of account and
+     * interest using the accountID that belongs to the ssn we use
      *
-     * @param ssn
-     * @param accountId
-     * @return
+     * @param ssn SSN of the customer
+     * @param accountId ID of the account
+     * @return Information about the account, or error message if the account
+     * was not found
      */
     public String getAccount(long ssn, int accountId) {
         Account acc = searchForAccount(ssn, accountId);
@@ -193,14 +195,13 @@ public class BankLogic {
     }
 
     /**
-     * makes a deposit from the accountnumber that belongs to the right social
-     * security number returns true if it went through otherwise i returnes
-     * false
+     * Makes a deposit to an account that belongs to the customer with the
+     * social security number.
      *
-     * @param ssn
-     * @param accountId
-     * @param amount
-     * @return
+     * @param ssn SSN of the customer
+     * @param accountId ID of the account
+     * @param amount Amount to deposit
+     * @return True if successfully deposited money
      */
     public boolean deposit(long ssn, int accountId, double amount) {
         if (amount > 0) {
@@ -212,14 +213,13 @@ public class BankLogic {
     }
 
     /**
-     * makes a withdrawal from accountnumber that belongs to the right social
-     * security number returns true if it went through otherwise i returnes
-     * false
+     * Makes a withdrawal from an account that belongs to the customer with the
+     * social security number.
      *
-     * @param ssn
-     * @param accountId
-     * @param amount
-     * @return
+     * @param ssn SSN of the customer
+     * @param accountId ID of the account
+     * @param amount Amount to withdraw
+     * @return True if successfully withdrew money
      */
     public boolean withdraw(long ssn, int accountId, double amount) {
         Account acc = searchForAccount(ssn, accountId);
@@ -250,12 +250,11 @@ public class BankLogic {
     }
 
     /**
-     * Closes an account connected to a ssn and accountId if accountId is
-     * provided.
+     * Closes an account connected to a ssn
      *
-     * @param ssn
-     * @param accountId
-     * @return info
+     * @param ssn SSN of the customer
+     * @param accountId ID of the account to close
+     * @return info Information about the account and transactions made
      */
     public String closeAccount(long ssn, int accountId) {
         Account acc = searchForAccount(ssn, accountId);
@@ -271,8 +270,10 @@ public class BankLogic {
     }
 
     /**
-     * look in customer list for ssn and creates an credit account when search.
-     * fails returns -1.
+     * Searches for a customer and if found, adds a credit account
+     *
+     * @param ssn SSN of the customer
+     * @return The new accountID if successfully added otherwise -1
      */
     public int addCreditAccount(long ssn) {
         int accountNbr = -1;
@@ -286,16 +287,16 @@ public class BankLogic {
     }
 
     /**
-     * looks through customer list by ssn and account id and returns all
-     * transactions on that account if it find nothing return -1
+     * Searches for a customer and an account belonging to that customer and
+     * returns the transactions made
      *
-     * @return
+     * @param ssn SSN of the customer
+     * @param accountID ID of the account
+     * @return Transactions made
      */
     public List<String> getTransactions(long ssn, int accountID) {
         ArrayList<String> transactionInformation = new ArrayList();
-
         Account acc = searchForAccount(ssn, accountID);
-
         for (int j = 0; j < acc.getTransactions().size(); j++) {
             transactionInformation.add(acc.getTransactions().
                     get(j).toString());
@@ -305,11 +306,11 @@ public class BankLogic {
     }
 
     /**
-     * Searches through the list of customers with their ssn then returns the
-     * customer with that ssn
+     * Searches through the list of customers with their ssn and returns the
+     * customer if found
      *
-     * @param ssn
-     * @return
+     * @param ssn SSN of the customer to search for
+     * @return Customer if found otherwise null
      */
     private Customer searchForCustomer(long ssn) {
         Customer customer = null;
@@ -323,20 +324,19 @@ public class BankLogic {
     }
 
     /**
-     * Searches through Customers first then through their account with the
-     * accountID and gives us that account
+     * Searches for a customer and then an account belonging to the customer
      *
-     * @param ssn
-     * @param accountNumber
-     * @return
+     * @param ssn SSN of the customer
+     * @param accountID ID of the account
+     * @return Account if found otherwise null
      */
-    private Account searchForAccount(long ssn, int accountNumber) {
+    private Account searchForAccount(long ssn, int accountID) {
         Account acc = null;
         Customer customer = searchForCustomer(ssn);
         if (customer != null) {
             ArrayList<Account> accounts = customer.getAccounts();
             for (int i = 0; i < accounts.size(); i++) {
-                if (accounts.get(i).getAccountNumber() == accountNumber) {
+                if (accounts.get(i).getAccountID() == accountID) {
                     acc = accounts.get(i);
                     break;
                 }
@@ -349,7 +349,7 @@ public class BankLogic {
     /**
      * Prints all customers to a text file.
      *
-     * @return
+     * @return True if file successfully written
      */
     public boolean customerToFile() {
         try {
@@ -370,8 +370,8 @@ public class BankLogic {
     /**
      * Returns customer ssn of given index
      *
-     * @param CustomerIndex
-     * @return
+     * @param CustomerIndex Selected index
+     * @return SSN of selected customer
      */
     public long getCustomerSsnViaIndex(int CustomerIndex) {
         return customers.get(CustomerIndex).getSsn();
@@ -380,40 +380,21 @@ public class BankLogic {
     /**
      * Returns the accountId of given index
      *
-     * @param AccountIdIndex
-     * @return
+     * @param AccountIdIndex Selected index
+     * @return accountID of selected account
      */
     public int getCustomerAccountIdViaIndex(int AccountIdIndex) {
         Customer customer = searchForCustomer(BaseController.selectedCustomerSSN);
-        return customer.getAccounts().get(AccountIdIndex).getAccountNumber();
+        return customer.getAccounts().get(AccountIdIndex).getAccountID();
     }
 
     /**
-     * Makes sure a string only contains letters
-     *
-     * @param str
-     * @return
-     */
-    public boolean isAlpha(String str) {
-        char[] chars = str.toCharArray();
-
-        for (char c : chars) {
-            if (!Character.isLetter(c)) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    /**
-     * if firstName & lastName contains the symbols we allow it will return
-     * true. both firstName and lastName must be true for the symbols can be
-     * allowed
-     *
-     * @param firstName
-     * @param lastName
-     * @return Allowed symbols
+     * Validates the names given from the user based on which characters it
+     * contains and if the names start and end with letters
+     * 
+     * @param firstName First name of the customer
+     * @param lastName Last name of the customer
+     * @return True if both name are valid
      */
     public boolean validateName(String firstName, String lastName) {
         boolean firstNameValid = false, lastNameValid = false;

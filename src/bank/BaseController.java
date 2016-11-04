@@ -15,12 +15,14 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+/**
+ * Superclass to the different scene controllers which handles menu-buttons,
+ * scene switching, popups and error messages
+ *
+ * @author Grupp 4
+ */
 public abstract class BaseController implements Initializable {
 
-    /**
-     * This is the superClass that haves equal information to different scenes.
-     * Buttons. Titels. PopUps.
-     */
     protected static Stage main;
     protected Stage popup;
     protected PopupController popupCtrl;
@@ -29,18 +31,27 @@ public abstract class BaseController implements Initializable {
     public static long selectedCustomerSSN;
     public static int selectedCustomerAccountID;
 
+    /**
+     * Constructor which gets a reference to the BankLogic object
+     */
     public BaseController() {
         bankLogic = BankLogic.getBankLogic();
     }
 
+    /**
+     * Sets the main stage of the application which makes it available to the
+     * the different controllers
+     *
+     * @param stage
+     */
     protected void setStage(Stage stage) {
         BaseController.main = stage;
     }
 
     /**
-     * Create PopUps
+     * Loads the popup
      *
-     * @throws IOException
+     * @throws IOException if the popup could not be loaded
      */
     protected void loadPopup() throws IOException {
         popup = new Stage();
@@ -55,47 +66,75 @@ public abstract class BaseController implements Initializable {
         popup.setOnCloseRequest((WindowEvent we) -> {
             we.consume();
         });
-
     }
 
+    /**
+     * Shows the popup
+     */
     protected void showPopup() {
         if (popup != null) {
             popup.show();
-        } else {
-            System.out.println("Error loading popup");
         }
     }
 
+    /**
+     * Defines what will happen when the yes button is pressed in the popup
+     */
     protected abstract void popupYes();
 
+    /**
+     * Closes the popup if the no button is pressed
+     */
     protected final void popupNo() {
         popup.close();
     }
 
+    /**
+     * Sets the message to display in the popup
+     *
+     * @param msg message to display
+     */
     protected void setPopupMessage(String msg) {
         popupCtrl.setMessage(msg);
     }
 
+    /**
+     * Switches to the Home scene when pressed in the menu
+     */
     @FXML
     protected void handleHome() {
         loadScene("Home.fxml");
     }
 
+    /**
+     * Switches to the Customer scene when pressed in the menu
+     */
     @FXML
     protected void handleCustomer() {
         loadScene("Customer.fxml");
     }
 
+    /**
+     * Switches to the Account scene when pressed in the menu
+     */
     @FXML
     protected void handleAccount() {
         loadScene("Account.fxml");
     }
 
+    /**
+     * Terminates the application when the Quit button is pressed in the menu
+     */
     @FXML
     protected void handleQuit() {
         Platform.exit();
     }
 
+    /**
+     * Loads a new scene
+     *
+     * @param sceneToLoad Name of the scene to load
+     */
     protected void loadScene(String sceneToLoad) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource(sceneToLoad));
@@ -106,6 +145,14 @@ public abstract class BaseController implements Initializable {
         }
     }
 
+    /**
+     * Shows a message in the GUI. If its a error message, the message will be
+     * shown in red
+     *
+     * @param msg Message to display
+     * @param lbl Label to display the message
+     * @param isError true if it is an error message
+     */
     protected void showMessage(String msg, Label lbl, boolean isError) {
         if (isError) {
             lbl.setText(msg);

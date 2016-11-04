@@ -12,6 +12,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 
+/**
+ * Handles the logic for the Info scene
+ *
+ * @author Grupp 4
+ */
 public class InfoController extends BaseController {
 
     private int typeOfOperation;
@@ -26,10 +31,12 @@ public class InfoController extends BaseController {
     private Button btnAccount;
 
     private ObservableList<String> customerInformation;
-/**
- * Prevents selection in ListView.
- * @param event 
- */
+
+    /**
+     * Prevents selection in ListView.
+     *
+     * @param event
+     */
     public void dontPressMe(MouseEvent event) {
         accountList.addEventFilter(MouseEvent.MOUSE_PRESSED, (MouseEvent event1) -> {
             System.out.println(">> Mouse Clicked");
@@ -37,6 +44,9 @@ public class InfoController extends BaseController {
         });
     }
 
+    /**
+     * Shows a confirmation popup if the user wants to leave the scene
+     */
     @FXML
     @Override
     protected void handleHome() {
@@ -45,6 +55,9 @@ public class InfoController extends BaseController {
         showPopup();
     }
 
+    /**
+     * Shows a confirmation popup if the user wants to leave the scene
+     */
     @FXML
     @Override
     protected void handleCustomer() {
@@ -63,13 +76,15 @@ public class InfoController extends BaseController {
         popup.close();
     }
 
+    /**
+     * Initializes the scene and sets the visibility of menu buttons
+     * @param url
+     * @param rb 
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         btnAccount.setVisible(false);
-        
-/**
- * Visibility of menuButtons when in different scene.
- */
+
         if (selectedCustomerAccountID == 0) {
             btnCustomer.setVisible(false);
             customerInformation = FXCollections.observableArrayList(bankLogic.removeCustomer(selectedCustomerSSN));

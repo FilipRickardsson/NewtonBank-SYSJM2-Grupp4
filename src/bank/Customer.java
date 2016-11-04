@@ -2,12 +2,21 @@ package bank;
 
 import java.util.ArrayList;
 
+/**
+ * A Customer in the bank
+ * @author Grupp 4
+ */
 public class Customer {
 
     private String name;
     private final long ssn;
     private final ArrayList<Account> accounts;
 
+    /**
+     * Constructor
+     * @param name Name of the customer
+     * @param ssn SSN of the customer
+     */
     public Customer(String name, long ssn) {
         this.name = name;
         this.ssn = ssn;

@@ -4,6 +4,10 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * A transaction created by an account
+ * @author Grupp 4
+ */
 public class Transaction {
 
     private final int accountID;
@@ -13,6 +17,13 @@ public class Transaction {
     private final double amount;
     private final double updatedBalance;
 
+    /**
+     * Constructor
+     * @param accountID The unique account id
+     * @param withdrawal true if a withdrawal was made
+     * @param amount The amount to deposit/withdraw
+     * @param updatedBalance The new balance of the account
+     */
     public Transaction(int accountID, boolean withdrawal,
             double amount, double updatedBalance) {
 
