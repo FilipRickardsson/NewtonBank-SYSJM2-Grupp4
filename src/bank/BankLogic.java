@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -25,12 +26,12 @@ public class BankLogic {
         /**
          * Default hardcoded customers with accounts to test the program.
          */
-        customers.add(new Customer("Dijana Popovic", 7912120101L));
-        customers.add(new Customer("Johan Jonsson", 9702020101L));
-        customers.add(new Customer("Christoffer Flystam", 9202254545L));
-        customers.add(new Customer("Tobias Hjertelundh", 8706045625L));
-        customers.add(new Customer("Bekir Halvadzic", 9909195421L));
-        customers.add(new Customer("Filip Rickardsson", 8802023251L));
+        customers.add(new Customer("Dijana Popovic", 197912120101L));
+        customers.add(new Customer("Johan Jonsson", 199702020101L));
+        customers.add(new Customer("Christoffer Flystam", 199202254545L));
+        customers.add(new Customer("Tobias Hjertelundh", 198706045625L));
+        customers.add(new Customer("Bekir Halvadzic", 199909195421L));
+        customers.add(new Customer("Filip Rickardsson", 198802023251L));
 
         for (int i = 0; i < customers.size(); i++) {
             addSavingsAccount(customers.get(i).getSsn());
@@ -413,6 +414,62 @@ public class BankLogic {
         return firstNameValid && lastNameValid;
     }
 
-    // ValidateSSN
-    
+    public boolean validateSSN(long ssn) {
+        long tempSSN = ssn;
+        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+        int year = (int) (tempSSN / 100000000);
+        tempSSN %= 100000000;
+        int month = (int) (tempSSN / 1000000);
+        tempSSN %= 1000000;
+        int day = (int) (tempSSN / 10000);
+        tempSSN %= 10000;
+        int x1 = (int) (tempSSN / 10);
+        int x2 = (int) (tempSSN % 10);
+        if (year <= currentYear - 18) {
+            if (month >= 0 && month <= 12) {
+                int[] daysInMonths = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+                if (year % 4 == 0) {
+                    daysInMonths[1] = 29;
+                }
+                if (day <= daysInMonths[month - 1]) {
+
+                    /* -----------------------------------------
+                     * Validates last digit in SSN
+                     * Comment this block to not validate the last digit
+                     */
+                    int[] oneAndTwo = {2, 1, 2, 1, 2, 1, 2, 1, 2};
+                    long partSSN = (ssn % 10000000000L) / 10;
+                    int[] splittedSSN = new int[9];
+                    for (int i = splittedSSN.length - 1; i >= 0; i--) {
+                        splittedSSN[i] = ((int) partSSN % 10) * oneAndTwo[i];
+                        partSSN = partSSN / 10;
+                    }
+
+                    ArrayList<Integer> splittedProduct = new ArrayList();
+                    for (int i = 0; i < splittedSSN.length; i++) {
+                        int temp = splittedSSN[i];
+                        while (temp > 0) {
+                            splittedProduct.add(temp % 10);
+                            temp = temp / 10;
+                        }
+                    }
+
+                    int sum = 0;
+                    for (int value : splittedProduct) {
+                        sum += value;
+                    }
+                    int lastDigit = 10 - (sum % 10);
+                    if (lastDigit == x2) {
+                        return true;
+                    }
+                    // -----------------------------------------
+
+//                    return true; // Uncomment this to not validate last digit
+                }
+            }
+        }
+
+        return false;
+    }
+
 }
