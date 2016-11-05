@@ -133,9 +133,9 @@ public class HomeController extends BaseController {
     }
 
     /**
-     * Checks that the different textfields has correct input and sends the 
-     * information for validation in BankLogic which then creates a
-     * new customer. The error handling checks if the names and SSN is correct 
+     * Checks that the different textfields has correct input and sends the
+     * information for validation in BankLogic which then creates a new
+     * customer. The error handling checks if the names and SSN is correct
      * length and shows error messages based on result
      */
     @FXML

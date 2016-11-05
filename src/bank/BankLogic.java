@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -391,7 +392,7 @@ public class BankLogic {
     /**
      * Validates the names given from the user based on which characters it
      * contains and if the names start and end with letters
-     * 
+     *
      * @param firstName First name of the customer
      * @param lastName Last name of the customer
      * @return True if both name are valid
