@@ -39,7 +39,6 @@ public class InfoController extends BaseController {
      */
     public void dontPressMe(MouseEvent event) {
         accountList.addEventFilter(MouseEvent.MOUSE_PRESSED, (MouseEvent event1) -> {
-            System.out.println(">> Mouse Clicked");
             event1.consume();
         });
     }
