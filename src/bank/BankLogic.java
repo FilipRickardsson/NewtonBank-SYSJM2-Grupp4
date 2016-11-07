@@ -455,7 +455,12 @@ public class BankLogic {
                     for (int value : splittedProduct) {
                         sum += value;
                     }
-                    int lastDigit = 10 - (sum % 10);
+
+                    int lastDigit = (sum % 10);
+                    if (lastDigit != 0) {
+                        lastDigit = 10 - lastDigit;
+                    }
+
                     if (lastDigit == x2) {
                         return true;
                     }
