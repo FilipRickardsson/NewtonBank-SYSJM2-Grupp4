@@ -28,8 +28,8 @@ public class DBConnection {
 
     private void connectToDB() {
         String url = "jdbc:mysql://localhost:3306/sys?autoReconnect=true&useSSL=false";
-        String user = "root";
-        String password = "root";
+        String user = "newtonbank";
+        String password = "kaffekopp";
 
         try {
             con = DriverManager.getConnection(url, user, password);
@@ -39,6 +39,7 @@ public class DBConnection {
             Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
     public ArrayList getCustomers(){
         ArrayList<String> customersList=new ArrayList();
         try {
