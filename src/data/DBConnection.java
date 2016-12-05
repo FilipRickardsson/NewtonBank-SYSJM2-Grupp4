@@ -31,7 +31,7 @@ public class DBConnection {
         String url = "jdbc:mysql://localhost:3306/newtonbank?autoReconnect=true&useSSL=false";
         String user = "newtonbank";
         String password = "kaffekopp";
-
+        
         try {
             con = DriverManager.getConnection(url, user, password);
             st = con.createStatement();
