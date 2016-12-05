@@ -46,7 +46,8 @@ public class DBConnection {
         try {
             ResultSet rs = st.executeQuery("SELECT * FROM customer");
             while (rs.next()) {
-                customers.add(new Customer(rs.getString(20), rs.getInt(1)));
+                System.out.println("1");
+                customers.add(new Customer(rs.getString(2), rs.getLong(1)));
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
