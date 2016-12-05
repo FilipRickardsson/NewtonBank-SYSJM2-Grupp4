@@ -1,5 +1,6 @@
 package bank;
 
+import data.DBConnection;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -16,11 +17,12 @@ import java.util.List;
 public class BankLogic {
 
     private static BankLogic bankLogic;
-
+    private DBConnection dbConnection;
     private final List<Customer> customers;
     private int accountNbrCounter;
 
     private BankLogic() {
+        dbConnection=DBConnection.getDBConnection();
         customers = new ArrayList();
         accountNbrCounter = 1001;
         /**
@@ -32,7 +34,7 @@ public class BankLogic {
         customers.add(new Customer("Tobias Hjertelundh", 198706045625L));
         customers.add(new Customer("Bekir Halvadzic", 199909195421L));
         customers.add(new Customer("Filip Rickardsson", 198802023251L));
-
+        
         for (int i = 0; i < customers.size(); i++) {
             addSavingsAccount(customers.get(i).getSsn());
             addCreditAccount(customers.get(i).getSsn());
@@ -58,10 +60,11 @@ public class BankLogic {
      */
     public List<String> getCustomers() {
         List<String> customerPresentation = new ArrayList();
-        for (int i = 0; i < customers.size(); i++) {
+        customerPresentation=dbConnection.getCustomers();
+        for (int i = 0; i < customerPresentation.size(); i++) {
             customerPresentation.add(customers.get(i).toString());
         }
-
+        
         return customerPresentation;
     }
 

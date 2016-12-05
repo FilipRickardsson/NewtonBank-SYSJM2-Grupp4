@@ -2,14 +2,16 @@ package data;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class DBConnection {
 
-    private DBConnection dbConnection;
+    private static DBConnection dbConnection;
     private Connection con;
     private Statement st;
 
@@ -17,7 +19,7 @@ public class DBConnection {
         connectToDB();
     }
 
-    public DBConnection getDBConnection() {
+    public static DBConnection getDBConnection() {
         if (dbConnection == null) {
             dbConnection = new DBConnection();
         }
@@ -36,6 +38,19 @@ public class DBConnection {
         } catch (SQLException ex) {
             Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    public ArrayList getCustomers(){
+        ArrayList<String> customersList=new ArrayList();
+        try {
+            ResultSet rs=st.executeQuery("SELECT * FROM customer");
+            while(rs.next()){
+                String getAll=rs.getString(1)+" "+rs.getString(2);
+                customersList.add(getAll);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return customersList;
     }
 
 }
