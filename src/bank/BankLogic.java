@@ -18,27 +18,14 @@ public class BankLogic {
 
     private static BankLogic bankLogic;
     private DBConnection dbConnection;
-    private final List<Customer> customers;
+    private final List<Customer> customers; //REMOVE LATER
     private int accountNbrCounter;
 
     private BankLogic() {
         dbConnection = DBConnection.getDBConnection();
         customers = new ArrayList();
         accountNbrCounter = 1001;
-        /**
-         * Default hardcoded customers with accounts to test the program.
-         */
-        customers.add(new Customer("Dijana Popovic", 197912120101L));
-        customers.add(new Customer("Johan Jonsson", 199702020101L));
-        customers.add(new Customer("Christoffer Flystam", 199202254545L));
-        customers.add(new Customer("Tobias Hjertelundh", 198706045625L));
-        customers.add(new Customer("Bekir Halvadzic", 199909195421L));
-        customers.add(new Customer("Filip Rickardsson", 198802023251L));
-
-        for (int i = 0; i < customers.size(); i++) {
-            addSavingsAccount(customers.get(i).getSsn());
-            addCreditAccount(customers.get(i).getSsn());
-        }
+        
     }
 
     /**
