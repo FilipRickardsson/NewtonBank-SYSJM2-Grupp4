@@ -60,9 +60,9 @@ public class BankLogic {
      */
     public ArrayList<String> getCustomers() {
         ArrayList<String> customerPresentation = new ArrayList();
-        customerPresentation = dbConnection.getCustomers();
+        ArrayList<Customer> c = dbConnection.getCustomers();
         for (int i = 0; i < customerPresentation.size(); i++) {
-            customerPresentation.add(customers.get(i).toString());
+            customerPresentation.add(c.get(i).toString());
         }
 
         return customerPresentation;
