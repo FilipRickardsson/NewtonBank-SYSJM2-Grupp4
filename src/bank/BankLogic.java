@@ -61,7 +61,7 @@ public class BankLogic {
     public ArrayList<String> getCustomers() {
         ArrayList<String> customerPresentation = new ArrayList();
         ArrayList<Customer> c = dbConnection.getCustomers();
-        for (int i = 0; i < customerPresentation.size(); i++) {
+        for (int i = 0; i < c.size(); i++) {
             customerPresentation.add(c.get(i).toString());
         }
 
