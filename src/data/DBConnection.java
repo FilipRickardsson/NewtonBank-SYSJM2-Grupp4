@@ -28,14 +28,13 @@ public class DBConnection {
     }
 
     private void connectToDB() {
-        String url = "jdbc:mysql://localhost:3306/sys?autoReconnect=true&useSSL=false";
+        String url = "jdbc:mysql://localhost:3306/newtonbank?autoReconnect=true&useSSL=false";
         String user = "newtonbank";
         String password = "kaffekopp";
 
         try {
             con = DriverManager.getConnection(url, user, password);
             st = con.createStatement();
-            st.executeQuery("USE newtonbank");
         } catch (SQLException ex) {
             Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
