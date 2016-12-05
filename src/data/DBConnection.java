@@ -1,5 +1,6 @@
 package data;
 
+import bank.Customer;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -39,19 +40,18 @@ public class DBConnection {
             Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public ArrayList getCustomers(){
-        ArrayList<String> customersList=new ArrayList();
+
+    public ArrayList getCustomers() {
+        ArrayList<Customer> customers = new ArrayList();
         try {
-            ResultSet rs=st.executeQuery("SELECT * FROM customer");
-            while(rs.next()){
-                String getAll=rs.getString(1)+" "+rs.getString(2);
-                customersList.add(getAll);
+            ResultSet rs = st.executeQuery("SELECT * FROM customer");
+            while (rs.next()) {
+                customers.add(new Customer(rs.getString(20), rs.getInt(1)));
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-        return customersList;
+        return customers;
     }
 
 }

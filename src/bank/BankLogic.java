@@ -22,7 +22,7 @@ public class BankLogic {
     private int accountNbrCounter;
 
     private BankLogic() {
-        dbConnection=DBConnection.getDBConnection();
+        dbConnection = DBConnection.getDBConnection();
         customers = new ArrayList();
         accountNbrCounter = 1001;
         /**
@@ -34,7 +34,7 @@ public class BankLogic {
         customers.add(new Customer("Tobias Hjertelundh", 198706045625L));
         customers.add(new Customer("Bekir Halvadzic", 199909195421L));
         customers.add(new Customer("Filip Rickardsson", 198802023251L));
-        
+
         for (int i = 0; i < customers.size(); i++) {
             addSavingsAccount(customers.get(i).getSsn());
             addCreditAccount(customers.get(i).getSsn());
@@ -58,13 +58,13 @@ public class BankLogic {
      *
      * @return The customer list
      */
-    public List<String> getCustomers() {
-        List<String> customerPresentation = new ArrayList();
-        customerPresentation=dbConnection.getCustomers();
+    public ArrayList<String> getCustomers() {
+        ArrayList<String> customerPresentation = new ArrayList();
+        customerPresentation = dbConnection.getCustomers();
         for (int i = 0; i < customerPresentation.size(); i++) {
             customerPresentation.add(customers.get(i).toString());
         }
-        
+
         return customerPresentation;
     }
 
