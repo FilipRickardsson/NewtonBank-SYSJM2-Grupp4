@@ -49,7 +49,6 @@ public class DBConnection {
             while (rs.next()) {
                 customers.add(new Customer(rs.getString(2), rs.getLong(1)));
             }
-            System.out.println("test");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
