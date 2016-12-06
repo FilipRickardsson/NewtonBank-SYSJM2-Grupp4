@@ -105,9 +105,9 @@ public class BankLogic {
      * @return True if successfully changed the name
      */
     public boolean changeCustomer(String name, long ssn) {
-        Customer customer = searchForCustomer(ssn);
+        Customer customer = dbConnection.searchForCustomer(ssn);
         if (customer != null) {
-            customer.setName(name);
+            dbConnection.changeCustomer(customer, name);
             return true;
         }
 
