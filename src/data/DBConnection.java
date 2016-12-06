@@ -91,6 +91,15 @@ public class DBConnection {
         }
     }
     
+    public void removeCustomer (Customer customerToBeRemoved) {
+        try {
+            st.executeUpdate("DELETE FROM customer WHERE ssn = " + customerToBeRemoved.getSsn());
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+    }
+    
     
     
 

@@ -123,7 +123,7 @@ public class BankLogic {
      */
     public List<String> removeCustomer(long ssn) {
         List<String> info = new ArrayList();
-        Customer customer = searchForCustomer(ssn);
+        Customer customer = dbConnection.searchForCustomer(ssn);
         if (customer != null) {
             double sumInterest = 0;
             double sumSaldo = 0;
@@ -142,7 +142,7 @@ public class BankLogic {
                 info.add("Total money back: " + String.format("%.2f", sumSaldo + sumInterest)
                         + " whereof interest is: " + String.format("%.2f", sumInterest));
             }
-            customers.remove(customer);
+            dbConnection.removeCustomer(customer);
         }
         return info;
     }
