@@ -3,6 +3,7 @@ package data;
 import bank.Customer;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -15,6 +16,7 @@ public class DBConnection {
     private static DBConnection dbConnection;
     private Connection con;
     private Statement st;
+    private PreparedStatement ps;
 
     private DBConnection() {
         connectToDB();
@@ -52,6 +54,10 @@ public class DBConnection {
             System.out.println(ex.getMessage());
         }
         return customers;
+    }
+    
+    public void addCustomer(Customer newCustomer) {
+        
     }
 
 }
