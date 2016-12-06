@@ -56,7 +56,29 @@ public class DBConnection {
     }
     
     public void addCustomer(Customer newCustomer) {
-        
+        try {
+            ps = con.prepareStatement("INSERT INTO customer (ssn, name) VALUES (?, ?);");
+            ps.setLong(1, newCustomer.getSsn());
+            ps.setString(2, newCustomer.getName());
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
+    
+    public Customer getCustomer (long customerSsn) {
+        Customer customer = null;
+        try {
+            ResultSet result = st.executeQuery("SELECT * FROM customer WHERE "
+                    + "ssn = " + customerSsn);
+            result.next();
+            customer = new Customer(result.getString(2), result.getLong(1));
+        } catch (SQLException ex) {
+            Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return customer;
+    }
+    
 
 }

@@ -83,7 +83,7 @@ public class BankLogic {
     public List<String> getCustomer(long ssn) {
         ArrayList<String> customerInformation = new ArrayList();
 
-        Customer customer = searchForCustomer(ssn);
+        Customer customer = dbConnection.getCustomer(ssn);
         if (customer != null) {
             customerInformation.add(customer.getName());
             customerInformation.add(Long.toString(customer.getSsn()));
