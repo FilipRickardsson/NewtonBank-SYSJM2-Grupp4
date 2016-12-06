@@ -156,7 +156,7 @@ public class BankLogic {
      */
     public int addSavingsAccount(long ssn) {
         int accountNbr = -1;
-        Customer customer = searchForCustomer(ssn);
+        Customer customer = dbConnection.searchForCustomer(ssn); //Hur skapar vi accounts? Gjort om?
         if (customer != null) {
             accountNbr = accountNbrCounter;
             customer.getAccounts().add(new SavingAccount(accountNbr));
