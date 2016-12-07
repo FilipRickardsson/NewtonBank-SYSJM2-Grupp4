@@ -14,11 +14,11 @@ public class SavingAccount extends Account {
      * Constructor
      * @param accountID The unique account id
      */
-    public SavingAccount(int accountID) {
-        super(accountID, "Saving Account");
-        interest = 0.01;
-        firstWithdrawal = true;
-        withdrawalFee = 0.02;
+    public SavingAccount(int accountID,double interest,boolean firstWithDrawal,double withdrawalFee,double saldo) {
+        super(accountID, "Saving Account",saldo);
+        this.interest=interest;
+        this.firstWithdrawal=firstWithDrawal;
+        this.withdrawalFee=withdrawalFee;
     }
 
     //<editor-fold defaultstate="collapsed" desc="Getters">
@@ -31,23 +31,7 @@ public class SavingAccount extends Account {
     }
 
     //</editor-fold>
-    /**
-     * Withdraws given amount from account saldo and adds a new transaction to
-     * accounts transaction list.
-     *
-     * @param amount The amount to withdraw
-     */
-    @Override
-    public void withdraw(double amount) {
-        if (firstWithdrawal) {
-            saldo -= amount;
-            firstWithdrawal = false;
-        } else {
-            saldo -= amount * withdrawalFee + amount;
-        }
-        transactions.add(new Transaction(accountID, true, amount, saldo));
-    }
-
+        
     /**
      * Calculates interest of the account.
      *

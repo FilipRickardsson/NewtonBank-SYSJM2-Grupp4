@@ -13,7 +13,6 @@ public abstract class Account {
     protected double saldo;
     protected double interest;
     protected final String accountType;
-    protected final ArrayList<Transaction> transactions;
 
     /**
      * Constructor
@@ -21,11 +20,10 @@ public abstract class Account {
      * @param accountID The unique id of the account
      * @param accountType The type of account
      */
-    public Account(int accountID, String accountType) {
+    public Account(int accountID, String accountType,double saldo) {
         this.accountID = accountID;
         this.accountType = accountType;
-        saldo = 0;
-        transactions = new ArrayList();
+        this.saldo=saldo;
     }
 
     public int getAccountID() {
@@ -43,27 +41,6 @@ public abstract class Account {
     public double getSaldo() {
         return saldo;
     }
-
-    public ArrayList<Transaction> getTransactions() {
-        return transactions;
-    }
-
-    /**
-     * Deposits an amount to the account and creates a transaction
-     *
-     * @param amount The amount to deposit
-     */
-    public void deposit(double amount) {
-        saldo += amount;
-        transactions.add(new Transaction(accountID, false, amount, saldo));
-    }
-
-    /**
-     * Withdraw an amount from the account and creates a transation
-     *
-     * @param amount The amount to withdraw
-     */
-    public abstract void withdraw(double amount);
 
     /**
      * Calculates the interest

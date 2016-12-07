@@ -204,9 +204,9 @@ public class BankLogic {
      * @param amount Amount to deposit
      * @return True if successfully deposited money
      */
-    public boolean deposit(long ssn, int accountId, double amount) {
+    public boolean deposit(int accountId, double amount) {
         if (amount > 0) {
-            searchForAccount(ssn, accountId).deposit(amount);
+            dbConnection.deposit(accountId, amount);
             return true;
         } else {
             return false;
@@ -223,12 +223,12 @@ public class BankLogic {
      * @return True if successfully withdrew money
      */
     public boolean withdraw(long ssn, int accountId, double amount) {
-        Account acc = searchForAccount(ssn, accountId);
-
+        Account acc = dbConnection.getAccount(ssn, accountId);
+        
         if (acc instanceof CreditAccount && amount > 0) {
             CreditAccount acc2 = (CreditAccount) acc;
             if (acc.saldo - amount >= acc2.getCreditLimit()) {
-                acc2.withdraw(amount);
+                dbConnection.withdraw(accountId, amount);
                 return true;
             } else {
                 return false;
@@ -236,11 +236,11 @@ public class BankLogic {
         } else if (acc instanceof SavingAccount && amount > 0) {
             SavingAccount acc2 = (SavingAccount) acc;
             if ((amount + (amount * acc2.getWithdrawalFee())) <= acc2.getSaldo()) {
-                acc.withdraw(amount);
+                dbConnection.withdraw(accountId, amount+(amount*acc2.getWithdrawalFee()));
                 return true;
 
             } else if (acc2.isFirstWithdrawal() && amount <= acc2.getSaldo()) {
-                acc2.withdraw(amount);
+                dbConnection.withdraw(accountId, amount);
                 return true;
             } else {
                 return false;
@@ -296,11 +296,11 @@ public class BankLogic {
      * @return Transactions made
      */
     public List<String> getTransactions(long ssn, int accountID) {
-        ArrayList<String> transactionInformation = new ArrayList();
-        Account acc = searchForAccount(ssn, accountID);
-        for (int j = 0; j < acc.getTransactions().size(); j++) {
-            transactionInformation.add(acc.getTransactions().
-                    get(j).toString());
+        ArrayList<Transaction> transactions = new ArrayList();
+        ArrayList<String> transactionInformation=new ArrayList();
+        transactions=dbConnection.getTransactions(accountID);
+        for (int j = 0; j < transactions.size(); j++) {
+            transactionInformation.add(transactions.get(j).toString());
         }
 
         return transactionInformation;

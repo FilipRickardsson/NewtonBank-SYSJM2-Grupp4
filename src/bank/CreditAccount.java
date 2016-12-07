@@ -15,8 +15,8 @@ public class CreditAccount extends Account {
      *
      * @param accountNumber The unique account id
      */
-    public CreditAccount(int accountNumber) {
-        super(accountNumber, "Credit Account");
+    public CreditAccount(int accountNumber,double creditInterest,double interest,int creditLimit,double saldo) {
+        super(accountNumber, "Credit Account",saldo);
         this.creditInterest = 0.07;
         this.interest = 0.005;
         this.creditLimit = -5000;
@@ -29,18 +29,7 @@ public class CreditAccount extends Account {
     public double getCreditInterest() {
         return creditInterest;
     }
-
-    /**
-     * Makes a withdrawal and adds a transaction
-     *
-     * @param amount the amount to withdraw
-     */
-    @Override
-    public void withdraw(double amount) {
-        saldo -= amount;
-        transactions.add(new Transaction(accountID, true, amount, saldo));
-    }
-
+        
     /**
      * Calculates the interest
      *

@@ -38,7 +38,15 @@ public class Transaction {
         this.amount = amount;
         this.updatedBalance = updatedBalance;
     }
-
+    public Transaction(int accountID,String date,String time, boolean withdrawal,
+            double amount, double updatedBalance){
+                this.accountID = accountID;
+        this.date = date;
+        this.time = time;
+        this.withdrawal = withdrawal;
+        this.amount = amount;
+        this.updatedBalance = updatedBalance;
+    }
     //<editor-fold defaultstate="collapsed" desc="Getters">
     public String getTime() {
         return time;
