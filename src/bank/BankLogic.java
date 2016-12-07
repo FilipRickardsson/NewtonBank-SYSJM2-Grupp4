@@ -249,8 +249,7 @@ public class BankLogic {
             info = "SSN: " + ssn + ", Type: " + acc.getAccountType()
                     + ", Saldo: " + String.format("%.2f", acc.getSaldo())
                     + ", Interest: " + String.format("%.2f", acc.calcInterest());
-            Customer co = getCustomer(ssn);
-            co.getAccounts().remove(acc);
+            dbConnection.closeAccount(accountId);
         }
         return info;
     }
