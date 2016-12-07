@@ -72,6 +72,11 @@ public class Transaction {
         return updatedBalance;
     }
 
+    public boolean isWithdrawal() {
+        return withdrawal;
+    }
+    
+
     //</editor-fold>
     @Override
     public String toString() {
