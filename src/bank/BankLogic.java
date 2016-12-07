@@ -315,12 +315,8 @@ public class BankLogic {
      */
     private Customer searchForCustomer(long ssn) {
         Customer customer = null;
-        for (int i = 0; i < customers.size(); i++) {
-            if (customers.get(i).getSsn() == ssn) {
-                customer = customers.get(i);
-                break;
-            }
-        }
+        customer = dbConnection.searchForCustomer(ssn);
+       
         return customer;
     }
 
@@ -357,8 +353,9 @@ public class BankLogic {
             FileWriter write = new FileWriter("Customerlist.txt");
             BufferedWriter bf = new BufferedWriter(write);
             PrintWriter pw = new PrintWriter(bf);
-            for (int i = 0; i < customers.size(); i++) {
-                pw.println(customers.get(i).toString());
+            ArrayList <Customer> c = dbConnection.getCustomers(); 
+            for (int i = 0; i < c.size(); i++) {
+                pw.println(c.get(i).toString());
             }
             pw.close();
             return true;
@@ -375,7 +372,9 @@ public class BankLogic {
      * @return SSN of selected customer
      */
     public long getCustomerSsnViaIndex(int CustomerIndex) {
-        return customers.get(CustomerIndex).getSsn();
+        long ssn = 0;
+        ssn = dbConnection.getCustomerViaIndex(CustomerIndex);
+        return ssn;
     }
 
     /**
@@ -385,8 +384,9 @@ public class BankLogic {
      * @return accountID of selected account
      */
     public int getCustomerAccountIdViaIndex(int AccountIdIndex) {
-        Customer customer = searchForCustomer(BaseController.selectedCustomerSSN);
-        return customer.getAccounts().get(AccountIdIndex).getAccountID();
+        int accountId = 0;
+        accountId = dbConnection.getAccountIdViaIndex(accountId);
+        return accountId;
     }
 
     /**
