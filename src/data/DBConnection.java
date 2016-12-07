@@ -288,4 +288,17 @@ public class DBConnection {
         }
         return accountId;
     }
+    public int addCreditAccount(long ssn){
+        int accountNbr = -1;
+        try {
+            ps = con.prepareStatement("INSERT INTO Account (saldo, AccountType_type, Customer_ssn) VALUES (?, '?', ?);");
+            ps.setDouble(1, 0);
+            ps.setString(2, "CreditAccount");
+            ps.setLong(3, ssn);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return accountNbr;
+    }
 }
