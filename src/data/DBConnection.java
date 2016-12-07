@@ -1,5 +1,6 @@
 package data;
 
+import bank.Account;
 import bank.Customer;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -28,7 +29,7 @@ public class DBConnection {
     }
 
     private void connectToDB() {
-        String url = "jdbc:mysql://localhost:3306/sys?autoReconnect=true&useSSL=false";
+        String url = "jdbc:mysql://localhost:3306/newtonbank?autoReconnect=true&useSSL=false";
         String user = "newtonbank";
         String password = "kaffekopp";
 
@@ -54,5 +55,41 @@ public class DBConnection {
         }
         return customers;
     }
+    public Customer searchForCustomer(long ssn) {
+        
+        
+        Customer customer = null;
+        try {
+            ResultSet rs = st.executeQuery("SELECT * FROM customer where ssn = '"+ ssn +"';");
+            customer = new Customer(rs.getString(2), rs.getLong(1));
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return customer;
+    }
+    public long getCustomerViaIndex(int index) {
+        long customerSsn = 0;
+        try {
+            
+            ResultSet rs = st.executeQuery("SELECT ssn FROM customer LIMIT "+customerSsn+",1");
+            customerSsn = rs.getLong(1);
+                    } catch (SQLException ex) {
+            Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return customerSsn;
+    }
+      public int getAccountIdViaIndex(int index) {
+        int accountId = 0;
+        try {
+            
+            ResultSet rs = st.executeQuery("SELECT * FROM customer LIMIT "+accountId+",1");
+            accountId = rs.getInt(1);
+                    } catch (SQLException ex) {
+            Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return accountId;
+    }
+    }
 
-}
+
