@@ -54,7 +54,7 @@ public class DBConnection {
         }
         return customers;
     }
-    
+
     public void addCustomer(Customer newCustomer) {
         try {
             ps = con.prepareStatement("INSERT INTO customer (ssn, name) VALUES (?, '?');");
@@ -65,8 +65,8 @@ public class DBConnection {
             System.out.println(ex.getMessage());
         }
     }
-    
-    public Customer getCustomer (long customerSsn) {
+
+    public Customer getCustomer(long customerSsn) {
         Customer customer = null;
         try {
             ResultSet result = st.executeQuery("SELECT * FROM customer WHERE "
@@ -76,11 +76,11 @@ public class DBConnection {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-        
+
         return customer;
     }
-    
-    public void changeCustomer (Customer customer, String newName) {
+
+    public void changeCustomer(Customer customer, String newName) {
         try {
             ps = con.prepareStatement("UPDATE customer SET name = '?' WHERE ssn = ?;");
             ps.setLong(1, customer.getSsn());
@@ -90,8 +90,8 @@ public class DBConnection {
             System.out.println(ex.getMessage());
         }
     }
-    
-    public void removeCustomer (Customer customerToBeRemoved) {
+
+    public void removeCustomer(Customer customerToBeRemoved) {
         try {
             st.executeUpdate("DELETE FROM customer WHERE ssn = " + customerToBeRemoved.getSsn());
         } catch (SQLException ex) {
@@ -99,8 +99,31 @@ public class DBConnection {
         }
 
     }
-    
-    
-    
+
+    //Skapa transaktion istället?
+    public int AddSavingsAccount(long ssn) {
+        int accountNbr = -1;
+        try {
+            
+            ps = con.prepareStatement("INSERT INTO Account (saldo, AccountType_type, Customer_ssn) VALUES (?, '?', ?);");
+            ps.setDouble(1, 0);
+            ps.setString(2, "SavingsAccount");
+            ps.setLong(3, ssn);
+            ps.executeUpdate();
+            
+            ResultSet result = st.executeQuery("SELECT MAX(accountId) FROM Account");
+            result.next();
+            accountNbr = result.getInt(1);
+            
+            ps = con.prepareStatement("INSERT INTO SavingAccount (Account_accountId, firstwithdrawal) VALUES (?, ?);");
+            ps.setInt(1, accountNbr);
+            ps.setBoolean(2, true);
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return accountNbr;
+
+    }
 
 }
