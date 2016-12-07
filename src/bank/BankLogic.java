@@ -262,11 +262,9 @@ public class BankLogic {
      */
     public int addCreditAccount(long ssn) {
         int accountNbr = -1;
-        Customer customer = searchForCustomer(ssn);
+        Customer customer = dbConnection.searchForCustomer(ssn); 
         if (customer != null) {
-            accountNbr = accountNbrCounter;
-            searchForCustomer(ssn).getAccounts().add(new CreditAccount(accountNbr));
-            accountNbrCounter++;
+            accountNbr = dbConnection.addCreditAccount(ssn);
         }
         return accountNbr;
     }
