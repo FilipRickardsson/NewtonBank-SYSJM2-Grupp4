@@ -36,6 +36,11 @@ public abstract class BaseController implements Initializable {
      */
     public BaseController() {
         bankLogic = BankLogic.getBankLogic();
+        try {
+            loadPopup();
+        } catch (IOException ex) {
+            System.out.println("Could not load Popup");
+        }
     }
 
     /**
@@ -53,7 +58,7 @@ public abstract class BaseController implements Initializable {
      *
      * @throws IOException if the popup could not be loaded
      */
-    protected void loadPopup() throws IOException {
+    protected final void loadPopup() throws IOException {
         popup = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Popup.fxml"));
         Parent root = (Parent) loader.load();

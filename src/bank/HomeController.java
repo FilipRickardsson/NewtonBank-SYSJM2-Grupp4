@@ -3,8 +3,6 @@ package bank;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -66,9 +64,9 @@ public class HomeController extends BaseController {
         try {
             if (!ssnSearchField.getText().isEmpty()) {
                 long testInput = Long.parseLong(ssnSearchField.getText());
-                if (ssnSearchField.getText().length() == 10) {
+                if (ssnSearchField.getText().length() == 12) {
                     for (int i = 0; i < customerList.size(); i++) {
-                        searchStr = customerList.get(i).substring(customerList.get(i).length() - 10);
+                        searchStr = customerList.get(i).substring(customerList.get(i).length() - 12);
                         if (searchStr.equals(ssnSearchField.getText())) {
                             customerListView.getSelectionModel().select(i);
                             match = true;
@@ -147,17 +145,21 @@ public class HomeController extends BaseController {
                     String fullName = firstNameInsert.getText() + " "
                             + lastNameInsert.getText();
 
-                    if (ssnInsert.getText().length() == 10) {
-                        if (bankLogic.addCustomer(fullName, Long.parseLong(ssnInsert
-                                .getText()))) {
+                    if (ssnInsert.getText().length() == 12) {
+                        if (bankLogic.validateSSN(Long.parseLong(ssnInsert.getText()))) {
+                            if (bankLogic.addCustomer(fullName, Long.parseLong(ssnInsert
+                                    .getText()))) {
 
-                            updateInfo();
-                            firstNameInsert.clear();
-                            lastNameInsert.clear();
-                            ssnInsert.clear();
-                            showMessage("Customer added!", wrongCreateCustomer, false);
+                                updateInfo();
+                                firstNameInsert.clear();
+                                lastNameInsert.clear();
+                                ssnInsert.clear();
+                                showMessage("Customer added!", wrongCreateCustomer, false);
+                            } else {
+                                showMessage("Customer already exist", wrongCreateCustomer, true);
+                            }
                         } else {
-                            showMessage("Customer already exist", wrongCreateCustomer, true);
+                            showMessage("Invalid ssn", wrongCreateCustomer, true);
                         }
                     } else {
                         showMessage("Wrong input length on ssn", wrongCreateCustomer, true);
@@ -200,17 +202,10 @@ public class HomeController extends BaseController {
     public void initialize(URL url, ResourceBundle rb) {
         btnAccount.setVisible(false);
         btnCustomer.setVisible(false);
-        ssnSearchField.setPromptText("YYMMDDXXXX");
-        ssnInsert.setPromptText("YYMMDDXXXX");
+        ssnSearchField.setPromptText("YYYYMMDDXXXX");
+        ssnInsert.setPromptText("YYYYMMDDXXXX");
 
         updateInfo();
-
-        try {
-            loadPopup();
-        } catch (IOException ex) {
-            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
     }
 
 }

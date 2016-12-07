@@ -1,10 +1,12 @@
 package bank;
 
+import data.DBConnection;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -15,27 +17,15 @@ import java.util.List;
 public class BankLogic {
 
     private static BankLogic bankLogic;
-
-    private final List<Customer> customers;
+    private DBConnection dbConnection;
+    private final List<Customer> customers; //REMOVE LATER
     private int accountNbrCounter;
 
     private BankLogic() {
+        dbConnection = DBConnection.getDBConnection();
         customers = new ArrayList();
         accountNbrCounter = 1001;
-        /**
-         * Default hardcoded customers with accounts to test the program.
-         */
-        customers.add(new Customer("Dijana Popovic", 7912120101L));
-        customers.add(new Customer("Johan Jonsson", 9702020101L));
-        customers.add(new Customer("Christoffer Flystam", 9202254545L));
-        customers.add(new Customer("Tobias Hjertelundh", 8706045625L));
-        customers.add(new Customer("Bekir Halvadzic", 9909195421L));
-        customers.add(new Customer("Filip Rickardsson", 8802023251L));
-
-        for (int i = 0; i < customers.size(); i++) {
-            addSavingsAccount(customers.get(i).getSsn());
-            addCreditAccount(customers.get(i).getSsn());
-        }
+        
     }
 
     /**
@@ -55,10 +45,11 @@ public class BankLogic {
      *
      * @return The customer list
      */
-    public List<String> getCustomers() {
-        List<String> customerPresentation = new ArrayList();
-        for (int i = 0; i < customers.size(); i++) {
-            customerPresentation.add(customers.get(i).toString());
+    public ArrayList<String> getCustomers() {
+        ArrayList<String> customerPresentation = new ArrayList();
+        ArrayList<Customer> c = dbConnection.getCustomers();
+        for (int i = 0; i < c.size(); i++) {
+            customerPresentation.add(c.get(i).toString());
         }
 
         return customerPresentation;
@@ -77,7 +68,7 @@ public class BankLogic {
         if (customer != null) {
             return false;
         } else {
-            customers.add(new Customer(name, ssn));
+            dbConnection.addCustomer(customer);
             return true;
         }
     }
@@ -99,9 +90,6 @@ public class BankLogic {
             ArrayList accounts = customer.getAccounts();
             for (int j = 0; j < accounts.size(); j++) {
                 customerInformation.add(accounts.get(j).toString());
-            }
-            for (int i = 0; i < customerInformation.size(); i++) {
-                System.out.println(customerInformation.get(i));
             }
         }
 
@@ -257,13 +245,13 @@ public class BankLogic {
      * @return info Information about the account and transactions made
      */
     public String closeAccount(long ssn, int accountId) {
-        Account acc = searchForAccount(ssn, accountId);
+        Account acc = dbConnection.getAccount(ssn, accountId);
         String info = null;
         if (acc != null) {
             info = "SSN: " + ssn + ", Type: " + acc.getAccountType()
                     + ", Saldo: " + String.format("%.2f", acc.getSaldo())
                     + ", Interest: " + String.format("%.2f", acc.calcInterest());
-            Customer co = searchForCustomer(ssn);
+            Customer co = getCustomer(ssn);
             co.getAccounts().remove(acc);
         }
         return info;
@@ -412,5 +400,68 @@ public class BankLogic {
 
         return firstNameValid && lastNameValid;
     }
-    
+
+    public boolean validateSSN(long ssn) {
+        long tempSSN = ssn;
+        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+        int year = (int) (tempSSN / 100000000);
+        tempSSN %= 100000000;
+        int month = (int) (tempSSN / 1000000);
+        tempSSN %= 1000000;
+        int day = (int) (tempSSN / 10000);
+        tempSSN %= 10000;
+        int x1 = (int) (tempSSN / 10);
+        int x2 = (int) (tempSSN % 10);
+        if (year <= currentYear - 18) {
+            if (month >= 0 && month <= 12) {
+                int[] daysInMonths = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+                if (year % 4 == 0) {
+                    daysInMonths[1] = 29;
+                }
+                if (day <= daysInMonths[month - 1]) {
+
+                    /* -----------------------------------------
+                     * Validates last digit in SSN
+                     * Comment this block to not validate the last digit
+                     */
+                    int[] oneAndTwo = {2, 1, 2, 1, 2, 1, 2, 1, 2};
+                    long partSSN = (ssn % 10000000000L) / 10;
+                    int[] splittedSSN = new int[9];
+                    for (int i = splittedSSN.length - 1; i >= 0; i--) {
+                        splittedSSN[i] = ((int) partSSN % 10) * oneAndTwo[i];
+                        partSSN = partSSN / 10;
+                    }
+
+                    ArrayList<Integer> splittedProduct = new ArrayList();
+                    for (int i = 0; i < splittedSSN.length; i++) {
+                        int temp = splittedSSN[i];
+                        while (temp > 0) {
+                            splittedProduct.add(temp % 10);
+                            temp = temp / 10;
+                        }
+                    }
+
+                    int sum = 0;
+                    for (int value : splittedProduct) {
+                        sum += value;
+                    }
+
+                    int lastDigit = (sum % 10);
+                    if (lastDigit != 0) {
+                        lastDigit = 10 - lastDigit;
+                    }
+
+                    if (lastDigit == x2) {
+                        return true;
+                    }
+                    // -----------------------------------------
+
+//                    return true; // Uncomment this to not validate last digit
+                }
+            }
+        }
+
+        return false;
+    }
+
 }

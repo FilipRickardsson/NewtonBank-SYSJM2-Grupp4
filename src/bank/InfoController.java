@@ -1,10 +1,7 @@
 package bank;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -39,7 +36,6 @@ public class InfoController extends BaseController {
      */
     public void dontPressMe(MouseEvent event) {
         accountList.addEventFilter(MouseEvent.MOUSE_PRESSED, (MouseEvent event1) -> {
-            System.out.println(">> Mouse Clicked");
             event1.consume();
         });
     }
@@ -78,8 +74,9 @@ public class InfoController extends BaseController {
 
     /**
      * Initializes the scene and sets the visibility of menu buttons
+     *
      * @param url
-     * @param rb 
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -93,13 +90,6 @@ public class InfoController extends BaseController {
             customerInformation = FXCollections.observableArrayList(bankLogic.closeAccount(selectedCustomerSSN, selectedCustomerAccountID));
             accountList.setItems(customerInformation);
         }
-
-        try {
-            loadPopup();
-        } catch (IOException ex) {
-            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
     }
 
 }
