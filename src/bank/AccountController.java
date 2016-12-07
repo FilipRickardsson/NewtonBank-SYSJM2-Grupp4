@@ -40,7 +40,7 @@ public class AccountController extends BaseController {
         if (validateInput()) {
             // Math.Round used to round the deposit to two decimals
             double value = Math.round(Double.parseDouble(amount.getText().replaceAll(",", ".")) * 100.0) / 100.0;
-            boolean success = bankLogic.deposit(selectedCustomerSSN, selectedCustomerAccountID, value);
+            boolean success = bankLogic.deposit(selectedCustomerAccountID, value);
             updateInfo();
             if (success) {
                 showMessage("Transaction complete", error, false);
