@@ -98,7 +98,6 @@ public class DBConnection {
                 }
             }
         } catch (SQLException ex) {
-            System.out.println("debug 2");
             System.out.println(ex.getMessage());
         }
         return acc;
@@ -162,7 +161,6 @@ public class DBConnection {
     }
 
     public void closeAccount(int accountId) {
-
         try {
             st.executeUpdate("DELETE FROM SavingAccount WHERE Account_accountId = " +  accountId);
             st.executeUpdate("DELETE FROM Account WHERE accountId = " + accountId);
@@ -171,7 +169,6 @@ public class DBConnection {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-
     }
 
     public Customer getCustomer(long customerSsn) {
