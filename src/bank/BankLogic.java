@@ -5,9 +5,12 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -181,6 +184,20 @@ public class BankLogic {
         }
         return "Could not find account";
     }
+    
+    private void addTransaction( Account account,boolean isWithdrawal,double amount){
+        double updatedBalance = 0;
+        if(isWithdrawal){
+            updatedBalance = account.getSaldo() - amount;
+        }
+        else {
+            updatedBalance = account.getSaldo() + amount;
+        }
+        Transaction transaction = new Transaction(account.getAccountID(), isWithdrawal, amount, updatedBalance);
+        dbConnection.addTransaction(transaction);
+            
+        
+    }
 
     /**
      * Makes a deposit to an account that belongs to the customer with the
@@ -190,9 +207,11 @@ public class BankLogic {
      * @param amount Amount to deposit
      * @return True if successfully deposited money
      */
-    public boolean deposit(int accountId, double amount) {
+    public boolean deposit(long ssn,int accountId, double amount) {
+        Account account = dbConnection.getAccount(ssn, accountId);
         if (amount > 0) {
             dbConnection.deposit(accountId, amount);
+            addTransaction(account,false,amount);
             return true;
         } else {
             return false;
@@ -209,24 +228,27 @@ public class BankLogic {
      * @return True if successfully withdrew money
      */
     public boolean withdraw(long ssn, int accountId, double amount) {
-        Account acc = dbConnection.getAccount(ssn, accountId);
+        Account account = dbConnection.getAccount(ssn, accountId);
 
-        if (acc instanceof CreditAccount && amount > 0) {
-            CreditAccount acc2 = (CreditAccount) acc;
-            if (acc.saldo - amount >= acc2.getCreditLimit()) {
+        if (account instanceof CreditAccount && amount > 0) {
+            CreditAccount acc2 = (CreditAccount) account;
+            if (account.saldo - amount >= acc2.getCreditLimit()) {
                 dbConnection.withdraw(accountId, amount);
+                addTransaction(account,true,amount);
                 return true;
             } else {
                 return false;
             }
-        } else if (acc instanceof SavingAccount && amount > 0) {
-            SavingAccount acc2 = (SavingAccount) acc;
+        } else if (account instanceof SavingAccount && amount > 0) {
+            SavingAccount acc2 = (SavingAccount) account;
             if ((amount + (amount * acc2.getWithdrawalFee())) <= acc2.getSaldo()) {
                 dbConnection.withdraw(accountId, amount + (amount * acc2.getWithdrawalFee()));
+                addTransaction(account,true,amount);
                 return true;
 
             } else if (acc2.isFirstWithdrawal() && amount <= acc2.getSaldo()) {
                 dbConnection.withdraw(accountId, amount);
+                addTransaction(account,true,amount);
                 return true;
             } else {
                 return false;
@@ -354,6 +376,11 @@ public class BankLogic {
             BufferedWriter bf = new BufferedWriter(write);
             PrintWriter pw = new PrintWriter(bf);
             ArrayList <Transaction> c = dbConnection.getTransactions(accountId);
+              DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+        DateFormat df1 = new SimpleDateFormat("HH:mm:ss");
+        Date currentDate = new Date();
+        pw.println("Date of account history: "+ df.format(currentDate)+" "+
+        df1.format(currentDate));
             for (int i = 0; i < c.size(); i++) {
                 pw.println(c.get(i).toString());
             }

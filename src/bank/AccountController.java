@@ -31,9 +31,6 @@ public class AccountController extends BaseController {
     @FXML
     private Label error;
     
-    @FXML
-    private Label listViewInformation;
-    
     
 
     /**
@@ -45,7 +42,7 @@ public class AccountController extends BaseController {
         if (validateInput()) {
             // Math.Round used to round the deposit to two decimals
             double value = Math.round(Double.parseDouble(amount.getText().replaceAll(",", ".")) * 100.0) / 100.0;
-            boolean success = bankLogic.deposit(selectedCustomerAccountID, value);
+            boolean success = bankLogic.deposit(selectedCustomerSSN,selectedCustomerAccountID, value);
             updateInfo();
             if (success) {
                 showMessage("Transaction complete", error, false);
@@ -84,9 +81,9 @@ public class AccountController extends BaseController {
     @FXML
     private void printAccountToFile() {
         if (bankLogic.transactionsToFile(selectedCustomerAccountID)) {
-            showMessage("Transaction list printed to text file", listViewInformation, false);
+            showMessage("Transaction list printed to text file", error, false);
         } else {
-            showMessage("Could not write to file. Check file permissions", listViewInformation, true);
+            showMessage("Could not write to file. Check file permissions", error, true);
         }
     }
 

@@ -91,7 +91,7 @@ public class DBConnection {
                         + "AND Customer_ssn = %d", accountId, ssn));
             }
             while (rs.next()) {
-                if (rs.getString(2).equals("Saving Account")) {
+                if (rs.getString(2).equals("Savings Account")) {
                     acc = new SavingAccount(rs.getInt(1), rs.getDouble(3), rs.getBoolean(6), rs.getDouble(5), rs.getInt(4));
                 } else {
                     acc = new CreditAccount(rs.getInt(1), rs.getDouble(5), rs.getDouble(3), rs.getInt(6), rs.getInt(4));
@@ -106,19 +106,16 @@ public class DBConnection {
 
     public void deposit(int accountId, double amount) {
         try {
-            ps = con.prepareStatement(String.format("UPDATE Account "
-                    + "SET saldo=saldo+%f "
-                    + "WHERE accountId=%d", amount, accountId));
+           st.executeUpdate("UPDATE account SET saldo = saldo+"+amount+"WHERE accountid = "+accountId);
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
+            System.out.println("Debug 1");
         }
     }
 
     public void withdraw(int accountId, double amount) {
         try {
-            ps = con.prepareStatement(String.format("UPDATE Account "
-                    + "SET saldo=saldo-%f "
-                    + "WHERE accountId=%d", amount, accountId));
+             st.executeUpdate("UPDATE account SET saldo = saldo-"+amount+"WHERE accountid = "+accountId);
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
@@ -127,9 +124,9 @@ public class DBConnection {
     public void addTransaction(Transaction transaction) {
 
         try {
-            ps = con.prepareStatement(String.format("INSERT INTO Transaction "
-                    + "(accountId,date,time,withdrawal,amount,updatebalance,Account_accountId)"
-                    + "VALUES (%d,%s,&s,%b,%f,%f)", transaction.getAccountID(), transaction.getDate(), transaction.getTime(), transaction.isWithdrawal(), transaction.getAmount(), transaction.getUpdatedBalance()));
+            st.executeUpdate ("INSERT INTO Transaction "
+                    + "(date,time,withdrawal,amount,updatedbalance,Account_accountId) "
+                    + "VALUES ('"+transaction.getDate()+"','"+transaction.getTime()+"',"+transaction.isWithdrawal()+","+transaction.getAmount()+","+transaction.getUpdatedBalance()+","+transaction.getAccountID()+")");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
