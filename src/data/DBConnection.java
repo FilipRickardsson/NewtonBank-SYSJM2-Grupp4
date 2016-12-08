@@ -91,14 +91,13 @@ public class DBConnection {
                         + "AND Customer_ssn = %d", accountId, ssn));
             }
             while (rs.next()) {
-                if (rs.getString(2).equals("Saving Account")) {
+                if (rs.getString(2).equals("Savings Account")) {
                     acc = new SavingAccount(rs.getInt(1), rs.getDouble(3), rs.getBoolean(6), rs.getDouble(5), rs.getInt(4));
                 } else {
                     acc = new CreditAccount(rs.getInt(1), rs.getDouble(5), rs.getDouble(3), rs.getInt(6), rs.getInt(4));
                 }
             }
         } catch (SQLException ex) {
-            System.out.println("debug 2");
             System.out.println(ex.getMessage());
         }
         return acc;
@@ -165,7 +164,6 @@ public class DBConnection {
     }
 
     public void closeAccount(int accountId) {
-
         try {
             st.executeUpdate("DELETE FROM SavingAccount WHERE Account_accountId = " +  accountId);
             st.executeUpdate("DELETE FROM Account WHERE accountId = " + accountId);
@@ -174,7 +172,6 @@ public class DBConnection {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-
     }
 
     public Customer getCustomer(long customerSsn) {
