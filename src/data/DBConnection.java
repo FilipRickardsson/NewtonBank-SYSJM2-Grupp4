@@ -178,10 +178,10 @@ public class DBConnection {
                     + "DELETE FROM Account WHERE accountId = %d ", accountId));
 
             st.executeUpdate(String.format(""
-                    + "DELETE FROM SavingAccount WHERE accountId = %d ", accountId));
+                    + "DELETE FROM SavingAccount WHERE Account_accountId = %d ", accountId));
 
         } catch (SQLException ex) {
-            Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }
 
     }
@@ -224,7 +224,7 @@ public class DBConnection {
         int accountNbr = -1;
         try {
 
-            ps = con.prepareStatement("INSERT INTO Account (saldo, AccountType_type, Customer_ssn) VALUES (?, '?', ?);");
+            ps = con.prepareStatement("INSERT INTO Account (saldo, AccountType_type, Customer_ssn) VALUES (?, ?, ?);");
             ps.setDouble(1, 0);
             ps.setString(2, "SavingsAccount");
             ps.setLong(3, ssn);
@@ -272,7 +272,8 @@ public class DBConnection {
     public int addCreditAccount(long ssn) {
         int accountNbr = -1;
         try {
-            ps = con.prepareStatement("INSERT INTO Account (saldo, AccountType_type, Customer_ssn) VALUES (?, '?', ?);");
+            //double creditInterest,double interest,int creditLimit,double saldo
+            ps = con.prepareStatement("INSERT INTO Account (saldo,AccountType_type,Customer_ssn) VALUES (?, ?, ?);");
             ps.setDouble(1, 0);
             ps.setString(2, "CreditAccount");
             ps.setLong(3, ssn);
