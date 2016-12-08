@@ -162,7 +162,7 @@ public class DBConnection {
 
     public void addCustomer(Customer newCustomer) {
         try {
-            ps = con.prepareStatement("INSERT INTO customer (ssn, name) VALUES (?, '?');");
+            ps = con.prepareStatement("INSERT INTO customer (ssn, name) VALUES (?, ?);");
             ps.setLong(1, newCustomer.getSsn());
             ps.setString(2, newCustomer.getName());
             ps.executeUpdate();
