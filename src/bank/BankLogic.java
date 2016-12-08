@@ -105,7 +105,7 @@ public class BankLogic {
      * @return True if successfully changed the name
      */
     public boolean changeCustomer(String name, long ssn) {
-        Customer customer = dbConnection.searchForCustomer(ssn);
+        Customer customer = dbConnection.getCustomer(ssn);
         if (customer != null) {
             dbConnection.changeCustomer(customer, name);
             return true;
@@ -123,7 +123,7 @@ public class BankLogic {
      */
     public List<String> removeCustomer(long ssn) {
         List<String> info = new ArrayList();
-        Customer customer = dbConnection.searchForCustomer(ssn);
+        Customer customer = dbConnection.getCustomer(ssn);
         if (customer != null) {
             double sumInterest = 0;
             double sumSaldo = 0;
@@ -156,7 +156,7 @@ public class BankLogic {
      */
     public int addSavingsAccount(long ssn) {
         int accountNbr = -1;
-        Customer customer = dbConnection.searchForCustomer(ssn); 
+        Customer customer = dbConnection.getCustomer(ssn); 
         if (customer != null) {
             accountNbr = dbConnection.AddSavingsAccount(ssn);
         }
@@ -262,7 +262,7 @@ public class BankLogic {
      */
     public int addCreditAccount(long ssn) {
         int accountNbr = -1;
-        Customer customer = dbConnection.searchForCustomer(ssn); 
+        Customer customer = dbConnection.getCustomer(ssn); 
         if (customer != null) {
             accountNbr = dbConnection.addCreditAccount(ssn);
         }
@@ -297,7 +297,7 @@ public class BankLogic {
      */
     private Customer searchForCustomer(long ssn) {
         Customer customer = null;
-        customer = dbConnection.searchForCustomer(ssn);
+        customer = dbConnection.getCustomer(ssn);
        
         return customer;
     }

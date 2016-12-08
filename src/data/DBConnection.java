@@ -245,19 +245,6 @@ public class DBConnection {
 
     }
 
-    public Customer searchForCustomer(long ssn) {
-
-        Customer customer = null;
-        try {
-            ResultSet rs = st.executeQuery("SELECT * FROM customer where ssn = '" + ssn + "';");
-            customer = new Customer(rs.getString(2), rs.getLong(1));
-
-        } catch (SQLException ex) {
-            Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return customer;
-    }
-
     public long getCustomerViaIndex(int index) {
         long customerSsn = 0;
         try {
@@ -274,7 +261,6 @@ public class DBConnection {
     public int getAccountIdViaIndex(int index) {
         int accountId = 0;
         try {
-
             ResultSet rs = st.executeQuery("SELECT * FROM customer LIMIT " + index + ",1");
             accountId = rs.getInt(1);
         } catch (SQLException ex) {
