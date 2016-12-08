@@ -40,7 +40,7 @@ public class DBConnection {
         String url = "jdbc:mysql://localhost:3306/newtonbank?autoReconnect=true&useSSL=false";
         String user = "newtonbank";
         String password = "kaffekopp";
-        
+
         try {
             con = DriverManager.getConnection(url, user, password);
             st = con.createStatement();
@@ -63,51 +63,49 @@ public class DBConnection {
         }
         return customers;
     }
-    public Account getAccount(long ssn, int accountId){
-        Account acc=null;
+
+    public Account getAccount(long ssn, int accountId) {
+        Account acc = null;
         try {
-            ResultSet rs=st.executeQuery(String.format("SELECT * "
-                           + "FROM savingAccount "
-                           + "WHERE Account_accountId=%d",accountId));
-            if(rs.next()){
-                rs=st.executeQuery(String.format("SELECT "
-                           + "accountId,"
-                           + "AccountType_type,"
-                           + "AccountType.interest,"
-                           + "saldo "
-                           + "withdrawalFee "
-                           + "firstwithdrawal "
-                           + "FROM Account "
-                           + "JOIN AccountType "
-                           + "ON AccountType_type=type "
-                           + "JOIN SavingsAccount"
-                           + "ON accountId=account_accountId"
-                           + "WHERE accountId=%d"
-                           + " AND Customer.ssn=%d", accountId,ssn));
-            }else{
-               rs=st.executeQuery(String.format(""
-                           + "SELECT "
-                           + "accountId,"
-                           + "AccountType_type,"
-                           + "AccountType.interest,"
-                           + "saldo, "
-                              + "creditInterest,"
-                              + "creditLimit "
-                           + "FROM Account "
-                           + "JOIN AccountType "
-                           + "ON AccountType_type=type"
-                           + "WHERE accountId=%d"
-                           + " AND Customer.ssn=%d", accountId,ssn)); 
+            ResultSet rs = st.executeQuery(String.format("SELECT * "
+                    + "FROM savingAccount "
+                    + "WHERE Account_accountId=%d", accountId));
+            if (rs.next()) {
+                rs = st.executeQuery(String.format("SELECT "
+                        + "accountId,"
+                        + "AccountType_type,"
+                        + "AccountType.interest,"
+                        + "saldo "
+                        + "withdrawalFee "
+                        + "firstwithdrawal "
+                        + "FROM Account "
+                        + "JOIN AccountType "
+                        + "ON AccountType_type=type "
+                        + "JOIN SavingsAccount"
+                        + "ON accountId=account_accountId"
+                        + "WHERE accountId=%d"
+                        + " AND Customer.ssn=%d", accountId, ssn));
+            } else {
+                rs = st.executeQuery(String.format(""
+                        + "SELECT "
+                        + "accountId,"
+                        + "AccountType_type,"
+                        + "AccountType.interest,"
+                        + "saldo, "
+                        + "creditInterest,"
+                        + "creditLimit "
+                        + "FROM Account "
+                        + "JOIN AccountType "
+                        + "ON AccountType_type=type"
+                        + "WHERE accountId=%d"
+                        + " AND Customer.ssn=%d", accountId, ssn));
             }
-            
-            while(rs.next()){
-                if(rs.getString(2).equals("Saving Account")){
-                    acc=new SavingAccount(rs.getInt(1),rs.getDouble(3),rs.getBoolean(6)
-                       ,rs.getDouble(5),rs.getInt(4));
-                }else{
-                    acc=new CreditAccount(rs.getInt(1)
-                       ,rs.getDouble(5),rs.getDouble(3),rs.getInt(6)
-                       ,rs.getInt(4));
+
+            while (rs.next()) {
+                if (rs.getString(2).equals("Saving Account")) {
+                    acc = new SavingAccount(rs.getInt(1), rs.getDouble(3), rs.getBoolean(6), rs.getDouble(5), rs.getInt(4));
+                } else {
+                    acc = new CreditAccount(rs.getInt(1), rs.getDouble(5), rs.getDouble(3), rs.getInt(6), rs.getInt(4));
                 }
             }
         } catch (SQLException ex) {
@@ -115,50 +113,51 @@ public class DBConnection {
         }
         return acc;
     }
-    public void deposit(int accountId, double amount){
+
+    public void deposit(int accountId, double amount) {
         try {
-            ps=con.prepareStatement(String.format("UPDATE Account "
-                           + "SET saldo=saldo+%f "
-                           + "WHERE accountId=%d",amount,accountId));
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-    }
-    public void withdraw(int accountId, double amount){
-        try {
-            ps=con.prepareStatement(String.format("UPDATE Account "
-                           + "SET saldo=saldo-%f "
-                           + "WHERE accountId=%d",amount,accountId));
+            ps = con.prepareStatement(String.format("UPDATE Account "
+                    + "SET saldo=saldo+%f "
+                    + "WHERE accountId=%d", amount, accountId));
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
     }
 
-    public void addTransaction(Transaction transaction){
-        
+    public void withdraw(int accountId, double amount) {
         try {
-            ps=con.prepareStatement(String.format("INSERT INTO Transaction "
-                           + "(accountId,date,time,withdrawal,amount,updatebalance,Account_accountId)"
-                           + "VALUES (%d,%s,&s,%b,%f,%f)",transaction.getAccountID(),transaction.getDate()
-                           ,transaction.getTime(),transaction.isWithdrawal(),transaction.getAmount(),transaction.getUpdatedBalance()));
+            ps = con.prepareStatement(String.format("UPDATE Account "
+                    + "SET saldo=saldo-%f "
+                    + "WHERE accountId=%d", amount, accountId));
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-        
     }
-    public ArrayList getTransactions(int accountID){
-        ArrayList<Transaction> transactionList= new ArrayList();
+
+    public void addTransaction(Transaction transaction) {
+
         try {
-            ResultSet rs=st.executeQuery(String.format("SELECT * FROM Transaction WHERE "
-                           + "accountId=%d",accountID));
-            while(rs.next()){
-                transactionList.add(new Transaction(rs.getInt(7),rs.getString(2),rs.getString(3)
-                ,rs.getBoolean(4),rs.getDouble(5),rs.getDouble(6)));
+            ps = con.prepareStatement(String.format("INSERT INTO Transaction "
+                    + "(accountId,date,time,withdrawal,amount,updatebalance,Account_accountId)"
+                    + "VALUES (%d,%s,&s,%b,%f,%f)", transaction.getAccountID(), transaction.getDate(), transaction.getTime(), transaction.isWithdrawal(), transaction.getAmount(), transaction.getUpdatedBalance()));
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+    }
+
+    public ArrayList getTransactions(int accountID) {
+        ArrayList<Transaction> transactionList = new ArrayList();
+        try {
+            ResultSet rs = st.executeQuery(String.format("SELECT * FROM Transaction WHERE "
+                    + "accountId=%d", accountID));
+            while (rs.next()) {
+                transactionList.add(new Transaction(rs.getInt(7), rs.getString(2), rs.getString(3), rs.getBoolean(4), rs.getDouble(5), rs.getDouble(6)));
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-       return transactionList; 
+        return transactionList;
     }
 
     public void addCustomer(Customer newCustomer) {
@@ -171,26 +170,20 @@ public class DBConnection {
             System.out.println(ex.getMessage());
         }
     }
-    
-    public void closeAccount(int accountId){
-        
+
+    public void closeAccount(int accountId) {
+
         try {
             st.executeUpdate(String.format(""
-                    
-                    
                     + "DELETE FROM Account WHERE accountId = %d ", accountId));
-            
+
             st.executeUpdate(String.format(""
                     + "DELETE FROM SavingAccount WHERE accountId = %d ", accountId));
-                    
-                    
-                    
-                    } catch (SQLException ex) {
+
+        } catch (SQLException ex) {
             Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-         
-        
+
     }
 
     public Customer getCustomer(long customerSsn) {
@@ -268,9 +261,10 @@ public class DBConnection {
     public long getCustomerViaIndex(int index) {
         long customerSsn = 0;
         try {
-
-            ResultSet rs = st.executeQuery("SELECT ssn FROM customer LIMIT " + customerSsn + ",1");
-            customerSsn = rs.getLong(1);
+            ResultSet rs = st.executeQuery("SELECT ssn FROM customer LIMIT " + index + ",1");
+            while (rs.next()) {
+                customerSsn = rs.getLong(1);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -281,14 +275,15 @@ public class DBConnection {
         int accountId = 0;
         try {
 
-            ResultSet rs = st.executeQuery("SELECT * FROM customer LIMIT " + accountId + ",1");
+            ResultSet rs = st.executeQuery("SELECT * FROM customer LIMIT " + index + ",1");
             accountId = rs.getInt(1);
         } catch (SQLException ex) {
             Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
         return accountId;
     }
-    public int addCreditAccount(long ssn){
+
+    public int addCreditAccount(long ssn) {
         int accountNbr = -1;
         try {
             ps = con.prepareStatement("INSERT INTO Account (saldo, AccountType_type, Customer_ssn) VALUES (?, '?', ?);");
