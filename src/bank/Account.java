@@ -1,13 +1,11 @@
 package bank;
 
-import java.util.ArrayList;
-
 /**
  * Superclass for an account
  *
  * @author Grupp 4
  */
-public abstract class Account {
+public abstract class Account implements Comparable<Account> {
 
     protected final int accountID;
     protected double saldo;
@@ -21,10 +19,10 @@ public abstract class Account {
      * @param accountType The type of account
      * @param saldo
      */
-    public Account(int accountID, String accountType,double saldo) {
+    public Account(int accountID, String accountType, double saldo) {
         this.accountID = accountID;
         this.accountType = accountType;
-        this.saldo=saldo;
+        this.saldo = saldo;
     }
 
     public int getAccountID() {
@@ -49,5 +47,14 @@ public abstract class Account {
      * @return The interest
      */
     public abstract double calcInterest();
+
+    @Override
+    public int compareTo(Account acc) {
+        if (this.accountID > acc.accountID) {
+            return 1;
+        } else {
+            return -1;
+        }
+    }
 
 }
