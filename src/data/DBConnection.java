@@ -159,7 +159,7 @@ public class DBConnection {
 
     public void addCustomer(Customer newCustomer) {
         try {
-            ps = con.prepareStatement("INSERT INTO customer (ssn, name) VALUES (?, '?');");
+            ps = con.prepareStatement("INSERT INTO customer (ssn, name) VALUES (?, ?);");
             ps.setLong(1, newCustomer.getSsn());
             ps.setString(2, newCustomer.getName());
             ps.executeUpdate();
@@ -175,10 +175,10 @@ public class DBConnection {
                     + "DELETE FROM Account WHERE accountId = %d ", accountId));
 
             st.executeUpdate(String.format(""
-                    + "DELETE FROM SavingAccount WHERE accountId = %d ", accountId));
+                    + "DELETE FROM SavingAccount WHERE Account_accountId = %d ", accountId));
 
         } catch (SQLException ex) {
-            Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }
 
     }
@@ -199,9 +199,9 @@ public class DBConnection {
 
     public void changeCustomer(Customer customer, String newName) {
         try {
-            ps = con.prepareStatement("UPDATE customer SET name = '?' WHERE ssn = ?;");
-            ps.setLong(1, customer.getSsn());
-            ps.setString(2, newName);
+            ps = con.prepareStatement("UPDATE customer SET name = ? WHERE ssn = ?;");
+            ps.setLong(2, customer.getSsn());
+            ps.setString(1, newName);
             ps.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -256,7 +256,7 @@ public class DBConnection {
         int accountNbr = -1;
         try {
 
-            ps = con.prepareStatement("INSERT INTO Account (saldo, AccountType_type, Customer_ssn) VALUES (?, '?', ?);");
+            ps = con.prepareStatement("INSERT INTO Account (saldo, AccountType_type, Customer_ssn) VALUES (?, ?, ?);");
             ps.setDouble(1, 0);
             ps.setString(2, "SavingsAccount");
             ps.setLong(3, ssn);
@@ -304,7 +304,8 @@ public class DBConnection {
     public int addCreditAccount(long ssn) {
         int accountNbr = -1;
         try {
-            ps = con.prepareStatement("INSERT INTO Account (saldo, AccountType_type, Customer_ssn) VALUES (?, '?', ?);");
+            //double creditInterest,double interest,int creditLimit,double saldo
+            ps = con.prepareStatement("INSERT INTO Account (saldo,AccountType_type,Customer_ssn) VALUES (?, ?, ?);");
             ps.setDouble(1, 0);
             ps.setString(2, "CreditAccount");
             ps.setLong(3, ssn);

@@ -68,6 +68,7 @@ public class BankLogic {
         if (customer != null) {
             return false;
         } else {
+            customer = new Customer(name,ssn);
             dbConnection.addCustomer(customer);
             return true;
         }
