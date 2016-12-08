@@ -19,6 +19,7 @@ public abstract class Account {
      *
      * @param accountID The unique id of the account
      * @param accountType The type of account
+     * @param saldo
      */
     public Account(int accountID, String accountType,double saldo) {
         this.accountID = accountID;
