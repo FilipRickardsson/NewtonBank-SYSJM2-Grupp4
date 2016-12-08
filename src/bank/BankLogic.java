@@ -129,11 +129,12 @@ public class BankLogic {
             double sumInterest = 0;
             double sumSaldo = 0;
             info.add(customer.toString());
-            ArrayList<Account> accounts = customer.getAccounts();
+            ArrayList<Account> accounts = dbConnection.getAccounts(ssn);
             for (int j = 0; j < accounts.size(); j++) {
                 info.add(accounts.get(j).toString());
                 sumInterest += accounts.get(j).calcInterest();
                 sumSaldo += accounts.get(j).getSaldo();
+                dbConnection.closeAccount(accounts.get(j).getAccountID());
             }
             if (sumSaldo + sumInterest < 0) {
 

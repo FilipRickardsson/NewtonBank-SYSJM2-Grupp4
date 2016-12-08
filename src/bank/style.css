@@ -49,6 +49,18 @@
     -fx-background-color: #848482;
 }
 
+.bigActionButton {
+    -fx-background-color: #515151;
+    -fx-pref-width: 250px;
+    -fx-font-size:12pt;
+    -fx-font-weight:bold;
+    -fx-text-fill:white;
+}
+
+.bigActionButton:hover {
+    -fx-background-color: #848482;
+}
+
 .content {
     -fx-background-color: #FFFFFF;
     -fx-pref-height: 1100px;
