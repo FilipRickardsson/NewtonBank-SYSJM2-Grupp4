@@ -202,9 +202,9 @@ public class DBConnection {
 
     public void changeCustomer(Customer customer, String newName) {
         try {
-            ps = con.prepareStatement("UPDATE customer SET name = '?' WHERE ssn = ?;");
-            ps.setLong(1, customer.getSsn());
-            ps.setString(2, newName);
+            ps = con.prepareStatement("UPDATE customer SET name = ? WHERE ssn = ?;");
+            ps.setLong(2, customer.getSsn());
+            ps.setString(1, newName);
             ps.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
