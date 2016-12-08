@@ -1,6 +1,5 @@
-Name: Dijana Popovic, SSN: 197912120101
-Name: Johan Jönsson, SSN: 199702020101
-Name: Christoffer Flystam, SSN: 199202254545
 Name: Tobias Hjertelundh, SSN: 198706045625
-Name: Bekir Halvadzic, SSN: 199909195421
 Name: Filip Rickardsson, SSN: 198802023251
+Name: Dijana Popovic, SSN: 199009230120
+Name: Christoffer Flystam, SSN: 199202255454
+Name: Johan Jönsson, SSN: 199702020101

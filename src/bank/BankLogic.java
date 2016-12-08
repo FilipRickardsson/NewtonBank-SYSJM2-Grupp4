@@ -68,6 +68,7 @@ public class BankLogic {
         if (customer != null) {
             return false;
         } else {
+            customer = new Customer(name,ssn);
             dbConnection.addCustomer(customer);
             return true;
         }
@@ -82,17 +83,15 @@ public class BankLogic {
      */
     public List<String> getCustomer(long ssn) {
         ArrayList<String> customerInformation = new ArrayList();
-
         Customer customer = dbConnection.getCustomer(ssn);
         if (customer != null) {
             customerInformation.add(customer.getName());
             customerInformation.add(Long.toString(customer.getSsn()));
-            ArrayList accounts = customer.getAccounts();
+            ArrayList accounts = dbConnection.getAccounts(ssn);
             for (int j = 0; j < accounts.size(); j++) {
                 customerInformation.add(accounts.get(j).toString());
             }
         }
-
         return customerInformation;
     }
 
@@ -105,7 +104,7 @@ public class BankLogic {
      * @return True if successfully changed the name
      */
     public boolean changeCustomer(String name, long ssn) {
-        Customer customer = dbConnection.searchForCustomer(ssn);
+        Customer customer = dbConnection.getCustomer(ssn);
         if (customer != null) {
             dbConnection.changeCustomer(customer, name);
             return true;
@@ -123,7 +122,7 @@ public class BankLogic {
      */
     public List<String> removeCustomer(long ssn) {
         List<String> info = new ArrayList();
-        Customer customer = dbConnection.searchForCustomer(ssn);
+        Customer customer = dbConnection.getCustomer(ssn);
         if (customer != null) {
             double sumInterest = 0;
             double sumSaldo = 0;
@@ -156,7 +155,7 @@ public class BankLogic {
      */
     public int addSavingsAccount(long ssn) {
         int accountNbr = -1;
-        Customer customer = dbConnection.searchForCustomer(ssn); 
+        Customer customer = dbConnection.getCustomer(ssn); 
         if (customer != null) {
             accountNbr = dbConnection.AddSavingsAccount(ssn);
         }
@@ -184,7 +183,6 @@ public class BankLogic {
      * Makes a deposit to an account that belongs to the customer with the
      * social security number.
      *
-     * @param ssn SSN of the customer
      * @param accountId ID of the account
      * @param amount Amount to deposit
      * @return True if successfully deposited money
@@ -249,8 +247,7 @@ public class BankLogic {
             info = "SSN: " + ssn + ", Type: " + acc.getAccountType()
                     + ", Saldo: " + String.format("%.2f", acc.getSaldo())
                     + ", Interest: " + String.format("%.2f", acc.calcInterest());
-            Customer co = getCustomer(ssn);
-            co.getAccounts().remove(acc);
+            dbConnection.closeAccount(accountId);
         }
         return info;
     }
@@ -263,11 +260,9 @@ public class BankLogic {
      */
     public int addCreditAccount(long ssn) {
         int accountNbr = -1;
-        Customer customer = searchForCustomer(ssn);
+        Customer customer = dbConnection.getCustomer(ssn); 
         if (customer != null) {
-            accountNbr = accountNbrCounter;
-            searchForCustomer(ssn).getAccounts().add(new CreditAccount(accountNbr));
-            accountNbrCounter++;
+            accountNbr = dbConnection.addCreditAccount(ssn);
         }
         return accountNbr;
     }
@@ -300,7 +295,7 @@ public class BankLogic {
      */
     private Customer searchForCustomer(long ssn) {
         Customer customer = null;
-        customer = dbConnection.searchForCustomer(ssn);
+        customer = dbConnection.getCustomer(ssn);
        
         return customer;
     }
@@ -339,6 +334,23 @@ public class BankLogic {
             BufferedWriter bf = new BufferedWriter(write);
             PrintWriter pw = new PrintWriter(bf);
             ArrayList <Customer> c = dbConnection.getCustomers(); 
+            for (int i = 0; i < c.size(); i++) {
+                pw.println(c.get(i).toString());
+            }
+            pw.close();
+            return true;
+
+        } catch (IOException ex) {
+            return false;
+        }
+    }
+    
+       public boolean transactionsToFile(int accountId) {
+        try {
+            FileWriter write = new FileWriter("Transactionlist.txt");
+            BufferedWriter bf = new BufferedWriter(write);
+            PrintWriter pw = new PrintWriter(bf);
+            ArrayList <Transaction> c = dbConnection.getTransactions(accountId);
             for (int i = 0; i < c.size(); i++) {
                 pw.println(c.get(i).toString());
             }
