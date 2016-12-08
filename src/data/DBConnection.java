@@ -167,11 +167,9 @@ public class DBConnection {
     public void closeAccount(int accountId) {
 
         try {
-            st.executeUpdate(String.format(""
-                    + "DELETE FROM Account WHERE accountId = %d ", accountId));
+            st.executeUpdate("DELETE FROM SavingAccount WHERE Account_accountId = " +  accountId);
+            st.executeUpdate("DELETE FROM Account WHERE accountId = " + accountId);
 
-            st.executeUpdate(String.format(""
-                    + "DELETE FROM SavingAccount WHERE Account_accountId = %d ", accountId));
 
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());

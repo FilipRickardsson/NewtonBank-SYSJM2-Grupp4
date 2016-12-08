@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="825.0" prefWidth="1100.0" styleClass="borderPane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bank.AccountController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="825.0" prefWidth="1100.0" styleClass="borderPane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bank.AccountController">
    <left>
       <VBox prefHeight="200.0" prefWidth="100.0" styleClass="menu" BorderPane.alignment="CENTER">
          <children>
@@ -33,7 +33,7 @@
                   <HBox>
                      <children>
                         <Label prefHeight="20.0" prefWidth="722.0" styleClass="smallHeader" text="Amount" />
-                        <Button mnemonicParsing="false" onAction="#printAccountToFile" prefHeight="26.0" prefWidth="96.0" styleClass="actionButton" text="Button" />
+                        <Button mnemonicParsing="false" onAction="#printAccountToFile" prefHeight="37.0" prefWidth="233.0" styleClass="bigActionButton" text="Print transactions" />
                      </children>
                   </HBox>
                   <TextField fx:id="amount" styleClass="textField" />
