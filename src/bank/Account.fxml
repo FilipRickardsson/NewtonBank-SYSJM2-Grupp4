@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="825.0" prefWidth="1100.0" styleClass="borderPane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bank.AccountController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="825.0" prefWidth="1100.0" styleClass="borderPane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bank.AccountController">
    <left>
       <VBox prefHeight="200.0" prefWidth="100.0" styleClass="menu" BorderPane.alignment="CENTER">
          <children>
@@ -30,7 +30,12 @@
                <children>
                   <Label fx:id="accountInformation" styleClass="bigHeader" />
                   <ListView fx:id="transactions" minHeight="-Infinity" prefHeight="200.0" prefWidth="200.0" styleClass="interactiveListView" />
-                  <Label styleClass="smallHeader" text="Amount" />
+                  <HBox>
+                     <children>
+                        <Label prefHeight="20.0" prefWidth="722.0" styleClass="smallHeader" text="Amount" />
+                        <Button mnemonicParsing="false" onAction="#printAccountToFile" prefHeight="26.0" prefWidth="96.0" styleClass="actionButton" text="Button" />
+                     </children>
+                  </HBox>
                   <TextField fx:id="amount" styleClass="textField" />
                   <HBox prefHeight="40.0" prefWidth="814.0" styleClass="hBox">
                      <children>
@@ -38,7 +43,12 @@
                         <Button mnemonicParsing="false" onAction="#makeWithdrawal" styleClass="actionButton" text="Withdraw" />
                      </children>
                   </HBox>
-                  <Label fx:id="error" />
+                  <VBox>
+                     <children>
+                        <Label fx:id="listViewInformation" />
+                        <Label fx:id="error" />
+                     </children>
+                  </VBox>
                </children></VBox>
          </content>
       </ScrollPane>

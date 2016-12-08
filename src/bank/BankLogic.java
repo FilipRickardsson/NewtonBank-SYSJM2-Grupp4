@@ -346,6 +346,23 @@ public class BankLogic {
             return false;
         }
     }
+    
+       public boolean transactionsToFile(int accountId) {
+        try {
+            FileWriter write = new FileWriter("Transactionlist.txt");
+            BufferedWriter bf = new BufferedWriter(write);
+            PrintWriter pw = new PrintWriter(bf);
+            ArrayList <Transaction> c = dbConnection.getTransactions(accountId);
+            for (int i = 0; i < c.size(); i++) {
+                pw.println(c.get(i).toString());
+            }
+            pw.close();
+            return true;
+
+        } catch (IOException ex) {
+            return false;
+        }
+    }
 
     /**
      * Returns customer ssn of given index
