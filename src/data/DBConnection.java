@@ -11,10 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -218,6 +215,41 @@ public class DBConnection {
             System.out.println(ex.getMessage());
         }
 
+    }
+
+    public ArrayList getAccounts(long ssn) {
+        ArrayList<Account> accounts = new ArrayList();
+        try {
+            ResultSet rs = st.executeQuery(String.format(""
+                    + "SELECT accountId, AccountType_type, AccountType.interest,"
+                    + "saldo, withdrawalFee, firstwithdrawal "
+                    + "FROM Account "
+                    + "JOIN AccountType "
+                    + "ON AccountType_type = type "
+                    + "JOIN SavingAccount "
+                    + "ON accountId = account_accountId "
+                    + "WHERE Customer_ssn = %d", ssn));
+            while (rs.next()) {
+                accounts.add(new SavingAccount(rs.getInt(1), rs.getDouble(3), rs.getBoolean(6), rs.getDouble(5), rs.getInt(4)));
+            }
+
+            rs = st.executeQuery(String.format(""
+                    + "SELECT accountId, AccountType_type, AccountType.interest, "
+                    + "saldo, creditInterest, creditLimit "
+                    + "FROM Account "
+                    + "JOIN AccountType "
+                    + "ON AccountType_type = type "
+                    + "WHERE Customer_ssn = %d "
+                    + "AND AccountType_type = 'Credit Account' ", ssn));
+
+            while (rs.next()) {
+                accounts.add(new CreditAccount(rs.getInt(1), rs.getDouble(5), rs.getDouble(3), rs.getInt(6), rs.getInt(4)));
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return accounts;
     }
 
     public int AddSavingsAccount(long ssn) {

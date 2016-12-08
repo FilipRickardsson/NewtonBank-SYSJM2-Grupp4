@@ -82,17 +82,15 @@ public class BankLogic {
      */
     public List<String> getCustomer(long ssn) {
         ArrayList<String> customerInformation = new ArrayList();
-
         Customer customer = dbConnection.getCustomer(ssn);
         if (customer != null) {
             customerInformation.add(customer.getName());
             customerInformation.add(Long.toString(customer.getSsn()));
-            ArrayList accounts = customer.getAccounts();
+            ArrayList accounts = dbConnection.getAccounts(ssn);
             for (int j = 0; j < accounts.size(); j++) {
                 customerInformation.add(accounts.get(j).toString());
             }
         }
-
         return customerInformation;
     }
 
@@ -184,7 +182,6 @@ public class BankLogic {
      * Makes a deposit to an account that belongs to the customer with the
      * social security number.
      *
-     * @param ssn SSN of the customer
      * @param accountId ID of the account
      * @param amount Amount to deposit
      * @return True if successfully deposited money
