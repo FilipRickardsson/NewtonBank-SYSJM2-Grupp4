@@ -288,10 +288,10 @@ public class DBConnection {
         return customerSsn;
     }
 
-    public int getAccountIdViaIndex(int index) {
+    public int getAccountIdViaIndex(long ssn, int index) {
         int accountId = 0;
         try {
-            ResultSet rs = st.executeQuery("SELECT accountId FROM account LIMIT " + index + ",1");
+            ResultSet rs = st.executeQuery("SELECT accountId FROM account WHERE customer_ssn = " + ssn + " LIMIT " + index + ",1");
             while (rs.next()) {
                 accountId = rs.getInt(1);
             }
@@ -315,6 +315,5 @@ public class DBConnection {
         }
         return accountNbr;
     }
-    
-   
+
 }

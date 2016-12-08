@@ -382,10 +382,9 @@ public class BankLogic {
      * @param AccountIdIndex Selected index
      * @return accountID of selected account
      */
-    public int getCustomerAccountIdViaIndex(int AccountIdIndex) {
+    public int getCustomerAccountIdViaIndex(long ssn, int AccountIdIndex) {
         int accountId = 0;
-        System.out.println("debug 1");
-        accountId = dbConnection.getAccountIdViaIndex(AccountIdIndex);
+        accountId = dbConnection.getAccountIdViaIndex(ssn, AccountIdIndex);
         System.out.println("Banklogic: getCustomerAccountIdViaIndex: " +accountId);
         return accountId;
     }

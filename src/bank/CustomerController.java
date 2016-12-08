@@ -125,7 +125,7 @@ public class CustomerController extends BaseController {
     @FXML
     private void buttonSelect(ActionEvent event) throws IOException {
         if (listOfAccounts.getSelectionModel().getSelectedItem() != null) {
-            selectedCustomerAccountID = bankLogic.getCustomerAccountIdViaIndex(listOfAccounts.getSelectionModel().getSelectedIndex());
+            selectedCustomerAccountID = bankLogic.getCustomerAccountIdViaIndex(selectedCustomerSSN, listOfAccounts.getSelectionModel().getSelectedIndex());
             loadScene("Account.fxml");
         } else {
             showMessage("Nothing selected", message2, true);
@@ -135,7 +135,7 @@ public class CustomerController extends BaseController {
     @Override
     protected void popupYes() {
         if (typeOfOperation == 0) {
-            selectedCustomerAccountID = bankLogic.getCustomerAccountIdViaIndex(listOfAccounts.getSelectionModel().getSelectedIndex());
+            selectedCustomerAccountID = bankLogic.getCustomerAccountIdViaIndex(selectedCustomerSSN, listOfAccounts.getSelectionModel().getSelectedIndex());
             loadScene("Info.fxml");
         } else {
             if (saving.isSelected()) {
