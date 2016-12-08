@@ -30,6 +30,11 @@ public class AccountController extends BaseController {
 
     @FXML
     private Label error;
+    
+    @FXML
+    private Label listViewInformation;
+    
+    
 
     /**
      * Tries to make a desposit based on user-input and shows messages based on
@@ -73,6 +78,16 @@ public class AccountController extends BaseController {
             showMessage("Invalid input", error, true);
         }
         amount.clear();
+    }
+    
+    
+    @FXML
+    private void printAccountToFile() {
+        if (bankLogic.transactionsToFile(selectedCustomerAccountID)) {
+            showMessage("Transaction list printed to text file", listViewInformation, false);
+        } else {
+            showMessage("Could not write to file. Check file permissions", listViewInformation, true);
+        }
     }
 
     /**
