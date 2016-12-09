@@ -92,9 +92,9 @@ public class DBConnection {
             }
             while (rs.next()) {
                 if (rs.getString(2).equals("Savings Account")) {
-                    acc = new SavingAccount(rs.getInt(1), rs.getDouble(3), rs.getBoolean(6), rs.getDouble(5), rs.getInt(4));
+                    acc = new SavingAccount(rs.getInt(1), rs.getDouble(3), rs.getBoolean(6), rs.getDouble(5), rs.getDouble(4));
                 } else {
-                    acc = new CreditAccount(rs.getInt(1), rs.getDouble(5), rs.getDouble(3), rs.getInt(6), rs.getInt(4));
+                    acc = new CreditAccount(rs.getInt(1), rs.getDouble(5), rs.getDouble(3), rs.getInt(6), rs.getDouble(4));
                 }
             }
         } catch (SQLException ex) {
@@ -105,7 +105,7 @@ public class DBConnection {
 
     public void deposit(int accountId, double amount) {
         try {
-           st.executeUpdate("UPDATE account SET saldo = saldo+"+amount+"WHERE accountid = "+accountId);
+            st.executeUpdate("UPDATE account SET saldo = saldo+" + amount + "WHERE accountid = " + accountId);
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             System.out.println("Debug 1");
@@ -114,18 +114,25 @@ public class DBConnection {
 
     public void withdraw(int accountId, double amount) {
         try {
-             st.executeUpdate("UPDATE account SET saldo = saldo-"+amount+"WHERE accountid = "+accountId);
+            st.executeUpdate("UPDATE account SET saldo = saldo-" + amount + "WHERE accountid = " + accountId);
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public void updateFirstWithdrawal(int accountId) {
+        try {
+            st.executeUpdate("UPDATE savingaccount SET firstwithdrawal = false WHERE account_accountid =  " + accountId);
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
     }
 
     public void addTransaction(Transaction transaction) {
-
         try {
-            st.executeUpdate ("INSERT INTO Transaction "
+            st.executeUpdate("INSERT INTO Transaction "
                     + "(date,time,withdrawal,amount,updatedbalance,Account_accountId) "
-                    + "VALUES ('"+transaction.getDate()+"','"+transaction.getTime()+"',"+transaction.isWithdrawal()+","+transaction.getAmount()+","+transaction.getUpdatedBalance()+","+transaction.getAccountID()+")");
+                    + "VALUES ('" + transaction.getDate() + "','" + transaction.getTime() + "'," + transaction.isWithdrawal() + "," + transaction.getAmount() + "," + transaction.getUpdatedBalance() + "," + transaction.getAccountID() + ")");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
@@ -162,9 +169,8 @@ public class DBConnection {
 
     public void closeAccount(int accountId) {
         try {
-            st.executeUpdate("DELETE FROM SavingAccount WHERE Account_accountId = " +  accountId);
+            st.executeUpdate("DELETE FROM SavingAccount WHERE Account_accountId = " + accountId);
             st.executeUpdate("DELETE FROM Account WHERE accountId = " + accountId);
-
 
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -219,7 +225,8 @@ public class DBConnection {
                     + "WHERE Customer_ssn = %d "
                     + "AND AccountType_type = 'Savings Account' ", ssn));
             while (rs.next()) {
-                accounts.add(new SavingAccount(rs.getInt(1), rs.getDouble(3), rs.getBoolean(6), rs.getDouble(5), rs.getInt(4)));
+                System.out.println(rs.getInt(1) + " " + rs.getDouble(3) + " " + rs.getBoolean(6) + " " + rs.getDouble(5) + " " + rs.getDouble(4));
+                accounts.add(new SavingAccount(rs.getInt(1), rs.getDouble(3), rs.getBoolean(6), rs.getDouble(5), rs.getDouble(4)));
             }
 
             rs = st.executeQuery(String.format(""
@@ -232,7 +239,8 @@ public class DBConnection {
                     + "AND AccountType_type = 'Credit Account' ", ssn));
 
             while (rs.next()) {
-                accounts.add(new CreditAccount(rs.getInt(1), rs.getDouble(5), rs.getDouble(3), rs.getInt(6), rs.getInt(4)));
+                System.out.println(rs.getInt(1) + " " + rs.getDouble(5) + " " + rs.getDouble(3) + " " + rs.getInt(6) + " " + rs.getDouble(4));
+                accounts.add(new CreditAccount(rs.getInt(1), rs.getDouble(5), rs.getDouble(3), rs.getInt(6), rs.getDouble(4)));
             }
 
         } catch (SQLException ex) {
