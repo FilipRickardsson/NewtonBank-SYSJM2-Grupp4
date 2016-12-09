@@ -13,13 +13,17 @@ public class CreditAccount extends Account {
     /**
      * Constructor
      *
-     * @param accountNumber The unique account id
+     * @param accountNumber
+     * @param creditInterest
+     * @param interest
+     * @param creditLimit
+     * @param saldo
      */
-    public CreditAccount(int accountNumber,double creditInterest,double interest,int creditLimit,double saldo) {
-        super(accountNumber, "Credit Account",saldo);
-        this.creditInterest = 0.07;
-        this.interest = 0.005;
-        this.creditLimit = -5000;
+    public CreditAccount(int accountNumber, double creditInterest, double interest, int creditLimit, double saldo) {
+        super(accountNumber, "Credit Account", saldo);
+        this.creditInterest = creditInterest;
+        this.interest = interest;
+        this.creditLimit = creditLimit;
     }
 
     public int getCreditLimit() {
@@ -29,7 +33,7 @@ public class CreditAccount extends Account {
     public double getCreditInterest() {
         return creditInterest;
     }
-        
+
     /**
      * Calculates the interest
      *
@@ -48,10 +52,10 @@ public class CreditAccount extends Account {
     public String toString() {
         if (saldo < 0) {
             return "AccountID: " + accountID + ", Type: " + accountType
-                    + ", Interest: " + interest + "\nSaldo: " + String.format("%.2f", saldo);
+                    + ", Interest: " + interest * 100 + "%" + "\nSaldo: " + String.format("%.2f", saldo);
         } else {
             return "AccountID: " + accountID + ", Type: " + accountType
-                    + ", Interest: " + interest + "\nSaldo: " + String.format("%.2f", saldo);
+                    + ", Interest: " + interest * 100 + "%" + "\nSaldo: " + String.format("%.2f", saldo);
         }
     }
 }

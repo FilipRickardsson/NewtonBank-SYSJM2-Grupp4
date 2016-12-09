@@ -7,18 +7,23 @@ package bank;
  */
 public class SavingAccount extends Account {
 
-    private boolean firstWithdrawal;
+    private final boolean firstWithdrawal;
     private final double withdrawalFee;
 
     /**
      * Constructor
-     * @param accountID The unique account id
+     *
+     * @param accountID
+     * @param interest
+     * @param firstWithDrawal
+     * @param withdrawalFee
+     * @param saldo
      */
-    public SavingAccount(int accountID,double interest,boolean firstWithDrawal,double withdrawalFee,double saldo) {
-        super(accountID, "Saving Account",saldo);
-        this.interest=interest;
-        this.firstWithdrawal=firstWithDrawal;
-        this.withdrawalFee=withdrawalFee;
+    public SavingAccount(int accountID, double interest, boolean firstWithDrawal, double withdrawalFee, double saldo) {
+        super(accountID, "Saving Account", saldo);
+        this.interest = interest;
+        this.firstWithdrawal = firstWithDrawal;
+        this.withdrawalFee = withdrawalFee;
     }
 
     //<editor-fold defaultstate="collapsed" desc="Getters">
@@ -31,7 +36,6 @@ public class SavingAccount extends Account {
     }
 
     //</editor-fold>
-        
     /**
      * Calculates interest of the account.
      *
@@ -45,7 +49,7 @@ public class SavingAccount extends Account {
     @Override
     public String toString() {
         return "AccountID: " + accountID + ", Type: " + accountType
-                + ", Interest: " + interest + "\nSaldo: " + String.format("%.2f", saldo);
+                + ", Interest: " + interest * 100 + "%" + "\nSaldo: " + String.format("%.2f", saldo);
     }
 
 }

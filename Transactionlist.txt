@@ -1,5 +1,5 @@
-Date of account history2016/12/0814:51:11
-2016/12/08 14:50:50  Out: 4000,00 Balance: -4000,00
-2016/12/08 14:50:57  Out: 1000,00 Balance: -5000,00
-2016/12/08 14:51:03  In: 1,00 Balance: -4999,00
-2016/12/08 14:51:07  Out: 0,20 Balance: -4999,20
+***** Newton Bank *****
+Date of account history: 2016/12/09 17:26:43
+
+Transactions:
+None

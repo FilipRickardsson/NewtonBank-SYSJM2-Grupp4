@@ -49,10 +49,10 @@ public class CustomerController extends BaseController {
 
     @FXML
     private Label message;
-    
+
     @FXML
     private Label message2;
-    
+
     @FXML
     private Button btnAccount;
 

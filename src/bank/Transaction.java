@@ -6,6 +6,7 @@ import java.util.Date;
 
 /**
  * A transaction created by an account
+ *
  * @author Grupp 4
  */
 public class Transaction {
@@ -19,6 +20,7 @@ public class Transaction {
 
     /**
      * Constructor
+     *
      * @param accountID The unique account id
      * @param withdrawal true if a withdrawal was made
      * @param amount The amount to deposit/withdraw
@@ -38,15 +40,17 @@ public class Transaction {
         this.amount = amount;
         this.updatedBalance = updatedBalance;
     }
-    public Transaction(int accountID,String date,String time, boolean withdrawal,
-            double amount, double updatedBalance){
-                this.accountID = accountID;
+
+    public Transaction(int accountID, String date, String time, boolean withdrawal,
+            double amount, double updatedBalance) {
+        this.accountID = accountID;
         this.date = date;
         this.time = time;
         this.withdrawal = withdrawal;
         this.amount = amount;
         this.updatedBalance = updatedBalance;
     }
+
     //<editor-fold defaultstate="collapsed" desc="Getters">
     public String getTime() {
         return time;
@@ -75,16 +79,15 @@ public class Transaction {
     public boolean isWithdrawal() {
         return withdrawal;
     }
-    
 
     //</editor-fold>
     @Override
     public String toString() {
         if (withdrawal) {
-            return date + " " + time + " " + " Out: " + String.format("%.2f", amount) 
+            return date + " " + time + " " + " Out: " + String.format("%.2f", amount)
                     + " Balance: " + String.format("%.2f", updatedBalance);
         } else {
-            return date + " " + time + " " + " In: " + String.format("%.2f", amount) 
+            return date + " " + time + " " + " In: " + String.format("%.2f", amount)
                     + " Balance: " + String.format("%.2f", updatedBalance);
         }
     }

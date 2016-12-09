@@ -48,11 +48,18 @@ public abstract class Account implements Comparable<Account> {
      */
     public abstract double calcInterest();
 
+    /**
+     * Determines how two Accounts objects should be sorted
+     *
+     * @param acc object to compare against
+     * @return
+     */
     @Override
     public int compareTo(Account acc) {
         if (this.accountID > acc.accountID) {
             return 1;
-        } else {
+        }
+        else {
             return -1;
         }
     }

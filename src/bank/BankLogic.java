@@ -22,14 +22,9 @@ public class BankLogic {
 
     private static BankLogic bankLogic;
     private DBConnection dbConnection;
-    private final List<Customer> customers; //REMOVE LATER
-    private int accountNbrCounter;
 
     private BankLogic() {
         dbConnection = DBConnection.getDBConnection();
-        customers = new ArrayList();
-        accountNbrCounter = 1001;
-
     }
 
     /**
@@ -51,9 +46,9 @@ public class BankLogic {
      */
     public ArrayList<String> getCustomers() {
         ArrayList<String> customerPresentation = new ArrayList();
-        ArrayList<Customer> c = dbConnection.getCustomers();
-        for (int i = 0; i < c.size(); i++) {
-            customerPresentation.add(c.get(i).toString());
+        ArrayList<Customer> customers = dbConnection.getCustomers();
+        for (int i = 0; i < customers.size(); i++) {
+            customerPresentation.add(customers.get(i).toString());
         }
 
         return customerPresentation;
@@ -68,7 +63,7 @@ public class BankLogic {
      * @return True if successfully created customer
      */
     public boolean addCustomer(String name, long ssn) {
-        Customer customer = searchForCustomer(ssn);
+        Customer customer = dbConnection.getCustomer(ssn);
         if (customer != null) {
             return false;
         } else {
@@ -93,8 +88,8 @@ public class BankLogic {
             customerInformation.add(Long.toString(customer.getSsn()));
             ArrayList accounts = dbConnection.getAccounts(ssn);
             Collections.sort(accounts);
-            for (int j = 0; j < accounts.size(); j++) {
-                customerInformation.add(accounts.get(j).toString());
+            for (int i = 0; i < accounts.size(); i++) {
+                customerInformation.add(accounts.get(i).toString());
             }
         }
         return customerInformation;
@@ -114,7 +109,6 @@ public class BankLogic {
             dbConnection.changeCustomer(customer, name);
             return true;
         }
-
         return false;
     }
 
@@ -163,7 +157,7 @@ public class BankLogic {
         int accountNbr = -1;
         Customer customer = dbConnection.getCustomer(ssn);
         if (customer != null) {
-            accountNbr = dbConnection.AddSavingsAccount(ssn);
+            accountNbr = dbConnection.addSavingsAccount(ssn);
         }
         return accountNbr;
     }
@@ -185,8 +179,15 @@ public class BankLogic {
         return "Could not find account";
     }
 
+    /**
+     * Adds a transaction to chosen account
+     *
+     * @param account Account witch made the transaction
+     * @param isWithdrawal True if a withdrawal was made
+     * @param amount The amount that was withdrawn or deposited
+     */
     private void addTransaction(Account account, boolean isWithdrawal, double amount) {
-        double updatedBalance = 0;
+        double updatedBalance;
         if (isWithdrawal) {
             updatedBalance = account.getSaldo() - amount;
         } else {
@@ -194,13 +195,13 @@ public class BankLogic {
         }
         Transaction transaction = new Transaction(account.getAccountID(), isWithdrawal, amount, updatedBalance);
         dbConnection.addTransaction(transaction);
-
     }
 
     /**
      * Makes a deposit to an account that belongs to the customer with the
      * social security number.
      *
+     * @param ssn SSN of the customer
      * @param accountId ID of the account
      * @param amount Amount to deposit
      * @return True if successfully deposited money
@@ -301,51 +302,12 @@ public class BankLogic {
      * @return Transactions made
      */
     public List<String> getTransactions(long ssn, int accountID) {
-        ArrayList<Transaction> transactions = new ArrayList();
         ArrayList<String> transactionInformation = new ArrayList();
-        transactions = dbConnection.getTransactions(accountID);
+        ArrayList<Transaction> transactions = dbConnection.getTransactions(accountID);
         for (int j = 0; j < transactions.size(); j++) {
             transactionInformation.add(transactions.get(j).toString());
         }
-
         return transactionInformation;
-    }
-
-    /**
-     * Searches through the list of customers with their ssn and returns the
-     * customer if found
-     *
-     * @param ssn SSN of the customer to search for
-     * @return Customer if found otherwise null
-     */
-    private Customer searchForCustomer(long ssn) {
-        Customer customer = null;
-        customer = dbConnection.getCustomer(ssn);
-
-        return customer;
-    }
-
-    /**
-     * Searches for a customer and then an account belonging to the customer
-     *
-     * @param ssn SSN of the customer
-     * @param accountID ID of the account
-     * @return Account if found otherwise null
-     */
-    private Account searchForAccount(long ssn, int accountID) {
-        Account acc = null;
-        Customer customer = searchForCustomer(ssn);
-        if (customer != null) {
-            ArrayList<Account> accounts = customer.getAccounts();
-            for (int i = 0; i < accounts.size(); i++) {
-                if (accounts.get(i).getAccountID() == accountID) {
-                    acc = accounts.get(i);
-                    break;
-                }
-            }
-
-        }
-        return acc;
     }
 
     /**
@@ -364,7 +326,6 @@ public class BankLogic {
             }
             pw.close();
             return true;
-
         } catch (IOException ex) {
             return false;
         }
@@ -375,14 +336,20 @@ public class BankLogic {
             FileWriter write = new FileWriter("Transactionlist.txt");
             BufferedWriter bf = new BufferedWriter(write);
             PrintWriter pw = new PrintWriter(bf);
-            ArrayList<Transaction> c = dbConnection.getTransactions(accountId);
+            ArrayList<Transaction> transactions = dbConnection.getTransactions(accountId);
             DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
             DateFormat df1 = new SimpleDateFormat("HH:mm:ss");
             Date currentDate = new Date();
+            pw.println("***** Newton Bank *****");
             pw.println("Date of account history: " + df.format(currentDate) + " "
                     + df1.format(currentDate));
-            for (int i = 0; i < c.size(); i++) {
-                pw.println(c.get(i).toString());
+            pw.println();
+            pw.println("Transactions:");
+            if (transactions.isEmpty()) {
+                pw.println("None");
+            }
+            for (int i = 0; i < transactions.size(); i++) {
+                pw.println(transactions.get(i).toString());
             }
             pw.close();
             return true;
@@ -399,20 +366,19 @@ public class BankLogic {
      * @return SSN of selected customer
      */
     public long getCustomerSsnViaIndex(int CustomerIndex) {
-        long ssn = 0;
-        ssn = dbConnection.getCustomerViaIndex(CustomerIndex);
+        long ssn = dbConnection.getCustomerViaIndex(CustomerIndex);
         return ssn;
     }
 
     /**
      * Returns the accountId of given index
      *
+     * @param ssn SSN of the customer
      * @param AccountIdIndex Selected index
      * @return accountID of selected account
      */
     public int getCustomerAccountIdViaIndex(long ssn, int AccountIdIndex) {
-        int accountId = 0;
-        accountId = dbConnection.getAccountIdViaIndex(ssn, AccountIdIndex);
+        int accountId = dbConnection.getAccountIdViaIndex(ssn, AccountIdIndex);
         System.out.println("Banklogic: getCustomerAccountIdViaIndex: " + accountId);
         return accountId;
     }
@@ -501,7 +467,6 @@ public class BankLogic {
                 }
             }
         }
-
         return false;
     }
 

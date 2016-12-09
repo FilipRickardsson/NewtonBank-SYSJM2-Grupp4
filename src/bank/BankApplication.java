@@ -25,7 +25,7 @@ public class BankApplication extends Application {
         stage.setWidth(1100);
         stage.setHeight(825);
         controller.setStage(stage);
-        
+
         // Sets appliation logo
         Image icon = new Image(getClass().getResourceAsStream("nb.png"));
         stage.getIcons().add(icon);

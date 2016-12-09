@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 /**
  * A Customer in the bank
+ *
  * @author Grupp 4
  */
 public class Customer {
@@ -14,6 +15,7 @@ public class Customer {
 
     /**
      * Constructor
+     *
      * @param name Name of the customer
      * @param ssn SSN of the customer
      */

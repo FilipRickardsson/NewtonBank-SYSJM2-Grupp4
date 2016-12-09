@@ -30,8 +30,6 @@ public class AccountController extends BaseController {
 
     @FXML
     private Label error;
-    
-    
 
     /**
      * Tries to make a desposit based on user-input and shows messages based on
@@ -42,7 +40,7 @@ public class AccountController extends BaseController {
         if (validateInput()) {
             // Math.Round used to round the deposit to two decimals
             double value = Math.round(Double.parseDouble(amount.getText().replaceAll(",", ".")) * 100.0) / 100.0;
-            boolean success = bankLogic.deposit(selectedCustomerSSN,selectedCustomerAccountID, value);
+            boolean success = bankLogic.deposit(selectedCustomerSSN, selectedCustomerAccountID, value);
             updateInfo();
             if (success) {
                 showMessage("Transaction complete", error, false);
@@ -56,8 +54,8 @@ public class AccountController extends BaseController {
     }
 
     /**
-     * Tries to make a withdrawal based on user input and shows messages based on
-     * the result
+     * Tries to make a withdrawal based on user input and shows messages based
+     * on the result
      */
     @FXML
     private void makeWithdrawal() {
@@ -76,8 +74,7 @@ public class AccountController extends BaseController {
         }
         amount.clear();
     }
-    
-    
+
     @FXML
     private void printAccountToFile() {
         if (bankLogic.transactionsToFile(selectedCustomerAccountID)) {
@@ -121,8 +118,9 @@ public class AccountController extends BaseController {
 
     /**
      * Initializes the scene
+     *
      * @param url
-     * @param rb 
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
