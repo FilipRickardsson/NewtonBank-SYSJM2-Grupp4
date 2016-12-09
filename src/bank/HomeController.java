@@ -147,7 +147,7 @@ public class HomeController extends BaseController {
 
                     if (ssnInsert.getText().length() == 12) {
                         if (bankLogic.validateSSN(Long.parseLong(ssnInsert.getText()))) {
-                            if (bankLogic.addCustomer(fullName,Long.parseLong(ssnInsert
+                            if (bankLogic.addCustomer(fullName, Long.parseLong(ssnInsert
                                     .getText()))) {
 
                                 updateInfo();
