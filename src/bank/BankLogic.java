@@ -246,7 +246,6 @@ public class BankLogic {
                 return true;
 
             } else if (acc2.isFirstWithdrawal() && amount <= acc2.getSaldo()) {
-                System.out.println("debug 1 firstwithdrawal true");
                 dbConnection.withdraw(accountId, amount);
                 dbConnection.updateFirstWithdrawal(accountId);
                 addTransaction(account, true, amount);
@@ -379,7 +378,6 @@ public class BankLogic {
      */
     public int getCustomerAccountIdViaIndex(long ssn, int AccountIdIndex) {
         int accountId = dbConnection.getAccountIdViaIndex(ssn, AccountIdIndex);
-        System.out.println("Banklogic: getCustomerAccountIdViaIndex: " + accountId);
         return accountId;
     }
 

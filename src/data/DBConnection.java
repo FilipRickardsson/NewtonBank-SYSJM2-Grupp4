@@ -140,7 +140,6 @@ public class DBConnection {
                     + "WHERE accountid = " + accountId);
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
-            System.out.println("Debug 1");
         }
     }
 
@@ -322,7 +321,6 @@ public class DBConnection {
                     + "WHERE Customer_ssn = %d "
                     + "AND AccountType_type = 'Savings Account' ", ssn));
             while (rs.next()) {
-                System.out.println(rs.getInt(1) + " " + rs.getDouble(3) + " " + rs.getBoolean(6) + " " + rs.getDouble(5) + " " + rs.getDouble(4));
                 accounts.add(new SavingAccount(rs.getInt(1), rs.getDouble(3), rs.getBoolean(6), rs.getDouble(5), rs.getDouble(4)));
             }
             rs = st.executeQuery(String.format(""
@@ -335,7 +333,6 @@ public class DBConnection {
                     + "AND AccountType_type = 'Credit Account' ", ssn));
 
             while (rs.next()) {
-                System.out.println(rs.getInt(1) + " " + rs.getDouble(5) + " " + rs.getDouble(3) + " " + rs.getInt(6) + " " + rs.getDouble(4));
                 accounts.add(new CreditAccount(rs.getInt(1), rs.getDouble(5), rs.getDouble(3), rs.getInt(6), rs.getDouble(4)));
             }
         } catch (SQLException ex) {
