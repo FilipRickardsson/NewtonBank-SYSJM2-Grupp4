@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 
 /**
  * Connects, Retrieves, Updates and Deletes data from the database Designed with
- * the deisgnpattern Singelton
+ * the designpattern Singelton
  *
  * @author Grupp 4
  */
