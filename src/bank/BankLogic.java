@@ -392,13 +392,13 @@ public class BankLogic {
     public boolean validateName(String firstName, String lastName) {
         boolean firstNameValid = false, lastNameValid = false;
         if (firstName.matches("^[A-zåäöÅÄÖ-]+$")) {
-            if (!firstName.contains("--") && !firstName.substring(0, 1).contains("-") && !firstName.substring(firstName.length() - 1).contains("-")) {
+            if (!firstName.contains("--") && !firstName.substring(0, 1).contains("-") && !firstName.substring(firstName.length() - 1).contains("-") && !firstName.substring(firstName.length() - 1).contains("\\") && !firstName.substring(firstName.length() - 1).contains("[") && !firstName.substring(firstName.length() - 1).contains("]")) {
                 firstNameValid = true;
             }
         }
 
         if (lastName.matches("^[A-zåäöÅÄÖ ]+$")) {
-            if (!lastName.contains("  ") && !lastName.substring(0, 1).contains(" ") && !lastName.substring(lastName.length() - 1).contains(" ")) {
+            if (!lastName.contains("  ") && !lastName.substring(0, 1).contains(" ") && !lastName.substring(lastName.length() - 1).contains(" ") && !lastName.substring(lastName.length() - 1).contains("\\") && !lastName.substring(lastName.length() - 1).contains("[") && !lastName.substring(lastName.length() - 1).contains("]")) {
                 lastNameValid = true;
             }
         }
