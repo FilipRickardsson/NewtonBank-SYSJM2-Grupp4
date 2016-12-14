@@ -165,7 +165,7 @@ public class HomeController extends BaseController {
                         showMessage("Wrong input length on ssn", wrongCreateCustomer, true);
                     }
                 } else {
-                    showMessage("Invalid symbols i names", wrongCreateCustomer, true);
+                    showMessage("Invalid symbols in names", wrongCreateCustomer, true);
                 }
             } catch (NumberFormatException e) {
                 showMessage("Only numbers allowed in ssn", wrongCreateCustomer, true);
